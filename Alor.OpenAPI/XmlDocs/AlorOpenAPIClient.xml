@@ -1,0 +1,32 @@
+<Docs>
+	<Members name="AlorOpenAPIClient">
+		<Member name="CreateWsPool">
+			<summary>
+				Метод для создания пула вебсокетов
+			</summary>
+			<param name="names">Список с названиями вебсокетов (для логов)</param>
+			<param name="commandSocketName">Название командного вебсокета (для логов)</param>
+			<param name="sockets">Количество вебсокетов в пуле</param>
+			<param name="logLevel">Уровень логирования для данного пула</param>
+			<param name="logFileNameSuffix">Суффикс в названии лог-файла для данного пула</param>
+			<returns>
+				<see cref="IWebSocketsPoolManager"/>
+			</returns>
+		</Member>
+		<Member name="CreateAsync">
+			<summary>
+				Метод для создания экземпляра OpenAPI клиента
+			</summary>
+			<param name="configuration">Конфигурация настроек для подключения <see cref="Configuration.Config">Config</see>
+			</param>
+			<param name="refreshToken">Refresh-токен для авторизации</param>
+			<param name="logLevel">Уровень логирования для сервисов клиента</param>
+			<param name="isMetricsCollectionEnabled">Флаг включения сбора метрик</param>
+			<param name="wsResponseMessageHandler">Делегат для обработки входящих сообщений-ответов на подписки в вебсокетах</param>
+			<param name="wsResponseCommandMessageHandler">Делегат для обработки входящих сообщений-ответов на подписки в командном вебсокете</param>
+			<returns>
+				<see cref="IAlorOpenApiClient"/>
+			</returns>
+		</Member>
+	</Members>
+</Docs>

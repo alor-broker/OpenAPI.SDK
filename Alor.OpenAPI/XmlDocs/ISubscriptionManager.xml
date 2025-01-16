@@ -1,0 +1,1456 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Docs>
+  <Members name="ISubscriptionManager">
+    <Member name="OrderBookGetAndSubscribeSimpleAsync">
+      <summary>WebSocket подписка на "биржевой стакан"</summary>
+      <remarks>Подписка на информацию о биржевом стакане для выбранных биржи и финансового инструмента.Поддерживаются только авторизованные запросы.</remarks>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="orderBookChanged">Делегат метода для обработки ответов</param>
+      <param name="tickersList">Коллекция с тикерами инструментов для подписки</param>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="depth">Глубина стакана. Стандартное значение — 20 (20х20), максимальное — 50 (50х50)</param>
+      <param name="instrumentGroup">
+        <description>Код режима торгов (Борд):</description>
+        <list type="bullet">
+          <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
+          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+        </list>
+      </param>
+      <returns>Dictionary&lt;string, string&gt; в формате &lt;GUID, Ticker&gt;</returns>
+    </Member>
+    <Member name="OrderBookGetAndSubscribeSlimAsync">
+      <summary>WebSocket подписка на "биржевой стакан"</summary>
+      <remarks>Подписка на информацию о биржевом стакане для выбранных биржи и финансового инструмента.Поддерживаются только авторизованные запросы.</remarks>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="orderBookChanged">Делегат метода для обработки ответов</param>
+      <param name="tickersList">Коллекция с тикерами инструментов для подписки</param>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="depth">Глубина стакана. Стандартное значение — 20 (20х20), максимальное — 50 (50х50)</param>
+      <param name="instrumentGroup">
+        <description>Код режима торгов (Борд):</description>
+        <list type="bullet">
+          <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
+          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+        </list>
+      </param>
+      <returns>Dictionary&lt;string, string&gt; в формате &lt;GUID, Ticker&gt;</returns>
+    </Member>
+    <Member name="OrderBookGetAndSubscribeHeavyAsync">
+      <summary>WebSocket подписка на "биржевой стакан"</summary>
+      <remarks>Подписка на информацию о биржевом стакане для выбранных биржи и финансового инструмента.Поддерживаются только авторизованные запросы.</remarks>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="orderBookChanged">Делегат метода для обработки ответов</param>
+      <param name="tickersList">Коллекция с тикерами инструментов для подписки</param>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="depth">Глубина стакана. Стандартное значение — 20 (20х20), максимальное — 50 (50х50)</param>
+      <param name="instrumentGroup">
+        <description>Код режима торгов (Борд):</description>
+        <list type="bullet">
+          <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
+          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+        </list>
+      </param>
+      <returns>Dictionary&lt;string, string&gt; в формате &lt;GUID, Ticker&gt;</returns>
+    </Member>
+    <Member name="BarsGetAndSubscribeSimpleAsync">
+      <summary>WebSocket подписка на историю цен (свечи)</summary>
+      <remarks>Подписка на историю цен (свечи) для выбранных биржи и финансового инструмента.</remarks>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="candleChanged">Делегат метода для обработки ответов</param>
+      <param name="tickersList">Коллекция с тикерами инструментов для подписки</param>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="tf">
+        <list type="table">
+          <listheader>
+            <description>Длительность таймфрейма. В качестве значения можно указать точное количество секунд или код таймфрейма:</description>
+          </listheader>
+          <item>
+            <term>15</term>
+            <description />15 секунд</item>
+          <item>
+            <term>60</term>
+            <description />60 секунд или 1 минута</item>
+          <item>
+            <term>3600</term>
+            <description />3600 секунд или 1 час</item>
+          <item>
+            <term>D</term>
+            <description />сутки (соответствует значению 86400)</item>
+          <item>
+            <term>W</term>
+            <description />неделя (соответствует значению 604800)</item>
+          <item>
+            <term>M</term>
+            <description />месяц (соответствует значению 2592000)</item>
+          <item>
+            <term>Y</term>
+            <description />год (соответствует значению 31536000)</item>
+        </list>
+      </param>
+      <param name="from">Дата и время (UTC) для первой запрашиваемой свечи</param>
+      <param name="instrumentGroup">
+        <description>Код режима торгов (Борд):</description>
+        <list type="bullet">
+          <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
+          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+        </list>
+      </param>
+      <param name="skipHistory">
+        <list type="table">
+          <listheader>
+            <description>Флаг отсеивания исторических данных:</description>
+          </listheader>
+          <item>
+            <term>true</term>
+            <description />отображать только новые данные</item>
+          <item>
+            <term>false</term>
+            <description />отображать в том числе данные из истории</item>
+        </list>
+      </param>
+      <param name="splitAdjust">
+        <list type="table">
+          <listheader>
+            <description>Флаг коррекции исторических свечей инструмента с учётом сплитов, консолидаций и прочих факторов.</description>
+          </listheader>
+          <item>
+            <term>true</term>
+            <description />свечи пересчитываются с учётом дополнительных факторов;</item>
+          <item>
+            <term>false</term>
+            <description />свечи отображаются как есть, т.е. без корректировки.</item>
+        </list>
+      </param>
+      <returns>Dictionary&lt;string, string&gt; в формате &lt;GUID, Ticker&gt;</returns>
+    </Member>
+    <Member name="BarsGetAndSubscribeSlimAsync">
+      <summary>WebSocket подписка на историю цен (свечи)</summary>
+      <remarks>Подписка на историю цен (свечи) для выбранных биржи и финансового инструмента.</remarks>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="candleChanged">Делегат метода для обработки ответов</param>
+      <param name="tickersList">Коллекция с тикерами инструментов для подписки</param>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="tf">
+        <list type="table">
+          <listheader>
+            <description>Длительность таймфрейма. В качестве значения можно указать точное количество секунд или код таймфрейма:</description>
+          </listheader>
+          <item>
+            <term>15</term>
+            <description />15 секунд</item>
+          <item>
+            <term>60</term>
+            <description />60 секунд или 1 минута</item>
+          <item>
+            <term>3600</term>
+            <description />3600 секунд или 1 час</item>
+          <item>
+            <term>D</term>
+            <description />сутки (соответствует значению 86400)</item>
+          <item>
+            <term>W</term>
+            <description />неделя (соответствует значению 604800)</item>
+          <item>
+            <term>M</term>
+            <description />месяц (соответствует значению 2592000)</item>
+          <item>
+            <term>Y</term>
+            <description />год (соответствует значению 31536000)</item>
+        </list>
+      </param>
+      <param name="from">Дата и время (UTC) для первой запрашиваемой свечи</param>
+      <param name="instrumentGroup">
+        <description>Код режима торгов (Борд):</description>
+        <list type="bullet">
+          <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
+          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+        </list>
+      </param>
+      <param name="skipHistory">
+        <list type="table">
+          <listheader>
+            <description>Флаг отсеивания исторических данных:</description>
+          </listheader>
+          <item>
+            <term>true</term>
+            <description />отображать только новые данные</item>
+          <item>
+            <term>false</term>
+            <description />отображать в том числе данные из истории</item>
+        </list>
+      </param>
+      <param name="splitAdjust">
+        <list type="table">
+          <listheader>
+            <description>Флаг коррекции исторических свечей инструмента с учётом сплитов, консолидаций и прочих факторов.</description>
+          </listheader>
+          <item>
+            <term>true</term>
+            <description />свечи пересчитываются с учётом дополнительных факторов;</item>
+          <item>
+            <term>false</term>
+            <description />свечи отображаются как есть, т.е. без корректировки.</item>
+        </list>
+      </param>
+      <returns>Dictionary&lt;string, string&gt; в формате &lt;GUID, Ticker&gt;</returns>
+    </Member>
+    <Member name="BarsGetAndSubscribeHeavyAsync">
+      <summary>WebSocket подписка на историю цен (свечи)</summary>
+      <remarks>Подписка на историю цен (свечи) для выбранных биржи и финансового инструмента.</remarks>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="candleChanged">Делегат метода для обработки ответов</param>
+      <param name="tickersList">Коллекция с тикерами инструментов для подписки</param>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="tf">
+        <list type="table">
+          <listheader>
+            <description>Длительность таймфрейма. В качестве значения можно указать точное количество секунд или код таймфрейма:</description>
+          </listheader>
+          <item>
+            <term>15</term>
+            <description />15 секунд</item>
+          <item>
+            <term>60</term>
+            <description />60 секунд или 1 минута</item>
+          <item>
+            <term>3600</term>
+            <description />3600 секунд или 1 час</item>
+          <item>
+            <term>D</term>
+            <description />сутки (соответствует значению 86400)</item>
+          <item>
+            <term>W</term>
+            <description />неделя (соответствует значению 604800)</item>
+          <item>
+            <term>M</term>
+            <description />месяц (соответствует значению 2592000)</item>
+          <item>
+            <term>Y</term>
+            <description />год (соответствует значению 31536000)</item>
+        </list>
+      </param>
+      <param name="from">Дата и время (UTC) для первой запрашиваемой свечи</param>
+      <param name="instrumentGroup">
+        <description>Код режима торгов (Борд):</description>
+        <list type="bullet">
+          <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
+          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+        </list>
+      </param>
+      <param name="skipHistory">
+        <list type="table">
+          <listheader>
+            <description>Флаг отсеивания исторических данных:</description>
+          </listheader>
+          <item>
+            <term>true</term>
+            <description />отображать только новые данные</item>
+          <item>
+            <term>false</term>
+            <description />отображать в том числе данные из истории</item>
+        </list>
+      </param>
+      <param name="splitAdjust">
+        <list type="table">
+          <listheader>
+            <description>Флаг коррекции исторических свечей инструмента с учётом сплитов, консолидаций и прочих факторов.</description>
+          </listheader>
+          <item>
+            <term>true</term>
+            <description />свечи пересчитываются с учётом дополнительных факторов;</item>
+          <item>
+            <term>false</term>
+            <description />свечи отображаются как есть, т.е. без корректировки.</item>
+        </list>
+      </param>
+      <returns>Dictionary&lt;string, string&gt; в формате &lt;GUID, Ticker&gt;</returns>
+    </Member>
+    <Member name="QuotesSubscribeSimpleAsync">
+      <summary>WebSocket подписка на информацию о котировках</summary>
+      <remarks>Подписка на информацию о котировках для выбранных инструментов и бирж.</remarks>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="symbolChanged">Делегат метода для обработки ответов</param>
+      <param name="tickersList">Коллекция с тикерами инструментов для подписки</param>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="instrumentGroup">
+        <description>Код режима торгов (Борд):</description>
+        <list type="bullet">
+          <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
+          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+        </list>
+      </param>
+      <returns>Dictionary&lt;string, string&gt; в формате &lt;GUID, Ticker&gt;</returns>
+    </Member>
+    <Member name="QuotesSubscribeSlimAsync">
+      <summary>WebSocket подписка на информацию о котировках</summary>
+      <remarks>Подписка на информацию о котировках для выбранных инструментов и бирж.</remarks>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="symbolChanged">Делегат метода для обработки ответов</param>
+      <param name="tickersList">Коллекция с тикерами инструментов для подписки</param>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="instrumentGroup">
+        <description>Код режима торгов (Борд):</description>
+        <list type="bullet">
+          <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
+          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+        </list>
+      </param>
+      <returns>Dictionary&lt;string, string&gt; в формате &lt;GUID, Ticker&gt;</returns>
+    </Member>
+    <Member name="QuotesSubscribeHeavyAsync">
+      <summary>WebSocket подписка на информацию о котировках</summary>
+      <remarks>Подписка на информацию о котировках для выбранных инструментов и бирж.</remarks>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="symbolChanged">Делегат метода для обработки ответов</param>
+      <param name="tickersList">Коллекция с тикерами инструментов для подписки</param>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="instrumentGroup">
+        <description>Код режима торгов (Борд):</description>
+        <list type="bullet">
+          <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
+          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+        </list>
+      </param>
+      <returns>Dictionary&lt;string, string&gt; в формате &lt;GUID, Ticker&gt;</returns>
+    </Member>
+    <Member name="AllTradesGetAndSubscribeSimpleAsync">
+      <summary>WebSocket подписка на все сделки</summary>
+      <remarks>Подписка на информацию о всех сделках.</remarks>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="allTradeChanged">Делегат метода для обработки ответов</param>
+      <param name="tickersList">Коллекция с тикерами инструментов для подписки</param>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="instrumentGroup">
+        <description>Код режима торгов (Борд):</description>
+        <list type="bullet">
+          <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
+          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+        </list>
+      </param>
+      <param name="depth">Если указать, то перед актуальными данными придут данные о последних N сделках.
+</param>
+      <param name="includeVirtualTrades">Указывает, нужно ли отправлять виртуальные (индикативные) сделки</param>
+      <returns>Dictionary&lt;string, string&gt; в формате &lt;GUID, Ticker&gt;</returns>
+    </Member>
+    <Member name="AllTradesGetAndSubscribeSlimAsync">
+      <summary>WebSocket подписка на все сделки</summary>
+      <remarks>Подписка на информацию о всех сделках.</remarks>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="allTradeChanged">Делегат метода для обработки ответов</param>
+      <param name="tickersList">Коллекция с тикерами инструментов для подписки</param>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="instrumentGroup">
+        <description>Код режима торгов (Борд):</description>
+        <list type="bullet">
+          <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
+          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+        </list>
+      </param>
+      <param name="depth">Если указать, то перед актуальными данными придут данные о последних N сделках.
+</param>
+      <param name="includeVirtualTrades">Указывает, нужно ли отправлять виртуальные (индикативные) сделки</param>
+      <returns>Dictionary&lt;string, string&gt; в формате &lt;GUID, Ticker&gt;</returns>
+    </Member>
+    <Member name="AllTradesGetAndSubscribeHeavyAsync">
+      <summary>WebSocket подписка на все сделки</summary>
+      <remarks>Подписка на информацию о всех сделках.</remarks>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="allTradeChanged">Делегат метода для обработки ответов</param>
+      <param name="tickersList">Коллекция с тикерами инструментов для подписки</param>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="instrumentGroup">
+        <description>Код режима торгов (Борд):</description>
+        <list type="bullet">
+          <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
+          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+        </list>
+      </param>
+      <param name="depth">Если указать, то перед актуальными данными придут данные о последних N сделках.
+</param>
+      <param name="includeVirtualTrades">Указывает, нужно ли отправлять виртуальные (индикативные) сделки</param>
+      <returns>Dictionary&lt;string, string&gt; в формате &lt;GUID, Ticker&gt;</returns>
+    </Member>
+    <Member name="PositionsGetAndSubscribeV2SimpleAsync">
+      <summary>WebSocket подписка на информацию о текущих позициях по торговым инструментам и деньгам</summary>
+      <remarks>Подписка на информацию о текущих позициях по ценным бумагам и деньгам.</remarks>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="positionChanged">Делегат метода для обработки ответов</param>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="portfolio">Уникальный идентификатор клиентского портфеля</param>
+      <param name="skipHistory">
+        <list type="table">
+          <listheader>
+            <description>Флаг отсеивания исторических данных:</description>
+          </listheader>
+          <item>
+            <term>true</term>
+            <description />отображать только новые данные</item>
+          <item>
+            <term>false</term>
+            <description />отображать в том числе данные из истории</item>
+        </list>
+      </param>
+      <returns>
+        <see cref="string" />, GUID</returns>
+    </Member>
+    <Member name="PositionsGetAndSubscribeV2SlimAsync">
+      <summary>WebSocket подписка на информацию о текущих позициях по торговым инструментам и деньгам</summary>
+      <remarks>Подписка на информацию о текущих позициях по ценным бумагам и деньгам.</remarks>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="positionChanged">Делегат метода для обработки ответов</param>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="portfolio">Уникальный идентификатор клиентского портфеля</param>
+      <param name="skipHistory">
+        <list type="table">
+          <listheader>
+            <description>Флаг отсеивания исторических данных:</description>
+          </listheader>
+          <item>
+            <term>true</term>
+            <description />отображать только новые данные</item>
+          <item>
+            <term>false</term>
+            <description />отображать в том числе данные из истории</item>
+        </list>
+      </param>
+      <returns>
+        <see cref="string" />, GUID</returns>
+    </Member>
+    <Member name="PositionsGetAndSubscribeV2HeavyAsync">
+      <summary>WebSocket подписка на информацию о текущих позициях по торговым инструментам и деньгам</summary>
+      <remarks>Подписка на информацию о текущих позициях по ценным бумагам и деньгам.</remarks>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="positionChanged">Делегат метода для обработки ответов</param>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="portfolio">Уникальный идентификатор клиентского портфеля</param>
+      <param name="skipHistory">
+        <list type="table">
+          <listheader>
+            <description>Флаг отсеивания исторических данных:</description>
+          </listheader>
+          <item>
+            <term>true</term>
+            <description />отображать только новые данные</item>
+          <item>
+            <term>false</term>
+            <description />отображать в том числе данные из истории</item>
+        </list>
+      </param>
+      <returns>
+        <see cref="string" />, GUID</returns>
+    </Member>
+    <Member name="SummariesGetAndSubscribeV2SimpleAsync">
+      <summary>WebSocket подписка на сводную информацию по портфелю</summary>
+      <remarks>Подписка на сводную информацию по портфелю.</remarks>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="summaryChanged">Делегат метода для обработки ответов</param>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="portfolio">Уникальный идентификатор клиентского портфеля</param>
+      <param name="skipHistory">
+        <list type="table">
+          <listheader>
+            <description>Флаг отсеивания исторических данных:</description>
+          </listheader>
+          <item>
+            <term>true</term>
+            <description />отображать только новые данные</item>
+          <item>
+            <term>false</term>
+            <description />отображать в том числе данные из истории</item>
+        </list>
+      </param>
+      <returns>
+        <see cref="string" />, GUID</returns>
+    </Member>
+    <Member name="SummariesGetAndSubscribeV2SlimAsync">
+      <summary>WebSocket подписка на сводную информацию по портфелю</summary>
+      <remarks>Подписка на сводную информацию по портфелю.</remarks>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="summaryChanged">Делегат метода для обработки ответов</param>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="portfolio">Уникальный идентификатор клиентского портфеля</param>
+      <param name="skipHistory">
+        <list type="table">
+          <listheader>
+            <description>Флаг отсеивания исторических данных:</description>
+          </listheader>
+          <item>
+            <term>true</term>
+            <description />отображать только новые данные</item>
+          <item>
+            <term>false</term>
+            <description />отображать в том числе данные из истории</item>
+        </list>
+      </param>
+      <returns>
+        <see cref="string" />, GUID</returns>
+    </Member>
+    <Member name="SummariesGetAndSubscribeV2HeavyAsync">
+      <summary>WebSocket подписка на сводную информацию по портфелю</summary>
+      <remarks>Подписка на сводную информацию по портфелю.</remarks>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="summaryChanged">Делегат метода для обработки ответов</param>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="portfolio">Уникальный идентификатор клиентского портфеля</param>
+      <param name="skipHistory">
+        <list type="table">
+          <listheader>
+            <description>Флаг отсеивания исторических данных:</description>
+          </listheader>
+          <item>
+            <term>true</term>
+            <description />отображать только новые данные</item>
+          <item>
+            <term>false</term>
+            <description />отображать в том числе данные из истории</item>
+        </list>
+      </param>
+      <returns>
+        <see cref="string" />, GUID</returns>
+    </Member>
+    <Member name="RisksGetAndSubscribeSimpleAsync">
+      <summary>WebSocket подписка на информацию по портфельным рискам</summary>
+      <remarks>Подписка на сводную информацию по портфельным рискам.</remarks>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="riskChanged">Делегат метода для обработки ответов</param>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="portfolio">Уникальный идентификатор клиентского портфеля</param>
+      <param name="skipHistory">
+        <list type="table">
+          <listheader>
+            <description>Флаг отсеивания исторических данных:</description>
+          </listheader>
+          <item>
+            <term>true</term>
+            <description />отображать только новые данные</item>
+          <item>
+            <term>false</term>
+            <description />отображать в том числе данные из истории</item>
+        </list>
+      </param>
+      <returns>
+        <see cref="string" />, GUID</returns>
+    </Member>
+    <Member name="RisksGetAndSubscribeSlimAsync">
+      <summary>WebSocket подписка на информацию по портфельным рискам</summary>
+      <remarks>Подписка на сводную информацию по портфельным рискам.</remarks>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="riskChanged">Делегат метода для обработки ответов</param>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="portfolio">Уникальный идентификатор клиентского портфеля</param>
+      <param name="skipHistory">
+        <list type="table">
+          <listheader>
+            <description>Флаг отсеивания исторических данных:</description>
+          </listheader>
+          <item>
+            <term>true</term>
+            <description />отображать только новые данные</item>
+          <item>
+            <term>false</term>
+            <description />отображать в том числе данные из истории</item>
+        </list>
+      </param>
+      <returns>
+        <see cref="string" />, GUID</returns>
+    </Member>
+    <Member name="RisksGetAndSubscribeHeavyAsync">
+      <summary>WebSocket подписка на информацию по портфельным рискам</summary>
+      <remarks>Подписка на сводную информацию по портфельным рискам.</remarks>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="riskChanged">Делегат метода для обработки ответов</param>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="portfolio">Уникальный идентификатор клиентского портфеля</param>
+      <param name="skipHistory">
+        <list type="table">
+          <listheader>
+            <description>Флаг отсеивания исторических данных:</description>
+          </listheader>
+          <item>
+            <term>true</term>
+            <description />отображать только новые данные</item>
+          <item>
+            <term>false</term>
+            <description />отображать в том числе данные из истории</item>
+        </list>
+      </param>
+      <returns>
+        <see cref="string" />, GUID</returns>
+    </Member>
+    <Member name="SpectraRisksGetAndSubscribeSimpleAsync">
+      <summary>WebSocket подписка на информацию по рискам срочного рынка (FORTS)</summary>
+      <remarks>Подписка на информацию по рискам срочного рынка (FORTS).</remarks>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="fortsriskChanged">Делегат метода для обработки ответов</param>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="portfolio">Уникальный идентификатор клиентского портфеля</param>
+      <param name="skipHistory">
+        <list type="table">
+          <listheader>
+            <description>Флаг отсеивания исторических данных:</description>
+          </listheader>
+          <item>
+            <term>true</term>
+            <description />отображать только новые данные</item>
+          <item>
+            <term>false</term>
+            <description />отображать в том числе данные из истории</item>
+        </list>
+      </param>
+      <returns>
+        <see cref="string" />, GUID</returns>
+    </Member>
+    <Member name="SpectraRisksGetAndSubscribeSlimAsync">
+      <summary>WebSocket подписка на информацию по рискам срочного рынка (FORTS)</summary>
+      <remarks>Подписка на информацию по рискам срочного рынка (FORTS).</remarks>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="fortsriskChanged">Делегат метода для обработки ответов</param>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="portfolio">Уникальный идентификатор клиентского портфеля</param>
+      <param name="skipHistory">
+        <list type="table">
+          <listheader>
+            <description>Флаг отсеивания исторических данных:</description>
+          </listheader>
+          <item>
+            <term>true</term>
+            <description />отображать только новые данные</item>
+          <item>
+            <term>false</term>
+            <description />отображать в том числе данные из истории</item>
+        </list>
+      </param>
+      <returns>
+        <see cref="string" />, GUID</returns>
+    </Member>
+    <Member name="SpectraRisksGetAndSubscribeHeavyAsync">
+      <summary>WebSocket подписка на информацию по рискам срочного рынка (FORTS)</summary>
+      <remarks>Подписка на информацию по рискам срочного рынка (FORTS).</remarks>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="fortsriskChanged">Делегат метода для обработки ответов</param>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="portfolio">Уникальный идентификатор клиентского портфеля</param>
+      <param name="skipHistory">
+        <list type="table">
+          <listheader>
+            <description>Флаг отсеивания исторических данных:</description>
+          </listheader>
+          <item>
+            <term>true</term>
+            <description />отображать только новые данные</item>
+          <item>
+            <term>false</term>
+            <description />отображать в том числе данные из истории</item>
+        </list>
+      </param>
+      <returns>
+        <see cref="string" />, GUID</returns>
+    </Member>
+    <Member name="TradesGetAndSubscribeV2SimpleAsync">
+      <summary>WebSocket подписка на сделки</summary>
+      <remarks>Подписка на информацию о сделках.</remarks>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="tradeChanged">Делегат метода для обработки ответов</param>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="portfolio">Уникальный идентификатор клиентского портфеля</param>
+      <param name="skipHistory">
+        <list type="table">
+          <listheader>
+            <description>Флаг отсеивания исторических данных:</description>
+          </listheader>
+          <item>
+            <term>true</term>
+            <description />отображать только новые данные</item>
+          <item>
+            <term>false</term>
+            <description />отображать в том числе данные из истории</item>
+        </list>
+      </param>
+      <returns>
+        <see cref="string" />, GUID</returns>
+    </Member>
+    <Member name="TradesGetAndSubscribeV2SlimAsync">
+      <summary>WebSocket подписка на сделки</summary>
+      <remarks>Подписка на информацию о сделках.</remarks>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="tradeChanged">Делегат метода для обработки ответов</param>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="portfolio">Уникальный идентификатор клиентского портфеля</param>
+      <param name="skipHistory">
+        <list type="table">
+          <listheader>
+            <description>Флаг отсеивания исторических данных:</description>
+          </listheader>
+          <item>
+            <term>true</term>
+            <description />отображать только новые данные</item>
+          <item>
+            <term>false</term>
+            <description />отображать в том числе данные из истории</item>
+        </list>
+      </param>
+      <returns>
+        <see cref="string" />, GUID</returns>
+    </Member>
+    <Member name="TradesGetAndSubscribeV2HeavyAsync">
+      <summary>WebSocket подписка на сделки</summary>
+      <remarks>Подписка на информацию о сделках.</remarks>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="tradeChanged">Делегат метода для обработки ответов</param>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="portfolio">Уникальный идентификатор клиентского портфеля</param>
+      <param name="skipHistory">
+        <list type="table">
+          <listheader>
+            <description>Флаг отсеивания исторических данных:</description>
+          </listheader>
+          <item>
+            <term>true</term>
+            <description />отображать только новые данные</item>
+          <item>
+            <term>false</term>
+            <description />отображать в том числе данные из истории</item>
+        </list>
+      </param>
+      <returns>
+        <see cref="string" />, GUID</returns>
+    </Member>
+    <Member name="OrdersGetAndSubscribeV2SimpleAsync">
+      <summary>WebSocket подписка на информацию о заявках</summary>
+      <remarks>Подписка на информацию о текущих заявках на рынке для выбранных биржи и финансового инструмента.</remarks>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="orderChanged">Делегат метода для обработки ответов</param>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="portfolio">Уникальный идентификатор клиентского портфеля</param>
+      <param name="orderStatuses">
+        <list type="table">
+          <listheader>
+            <description>Статус исполнения:</description>
+          </listheader>
+          <item>
+            <term>working</term>
+            <description />На исполнении</item>
+          <item>
+            <term>filled</term>
+            <description />Исполнена</item>
+          <item>
+            <term>canceled</term>
+            <description />Отменена</item>
+          <item>
+            <term>rejected</term>
+            <description />Отклонена</item>
+        </list>
+      </param>
+      <param name="skipHistory">
+        <list type="table">
+          <listheader>
+            <description>Флаг отсеивания исторических данных:</description>
+          </listheader>
+          <item>
+            <term>true</term>
+            <description />отображать только новые данные</item>
+          <item>
+            <term>false</term>
+            <description />отображать в том числе данные из истории</item>
+        </list>
+      </param>
+      <returns>
+        <see cref="string" />, GUID</returns>
+    </Member>
+    <Member name="OrdersGetAndSubscribeV2SlimAsync">
+      <summary>WebSocket подписка на информацию о заявках</summary>
+      <remarks>Подписка на информацию о текущих заявках на рынке для выбранных биржи и финансового инструмента.</remarks>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="orderChanged">Делегат метода для обработки ответов</param>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="portfolio">Уникальный идентификатор клиентского портфеля</param>
+      <param name="orderStatuses">
+        <list type="table">
+          <listheader>
+            <description>Статус исполнения:</description>
+          </listheader>
+          <item>
+            <term>working</term>
+            <description />На исполнении</item>
+          <item>
+            <term>filled</term>
+            <description />Исполнена</item>
+          <item>
+            <term>canceled</term>
+            <description />Отменена</item>
+          <item>
+            <term>rejected</term>
+            <description />Отклонена</item>
+        </list>
+      </param>
+      <param name="skipHistory">
+        <list type="table">
+          <listheader>
+            <description>Флаг отсеивания исторических данных:</description>
+          </listheader>
+          <item>
+            <term>true</term>
+            <description />отображать только новые данные</item>
+          <item>
+            <term>false</term>
+            <description />отображать в том числе данные из истории</item>
+        </list>
+      </param>
+      <returns>
+        <see cref="string" />, GUID</returns>
+    </Member>
+    <Member name="OrdersGetAndSubscribeV2HeavyAsync">
+      <summary>WebSocket подписка на информацию о заявках</summary>
+      <remarks>Подписка на информацию о текущих заявках на рынке для выбранных биржи и финансового инструмента.</remarks>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="orderChanged">Делегат метода для обработки ответов</param>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="portfolio">Уникальный идентификатор клиентского портфеля</param>
+      <param name="orderStatuses">
+        <list type="table">
+          <listheader>
+            <description>Статус исполнения:</description>
+          </listheader>
+          <item>
+            <term>working</term>
+            <description />На исполнении</item>
+          <item>
+            <term>filled</term>
+            <description />Исполнена</item>
+          <item>
+            <term>canceled</term>
+            <description />Отменена</item>
+          <item>
+            <term>rejected</term>
+            <description />Отклонена</item>
+        </list>
+      </param>
+      <param name="skipHistory">
+        <list type="table">
+          <listheader>
+            <description>Флаг отсеивания исторических данных:</description>
+          </listheader>
+          <item>
+            <term>true</term>
+            <description />отображать только новые данные</item>
+          <item>
+            <term>false</term>
+            <description />отображать в том числе данные из истории</item>
+        </list>
+      </param>
+      <returns>
+        <see cref="string" />, GUID</returns>
+    </Member>
+    <Member name="InstrumentsGetAndSubscribeV2SimpleAsync">
+      <summary>WebSocket подписка на изменение информации о финансовых инструментах</summary>
+      <remarks>Подписка на изменение информации о финансовых инструментах на выбранной бирже.</remarks>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="securityFromWsChanged">Делегат метода для обработки ответов</param>
+      <param name="tickersList">Коллекция с тикерами инструментов для подписки</param>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="instrumentGroup">
+        <description>Код режима торгов (Борд):</description>
+        <list type="bullet">
+          <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
+          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+        </list>
+      </param>
+      <returns>Dictionary&lt;string, string&gt; в формате &lt;GUID, Ticker&gt;</returns>
+    </Member>
+    <Member name="InstrumentsGetAndSubscribeV2SlimAsync">
+      <summary>WebSocket подписка на изменение информации о финансовых инструментах</summary>
+      <remarks>Подписка на изменение информации о финансовых инструментах на выбранной бирже.</remarks>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="securityFromWsChanged">Делегат метода для обработки ответов</param>
+      <param name="tickersList">Коллекция с тикерами инструментов для подписки</param>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="instrumentGroup">
+        <description>Код режима торгов (Борд):</description>
+        <list type="bullet">
+          <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
+          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+        </list>
+      </param>
+      <returns>Dictionary&lt;string, string&gt; в формате &lt;GUID, Ticker&gt;</returns>
+    </Member>
+    <Member name="InstrumentsGetAndSubscribeV2HeavyAsync">
+      <summary>WebSocket подписка на изменение информации о финансовых инструментах</summary>
+      <remarks>Подписка на изменение информации о финансовых инструментах на выбранной бирже.</remarks>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="securityFromWsChanged">Делегат метода для обработки ответов</param>
+      <param name="tickersList">Коллекция с тикерами инструментов для подписки</param>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="instrumentGroup">
+        <description>Код режима торгов (Борд):</description>
+        <list type="bullet">
+          <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
+          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+        </list>
+      </param>
+      <returns>Dictionary&lt;string, string&gt; в формате &lt;GUID, Ticker&gt;</returns>
+    </Member>
+    <Member name="StopOrdersGetAndSubscribeV2SimpleAsync">
+      <summary>WebSocket подписка на информацию о стоп-заявках v2</summary>
+      <remarks>Подписка на информацию о текущих заявках на рынке для выбранных биржи и финансового инструмента.</remarks>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="stopOrderChanged">Делегат метода для обработки ответов</param>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="portfolio">Уникальный идентификатор клиентского портфеля</param>
+      <param name="orderStatuses">
+        <list type="table">
+          <listheader>
+            <description>Статус исполнения:</description>
+          </listheader>
+          <item>
+            <term>working</term>
+            <description />На исполнении</item>
+          <item>
+            <term>filled</term>
+            <description />Исполнена</item>
+          <item>
+            <term>canceled</term>
+            <description />Отменена</item>
+          <item>
+            <term>rejected</term>
+            <description />Отклонена</item>
+        </list>
+      </param>
+      <param name="skipHistory">
+        <list type="table">
+          <listheader>
+            <description>Флаг отсеивания исторических данных:</description>
+          </listheader>
+          <item>
+            <term>true</term>
+            <description />отображать только новые данные</item>
+          <item>
+            <term>false</term>
+            <description />отображать в том числе данные из истории</item>
+        </list>
+      </param>
+      <returns>
+        <see cref="string" />, GUID</returns>
+    </Member>
+    <Member name="StopOrdersGetAndSubscribeV2SlimAsync">
+      <summary>WebSocket подписка на информацию о стоп-заявках v2</summary>
+      <remarks>Подписка на информацию о текущих заявках на рынке для выбранных биржи и финансового инструмента.</remarks>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="stopOrderChanged">Делегат метода для обработки ответов</param>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="portfolio">Уникальный идентификатор клиентского портфеля</param>
+      <param name="orderStatuses">
+        <list type="table">
+          <listheader>
+            <description>Статус исполнения:</description>
+          </listheader>
+          <item>
+            <term>working</term>
+            <description />На исполнении</item>
+          <item>
+            <term>filled</term>
+            <description />Исполнена</item>
+          <item>
+            <term>canceled</term>
+            <description />Отменена</item>
+          <item>
+            <term>rejected</term>
+            <description />Отклонена</item>
+        </list>
+      </param>
+      <param name="skipHistory">
+        <list type="table">
+          <listheader>
+            <description>Флаг отсеивания исторических данных:</description>
+          </listheader>
+          <item>
+            <term>true</term>
+            <description />отображать только новые данные</item>
+          <item>
+            <term>false</term>
+            <description />отображать в том числе данные из истории</item>
+        </list>
+      </param>
+      <returns>
+        <see cref="string" />, GUID</returns>
+    </Member>
+    <Member name="StopOrdersGetAndSubscribeV2HeavyAsync">
+      <summary>WebSocket подписка на информацию о стоп-заявках v2</summary>
+      <remarks>Подписка на информацию о текущих заявках на рынке для выбранных биржи и финансового инструмента.</remarks>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="stopOrderChanged">Делегат метода для обработки ответов</param>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="portfolio">Уникальный идентификатор клиентского портфеля</param>
+      <param name="orderStatuses">
+        <list type="table">
+          <listheader>
+            <description>Статус исполнения:</description>
+          </listheader>
+          <item>
+            <term>working</term>
+            <description />На исполнении</item>
+          <item>
+            <term>filled</term>
+            <description />Исполнена</item>
+          <item>
+            <term>canceled</term>
+            <description />Отменена</item>
+          <item>
+            <term>rejected</term>
+            <description />Отклонена</item>
+        </list>
+      </param>
+      <param name="skipHistory">
+        <list type="table">
+          <listheader>
+            <description>Флаг отсеивания исторических данных:</description>
+          </listheader>
+          <item>
+            <term>true</term>
+            <description />отображать только новые данные</item>
+          <item>
+            <term>false</term>
+            <description />отображать в том числе данные из истории</item>
+        </list>
+      </param>
+      <returns>
+        <see cref="string" />, GUID</returns>
+    </Member>
+    <Member name="UnsubscribeAsync">
+      <summary>WebSocket отмена существующей подписки</summary>
+      <remarks />
+      <param name="guids">Коллекция с уникальными идентификаторами подписок, от которых отписываемся</param>
+    </Member>
+  </Members>
+</Docs>

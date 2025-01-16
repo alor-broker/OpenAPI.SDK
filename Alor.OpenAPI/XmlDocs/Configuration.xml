@@ -1,0 +1,26 @@
+<Docs>
+	<Members name="Configuration">
+		<Member name="Create">
+			<summary>
+				Метод для создания конфигурации с необходимыми для работы API адресами
+			</summary>
+			<param name="baseUrl">Адрес REST-контура API</param>
+			<param name="wsUrl">Адрес вебсокет-контура API</param>
+			<param name="cwsUrl">Адрес вебсокет-контура API для управления заявками</param>
+			<param name="authUrl">Адрес для генерации JWT</param>
+			<param name="baseUrlHeaders">Словарь с пользовательскими http-заголовками для <paramref name="baseUrl"/></param>
+			<param name="wsUrlHeaders">Словарь с пользовательскими http-заголовками для <paramref name="wsUrl"/></param>
+			<param name="cwsUrlHeaders">Словарь с пользовательскими http-заголовками для <paramref name="cwsUrl"/></param>
+			<param name="authUrlHeaders">Словарь с пользовательскими http-заголовками для <paramref name="authUrl"/></param>
+			<exception cref="ArgumentNullException">Вызывается, если один из параметров равен null.</exception>
+			<returns>
+				<see cref="Config"/>
+			</returns>
+		</Member>
+		<Member name="Config">
+			<summary>
+				Конфигурация настроек для подключения к веб-сервисам Алор
+			</summary>
+		</Member>
+	</Members>
+</Docs>

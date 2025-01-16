@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Docs>
+  <Members name="IOrderGroupsService">
+    <Member name="CommandapiApiOrderGroupsGetAsync">
+      <summary>Получение всех групп заявок</summary>
+      <remarks>
+        <b>Запрос нельзя выполнить анонимно.</b>
+        <br />Возвращает список групп заявок для логина, выписавшего токен.</remarks>
+      <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
+      <returns>
+        <see cref="ICollection{T}">ICollection</see>&lt;<see cref="ResponseOrderGroupInfo">ResponseOrderGroupInfo</see>&gt;</returns>
+    </Member>
+    <Member name="CommandapiApiOrderGroupsPostAsync">
+      <summary>Создание группы заявок</summary>
+      <remarks>
+        <b>Запрос нельзя выполнить анонимно.</b>
+        <br />Создание группы заявок на основе уже созданных заявок</remarks>
+      <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
+      <param name="orders">Сведения о заявке, добавляемой или состоящей в группе</param>
+      <param name="executionPolicy">
+        <list type="table">
+          <listheader>
+            <description>Тип группы заявок:</description>
+          </listheader>
+          <item>
+            <term>OnExecuteOrCancel</term>
+            <description />Группа отменяется при отмене/выполнении/редактировании любой заявки</item>
+          <item>
+            <term>IgnoreCancel</term>
+            <description />Группа отменяется при исполнении заявки. При отмене или редактировании заявки — заявка удаляется из группы, группа остаётся активной</item>
+          <item>
+            <term>TriggerBracketOrders</term>
+            <description />Группа, содержащая одну лимитную заявку и несколько стопов. Для создания группы, стоп-заявки должны быть созданны с флагом 'Activate = false'. После выполнения лимитной заявки, активируются стоп-заявки</item>
+        </list>
+      </param>
+      <returns>
+        <see cref="BodyresponseOrderGroup" />
+      </returns>
+    </Member>
+    <Member name="CommandapiApiOrderGroupsOrderGroupIdGetAsync">
+      <summary>Получение информации о группе заявок</summary>
+      <remarks>
+        <b>Запрос нельзя выполнить анонимно.</b>
+        <br />
+      </remarks>
+      <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="orderGroupId">Идентификатор группы заявок</param>
+      <returns>
+        <see cref="ResponseOrderGroupInfo" />
+      </returns>
+    </Member>
+    <Member name="CommandapiApiOrderGroupsOrderGroupIdPutAsync">
+      <summary>Редактирование группы заявок</summary>
+      <remarks>
+        <b>Запрос нельзя выполнить анонимно.</b>
+        <br />Редактирование группы заявок (связывание новых заявок, изменение типасвязи)</remarks>
+      <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="orderGroupId">Идентификатор группы заявок</param>
+      <param name="orders">Сведения о заявке, добавляемой или состоящей в группе</param>
+      <param name="executionPolicy">
+        <list type="table">
+          <listheader>
+            <description>Тип группы заявок:</description>
+          </listheader>
+          <item>
+            <term>OnExecuteOrCancel</term>
+            <description />Группа отменяется при отмене/выполнении/редактировании любой заявки</item>
+          <item>
+            <term>IgnoreCancel</term>
+            <description />Группа отменяется при исполнении заявки. При отмене или редактировании заявки — заявка удаляется из группы, группа остаётся активной</item>
+          <item>
+            <term>TriggerBracketOrders</term>
+            <description />Группа, содержащая одну лимитную заявку и несколько стопов. Для создания группы, стоп-заявки должны быть созданны с флагом 'Activate = false'. После выполнения лимитной заявки, активируются стоп-заявки</item>
+        </list>
+      </param>
+      <returns>
+        <see cref="string" />
+      </returns>
+    </Member>
+    <Member name="CommandapiApiOrderGroupsOrderGroupIdDeleteAsync">
+      <summary>Удаление группы заявок</summary>
+      <remarks>
+        <b>Запрос нельзя выполнить анонимно.</b>
+        <br />
+      </remarks>
+      <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="orderGroupId">Идентификатор группы заявок</param>
+      <returns>
+        <see cref="string" />
+      </returns>
+    </Member>
+  </Members>
+</Docs>

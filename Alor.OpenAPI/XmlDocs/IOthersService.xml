@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Docs>
+  <Members name="IOthersService">
+    <Member name="MdV2TimeGetAsync">
+      <summary>Текущее UTC время в формате Unix</summary>
+      <remarks>
+        <b>Запрос может быть выполнен без авторизации.</b>
+        <br />При отправке анонимного запроса вернутся данные, бывшие актуальными 15 минут назад. Запрос текущего UTC времени в формате Unix Time Seconds. Если этот запрос выполнен без авторизации, то будет возвращено время, которое было 15 минут назад.</remarks>
+      <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
+      <returns>
+        <see cref="long" />
+      </returns>
+    </Member>
+  </Members>
+</Docs>

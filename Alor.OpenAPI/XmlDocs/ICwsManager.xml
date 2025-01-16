@@ -1,0 +1,687 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Docs>
+  <Members name="ICwsManager">
+    <Member name="CreateMarketOrderAsync">
+      <summary>Создание рыночной заявки</summary>
+      <remarks>Запрос создаёт на бирже новую заявку на покупку или продажу торгового инструмента по рыночной цене.</remarks>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="portfolio">Уникальный идентификатор клиентского портфеля</param>
+      <param name="side">
+        <list type="table">
+          <listheader>
+            <description>Направление сделки:</description>
+          </listheader>
+          <item>
+            <term>buy</term>
+            <description />Купля</item>
+          <item>
+            <term>sell</term>
+            <description />Продажа</item>
+        </list>
+      </param>
+      <param name="quantity">Количество (лоты)</param>
+      <param name="symbol">Тикер (Код финансового инструмента)</param>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="board">
+        <description>Код режима торгов (Борд):</description>
+        <list type="bullet">
+          <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
+          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+        </list>
+      </param>
+      <param name="timeInForce">
+        <list type="table">
+          <listheader>
+            <description>Тип заявки:</description>
+          </listheader>
+          <item>
+            <term>oneday</term>
+            <description />До конца дня</item>
+          <item>
+            <term>immediateorcancel</term>
+            <description />Снять остаток</item>
+          <item>
+            <term>fillorkill</term>
+            <description />Исполнить целиком или отклонить</item>
+          <item>
+            <term>goodtillcancelled</term>
+            <description />Активна до отмены</item>
+        </list>
+      </param>
+      <param name="comment">Пользовательский комментарий к заявке</param>
+      <param name="checkDuplicates">Флаг, отвечающий за проверку уникальности команд. По умолчанию включен. При отключении ускоряет прием заявки.</param>
+      <returns>
+        <see cref="string" />, GUID</returns>
+    </Member>
+    <Member name="CreateLimitOrderAsync">
+      <summary>Создание лимитной заявки</summary>
+      <remarks>Запрос создаёт на бирже новую заявку на покупку или продажу торгового инструмента по указанной в теле запроса цене.</remarks>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="portfolio">Уникальный идентификатор клиентского портфеля</param>
+      <param name="side">
+        <list type="table">
+          <listheader>
+            <description>Направление сделки:</description>
+          </listheader>
+          <item>
+            <term>buy</term>
+            <description />Купля</item>
+          <item>
+            <term>sell</term>
+            <description />Продажа</item>
+        </list>
+      </param>
+      <param name="quantity">Количество (лоты)</param>
+      <param name="price">Цена</param>
+      <param name="symbol">Тикер (Код финансового инструмента)</param>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="board">
+        <description>Код режима торгов (Борд):</description>
+        <list type="bullet">
+          <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
+          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+        </list>
+      </param>
+      <param name="comment">Пользовательский комментарий к заявке</param>
+      <param name="timeInForce">
+        <list type="table">
+          <listheader>
+            <description>Тип заявки:</description>
+          </listheader>
+          <item>
+            <term>oneday</term>
+            <description />До конца дня</item>
+          <item>
+            <term>immediateorcancel</term>
+            <description />Снять остаток</item>
+          <item>
+            <term>fillorkill</term>
+            <description />Исполнить целиком или отклонить</item>
+          <item>
+            <term>goodtillcancelled</term>
+            <description />Активна до отмены</item>
+        </list>
+      </param>
+      <param name="icebergFixed">Видимая постоянная часть айсберг-заявки в лотах, указанная при создании лимитной заявки</param>
+      <param name="icebergVariance">Амплитуда отклонения (в % от постоянной части) случайной надбавки к видимой части айсберг-заявки, указанная при создании лимитной заявки. Только срочный рынок</param>
+      <param name="checkDuplicates">Флаг, отвечающий за проверку уникальности команд. По умолчанию включен. При отключении ускоряет прием заявки.</param>
+      <returns>
+        <see cref="string" />, GUID</returns>
+    </Member>
+    <Member name="CreateStopOrderAsync">
+      <summary>Создание стоп-заявки</summary>
+      <remarks />
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="portfolio">Уникальный идентификатор клиентского портфеля</param>
+      <param name="side">
+        <list type="table">
+          <listheader>
+            <description>Направление сделки:</description>
+          </listheader>
+          <item>
+            <term>buy</term>
+            <description />Купля</item>
+          <item>
+            <term>sell</term>
+            <description />Продажа</item>
+        </list>
+      </param>
+      <param name="condition">
+        <list type="table">
+          <listheader>
+            <description>Условие срабатывания стоп/стоп-лимитной заявки:</description>
+          </listheader>
+          <item>
+            <term>More</term>
+            <description />Цена срабатывания больше текущей цены</item>
+          <item>
+            <term>Less</term>
+            <description />Цена срабатывания меньше текущей цены</item>
+          <item>
+            <term>MoreOrEqual</term>
+            <description />Цена срабатывания больше или равна текущей цене</item>
+          <item>
+            <term>LessOrEqual</term>
+            <description />Цена срабатывания меньше или равна текущей цене</item>
+        </list>
+      </param>
+      <param name="triggerPrice">Условная цена (цена срабатывания)</param>
+      <param name="stopEndUtcTime">Срок действия в формате <paramref name="DateTime" /> UTC</param>
+      <param name="quantity">Количество (лоты)</param>
+      <param name="symbol">Тикер (Код финансового инструмента)</param>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="board">
+        <description>Код режима торгов (Борд):</description>
+        <list type="bullet">
+          <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
+          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+        </list>
+      </param>
+      <param name="checkDuplicates">Флаг, отвечающий за проверку уникальности команд. По умолчанию включен. При отключении ускоряет прием заявки.</param>
+      <param name="protectingSeconds">Защитное время. Непрерывный период времени в секундах, в течение которого рыночная цена инструмента должна соответствовать указанным в заявке цене и условию срабатывания (<paramref name="triggerPrice" /> и <paramref name="condition" />). Предназначено для защиты условных заявок от срабатывания при краткосрочных колебаниях цены.</param>
+      <param name="activate">Флаг указывает, создать активную заявку, или не активную.
+Не активная заявка отображается в системе, но не участвует в процессе выставления на биржу, пока не станет активной.
+Данный флаг необходим при создании группы заявок с типом 'TriggerBracketOrders'
+</param>
+      <returns>
+        <see cref="string" />, GUID</returns>
+    </Member>
+    <Member name="CreateStopLimitOrderAsync">
+      <summary>Создание стоп-лимитной заявки</summary>
+      <remarks />
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="portfolio">Уникальный идентификатор клиентского портфеля</param>
+      <param name="side">
+        <list type="table">
+          <listheader>
+            <description>Направление сделки:</description>
+          </listheader>
+          <item>
+            <term>buy</term>
+            <description />Купля</item>
+          <item>
+            <term>sell</term>
+            <description />Продажа</item>
+        </list>
+      </param>
+      <param name="condition">
+        <list type="table">
+          <listheader>
+            <description>Условие срабатывания стоп/стоп-лимитной заявки:</description>
+          </listheader>
+          <item>
+            <term>More</term>
+            <description />Цена срабатывания больше текущей цены</item>
+          <item>
+            <term>Less</term>
+            <description />Цена срабатывания меньше текущей цены</item>
+          <item>
+            <term>MoreOrEqual</term>
+            <description />Цена срабатывания больше или равна текущей цене</item>
+          <item>
+            <term>LessOrEqual</term>
+            <description />Цена срабатывания меньше или равна текущей цене</item>
+        </list>
+      </param>
+      <param name="triggerPrice">Условная цена (цена срабатывания)</param>
+      <param name="stopEndUtcTime">Срок действия в формате <paramref name="DateTime" /> UTC</param>
+      <param name="quantity">Количество (лоты)</param>
+      <param name="price">Цена</param>
+      <param name="symbol">Тикер (Код финансового инструмента)</param>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="board">
+        <description>Код режима торгов (Борд):</description>
+        <list type="bullet">
+          <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
+          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+        </list>
+      </param>
+      <param name="timeInForce">
+        <list type="table">
+          <listheader>
+            <description>Тип заявки:</description>
+          </listheader>
+          <item>
+            <term>oneday</term>
+            <description />До конца дня</item>
+          <item>
+            <term>immediateorcancel</term>
+            <description />Снять остаток</item>
+          <item>
+            <term>fillorkill</term>
+            <description />Исполнить целиком или отклонить</item>
+          <item>
+            <term>goodtillcancelled</term>
+            <description />Активна до отмены</item>
+        </list>
+      </param>
+      <param name="icebergFixed">Видимая постоянная часть айсберг-заявки в лотах, указанная при создании лимитной заявки</param>
+      <param name="icebergVariance">Амплитуда отклонения (в % от постоянной части) случайной надбавки к видимой части айсберг-заявки, указанная при создании лимитной заявки. Только срочный рынок</param>
+      <param name="checkDuplicates">Флаг, отвечающий за проверку уникальности команд. По умолчанию включен. При отключении ускоряет прием заявки.</param>
+      <param name="protectingSeconds">Защитное время. Непрерывный период времени в секундах, в течение которого рыночная цена инструмента должна соответствовать указанным в заявке цене и условию срабатывания (<paramref name="triggerPrice" /> и <paramref name="condition" />). Предназначено для защиты условных заявок от срабатывания при краткосрочных колебаниях цены.</param>
+      <param name="activate">Флаг указывает, создать активную заявку, или не активную.
+Не активная заявка отображается в системе, но не участвует в процессе выставления на биржу, пока не станет активной.
+Данный флаг необходим при создании группы заявок с типом 'TriggerBracketOrders'
+</param>
+      <returns>
+        <see cref="string" />, GUID</returns>
+    </Member>
+    <Member name="UpdateMarketOrderAsync">
+      <summary>Изменение рыночной заявки</summary>
+      <remarks>Запрос изменяет характеристики ранее поданной рыночной заявки с указанным номером</remarks>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="portfolio">Уникальный идентификатор клиентского портфеля</param>
+      <param name="orderId">Уникальный идентификатор заявки</param>
+      <param name="side">
+        <list type="table">
+          <listheader>
+            <description>Направление сделки:</description>
+          </listheader>
+          <item>
+            <term>buy</term>
+            <description />Купля</item>
+          <item>
+            <term>sell</term>
+            <description />Продажа</item>
+        </list>
+      </param>
+      <param name="quantity">Количество (лоты)</param>
+      <param name="symbol">Тикер (Код финансового инструмента)</param>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="board">
+        <description>Код режима торгов (Борд):</description>
+        <list type="bullet">
+          <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
+          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+        </list>
+      </param>
+      <param name="timeInForce">
+        <list type="table">
+          <listheader>
+            <description>Тип заявки:</description>
+          </listheader>
+          <item>
+            <term>oneday</term>
+            <description />До конца дня</item>
+          <item>
+            <term>immediateorcancel</term>
+            <description />Снять остаток</item>
+          <item>
+            <term>fillorkill</term>
+            <description />Исполнить целиком или отклонить</item>
+          <item>
+            <term>goodtillcancelled</term>
+            <description />Активна до отмены</item>
+        </list>
+      </param>
+      <param name="comment">Пользовательский комментарий к заявке</param>
+      <param name="checkDuplicates">Флаг, отвечающий за проверку уникальности команд. По умолчанию включен. При отключении ускоряет прием заявки.</param>
+      <returns>
+        <see cref="string" />, GUID</returns>
+    </Member>
+    <Member name="UpdateLimitOrderAsync">
+      <summary>Изменение лимитной заявки</summary>
+      <remarks>Запрос изменяет характеристики ранее поданной лимитной заявки с указанным номером</remarks>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="portfolio">Уникальный идентификатор клиентского портфеля</param>
+      <param name="orderId">Уникальный идентификатор заявки</param>
+      <param name="side">
+        <list type="table">
+          <listheader>
+            <description>Направление сделки:</description>
+          </listheader>
+          <item>
+            <term>buy</term>
+            <description />Купля</item>
+          <item>
+            <term>sell</term>
+            <description />Продажа</item>
+        </list>
+      </param>
+      <param name="quantity">Количество (лоты)</param>
+      <param name="price">Цена</param>
+      <param name="symbol">Тикер (Код финансового инструмента)</param>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="board">
+        <description>Код режима торгов (Борд):</description>
+        <list type="bullet">
+          <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
+          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+        </list>
+      </param>
+      <param name="comment">Пользовательский комментарий к заявке</param>
+      <param name="timeInForce">
+        <list type="table">
+          <listheader>
+            <description>Тип заявки:</description>
+          </listheader>
+          <item>
+            <term>oneday</term>
+            <description />До конца дня</item>
+          <item>
+            <term>immediateorcancel</term>
+            <description />Снять остаток</item>
+          <item>
+            <term>fillorkill</term>
+            <description />Исполнить целиком или отклонить</item>
+          <item>
+            <term>goodtillcancelled</term>
+            <description />Активна до отмены</item>
+        </list>
+      </param>
+      <param name="icebergFixed">Видимая постоянная часть айсберг-заявки в лотах, указанная при создании лимитной заявки</param>
+      <param name="icebergVariance">Амплитуда отклонения (в % от постоянной части) случайной надбавки к видимой части айсберг-заявки, указанная при создании лимитной заявки. Только срочный рынок</param>
+      <param name="checkDuplicates">Флаг, отвечающий за проверку уникальности команд. По умолчанию включен. При отключении ускоряет прием заявки.</param>
+      <returns>
+        <see cref="string" />, GUID</returns>
+    </Member>
+    <Member name="UpdateStopOrderAsync">
+      <summary>Изменение стоп-заявки</summary>
+      <remarks />
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="portfolio">Уникальный идентификатор клиентского портфеля</param>
+      <param name="orderId">Уникальный идентификатор заявки</param>
+      <param name="side">
+        <list type="table">
+          <listheader>
+            <description>Направление сделки:</description>
+          </listheader>
+          <item>
+            <term>buy</term>
+            <description />Купля</item>
+          <item>
+            <term>sell</term>
+            <description />Продажа</item>
+        </list>
+      </param>
+      <param name="condition">
+        <list type="table">
+          <listheader>
+            <description>Условие срабатывания стоп/стоп-лимитной заявки:</description>
+          </listheader>
+          <item>
+            <term>More</term>
+            <description />Цена срабатывания больше текущей цены</item>
+          <item>
+            <term>Less</term>
+            <description />Цена срабатывания меньше текущей цены</item>
+          <item>
+            <term>MoreOrEqual</term>
+            <description />Цена срабатывания больше или равна текущей цене</item>
+          <item>
+            <term>LessOrEqual</term>
+            <description />Цена срабатывания меньше или равна текущей цене</item>
+        </list>
+      </param>
+      <param name="triggerPrice">Условная цена (цена срабатывания)</param>
+      <param name="stopEndUtcTime">Срок действия в формате <paramref name="DateTime" /> UTC</param>
+      <param name="quantity">Количество (лоты)</param>
+      <param name="symbol">Тикер (Код финансового инструмента)</param>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="board">
+        <description>Код режима торгов (Борд):</description>
+        <list type="bullet">
+          <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
+          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+        </list>
+      </param>
+      <param name="checkDuplicates">Флаг, отвечающий за проверку уникальности команд. По умолчанию включен. При отключении ускоряет прием заявки.</param>
+      <param name="protectingSeconds">Защитное время. Непрерывный период времени в секундах, в течение которого рыночная цена инструмента должна соответствовать указанным в заявке цене и условию срабатывания (<paramref name="triggerPrice" /> и <paramref name="condition" />). Предназначено для защиты условных заявок от срабатывания при краткосрочных колебаниях цены.</param>
+      <param name="activate">Флаг указывает, создать активную заявку, или не активную.
+Не активная заявка отображается в системе, но не участвует в процессе выставления на биржу, пока не станет активной.
+Данный флаг необходим при создании группы заявок с типом 'TriggerBracketOrders'
+</param>
+      <returns>
+        <see cref="string" />, GUID</returns>
+    </Member>
+    <Member name="UpdateStopLimitOrderAsync">
+      <summary>Изменение стоп-лимитной заявки</summary>
+      <remarks />
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="portfolio">Уникальный идентификатор клиентского портфеля</param>
+      <param name="orderId">Уникальный идентификатор заявки</param>
+      <param name="side">
+        <list type="table">
+          <listheader>
+            <description>Направление сделки:</description>
+          </listheader>
+          <item>
+            <term>buy</term>
+            <description />Купля</item>
+          <item>
+            <term>sell</term>
+            <description />Продажа</item>
+        </list>
+      </param>
+      <param name="condition">
+        <list type="table">
+          <listheader>
+            <description>Условие срабатывания стоп/стоп-лимитной заявки:</description>
+          </listheader>
+          <item>
+            <term>More</term>
+            <description />Цена срабатывания больше текущей цены</item>
+          <item>
+            <term>Less</term>
+            <description />Цена срабатывания меньше текущей цены</item>
+          <item>
+            <term>MoreOrEqual</term>
+            <description />Цена срабатывания больше или равна текущей цене</item>
+          <item>
+            <term>LessOrEqual</term>
+            <description />Цена срабатывания меньше или равна текущей цене</item>
+        </list>
+      </param>
+      <param name="triggerPrice">Условная цена (цена срабатывания)</param>
+      <param name="stopEndUtcTime">Срок действия в формате <paramref name="DateTime" /> UTC</param>
+      <param name="quantity">Количество (лоты)</param>
+      <param name="price">Цена</param>
+      <param name="symbol">Тикер (Код финансового инструмента)</param>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="board">
+        <description>Код режима торгов (Борд):</description>
+        <list type="bullet">
+          <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
+          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+        </list>
+      </param>
+      <param name="timeInForce">
+        <list type="table">
+          <listheader>
+            <description>Тип заявки:</description>
+          </listheader>
+          <item>
+            <term>oneday</term>
+            <description />До конца дня</item>
+          <item>
+            <term>immediateorcancel</term>
+            <description />Снять остаток</item>
+          <item>
+            <term>fillorkill</term>
+            <description />Исполнить целиком или отклонить</item>
+          <item>
+            <term>goodtillcancelled</term>
+            <description />Активна до отмены</item>
+        </list>
+      </param>
+      <param name="icebergFixed">Видимая постоянная часть айсберг-заявки в лотах, указанная при создании лимитной заявки</param>
+      <param name="icebergVariance">Амплитуда отклонения (в % от постоянной части) случайной надбавки к видимой части айсберг-заявки, указанная при создании лимитной заявки. Только срочный рынок</param>
+      <param name="checkDuplicates">Флаг, отвечающий за проверку уникальности команд. По умолчанию включен. При отключении ускоряет прием заявки.</param>
+      <param name="protectingSeconds">Защитное время. Непрерывный период времени в секундах, в течение которого рыночная цена инструмента должна соответствовать указанным в заявке цене и условию срабатывания (<paramref name="triggerPrice" /> и <paramref name="condition" />). Предназначено для защиты условных заявок от срабатывания при краткосрочных колебаниях цены.</param>
+      <param name="activate">Флаг указывает, создать активную заявку, или не активную.
+Не активная заявка отображается в системе, но не участвует в процессе выставления на биржу, пока не станет активной.
+Данный флаг необходим при создании группы заявок с типом 'TriggerBracketOrders'
+</param>
+      <returns>
+        <see cref="string" />, GUID</returns>
+    </Member>
+    <Member name="DeleteMarketOrderAsync">
+      <summary>Снятие рыночной заявки</summary>
+      <remarks>Запрос снимает рыночную заявку с указанным уникальным идентификатором</remarks>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="portfolio">Уникальный идентификатор клиентского портфеля</param>
+      <param name="orderId">Уникальный идентификатор заявки</param>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="checkDuplicates">Флаг, отвечающий за проверку уникальности команд. По умолчанию включен. При отключении ускоряет прием заявки.</param>
+      <returns>
+        <see cref="string" />, GUID</returns>
+    </Member>
+    <Member name="DeleteLimitOrderAsync">
+      <summary>Снятие лимитной заявки</summary>
+      <remarks>Запрос снимает лимитную заявку с указанным уникальным идентификатором</remarks>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="portfolio">Уникальный идентификатор клиентского портфеля</param>
+      <param name="orderId">Уникальный идентификатор заявки</param>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="checkDuplicates">Флаг, отвечающий за проверку уникальности команд. По умолчанию включен. При отключении ускоряет прием заявки.</param>
+      <returns>
+        <see cref="string" />, GUID</returns>
+    </Member>
+    <Member name="DeleteStopOrderAsync">
+      <summary>Снятие стоп-заявки</summary>
+      <remarks>Запрос снимает стоп-заявку с указанным уникальным идентификатором</remarks>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="portfolio">Уникальный идентификатор клиентского портфеля</param>
+      <param name="orderId">Уникальный идентификатор заявки</param>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="checkDuplicates">Флаг, отвечающий за проверку уникальности команд. По умолчанию включен. При отключении ускоряет прием заявки.</param>
+      <returns>
+        <see cref="string" />, GUID</returns>
+    </Member>
+    <Member name="DeleteStopLimitOrderAsync">
+      <summary>Снятие стоп-лимитной заявки</summary>
+      <remarks>Запрос снимает стоп-лимитную заявку с указанным уникальным идентификатором</remarks>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="portfolio">Уникальный идентификатор клиентского портфеля</param>
+      <param name="orderId">Уникальный идентификатор заявки</param>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="checkDuplicates">Флаг, отвечающий за проверку уникальности команд. По умолчанию включен. При отключении ускоряет прием заявки.</param>
+      <returns>
+        <see cref="string" />, GUID</returns>
+    </Member>
+  </Members>
+</Docs>

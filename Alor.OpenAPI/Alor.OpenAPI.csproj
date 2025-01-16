@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<Version>1.0.1</Version>
+		<OutputType>Library</OutputType>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<InvariantGlobalization>true</InvariantGlobalization>
+		<Authors>Alor Broker</Authors>
+		<Description>Alor OpenAPI SDK — это библиотека, написанная на .NET 8, реализующая все методы из спецификации Swagger Alor OpenAPI V2. SDK упрощает взаимодействие с API, предоставляя удобный интерфейс для работы с различными ресурсами и методами.</Description>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<Title>Alor OpenAPI SDK</Title>
+		<PackageIcon>Alor Icon.png</PackageIcon>
+		<PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<PackageProjectUrl>https://github.com/alor-broker/OpenAPI.SDK</PackageProjectUrl>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<InternalsVisibleTo Include="Alor.OpenAPI.Tests" />
+		<InternalsVisibleTo Include="DynamicProxyGenAssembly2" />
+		<None Include="..\Alor Icon.png">
+		  <Pack>True</Pack>
+		  <PackagePath>\</PackagePath>
+		</None>
+		<None Include="..\LICENSE">
+		  <Pack>True</Pack>
+		  <PackagePath>\</PackagePath>
+		</None>
+		<None Include="..\README.md">
+		  <Pack>True</Pack>
+		  <PackagePath>\</PackagePath>
+		</None>
+		<PackageReference Include="App.Metrics" Version="4.3.0" />
+		<PackageReference Include="App.Metrics.Reporting.Console" Version="4.3.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.0" />
+		<PackageReference Include="Polly" Version="8.5.1" />
+		<PackageReference Include="Serilog" Version="4.2.0" />
+		<PackageReference Include="Serilog.Sinks.Async" Version="2.1.0" />
+		<PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
+		<PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
+		<PackageReference Include="SpanJson" Version="4.2.1" />
+	</ItemGroup>
+
+</Project>

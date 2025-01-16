@@ -1,0 +1,36 @@
+<Docs>
+	<Members name="ApiException">
+		<Member name="ApiException">
+			<summary>
+				Класс-расширение класса <see cref="Exception"/>
+			</summary>
+			<param name="logger">Логгер</param>
+			<param name="message">Текст сообщения</param>
+			<param name="statusCode">HTTP status code</param>
+			<param name="response">Текстовое описание HTTP status code</param>
+			<param name="headers">HTTP-заголовки в ответе сервера</param>
+			<param name="innerException">Объект-исключение <see cref="Exception"/>
+			</param>
+		</Member>
+		<Member name="StatusCode">
+			<summary>
+				HTTP status code
+			</summary>
+		</Member>
+		<Member name="Response">
+			<summary>
+				Текстовое описание HTTP status code
+			</summary>
+		</Member>
+		<Member name="Headers">
+			<summary>
+				HTTP-заголовки в ответе сервера
+			</summary>
+		</Member>
+		<Member name="ToString">
+			<summary>
+				Метод-расширение для преобразования объекта-исключения в строку с описанием
+			</summary>
+		</Member>
+	</Members>
+</Docs>

@@ -1,0 +1,1173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Docs>
+  <Members name="IInstrumentsService">
+    <Member name="MdV2SecuritiesGetSimpleAsync">
+      <summary>Информация обо всех инструментах</summary>
+      <remarks>
+        <b>Запрос может быть выполнен без авторизации.</b>
+        <br />При отправке анонимного запроса вернутся данные, бывшие актуальными 15 минут назад. Возвращает информацию о соответствующих запросу торговых инструментах на всех биржах. Объекты в ответе сортируются по объёму торгов. Если не указано иное значение параметра <paramref name="limit" />, в ответе возвращается только 25 объектов за раз</remarks>
+      <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
+      <param name="query">Тикер (Код финансового инструмента)</param>
+      <param name="limit">Ограничение на количество выдаваемых результатов поиска</param>
+      <param name="offset">Смещение начала выборки (для пагинации)</param>
+      <param name="sector">
+        <list type="table">
+          <listheader>
+            <description>Рынок на бирже:</description>
+          </listheader>
+          <item>
+            <term>FORTS</term>
+            <description />Срочный рынок</item>
+          <item>
+            <term>FOND</term>
+            <description />Фондовый рынок</item>
+          <item>
+            <term>CURR</term>
+            <description />Валютный рынок</item>
+        </list>
+      </param>
+      <param name="cficode">Код финансового инструмента по стандарту ISO 10962</param>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="instrumentGroup">
+        <description>Код режима торгов (Борд):</description>
+        <list type="bullet">
+          <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
+          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+        </list>
+      </param>
+      <param name="includeNonBaseBoards">Флаг выгрузки инструментов для всех режимов торгов, включая отличающиеся от установленного для инструмента значения параметра <paramref name="primary_board" /></param>
+      <returns>
+        <see cref="ICollection{T}">ICollection</see>&lt;<see cref="SecuritySimple">SecuritySimple</see>&gt;</returns>
+    </Member>
+    <Member name="MdV2SecuritiesGetSlimAsync">
+      <summary>Информация обо всех инструментах</summary>
+      <remarks>
+        <b>Запрос может быть выполнен без авторизации.</b>
+        <br />При отправке анонимного запроса вернутся данные, бывшие актуальными 15 минут назад. Возвращает информацию о соответствующих запросу торговых инструментах на всех биржах. Объекты в ответе сортируются по объёму торгов. Если не указано иное значение параметра <paramref name="limit" />, в ответе возвращается только 25 объектов за раз</remarks>
+      <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
+      <param name="query">Тикер (Код финансового инструмента)</param>
+      <param name="limit">Ограничение на количество выдаваемых результатов поиска</param>
+      <param name="offset">Смещение начала выборки (для пагинации)</param>
+      <param name="sector">
+        <list type="table">
+          <listheader>
+            <description>Рынок на бирже:</description>
+          </listheader>
+          <item>
+            <term>FORTS</term>
+            <description />Срочный рынок</item>
+          <item>
+            <term>FOND</term>
+            <description />Фондовый рынок</item>
+          <item>
+            <term>CURR</term>
+            <description />Валютный рынок</item>
+        </list>
+      </param>
+      <param name="cficode">Код финансового инструмента по стандарту ISO 10962</param>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="instrumentGroup">
+        <description>Код режима торгов (Борд):</description>
+        <list type="bullet">
+          <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
+          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+        </list>
+      </param>
+      <param name="includeNonBaseBoards">Флаг выгрузки инструментов для всех режимов торгов, включая отличающиеся от установленного для инструмента значения параметра <paramref name="primary_board" /></param>
+      <returns>
+        <see cref="ICollection{T}">ICollection</see>&lt;<see cref="SecuritySlim">SecuritySlim</see>&gt;</returns>
+    </Member>
+    <Member name="MdV2SecuritiesGetHeavyAsync">
+      <summary>Информация обо всех инструментах</summary>
+      <remarks>
+        <b>Запрос может быть выполнен без авторизации.</b>
+        <br />При отправке анонимного запроса вернутся данные, бывшие актуальными 15 минут назад. Возвращает информацию о соответствующих запросу торговых инструментах на всех биржах. Объекты в ответе сортируются по объёму торгов. Если не указано иное значение параметра <paramref name="limit" />, в ответе возвращается только 25 объектов за раз</remarks>
+      <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
+      <param name="query">Тикер (Код финансового инструмента)</param>
+      <param name="limit">Ограничение на количество выдаваемых результатов поиска</param>
+      <param name="offset">Смещение начала выборки (для пагинации)</param>
+      <param name="sector">
+        <list type="table">
+          <listheader>
+            <description>Рынок на бирже:</description>
+          </listheader>
+          <item>
+            <term>FORTS</term>
+            <description />Срочный рынок</item>
+          <item>
+            <term>FOND</term>
+            <description />Фондовый рынок</item>
+          <item>
+            <term>CURR</term>
+            <description />Валютный рынок</item>
+        </list>
+      </param>
+      <param name="cficode">Код финансового инструмента по стандарту ISO 10962</param>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="instrumentGroup">
+        <description>Код режима торгов (Борд):</description>
+        <list type="bullet">
+          <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
+          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+        </list>
+      </param>
+      <param name="includeNonBaseBoards">Флаг выгрузки инструментов для всех режимов торгов, включая отличающиеся от установленного для инструмента значения параметра <paramref name="primary_board" /></param>
+      <returns>
+        <see cref="ICollection{T}">ICollection</see>&lt;<see cref="SecurityHeavy">SecurityHeavy</see>&gt;</returns>
+    </Member>
+    <Member name="MdV2SecuritiesExchangeGetSimpleAsync">
+      <summary>Информация обо всех инструментах на выбранной бирже</summary>
+      <remarks>
+        <b>Запрос нельзя выполнить анонимно.</b>
+        <br />Возвращает информацию о соответствующих запросу торговых инструментах на выбранной бирже. Объекты в ответе сортируются по объёму торгов. Если не указано иное значение параметра <paramref name="limit" />, в ответе возвращаются все соответствующие параметрам запроса инструменты</remarks>
+      <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="market">
+        <list type="table">
+          <listheader>
+            <description>Рынок на бирже:</description>
+          </listheader>
+          <item>
+            <term>FORTS</term>
+            <description />Срочный рынок Московской биржи</item>
+          <item>
+            <term>FOND</term>
+            <description />Фондовый рынок Московской биржи</item>
+          <item>
+            <term>CURR</term>
+            <description />Валютный рынок Московской биржи</item>
+          <item>
+            <term>SPBX</term>
+            <description />Рынок Санкт-Петербургской биржи</item>
+        </list>
+      </param>
+      <param name="includeOld">Флаг загрузки устаревших инструментов</param>
+      <param name="limit">Ограничение на количество выдаваемых результатов поиска</param>
+      <param name="offset">Смещение начала выборки (для пагинации)</param>
+      <param name="includeNonBaseBoards">Флаг выгрузки инструментов для всех режимов торгов, включая отличающиеся от установленного для инструмента значения параметра <paramref name="primary_board" /></param>
+      <returns>
+        <see cref="ICollection{T}">ICollection</see>&lt;<see cref="SecuritySimple">SecuritySimple</see>&gt;</returns>
+    </Member>
+    <Member name="MdV2SecuritiesExchangeGetSlimAsync">
+      <summary>Информация обо всех инструментах на выбранной бирже</summary>
+      <remarks>
+        <b>Запрос нельзя выполнить анонимно.</b>
+        <br />Возвращает информацию о соответствующих запросу торговых инструментах на выбранной бирже. Объекты в ответе сортируются по объёму торгов. Если не указано иное значение параметра <paramref name="limit" />, в ответе возвращаются все соответствующие параметрам запроса инструменты</remarks>
+      <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="market">
+        <list type="table">
+          <listheader>
+            <description>Рынок на бирже:</description>
+          </listheader>
+          <item>
+            <term>FORTS</term>
+            <description />Срочный рынок Московской биржи</item>
+          <item>
+            <term>FOND</term>
+            <description />Фондовый рынок Московской биржи</item>
+          <item>
+            <term>CURR</term>
+            <description />Валютный рынок Московской биржи</item>
+          <item>
+            <term>SPBX</term>
+            <description />Рынок Санкт-Петербургской биржи</item>
+        </list>
+      </param>
+      <param name="includeOld">Флаг загрузки устаревших инструментов</param>
+      <param name="limit">Ограничение на количество выдаваемых результатов поиска</param>
+      <param name="offset">Смещение начала выборки (для пагинации)</param>
+      <param name="includeNonBaseBoards">Флаг выгрузки инструментов для всех режимов торгов, включая отличающиеся от установленного для инструмента значения параметра <paramref name="primary_board" /></param>
+      <returns>
+        <see cref="ICollection{T}">ICollection</see>&lt;<see cref="SecuritySlim">SecuritySlim</see>&gt;</returns>
+    </Member>
+    <Member name="MdV2SecuritiesExchangeGetHeavyAsync">
+      <summary>Информация обо всех инструментах на выбранной бирже</summary>
+      <remarks>
+        <b>Запрос нельзя выполнить анонимно.</b>
+        <br />Возвращает информацию о соответствующих запросу торговых инструментах на выбранной бирже. Объекты в ответе сортируются по объёму торгов. Если не указано иное значение параметра <paramref name="limit" />, в ответе возвращаются все соответствующие параметрам запроса инструменты</remarks>
+      <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="market">
+        <list type="table">
+          <listheader>
+            <description>Рынок на бирже:</description>
+          </listheader>
+          <item>
+            <term>FORTS</term>
+            <description />Срочный рынок Московской биржи</item>
+          <item>
+            <term>FOND</term>
+            <description />Фондовый рынок Московской биржи</item>
+          <item>
+            <term>CURR</term>
+            <description />Валютный рынок Московской биржи</item>
+          <item>
+            <term>SPBX</term>
+            <description />Рынок Санкт-Петербургской биржи</item>
+        </list>
+      </param>
+      <param name="includeOld">Флаг загрузки устаревших инструментов</param>
+      <param name="limit">Ограничение на количество выдаваемых результатов поиска</param>
+      <param name="offset">Смещение начала выборки (для пагинации)</param>
+      <param name="includeNonBaseBoards">Флаг выгрузки инструментов для всех режимов торгов, включая отличающиеся от установленного для инструмента значения параметра <paramref name="primary_board" /></param>
+      <returns>
+        <see cref="ICollection{T}">ICollection</see>&lt;<see cref="SecurityHeavy">SecurityHeavy</see>&gt;</returns>
+    </Member>
+    <Member name="MdV2SecuritiesExchangeSymbolGetSimpleAsync">
+      <summary>Информация о выбранном инструменте</summary>
+      <remarks>
+        <b>Запрос нельзя выполнить анонимно.</b>
+        <br />Запрос информации о выбранном финансовом инструменте на бирже</remarks>
+      <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="symbol">Тикер (Код финансового инструмента)</param>
+      <param name="instrumentGroup">
+        <description>Код режима торгов (Борд):</description>
+        <list type="bullet">
+          <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
+          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+        </list>
+      </param>
+      <returns>
+        <see cref="SecuritySimple" />
+      </returns>
+    </Member>
+    <Member name="MdV2SecuritiesExchangeSymbolGetSlimAsync">
+      <summary>Информация о выбранном инструменте</summary>
+      <remarks>
+        <b>Запрос нельзя выполнить анонимно.</b>
+        <br />Запрос информации о выбранном финансовом инструменте на бирже</remarks>
+      <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="symbol">Тикер (Код финансового инструмента)</param>
+      <param name="instrumentGroup">
+        <description>Код режима торгов (Борд):</description>
+        <list type="bullet">
+          <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
+          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+        </list>
+      </param>
+      <returns>
+        <see cref="SecuritySlim" />
+      </returns>
+    </Member>
+    <Member name="MdV2SecuritiesExchangeSymbolGetHeavyAsync">
+      <summary>Информация о выбранном инструменте</summary>
+      <remarks>
+        <b>Запрос нельзя выполнить анонимно.</b>
+        <br />Запрос информации о выбранном финансовом инструменте на бирже</remarks>
+      <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="symbol">Тикер (Код финансового инструмента)</param>
+      <param name="instrumentGroup">
+        <description>Код режима торгов (Борд):</description>
+        <list type="bullet">
+          <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
+          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+        </list>
+      </param>
+      <returns>
+        <see cref="SecurityHeavy" />
+      </returns>
+    </Member>
+    <Member name="MdV2SecuritiesExchangeSymbolAvailableBoardsGetAsync">
+      <summary>Список бордов инструмента</summary>
+      <remarks>
+        <b>Запрос может быть выполнен без авторизации.</b>
+        <br />При отправке анонимного запроса вернутся данные, бывшие актуальными 15 минут назад. Возвращает список всех кодов поддерживаемых выбранным инструментов режимов торгов</remarks>
+      <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="symbol">Тикер (Код финансового инструмента)</param>
+      <returns>
+        <see cref="ICollection{T}">ICollection</see>&lt;<see cref="string">string</see>&gt;</returns>
+    </Member>
+    <Member name="MdV2SecuritiesSymbolsQuotesGetSimpleAsync">
+      <summary>Котировки для выбранных инструментов</summary>
+      <remarks>
+        <b>Запрос может быть выполнен без авторизации.</b>
+        <br />При отправке анонимного запроса вернутся данные, бывшие актуальными 15 минут назад. Запрос информации о котировках для выбранных инструментов и бирж</remarks>
+      <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="symbols">Принимает несколько пар биржа-тикер. Пары отделены запятыми. Биржа и тикер разделены двоеточием</param>
+      <returns>
+        <see cref="ICollection{T}">ICollection</see>&lt;<see cref="SymbolSimple">SymbolSimple</see>&gt;</returns>
+    </Member>
+    <Member name="MdV2SecuritiesSymbolsQuotesGetSlimAsync">
+      <summary>Котировки для выбранных инструментов</summary>
+      <remarks>
+        <b>Запрос может быть выполнен без авторизации.</b>
+        <br />При отправке анонимного запроса вернутся данные, бывшие актуальными 15 минут назад. Запрос информации о котировках для выбранных инструментов и бирж</remarks>
+      <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="symbols">Принимает несколько пар биржа-тикер. Пары отделены запятыми. Биржа и тикер разделены двоеточием</param>
+      <returns>
+        <see cref="ICollection{T}">ICollection</see>&lt;<see cref="SymbolSlim">SymbolSlim</see>&gt;</returns>
+    </Member>
+    <Member name="MdV2SecuritiesSymbolsQuotesGetHeavyAsync">
+      <summary>Котировки для выбранных инструментов</summary>
+      <remarks>
+        <b>Запрос может быть выполнен без авторизации.</b>
+        <br />При отправке анонимного запроса вернутся данные, бывшие актуальными 15 минут назад. Запрос информации о котировках для выбранных инструментов и бирж</remarks>
+      <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="symbols">Принимает несколько пар биржа-тикер. Пары отделены запятыми. Биржа и тикер разделены двоеточием</param>
+      <returns>
+        <see cref="ICollection{T}">ICollection</see>&lt;<see cref="SymbolHeavy">SymbolHeavy</see>&gt;</returns>
+    </Member>
+    <Member name="MdV2OrderbooksExchangeSymbolGetSimpleAsync">
+      <summary>Информация о биржевом стакане</summary>
+      <remarks>
+        <b>Запрос нельзя выполнить анонимно.</b>
+        <br />Запрос биржевого стакана</remarks>
+      <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="symbol">Тикер (Код финансового инструмента)</param>
+      <param name="instrumentGroup">
+        <description>Код режима торгов (Борд):</description>
+        <list type="bullet">
+          <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
+          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+        </list>
+      </param>
+      <param name="depth">Глубина стакана. Стандартное значение — 20 (20х20), максимальное — 50 (50х50)</param>
+      <returns>
+        <see cref="OrderbookSimple" />
+      </returns>
+    </Member>
+    <Member name="MdV2OrderbooksExchangeSymbolGetSlimAsync">
+      <summary>Информация о биржевом стакане</summary>
+      <remarks>
+        <b>Запрос нельзя выполнить анонимно.</b>
+        <br />Запрос биржевого стакана</remarks>
+      <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="symbol">Тикер (Код финансового инструмента)</param>
+      <param name="instrumentGroup">
+        <description>Код режима торгов (Борд):</description>
+        <list type="bullet">
+          <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
+          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+        </list>
+      </param>
+      <param name="depth">Глубина стакана. Стандартное значение — 20 (20х20), максимальное — 50 (50х50)</param>
+      <returns>
+        <see cref="OrderbookSlim" />
+      </returns>
+    </Member>
+    <Member name="MdV2OrderbooksExchangeSymbolGetHeavyAsync">
+      <summary>Информация о биржевом стакане</summary>
+      <remarks>
+        <b>Запрос нельзя выполнить анонимно.</b>
+        <br />Запрос биржевого стакана</remarks>
+      <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="symbol">Тикер (Код финансового инструмента)</param>
+      <param name="instrumentGroup">
+        <description>Код режима торгов (Борд):</description>
+        <list type="bullet">
+          <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
+          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+        </list>
+      </param>
+      <param name="depth">Глубина стакана. Стандартное значение — 20 (20х20), максимальное — 50 (50х50)</param>
+      <returns>
+        <see cref="OrderbookHeavy" />
+      </returns>
+    </Member>
+    <Member name="MdV2SecuritiesExchangeSymbolAlltradesGetSimpleAsync">
+      <summary>Информация о всех сделках по ценным бумагам за сегодня</summary>
+      <remarks>
+        <b>Запрос нельзя выполнить анонимно.</b>
+        <br />Запросить данные о всех сделках (лента) по ценным бумагам за сегодняшнийдень</remarks>
+      <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="symbol">Тикер (Код финансового инструмента)</param>
+      <param name="instrumentGroup">
+        <description>Код режима торгов (Борд):</description>
+        <list type="bullet">
+          <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
+          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+        </list>
+      </param>
+      <param name="from">Начало отрезка времени для фильтра результатов в формате <paramref name="DateTime" /> UTC</param>
+      <param name="to">Конец отрезка времени для фильтра результатов в формате <paramref name="DateTime" /> UTC</param>
+      <param name="fromId">Начальный номер сделки для фильтра результатов</param>
+      <param name="toId">Конечный номер сделки для фильтра результатов</param>
+      <param name="qtyFrom">Нижняя граница объёма сделки в лотах</param>
+      <param name="qtyTo">Верхняя граница объёма сделки в лотах</param>
+      <param name="priceFrom">Нижняя граница цены, по которой была совершена сделка</param>
+      <param name="priceTo">Верхняя граница цены, по которой была совершена сделка</param>
+      <param name="side">
+        <list type="table">
+          <listheader>
+            <description>Направление сделки:</description>
+          </listheader>
+          <item>
+            <term>buy</term>
+            <description />Купля</item>
+          <item>
+            <term>sell</term>
+            <description />Продажа</item>
+        </list>
+      </param>
+      <param name="offset">Смещение начала выборки (для пагинации)</param>
+      <param name="take">Количество загружаемых элементов</param>
+      <param name="descending">Флаг обратной сортировки выдачи</param>
+      <param name="includeVirtualTrades">Флаг загрузки виртуальных (индикативных) сделок, полученных из заявок на питерской бирже</param>
+      <returns>
+        <see cref="ICollection{T}">ICollection</see>&lt;<see cref="AllTradeSimple">AllTradeSimple</see>&gt;</returns>
+    </Member>
+    <Member name="MdV2SecuritiesExchangeSymbolAlltradesGetSlimAsync">
+      <summary>Информация о всех сделках по ценным бумагам за сегодня</summary>
+      <remarks>
+        <b>Запрос нельзя выполнить анонимно.</b>
+        <br />Запросить данные о всех сделках (лента) по ценным бумагам за сегодняшнийдень</remarks>
+      <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="symbol">Тикер (Код финансового инструмента)</param>
+      <param name="instrumentGroup">
+        <description>Код режима торгов (Борд):</description>
+        <list type="bullet">
+          <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
+          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+        </list>
+      </param>
+      <param name="from">Начало отрезка времени для фильтра результатов в формате <paramref name="DateTime" /> UTC</param>
+      <param name="to">Конец отрезка времени для фильтра результатов в формате <paramref name="DateTime" /> UTC</param>
+      <param name="fromId">Начальный номер сделки для фильтра результатов</param>
+      <param name="toId">Конечный номер сделки для фильтра результатов</param>
+      <param name="qtyFrom">Нижняя граница объёма сделки в лотах</param>
+      <param name="qtyTo">Верхняя граница объёма сделки в лотах</param>
+      <param name="priceFrom">Нижняя граница цены, по которой была совершена сделка</param>
+      <param name="priceTo">Верхняя граница цены, по которой была совершена сделка</param>
+      <param name="side">
+        <list type="table">
+          <listheader>
+            <description>Направление сделки:</description>
+          </listheader>
+          <item>
+            <term>buy</term>
+            <description />Купля</item>
+          <item>
+            <term>sell</term>
+            <description />Продажа</item>
+        </list>
+      </param>
+      <param name="offset">Смещение начала выборки (для пагинации)</param>
+      <param name="take">Количество загружаемых элементов</param>
+      <param name="descending">Флаг обратной сортировки выдачи</param>
+      <param name="includeVirtualTrades">Флаг загрузки виртуальных (индикативных) сделок, полученных из заявок на питерской бирже</param>
+      <returns>
+        <see cref="ICollection{T}">ICollection</see>&lt;<see cref="AllTradeSlim">AllTradeSlim</see>&gt;</returns>
+    </Member>
+    <Member name="MdV2SecuritiesExchangeSymbolAlltradesGetHeavyAsync">
+      <summary>Информация о всех сделках по ценным бумагам за сегодня</summary>
+      <remarks>
+        <b>Запрос нельзя выполнить анонимно.</b>
+        <br />Запросить данные о всех сделках (лента) по ценным бумагам за сегодняшнийдень</remarks>
+      <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="symbol">Тикер (Код финансового инструмента)</param>
+      <param name="instrumentGroup">
+        <description>Код режима торгов (Борд):</description>
+        <list type="bullet">
+          <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
+          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+        </list>
+      </param>
+      <param name="from">Начало отрезка времени для фильтра результатов в формате <paramref name="DateTime" /> UTC</param>
+      <param name="to">Конец отрезка времени для фильтра результатов в формате <paramref name="DateTime" /> UTC</param>
+      <param name="fromId">Начальный номер сделки для фильтра результатов</param>
+      <param name="toId">Конечный номер сделки для фильтра результатов</param>
+      <param name="qtyFrom">Нижняя граница объёма сделки в лотах</param>
+      <param name="qtyTo">Верхняя граница объёма сделки в лотах</param>
+      <param name="priceFrom">Нижняя граница цены, по которой была совершена сделка</param>
+      <param name="priceTo">Верхняя граница цены, по которой была совершена сделка</param>
+      <param name="side">
+        <list type="table">
+          <listheader>
+            <description>Направление сделки:</description>
+          </listheader>
+          <item>
+            <term>buy</term>
+            <description />Купля</item>
+          <item>
+            <term>sell</term>
+            <description />Продажа</item>
+        </list>
+      </param>
+      <param name="offset">Смещение начала выборки (для пагинации)</param>
+      <param name="take">Количество загружаемых элементов</param>
+      <param name="descending">Флаг обратной сортировки выдачи</param>
+      <param name="includeVirtualTrades">Флаг загрузки виртуальных (индикативных) сделок, полученных из заявок на питерской бирже</param>
+      <returns>
+        <see cref="ICollection{T}">ICollection</see>&lt;<see cref="AllTradeHeavy">AllTradeHeavy</see>&gt;</returns>
+    </Member>
+    <Member name="MdV2SecuritiesExchangeSymbolAlltradesHistoryGetSimpleAsync">
+      <summary>Информация о всех сделках по ценным бумагам за выбранный период</summary>
+      <remarks>
+        <b>Запрос нельзя выполнить анонимно.</b>
+        <br />Запросить данные о сделках (лента) по ценным бумагам за исторический период (за текущий день сделки не отдаются)</remarks>
+      <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="symbol">Тикер (Код финансового инструмента)</param>
+      <param name="limit">Ограничение на количество выдаваемых результатов поиска (1-50000)</param>
+      <param name="instrumentGroup">
+        <description>Код режима торгов (Борд):</description>
+        <list type="bullet">
+          <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
+          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+        </list>
+      </param>
+      <param name="from">Начало отрезка времени для фильтра результатов в формате <paramref name="DateTime" /> UTC</param>
+      <param name="to">Конец отрезка времени для фильтра результатов в формате <paramref name="DateTime" /> UTC</param>
+      <param name="offset">Смещение начала выборки (для пагинации)</param>
+      <returns>
+        <see cref="AllTradesHistorySimple" />
+      </returns>
+    </Member>
+    <Member name="MdV2SecuritiesExchangeSymbolAlltradesHistoryGetSlimAsync">
+      <summary>Информация о всех сделках по ценным бумагам за выбранный период</summary>
+      <remarks>
+        <b>Запрос нельзя выполнить анонимно.</b>
+        <br />Запросить данные о сделках (лента) по ценным бумагам за исторический период (за текущий день сделки не отдаются)</remarks>
+      <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="symbol">Тикер (Код финансового инструмента)</param>
+      <param name="limit">Ограничение на количество выдаваемых результатов поиска (1-50000)</param>
+      <param name="instrumentGroup">
+        <description>Код режима торгов (Борд):</description>
+        <list type="bullet">
+          <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
+          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+        </list>
+      </param>
+      <param name="from">Начало отрезка времени для фильтра результатов в формате <paramref name="DateTime" /> UTC</param>
+      <param name="to">Конец отрезка времени для фильтра результатов в формате <paramref name="DateTime" /> UTC</param>
+      <param name="offset">Смещение начала выборки (для пагинации)</param>
+      <returns>
+        <see cref="AllTradesHistorySlim" />
+      </returns>
+    </Member>
+    <Member name="MdV2SecuritiesExchangeSymbolAlltradesHistoryGetHeavyAsync">
+      <summary>Информация о всех сделках по ценным бумагам за выбранный период</summary>
+      <remarks>
+        <b>Запрос нельзя выполнить анонимно.</b>
+        <br />Запросить данные о сделках (лента) по ценным бумагам за исторический период (за текущий день сделки не отдаются)</remarks>
+      <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="symbol">Тикер (Код финансового инструмента)</param>
+      <param name="limit">Ограничение на количество выдаваемых результатов поиска (1-50000)</param>
+      <param name="instrumentGroup">
+        <description>Код режима торгов (Борд):</description>
+        <list type="bullet">
+          <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
+          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+        </list>
+      </param>
+      <param name="from">Начало отрезка времени для фильтра результатов в формате <paramref name="DateTime" /> UTC</param>
+      <param name="to">Конец отрезка времени для фильтра результатов в формате <paramref name="DateTime" /> UTC</param>
+      <param name="offset">Смещение начала выборки (для пагинации)</param>
+      <returns>
+        <see cref="AllTradesHistoryHeavy" />
+      </returns>
+    </Member>
+    <Member name="MdV2SecuritiesExchangeSymbolActualFuturesQuoteGetSimpleAsync">
+      <summary>Котировки по ближайшему фьючерсу (код)</summary>
+      <remarks>
+        <b>Запрос нельзя выполнить анонимно.</b>
+        <br />Запрос котировки по ближайшему фьючерсу (только по коду, без даты)</remarks>
+      <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+        </list>
+      </param>
+      <param name="symbol">Тикер (Код финансового инструмента)</param>
+      <returns>
+        <see cref="FuturesSimple" />
+      </returns>
+    </Member>
+    <Member name="MdV2SecuritiesExchangeSymbolActualFuturesQuoteGetSlimAsync">
+      <summary>Котировки по ближайшему фьючерсу (код)</summary>
+      <remarks>
+        <b>Запрос нельзя выполнить анонимно.</b>
+        <br />Запрос котировки по ближайшему фьючерсу (только по коду, без даты)</remarks>
+      <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+        </list>
+      </param>
+      <param name="symbol">Тикер (Код финансового инструмента)</param>
+      <returns>
+        <see cref="FuturesSlim" />
+      </returns>
+    </Member>
+    <Member name="MdV2SecuritiesExchangeSymbolActualFuturesQuoteGetHeavyAsync">
+      <summary>Котировки по ближайшему фьючерсу (код)</summary>
+      <remarks>
+        <b>Запрос нельзя выполнить анонимно.</b>
+        <br />Запрос котировки по ближайшему фьючерсу (только по коду, без даты)</remarks>
+      <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+        </list>
+      </param>
+      <param name="symbol">Тикер (Код финансового инструмента)</param>
+      <returns>
+        <see cref="FuturesHeavy" />
+      </returns>
+    </Member>
+    <Member name="MdV2RiskRatesGetAsync">
+      <summary>Ставки риска</summary>
+      <remarks>
+        <b>Запрос может быть выполнен без авторизации.</b>
+        <br />При отправке анонимного запроса вернутся данные, бывшие актуальными 15 минут назад. Получение ставок риска для маржинальной торговли.</remarks>
+      <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="ticker">Тикер\код инструмента, ISIN для облигаций</param>
+      <param name="riskCategoryId">Id вашей (или той которая интересует) категории риска. Можно получить из запроса информации по клиенту или через кабинет клиента</param>
+      <param name="search">Часть Тикера\кода инструмента, ISIN для облигаций. Вернет все совпадения, начинающиеся с </param>
+      <param name="limit">Ограничение на количество выдаваемых результатов поиска</param>
+      <param name="offset">Смещение начала выборки (для пагинации)</param>
+      <returns>
+        <see cref="RiskRates" />
+      </returns>
+    </Member>
+    <Member name="MdV2HistoryGetSimpleAsync">
+      <summary>История для выбранных биржи и инструмента</summary>
+      <remarks>
+        <b>Запрос может быть выполнен без авторизации.</b>
+        <br />При отправке анонимного запроса вернутся данные, бывшие актуальными 15 минут назад. Запрос истории рынка для выбранных биржи и финансового инструмента. Данные имеют задержку в 15 минут, если запрос не авторизован. Для авторизованных клиентов задержка не применяется.</remarks>
+      <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="symbol">Тикер (Код финансового инструмента)</param>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="tf">
+        <list type="table">
+          <listheader>
+            <description>Длительность таймфрейма. В качестве значения можно указать точное количество секунд или код таймфрейма:</description>
+          </listheader>
+          <item>
+            <term>15</term>
+            <description />15 секунд</item>
+          <item>
+            <term>60</term>
+            <description />60 секунд или 1 минута</item>
+          <item>
+            <term>3600</term>
+            <description />3600 секунд или 1 час</item>
+          <item>
+            <term>D</term>
+            <description />сутки (соответствует значению 86400)</item>
+          <item>
+            <term>W</term>
+            <description />неделя (соответствует значению 604800)</item>
+          <item>
+            <term>M</term>
+            <description />месяц (соответствует значению 2592000)</item>
+          <item>
+            <term>Y</term>
+            <description />год (соответствует значению 31536000)</item>
+        </list>
+      </param>
+      <param name="from">Начало отрезка времени в формате <paramref name="DateTime" /> UTC</param>
+      <param name="to">Конец отрезка времени в формате <paramref name="DateTime" /> UTC</param>
+      <param name="instrumentGroup">
+        <description>Код режима торгов (Борд):</description>
+        <list type="bullet">
+          <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
+          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+        </list>
+      </param>
+      <param name="countBack">
+        <description>Минимальное количество свечей, которое сервер должен вернуть в ответ на запрос. Поведение зависит от наличия свечей в заданном временном диапазоне (`from` → `to`):</description>
+        <list type="bullet">
+          <item>Количество свечей в диапазоне больше значения <paramref name="countBack" /> — параметр игнорируется, возвращаются все свечи заданного диапазона;</item>
+          <item>Количество свечей меньше — значение <paramref name="from" /> принудительно сдвигается до тех пор, пока не будет выгружено столько свечей, сколько указано в значении <paramref name="countBack" />.</item>
+          <item>Количество свечей за всю историю инструмента меньше указанного значения — возвращаются все доступные свечи.</item>
+        </list>
+      </param>
+      <param name="untraded">Флаг для поиска данных по устаревшим или экспирированным инструментам. При использовании требуется точное совпадение тикера</param>
+      <param name="splitAdjust">
+        <list type="table">
+          <listheader>
+            <description>Флаг коррекции исторических свечей инструмента с учётом сплитов, консолидаций и прочих факторов.</description>
+          </listheader>
+          <item>
+            <term>true</term>
+            <description />свечи пересчитываются с учётом дополнительных факторов;</item>
+          <item>
+            <term>false</term>
+            <description />свечи отображаются как есть, т.е. без корректировки.</item>
+        </list>
+      </param>
+      <returns>
+        <see cref="HistorySimple" />
+      </returns>
+    </Member>
+    <Member name="MdV2HistoryGetSlimAsync">
+      <summary>История для выбранных биржи и инструмента</summary>
+      <remarks>
+        <b>Запрос может быть выполнен без авторизации.</b>
+        <br />При отправке анонимного запроса вернутся данные, бывшие актуальными 15 минут назад. Запрос истории рынка для выбранных биржи и финансового инструмента. Данные имеют задержку в 15 минут, если запрос не авторизован. Для авторизованных клиентов задержка не применяется.</remarks>
+      <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="symbol">Тикер (Код финансового инструмента)</param>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="tf">
+        <list type="table">
+          <listheader>
+            <description>Длительность таймфрейма. В качестве значения можно указать точное количество секунд или код таймфрейма:</description>
+          </listheader>
+          <item>
+            <term>15</term>
+            <description />15 секунд</item>
+          <item>
+            <term>60</term>
+            <description />60 секунд или 1 минута</item>
+          <item>
+            <term>3600</term>
+            <description />3600 секунд или 1 час</item>
+          <item>
+            <term>D</term>
+            <description />сутки (соответствует значению 86400)</item>
+          <item>
+            <term>W</term>
+            <description />неделя (соответствует значению 604800)</item>
+          <item>
+            <term>M</term>
+            <description />месяц (соответствует значению 2592000)</item>
+          <item>
+            <term>Y</term>
+            <description />год (соответствует значению 31536000)</item>
+        </list>
+      </param>
+      <param name="from">Начало отрезка времени в формате <paramref name="DateTime" /> UTC</param>
+      <param name="to">Конец отрезка времени в формате <paramref name="DateTime" /> UTC</param>
+      <param name="instrumentGroup">
+        <description>Код режима торгов (Борд):</description>
+        <list type="bullet">
+          <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
+          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+        </list>
+      </param>
+      <param name="countBack">
+        <description>Минимальное количество свечей, которое сервер должен вернуть в ответ на запрос. Поведение зависит от наличия свечей в заданном временном диапазоне (`from` → `to`):</description>
+        <list type="bullet">
+          <item>Количество свечей в диапазоне больше значения <paramref name="countBack" /> — параметр игнорируется, возвращаются все свечи заданного диапазона;</item>
+          <item>Количество свечей меньше — значение <paramref name="from" /> принудительно сдвигается до тех пор, пока не будет выгружено столько свечей, сколько указано в значении <paramref name="countBack" />.</item>
+          <item>Количество свечей за всю историю инструмента меньше указанного значения — возвращаются все доступные свечи.</item>
+        </list>
+      </param>
+      <param name="untraded">Флаг для поиска данных по устаревшим или экспирированным инструментам. При использовании требуется точное совпадение тикера</param>
+      <param name="splitAdjust">
+        <list type="table">
+          <listheader>
+            <description>Флаг коррекции исторических свечей инструмента с учётом сплитов, консолидаций и прочих факторов.</description>
+          </listheader>
+          <item>
+            <term>true</term>
+            <description />свечи пересчитываются с учётом дополнительных факторов;</item>
+          <item>
+            <term>false</term>
+            <description />свечи отображаются как есть, т.е. без корректировки.</item>
+        </list>
+      </param>
+      <returns>
+        <see cref="HistorySlim" />
+      </returns>
+    </Member>
+    <Member name="MdV2HistoryGetHeavyAsync">
+      <summary>История для выбранных биржи и инструмента</summary>
+      <remarks>
+        <b>Запрос может быть выполнен без авторизации.</b>
+        <br />При отправке анонимного запроса вернутся данные, бывшие актуальными 15 минут назад. Запрос истории рынка для выбранных биржи и финансового инструмента. Данные имеют задержку в 15 минут, если запрос не авторизован. Для авторизованных клиентов задержка не применяется.</remarks>
+      <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
+      <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
+      <param name="symbol">Тикер (Код финансового инструмента)</param>
+      <param name="exchange">
+        <list type="table">
+          <listheader>
+            <description>Биржа:</description>
+          </listheader>
+          <item>
+            <term>MOEX</term>
+            <description />Московская биржа</item>
+          <item>
+            <term>SPBX</term>
+            <description />СПБ Биржа</item>
+        </list>
+      </param>
+      <param name="tf">
+        <list type="table">
+          <listheader>
+            <description>Длительность таймфрейма. В качестве значения можно указать точное количество секунд или код таймфрейма:</description>
+          </listheader>
+          <item>
+            <term>15</term>
+            <description />15 секунд</item>
+          <item>
+            <term>60</term>
+            <description />60 секунд или 1 минута</item>
+          <item>
+            <term>3600</term>
+            <description />3600 секунд или 1 час</item>
+          <item>
+            <term>D</term>
+            <description />сутки (соответствует значению 86400)</item>
+          <item>
+            <term>W</term>
+            <description />неделя (соответствует значению 604800)</item>
+          <item>
+            <term>M</term>
+            <description />месяц (соответствует значению 2592000)</item>
+          <item>
+            <term>Y</term>
+            <description />год (соответствует значению 31536000)</item>
+        </list>
+      </param>
+      <param name="from">Начало отрезка времени в формате <paramref name="DateTime" /> UTC</param>
+      <param name="to">Конец отрезка времени в формате <paramref name="DateTime" /> UTC</param>
+      <param name="instrumentGroup">
+        <description>Код режима торгов (Борд):</description>
+        <list type="bullet">
+          <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
+          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+        </list>
+      </param>
+      <param name="countBack">
+        <description>Минимальное количество свечей, которое сервер должен вернуть в ответ на запрос. Поведение зависит от наличия свечей в заданном временном диапазоне (`from` → `to`):</description>
+        <list type="bullet">
+          <item>Количество свечей в диапазоне больше значения <paramref name="countBack" /> — параметр игнорируется, возвращаются все свечи заданного диапазона;</item>
+          <item>Количество свечей меньше — значение <paramref name="from" /> принудительно сдвигается до тех пор, пока не будет выгружено столько свечей, сколько указано в значении <paramref name="countBack" />.</item>
+          <item>Количество свечей за всю историю инструмента меньше указанного значения — возвращаются все доступные свечи.</item>
+        </list>
+      </param>
+      <param name="untraded">Флаг для поиска данных по устаревшим или экспирированным инструментам. При использовании требуется точное совпадение тикера</param>
+      <param name="splitAdjust">
+        <list type="table">
+          <listheader>
+            <description>Флаг коррекции исторических свечей инструмента с учётом сплитов, консолидаций и прочих факторов.</description>
+          </listheader>
+          <item>
+            <term>true</term>
+            <description />свечи пересчитываются с учётом дополнительных факторов;</item>
+          <item>
+            <term>false</term>
+            <description />свечи отображаются как есть, т.е. без корректировки.</item>
+        </list>
+      </param>
+      <returns>
+        <see cref="HistoryHeavy" />
+      </returns>
+    </Member>
+    <Member name="MdV2SecuritiesCurrencyPairsGetAsync">
+      <summary>Список валютных пар</summary>
+      <remarks>
+        <b>Запрос может быть выполнен без авторизации.</b>
+        <br />При отправке анонимного запроса вернутся данные, бывшие актуальными 15 минут назад. Возвращает список доступных валютных пар</remarks>
+      <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
+      <returns>
+        <see cref="ICollection{T}">ICollection</see>&lt;<see cref="CurrencyPair">CurrencyPair</see>&gt;</returns>
+    </Member>
+  </Members>
+</Docs>
