@@ -11,6 +11,7 @@ namespace Alor.OpenAPI.Models
         public ResponseOrderGroupItem() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectOrderGroupItems"]/Member[@name="objectOrderGroupItems"]/*' />
+        [JsonConstructor]
         public ResponseOrderGroupItem(string? orderId = default)
         {
             OrderId = orderId;
@@ -18,7 +19,7 @@ namespace Alor.OpenAPI.Models
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectOrderGroupItems"]/Member[@name="orderId"]/*' />
         [DataMember(Name = "orderId", EmitDefaultValue = false)]
-        public string? OrderId { get; private set; }
+        public string? OrderId { get; init; }
 
         public override string ToString()
         {
@@ -31,11 +32,7 @@ namespace Alor.OpenAPI.Models
 
         public string ToJson() => Encoding.UTF8.GetString(JsonSerializer.Generic.Utf8.Serialize(this));
 
-        public override int GetHashCode() => Utilities.Utilities.GetHashCodeHelper(
-            [
-                OrderId?.GetHashCode() ?? 0,
-            ]
-        );
+        public override int GetHashCode() => HashCode.Combine(OrderId);
 
         private static bool EqualsHelper(ResponseOrderGroupItem? first, ResponseOrderGroupItem? second) =>
             first?.OrderId == second?.OrderId;
@@ -48,10 +45,7 @@ namespace Alor.OpenAPI.Models
             if ((object?)other == null)
                 return false;
 
-            if (GetType() != other.GetType())
-                return false;
-
-            return EqualsHelper(this, other);
+            return GetType() == other.GetType() && EqualsHelper(this, other);
         }
 
         public override bool Equals(object? obj) => Equals(obj as ResponseOrderGroupItem);

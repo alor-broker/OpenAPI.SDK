@@ -39,6 +39,7 @@ namespace Sample_Project
         {
             Dispose();
 
+            var b = new AllTradeSimple( ){ Id = 1 };
             var refreshtoken = (await File.ReadAllTextAsync("../../tokens/tokenAlorDev.txt")).Replace("\n", "").Replace("\t", "").Replace(" ", "");
 
             _api = await AlorOpenApiClient.CreateAsync(Configuration.Dev, refreshtoken, AlorOpenApiLogLevel.Information, false, null, WsResponseMessageHandler, WsResponseCommandMessageHandler);

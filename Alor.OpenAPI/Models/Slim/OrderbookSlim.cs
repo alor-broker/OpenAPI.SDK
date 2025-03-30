@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
+using SpanJson;
 
 namespace Alor.OpenAPI.Models.Slim
 {
@@ -10,6 +11,7 @@ namespace Alor.OpenAPI.Models.Slim
         public OrderbookSlim() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrderBook"]/Member[@name="responseOrderBook"]/*' />
+        [JsonConstructor]
         public OrderbookSlim(ICollection<LiquiditySlim>? bids, ICollection<LiquiditySlim>? asks, long? msTimestamp, bool? existing)
         {
             Bids = bids;
@@ -21,19 +23,19 @@ namespace Alor.OpenAPI.Models.Slim
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrderBook"]/Member[@name="bids"]/*' />
         [DataMember(Name = "b", EmitDefaultValue = false)]
-        public ICollection<LiquiditySlim>? Bids { get; private set; }
+        public ICollection<LiquiditySlim>? Bids { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrderBook"]/Member[@name="asks"]/*' />
         [DataMember(Name = "a", EmitDefaultValue = false)]
-        public ICollection<LiquiditySlim>? Asks { get; private set; }
+        public ICollection<LiquiditySlim>? Asks { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrderBook"]/Member[@name="msTimestamp"]/*' />
         [DataMember(Name = "t", EmitDefaultValue = false)]
-        public long? MsTimestamp { get; private set; }
+        public long? MsTimestamp { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrderBook"]/Member[@name="existing"]/*' />
         [DataMember(Name = "h", EmitDefaultValue = false)]
-        public bool? Existing { get; set; }
+        public bool? Existing { get; init; }
 
         public override string ToString()
         {
@@ -49,13 +51,7 @@ namespace Alor.OpenAPI.Models.Slim
 
         public string ToJson() => Encoding.UTF8.GetString(SpanJson.JsonSerializer.Generic.Utf8.Serialize(this));
 
-        public override int GetHashCode() => Utilities.Utilities.GetHashCodeHelper(
-            [
-                Bids?.GetHashCode() ?? 0,
-                Asks?.GetHashCode() ?? 0,
-                MsTimestamp ?.GetHashCode() ?? 0,
-            ]
-        );
+        public override int GetHashCode() => HashCode.Combine(Bids, Asks, MsTimestamp, Existing);
 
         private static bool EqualsHelper(OrderbookSlim? first, OrderbookSlim? second) =>
             first?.Bids != null && second?.Bids != null
@@ -75,10 +71,7 @@ namespace Alor.OpenAPI.Models.Slim
             if ((object?)other == null)
                 return false;
 
-            if (GetType() != other.GetType())
-                return false;
-
-            return EqualsHelper(this, other);
+            return GetType() == other.GetType() && EqualsHelper(this, other);
         }
 
         public override bool Equals(object? obj) => Equals(obj as OrderbookSlim);

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
 using SpanJson;
@@ -11,6 +12,7 @@ namespace Alor.OpenAPI.Models.Slim
         public HistorySlim() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseHistory"]/Member[@name="responseHistory"]/*' />
+        [JsonConstructor]
         public HistorySlim(List<CandleSlim>? history = default, long? next = default,
             long? prev = default)
         {
@@ -21,15 +23,15 @@ namespace Alor.OpenAPI.Models.Slim
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseHistory"]/Member[@name="history"]/*' />
         [DataMember(Name = "h", EmitDefaultValue = false)]
-        public List<CandleSlim>? History { get; set; }
+        public List<CandleSlim>? History { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseHistory"]/Member[@name="next"]/*' />
         [DataMember(Name = "next", EmitDefaultValue = false)]
-        public long? Next { get; set; }
+        public long? Next { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseHistory"]/Member[@name="prev"]/*' />
         [DataMember(Name = "prev", EmitDefaultValue = false)]
-        public long? Prev { get; set; }
+        public long? Prev { get; init; }
 
         public override string ToString()
         {
@@ -44,13 +46,7 @@ namespace Alor.OpenAPI.Models.Slim
 
         public string ToJson() => Encoding.UTF8.GetString(JsonSerializer.Generic.Utf8.Serialize(this));
 
-        public override int GetHashCode() => Utilities.Utilities.GetHashCodeHelper(
-            [
-                History?.GetHashCode() ?? 0,
-                Next?.GetHashCode() ?? 0,
-                Prev?.GetHashCode() ?? 0,
-            ]
-        );
+        public override int GetHashCode() => HashCode.Combine(History, Next, Prev);
 
         private static bool EqualsHelper(HistorySlim? first, HistorySlim? second)
         {
@@ -79,10 +75,7 @@ namespace Alor.OpenAPI.Models.Slim
             if ((object?)other == null)
                 return false;
 
-            if (GetType() != other.GetType())
-                return false;
-
-            return EqualsHelper(this, other);
+            return GetType() == other.GetType() && EqualsHelper(this, other);
         }
 
         public override bool Equals(object? obj) => Equals(obj as HistorySlim);

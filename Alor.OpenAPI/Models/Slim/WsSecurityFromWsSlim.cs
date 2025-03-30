@@ -14,6 +14,7 @@ namespace Alor.OpenAPI.Models.Slim
         public WsSecurityFromWsSlim() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsResponseSubInstrumentsGetAndSubscribeV2"]/Member[@name="wsResponseSubInstrumentsGetAndSubscribeV2"]/*' />
+        [SpanJson.JsonConstructor]
         public WsSecurityFromWsSlim(SecurityFromWsSlim? dataSlim, string? guid)
         {
             Data = dataSlim;
@@ -22,11 +23,11 @@ namespace Alor.OpenAPI.Models.Slim
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsResponseSubInstrumentsGetAndSubscribeV2"]/Member[@name="dataSlim"]/*' />
         [DataMember(Name = "data", EmitDefaultValue = false)]
-        public SecurityFromWsSlim? Data { get; private set; }
+        public SecurityFromWsSlim? Data { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsResponseSubInstrumentsGetAndSubscribeV2"]/Member[@name="guid"]/*' />
         [DataMember(Name = "guid", EmitDefaultValue = false)]
-        public string? Guid { get; private set; }
+        public string? Guid { get; init; }
 
         [IgnoreDataMember]
         [JsonIgnore]
@@ -48,15 +49,10 @@ namespace Alor.OpenAPI.Models.Slim
 
         public string ToJson() => Encoding.UTF8.GetString(JsonSerializer.Generic.Utf8.Serialize(this));
 
-        public override int GetHashCode() => Utilities.Utilities.GetHashCodeHelper(
-            [
-                Data?.GetHashCode() ?? 0,
-                Guid?.GetHashCode() ?? 0,
-            ]
-        );
+        public override int GetHashCode() => HashCode.Combine(Data, Guid);
 
         private static bool EqualsHelper(WsSecurityFromWsSlim? first, WsSecurityFromWsSlim? second) =>
-            (bool)first?.Data?.Equals(second?.Data) &&
+            Equals(first?.Data, second?.Data) &&
             first?.Guid == second?.Guid;
 
         public bool Equals(WsSecurityFromWsSlim? other)
@@ -67,10 +63,7 @@ namespace Alor.OpenAPI.Models.Slim
             if ((object?)other == null)
                 return false;
 
-            if (GetType() != other.GetType())
-                return false;
-
-            return EqualsHelper(this, other);
+            return GetType() == other.GetType() && EqualsHelper(this, other);
         }
 
         public override bool Equals(object? obj) => Equals(obj as WsSecurityFromWsSlim);

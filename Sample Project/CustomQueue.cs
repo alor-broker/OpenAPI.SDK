@@ -48,9 +48,9 @@ namespace Sample_Project
             }
         }
 
-        private async Task Finisher()
+        private Task Finisher()
         {
-                await StopChannel();
+            return StopChannel();
         }
 
         public async Task StopChannel()

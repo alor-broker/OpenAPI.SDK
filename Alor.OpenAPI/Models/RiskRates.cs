@@ -9,7 +9,9 @@ namespace Alor.OpenAPI.Models
     public sealed class RiskRates : IEquatable<RiskRates>, IValidatableObject
     {
         public RiskRates() { }
+
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseRiskRates"]/Member[@name="responseRiskRates"]/*' />
+        [JsonConstructor]
         public RiskRates(int? total = default, List<RiskRate>? list = default)
         {
             Total = total;
@@ -18,11 +20,11 @@ namespace Alor.OpenAPI.Models
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseRiskRates"]/Member[@name="total"]/*' />
         [DataMember(Name = "total", EmitDefaultValue = false)]
-        public int? Total { get; private set; }
+        public int? Total { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseRiskRates"]/Member[@name="list"]/*' />
         [DataMember(Name = "list", EmitDefaultValue = false)]
-        public List<RiskRate>? List { get; private set; }
+        public List<RiskRate>? List { get; init; }
 
         public override string ToString()
         {
@@ -36,12 +38,7 @@ namespace Alor.OpenAPI.Models
 
         public string ToJson() => Encoding.UTF8.GetString(JsonSerializer.Generic.Utf8.Serialize(this));
 
-        public override int GetHashCode() => Utilities.Utilities.GetHashCodeHelper(
-            [
-                Total?.GetHashCode() ?? 0,
-                List?.GetHashCode() ?? 0,
-            ]
-        );
+        public override int GetHashCode() => HashCode.Combine(Total, List);
 
         private static bool EqualsHelper(RiskRates? first, RiskRates? second)
         {
@@ -69,10 +66,7 @@ namespace Alor.OpenAPI.Models
             if ((object?)other == null)
                 return false;
 
-            if (GetType() != other.GetType())
-                return false;
-
-            return EqualsHelper(this, other);
+            return GetType() == other.GetType() && EqualsHelper(this, other);
         }
 
         public override bool Equals(object? obj) => Equals(obj as RiskRates);

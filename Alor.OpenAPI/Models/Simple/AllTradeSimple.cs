@@ -12,6 +12,7 @@ namespace Alor.OpenAPI.Models.Simple
         public AllTradeSimple() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseAllTrade"]/Member[@name="responseAllTrade"]/*' />
+        [JsonConstructor]
         public AllTradeSimple(long? id = default, long? orderno = default,
             string? symbol = default, string? board = default, int? qty = default,
             decimal? price = default, DateTime? time = default, long? timestamp = default,
@@ -32,47 +33,47 @@ namespace Alor.OpenAPI.Models.Simple
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseAllTrade"]/Member[@name="id"]/*' />
         [DataMember(Name = "id", EmitDefaultValue = false)]
-        public long? Id { get; private set; }
+        public long? Id { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseAllTrade"]/Member[@name="symbol"]/*' />
         [DataMember(Name = "orderno", EmitDefaultValue = false)]
-        public long? Orderno { get; private set; }
+        public long? Orderno { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseAllTrade"]/Member[@name="board"]/*' />
         [DataMember(Name = "symbol", EmitDefaultValue = false)]
-        public string? Symbol { get; private set; }
+        public string? Symbol { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseAllTrade"]/Member[@name="board"]/*' />
         [DataMember(Name = "board", EmitDefaultValue = false)]
-        public string? Board { get; private set; }
+        public string? Board { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseAllTrade"]/Member[@name="qty"]/*' />
         [DataMember(Name = "qty", EmitDefaultValue = false)]
-        public int? Qty { get; set; }
+        public int? Qty { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseAllTrade"]/Member[@name="price"]/*' />
         [DataMember(Name = "price", EmitDefaultValue = false)]
-        public decimal? Price { get; set; }
+        public decimal? Price { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseAllTrade"]/Member[@name="time"]/*' />
         [DataMember(Name = "time", EmitDefaultValue = false)]
-        public DateTime? Time { get; set; }
+        public DateTime? Time { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseAllTrade"]/Member[@name="timestamp"]/*' />
         [DataMember(Name = "timestamp", EmitDefaultValue = false)]
-        public long? Timestamp { get; set; }
+        public long? Timestamp { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseAllTrade"]/Member[@name="side"]/*' />
         [DataMember(Name = "side", EmitDefaultValue = false)]
-        public Side Side { get; set; }
+        public Side Side { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseAllTrade"]/Member[@name="oi"]/*' />
         [DataMember(Name = "oi", EmitDefaultValue = false)]
-        public long? Oi { get; set; }
+        public long? Oi { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseAllTrade"]/Member[@name="existing"]/*' />
         [DataMember(Name = "existing", EmitDefaultValue = false)]
-        public bool? Existing { get; set; }
+        public bool? Existing { get; init; }
 
         public override string ToString()
         {
@@ -95,14 +96,22 @@ namespace Alor.OpenAPI.Models.Simple
 
         public string ToJson() => Encoding.UTF8.GetString(JsonSerializer.Generic.Utf8.Serialize(this));
 
-        public override int GetHashCode() => Utilities.Utilities.GetHashCodeHelper(
-            [
-                Id?.GetHashCode() ?? 0,
-                Orderno?.GetHashCode() ?? 0,
-                Symbol?.GetHashCode() ?? 0,
-                Board?.GetHashCode() ?? 0,
-            ]
-        );
+        public override int GetHashCode()
+        {
+            var hash = new HashCode();
+            hash.Add(Id);
+            hash.Add(Orderno);
+            hash.Add(Symbol);
+            hash.Add(Board);
+            hash.Add(Qty);
+            hash.Add(Price);
+            hash.Add(Time);
+            hash.Add(Timestamp);
+            hash.Add(Side);
+            hash.Add(Oi);
+            hash.Add(Existing);
+            return hash.ToHashCode();
+        }
 
         private static bool EqualsHelper(AllTradeSimple? first, AllTradeSimple? second) =>
             first?.Id == second?.Id &&
@@ -116,8 +125,7 @@ namespace Alor.OpenAPI.Models.Simple
             first?.Side == second?.Side &&
             first?.Oi == second?.Oi &&
             first?.Existing == second?.Existing;
-
-
+        
         public bool Equals(AllTradeSimple? other)
         {
             if (this == (object?)other)
@@ -126,10 +134,7 @@ namespace Alor.OpenAPI.Models.Simple
             if ((object?)other == null)
                 return false;
 
-            if (GetType() != other.GetType())
-                return false;
-
-            return EqualsHelper(this, other);
+            return GetType() == other.GetType() && EqualsHelper(this, other);
         }
 
         public override bool Equals(object? obj) => Equals(obj as AllTradeSimple);

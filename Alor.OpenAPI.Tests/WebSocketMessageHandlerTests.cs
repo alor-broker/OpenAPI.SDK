@@ -138,7 +138,7 @@ namespace Alor.OpenAPI.Tests
             var handler =
                 new WebSocketMessageHandler(loggerMock.Object, commandLoggerMock.Object, Utilities.AlorOpenApiLogLevel.Fatal, parameters, null, null);
             var fakeMessage =
-                "{\"data\":{\"snapshot\":true,\"bids\":[],\"asks\":[],\"timestamp\":1710881402,\"ms_timestamp\":1710881402182,\"depth\":20,\"existing\":true},\"guid\":\"b0_3\"}"u8.ToArray();
+                "{\"data\":{\"snapshot\":true,\"bids\":[],\"asks\":[],\"timestamp\":1710881402,\"ms_timestamp\":1710881402182,\"existing\":true},\"guid\":\"b0_3\"}"u8.ToArray();
             var messageHandlerMock = new Mock<Action<WsOrderBookSimple>>();
             handler.UpdateWsOrderBookSimpleUserDelegate(messageHandlerMock.Object);
 
@@ -160,7 +160,7 @@ namespace Alor.OpenAPI.Tests
             var handler =
                 new WebSocketMessageHandler(loggerMock.Object, commandLoggerMock.Object, Utilities.AlorOpenApiLogLevel.Fatal, parameters, null, null);
             var fakeMessage =
-                "{\"data\"{\"snapshot\":true,\"bids\":[],\"asks\":[],\"timestamp\":1710881402,\"ms_timestamp\":1710881402182,\"depth\":20,\"existing\":true},\"guid\":\"b0_3\"}"u8.ToArray();
+                "{\"data\"{\"snapshot\":true,\"bids\":[],\"asks\":[],\"timestamp\":1710881402,\"ms_timestamp\":1710881402182,\"existing\":true},\"guid\":\"b0_3\"}"u8.ToArray();
             var messageHandlerMock = new Mock<Action<WsOrderBookSimple>>();
             handler.UpdateWsOrderBookSimpleUserDelegate(messageHandlerMock.Object);
 
@@ -265,7 +265,7 @@ namespace Alor.OpenAPI.Tests
                 .GetMethod("FindSubscriptionTypeMarker", BindingFlags.NonPublic | BindingFlags.Static);
 
             var message =
-                "{\"data\":{\"snapshot\":true,\"bids\":[],\"asks\":[],\"timestamp\":1710881402,\"ms_timestamp\":1710881402182,\"depth\":20,\"existing\":true},\"guid\":\"b0_3\"}";
+                "{\"data\":{\"snapshot\":true,\"bids\":[],\"asks\":[],\"timestamp\":1710881402,\"ms_timestamp\":1710881402182,\"existing\":true},\"guid\":\"b0_3\"}";
             var startPattern = "\"guid\":\""u8.ToArray();
             var endPattern = "_"u8.ToArray();
             var expected = "b0"u8.ToArray();

@@ -10,6 +10,7 @@ namespace Alor.OpenAPI.Models.Simple
     {
         public TradeRepoSpecificFieldsSimple() { }
 
+        [JsonConstructor]
         public TradeRepoSpecificFieldsSimple(decimal? repoRate = default, string? extRef = default, int? repoTerm = default,
             string? account = default, string? tradeTypeInfo = default, decimal? value = default,
             decimal? yield = default)
@@ -24,25 +25,25 @@ namespace Alor.OpenAPI.Models.Simple
         }
 
         [DataMember(Name = "repoRate", EmitDefaultValue = false)]
-        public decimal? RepoRate { get; private set; }
+        public decimal? RepoRate { get; init; }
 
         [DataMember(Name = "extRef", EmitDefaultValue = false)]
-        public string? ExtRef { get; private set; }
+        public string? ExtRef { get; init; }
 
         [DataMember(Name = "repoTerm", EmitDefaultValue = false)]
-        public int? RepoTerm { get; private set; }
+        public int? RepoTerm { get; init; }
 
         [DataMember(Name = "account", EmitDefaultValue = false)]
-        public string? Account { get; private set; }
+        public string? Account { get; init; }
 
         [DataMember(Name = "tradeTypeInfo", EmitDefaultValue = false)]
-        public string? TradeTypeInfo { get; private set; }
+        public string? TradeTypeInfo { get; init; }
 
         [DataMember(Name = "value", EmitDefaultValue = false)]
-        public decimal? Value { get; private set; }
+        public decimal? Value { get; init; }
 
         [DataMember(Name = "yield", EmitDefaultValue = false)]
-        public decimal? Yield { get; private set; }
+        public decimal? Yield { get; init; }
 
         public override string ToString()
         {
@@ -61,17 +62,18 @@ namespace Alor.OpenAPI.Models.Simple
 
         public string ToJson() => Encoding.UTF8.GetString(JsonSerializer.Generic.Utf8.Serialize(this));
 
-        public override int GetHashCode() => Utilities.Utilities.GetHashCodeHelper(
-            [
-                RepoRate?.GetHashCode() ?? 0,
-                ExtRef?.GetHashCode() ?? 0,
-                RepoTerm?.GetHashCode() ?? 0,
-                Account?.GetHashCode() ?? 0,
-                TradeTypeInfo?.GetHashCode() ?? 0,
-                Value?.GetHashCode() ?? 0,
-                Yield?.GetHashCode() ?? 0,
-            ]
-        );
+        public override int GetHashCode()
+        {
+            var hash = new HashCode();
+            hash.Add(RepoRate);
+            hash.Add(ExtRef);
+            hash.Add(RepoTerm);
+            hash.Add(Account);
+            hash.Add(TradeTypeInfo);
+            hash.Add(Value);
+            hash.Add(Yield);
+            return hash.ToHashCode();
+        }
 
         private static bool EqualsHelper(TradeRepoSpecificFieldsSimple? first, TradeRepoSpecificFieldsSimple? second) =>
             first?.RepoRate == second?.RepoRate &&
@@ -81,8 +83,7 @@ namespace Alor.OpenAPI.Models.Simple
             first?.TradeTypeInfo == second?.TradeTypeInfo &&
             first?.Value == second?.Value &&
             first?.Yield == second?.Yield;
-
-
+        
         public bool Equals(TradeRepoSpecificFieldsSimple? other)
         {
             if (this == (object?)other)
@@ -91,10 +92,7 @@ namespace Alor.OpenAPI.Models.Simple
             if ((object?)other == null)
                 return false;
 
-            if (GetType() != other.GetType())
-                return false;
-
-            return EqualsHelper(this, other);
+            return GetType() == other.GetType() && EqualsHelper(this, other);
         }
 
         public override bool Equals(object? obj) => Equals(obj as TradeRepoSpecificFieldsSimple);

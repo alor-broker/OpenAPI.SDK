@@ -539,10 +539,10 @@
       </returns>
     </Member>
     <Member name="MdV2SecuritiesExchangeSymbolAlltradesGetSimpleAsync">
-      <summary>Информация о всех сделках по ценным бумагам за сегодня</summary>
+      <summary>Сделки по инструменту (Текущая сессия)</summary>
       <remarks>
         <b>Запрос нельзя выполнить анонимно.</b>
-        <br />Запросить данные о всех сделках (лента) по ценным бумагам за сегодняшнийдень</remarks>
+        <br />Запрос возвращает обезличенную информацию обо всех сделках с участием указанного в <paramref name="symbol" /> инструмента, совершённых всеми участниками торгов за текущую торговую сессию. Временные рамки сессий зависят от выбранного рынка и могут различаться.</remarks>
       <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
       <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
       <param name="exchange">
@@ -595,10 +595,10 @@
         <see cref="ICollection{T}">ICollection</see>&lt;<see cref="AllTradeSimple">AllTradeSimple</see>&gt;</returns>
     </Member>
     <Member name="MdV2SecuritiesExchangeSymbolAlltradesGetSlimAsync">
-      <summary>Информация о всех сделках по ценным бумагам за сегодня</summary>
+      <summary>Сделки по инструменту (Текущая сессия)</summary>
       <remarks>
         <b>Запрос нельзя выполнить анонимно.</b>
-        <br />Запросить данные о всех сделках (лента) по ценным бумагам за сегодняшнийдень</remarks>
+        <br />Запрос возвращает обезличенную информацию обо всех сделках с участием указанного в <paramref name="symbol" /> инструмента, совершённых всеми участниками торгов за текущую торговую сессию. Временные рамки сессий зависят от выбранного рынка и могут различаться.</remarks>
       <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
       <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
       <param name="exchange">
@@ -651,10 +651,10 @@
         <see cref="ICollection{T}">ICollection</see>&lt;<see cref="AllTradeSlim">AllTradeSlim</see>&gt;</returns>
     </Member>
     <Member name="MdV2SecuritiesExchangeSymbolAlltradesGetHeavyAsync">
-      <summary>Информация о всех сделках по ценным бумагам за сегодня</summary>
+      <summary>Сделки по инструменту (Текущая сессия)</summary>
       <remarks>
         <b>Запрос нельзя выполнить анонимно.</b>
-        <br />Запросить данные о всех сделках (лента) по ценным бумагам за сегодняшнийдень</remarks>
+        <br />Запрос возвращает обезличенную информацию обо всех сделках с участием указанного в <paramref name="symbol" /> инструмента, совершённых всеми участниками торгов за текущую торговую сессию. Временные рамки сессий зависят от выбранного рынка и могут различаться.</remarks>
       <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
       <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
       <param name="exchange">
@@ -707,10 +707,10 @@
         <see cref="ICollection{T}">ICollection</see>&lt;<see cref="AllTradeHeavy">AllTradeHeavy</see>&gt;</returns>
     </Member>
     <Member name="MdV2SecuritiesExchangeSymbolAlltradesHistoryGetSimpleAsync">
-      <summary>Информация о всех сделках по ценным бумагам за выбранный период</summary>
+      <summary>Сделки по инструменту (Прошлые сессии)</summary>
       <remarks>
         <b>Запрос нельзя выполнить анонимно.</b>
-        <br />Запросить данные о сделках (лента) по ценным бумагам за исторический период (за текущий день сделки не отдаются)</remarks>
+        <br />Запрос возвращает обезличенную информацию обо всех сделках с участием указанного в <paramref name="symbol" /> инструмента, совершённых всеми участниками торгов за прошлые торговые сессии. Информация за текущую торговую сессию в ответ не входит — для её получения используйте соответствующий запрос. Временные рамки сессий зависят от выбранного рынка и могут различаться.</remarks>
       <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
       <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
       <param name="exchange">
@@ -743,10 +743,10 @@
       </returns>
     </Member>
     <Member name="MdV2SecuritiesExchangeSymbolAlltradesHistoryGetSlimAsync">
-      <summary>Информация о всех сделках по ценным бумагам за выбранный период</summary>
+      <summary>Сделки по инструменту (Прошлые сессии)</summary>
       <remarks>
         <b>Запрос нельзя выполнить анонимно.</b>
-        <br />Запросить данные о сделках (лента) по ценным бумагам за исторический период (за текущий день сделки не отдаются)</remarks>
+        <br />Запрос возвращает обезличенную информацию обо всех сделках с участием указанного в <paramref name="symbol" /> инструмента, совершённых всеми участниками торгов за прошлые торговые сессии. Информация за текущую торговую сессию в ответ не входит — для её получения используйте соответствующий запрос. Временные рамки сессий зависят от выбранного рынка и могут различаться.</remarks>
       <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
       <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
       <param name="exchange">
@@ -779,10 +779,10 @@
       </returns>
     </Member>
     <Member name="MdV2SecuritiesExchangeSymbolAlltradesHistoryGetHeavyAsync">
-      <summary>Информация о всех сделках по ценным бумагам за выбранный период</summary>
+      <summary>Сделки по инструменту (Прошлые сессии)</summary>
       <remarks>
         <b>Запрос нельзя выполнить анонимно.</b>
-        <br />Запросить данные о сделках (лента) по ценным бумагам за исторический период (за текущий день сделки не отдаются)</remarks>
+        <br />Запрос возвращает обезличенную информацию обо всех сделках с участием указанного в <paramref name="symbol" /> инструмента, совершённых всеми участниками торгов за прошлые торговые сессии. Информация за текущую торговую сессию в ответ не входит — для её получения используйте соответствующий запрос. Временные рамки сессий зависят от выбранного рынка и могут различаться.</remarks>
       <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
       <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
       <param name="exchange">

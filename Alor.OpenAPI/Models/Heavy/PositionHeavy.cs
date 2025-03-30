@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
 using Alor.OpenAPI.Enums;
@@ -12,6 +13,7 @@ namespace Alor.OpenAPI.Models.Heavy
         public PositionHeavy() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responsePosition"]/Member[@name="responsePosition"]/*' />
+        [JsonConstructor]
         public PositionHeavy(decimal? volume = default, decimal? currentVolume = default,
             string? symbol = default, string? brokerSymbol = default, string? portfolio = default,
             Exchange exchange = default, decimal? avgPrice = default,
@@ -53,103 +55,103 @@ namespace Alor.OpenAPI.Models.Heavy
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responsePosition"]/Member[@name="volume"]/*' />
         [DataMember(Name = "volume", EmitDefaultValue = false)]
-        public decimal? Volume { get; private set; }
+        public decimal? Volume { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responsePosition"]/Member[@name="currentVolume"]/*' />
         [DataMember(Name = "currentVolume", EmitDefaultValue = false)]
-        public decimal? CurrentVolume { get; set; }
+        public decimal? CurrentVolume { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responsePosition"]/Member[@name="symbol"]/*' />
         [DataMember(Name = "symbol", EmitDefaultValue = false)]
-        public string? Symbol { get; private set; }
+        public string? Symbol { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responsePosition"]/Member[@name="brokerSymbol"]/*' />
         [DataMember(Name = "brokerSymbol", EmitDefaultValue = false)]
-        public string? BrokerSymbol { get; set; }
+        public string? BrokerSymbol { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responsePosition"]/Member[@name="portfolio"]/*' />
         [DataMember(Name = "portfolio", EmitDefaultValue = false)]
-        public string? Portfolio { get; private set; }
+        public string? Portfolio { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responsePosition"]/Member[@name="exchange"]/*' />
         [DataMember(Name = "exchange", EmitDefaultValue = false)]
-        public Exchange Exchange { get; private set; }
+        public Exchange Exchange { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responsePosition"]/Member[@name="avgPrice"]/*' />
         [DataMember(Name = "avgPrice", EmitDefaultValue = false)]
-        public decimal? AvgPrice { get; private set; }
+        public decimal? AvgPrice { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responsePosition"]/Member[@name="qtyUnits"]/*' />
         [DataMember(Name = "qtyUnits", EmitDefaultValue = false)]
-        public decimal? QtyUnits { get; private set; }
+        public decimal? QtyUnits { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responsePosition"]/Member[@name="openUnits"]/*' />
         [DataMember(Name = "openUnits", EmitDefaultValue = false)]
-        public decimal? OpenUnits { get; private set; }
+        public decimal? OpenUnits { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responsePosition"]/Member[@name="lotSize"]/*' />
         [DataMember(Name = "lotSize", EmitDefaultValue = false)]
-        public decimal? LotSize { get; private set; }
+        public decimal? LotSize { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responsePosition"]/Member[@name="shortName"]/*' />
         [DataMember(Name = "shortName", EmitDefaultValue = false)]
-        public string? ShortName { get; set; }
+        public string? ShortName { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responsePosition"]/Member[@name="qtyT0"]/*' />
         [DataMember(Name = "qtyT0", EmitDefaultValue = false)]
-        public decimal? QtyT0 { get; set; }
+        public decimal? QtyT0 { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responsePosition"]/Member[@name="qtyT1"]/*' />
         [DataMember(Name = "qtyT1", EmitDefaultValue = false)]
-        public decimal? QtyT1 { get; set; }
+        public decimal? QtyT1 { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responsePosition"]/Member[@name="qtyT2"]/*' />
         [DataMember(Name = "qtyT2", EmitDefaultValue = false)]
-        public decimal? QtyT2 { get; private set; }
+        public decimal? QtyT2 { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responsePosition"]/Member[@name="qtyTFuture"]/*' />
         [DataMember(Name = "qtyTFuture", EmitDefaultValue = false)]
-        public decimal? QtyTFuture { get; set; }
+        public decimal? QtyTFuture { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responsePosition"]/Member[@name="qtyT0Batch"]/*' />
         [DataMember(Name = "qtyT0Batch", EmitDefaultValue = false)]
-        public decimal? QtyT0Batch { get; set; }
+        public decimal? QtyT0Batch { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responsePosition"]/Member[@name="qtyT1Batch"]/*' />
         [DataMember(Name = "qtyT1Batch", EmitDefaultValue = false)]
-        public decimal? QtyT1Batch { get; set; }
+        public decimal? QtyT1Batch { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responsePosition"]/Member[@name="qtyT2Batch"]/*' />
         [DataMember(Name = "qtyT2Batch", EmitDefaultValue = false)]
-        public decimal? QtyT2Batch { get; set; }
+        public decimal? QtyT2Batch { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responsePosition"]/Member[@name="qtyTFutureBatch"]/*' />
         [DataMember(Name = "qtyTFutureBatch", EmitDefaultValue = false)]
-        public decimal? QtyTFutureBatch { get; set; }
+        public decimal? QtyTFutureBatch { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responsePosition"]/Member[@name="qtyBatch"]/*' />
         [DataMember(Name = "qtyBatch", EmitDefaultValue = false)]
-        public decimal? QtyBatch { get; set; }
+        public decimal? QtyBatch { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responsePosition"]/Member[@name="openQtyBatch"]/*' />
         [DataMember(Name = "openQtyBatch", EmitDefaultValue = false)]
-        public decimal? OpenQtyBatch { get; set; }
+        public decimal? OpenQtyBatch { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responsePosition"]/Member[@name="dailyUnrealisedPl"]/*' />
         [DataMember(Name = "dailyUnrealisedPl", EmitDefaultValue = false)]
-        public decimal? DailyUnrealisedPl { get; set; }
+        public decimal? DailyUnrealisedPl { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responsePosition"]/Member[@name="unrealisedPl"]/*' />
         [DataMember(Name = "unrealisedPl", EmitDefaultValue = false)]
-        public decimal? UnrealisedPl { get; set; }
+        public decimal? UnrealisedPl { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responsePosition"]/Member[@name="isCurrency"]/*' />
         [DataMember(Name = "isCurrency", EmitDefaultValue = false)]
-        public bool? IsCurrency { get; set; }
+        public bool? IsCurrency { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responsePosition"]/Member[@name="existing"]/*' />
         [DataMember(Name = "existing", EmitDefaultValue = false)]
-        public bool? Existing { get; set; }
+        public bool? Existing { get; init; }
 
         public override string ToString()
         {
@@ -186,20 +188,36 @@ namespace Alor.OpenAPI.Models.Heavy
 
         public string ToJson() => Encoding.UTF8.GetString(JsonSerializer.Generic.Utf8.Serialize(this));
 
-        public override int GetHashCode() => Utilities.Utilities.GetHashCodeHelper(
-            [
-                Volume?.GetHashCode() ?? 0,
-                Symbol?.GetHashCode() ?? 0,
-                Portfolio?.GetHashCode() ?? 0,
-                Exchange.GetHashCode(),
-                AvgPrice?.GetHashCode() ?? 0,
-                QtyUnits?.GetHashCode() ?? 0,
-                OpenUnits?.GetHashCode() ?? 0,
-                LotSize?.GetHashCode() ?? 0,
-                QtyT2?.GetHashCode() ?? 0,
-                Existing?.GetHashCode() ?? 0,
-            ]
-        );
+        public override int GetHashCode()
+        {
+            var hash = new HashCode();
+            hash.Add(Volume);
+            hash.Add(CurrentVolume);
+            hash.Add(Symbol);
+            hash.Add(BrokerSymbol);
+            hash.Add(Portfolio);
+            hash.Add(Exchange);
+            hash.Add(AvgPrice);
+            hash.Add(QtyUnits);
+            hash.Add(OpenUnits);
+            hash.Add(LotSize);
+            hash.Add(ShortName);
+            hash.Add(QtyT0);
+            hash.Add(QtyT1);
+            hash.Add(QtyT2);
+            hash.Add(QtyTFuture);
+            hash.Add(QtyT0Batch);
+            hash.Add(QtyT1Batch);
+            hash.Add(QtyT2Batch);
+            hash.Add(QtyTFutureBatch);
+            hash.Add(QtyBatch);
+            hash.Add(OpenQtyBatch);
+            hash.Add(DailyUnrealisedPl);
+            hash.Add(UnrealisedPl);
+            hash.Add(IsCurrency);
+            hash.Add(Existing);
+            return hash.ToHashCode();
+        }
 
         private static bool EqualsHelper(PositionHeavy? first, PositionHeavy? second) =>
             first?.Volume == second?.Volume &&
@@ -238,10 +256,7 @@ namespace Alor.OpenAPI.Models.Heavy
             if ((object?)other == null)
                 return false;
 
-            if (GetType() != other.GetType())
-                return false;
-
-            return EqualsHelper(this, other);
+            return GetType() == other.GetType() && EqualsHelper(this, other);
         }
 
         public override bool Equals(object? obj) => Equals(obj as PositionHeavy);

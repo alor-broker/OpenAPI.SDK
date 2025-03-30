@@ -11,6 +11,7 @@ namespace Alor.OpenAPI.Models.Heavy
         public AllTradesHistoryHeavy() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseAllTradesHistory"]/Member[@name="responseAllTradesHistory"]/*' />
+        [JsonConstructor]
         public AllTradesHistoryHeavy(int? total = default, List<AllTradeHeavy>? listHeavy = default)
         {
             Total = total;
@@ -19,11 +20,11 @@ namespace Alor.OpenAPI.Models.Heavy
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseAllTradesHistory"]/Member[@name="total"]/*' />
         [DataMember(Name = "total", EmitDefaultValue = false)]
-        public int? Total { get; private set; }
+        public int? Total { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseAllTradesHistory"]/Member[@name="listHeavy"]/*' />
         [DataMember(Name = "list", EmitDefaultValue = false)]
-        public List<AllTradeHeavy>? List { get; private set; }
+        public List<AllTradeHeavy>? List { get; init; }
 
         public override string ToString()
         {
@@ -37,12 +38,7 @@ namespace Alor.OpenAPI.Models.Heavy
 
         public string ToJson() => Encoding.UTF8.GetString(JsonSerializer.Generic.Utf8.Serialize(this));
 
-        public override int GetHashCode() => Utilities.Utilities.GetHashCodeHelper(
-            [
-                Total?.GetHashCode() ?? 0,
-                List?.GetHashCode() ?? 0,
-            ]
-        );
+        public override int GetHashCode() => HashCode.Combine(Total, List);
 
         private static bool EqualsHelper(AllTradesHistoryHeavy? first, AllTradesHistoryHeavy? second)
         {
@@ -70,10 +66,7 @@ namespace Alor.OpenAPI.Models.Heavy
             if ((object?)other == null)
                 return false;
 
-            if (GetType() != other.GetType())
-                return false;
-
-            return EqualsHelper(this, other);
+            return GetType() == other.GetType() && EqualsHelper(this, other);
         }
 
         public override bool Equals(object? obj) => Equals(obj as AllTradesHistoryHeavy);

@@ -13,6 +13,7 @@ namespace Alor.OpenAPI.Models.Slim
         public OrderSlim() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrder"]/Member[@name="responseOrder"]/*' />
+        [JsonConstructor]
         public OrderSlim(string? id = default, string? symbol = default, string? board = default,
             string? brokerSymbol = default,
             string? portfolio = default, Exchange exchange = default, string? comment = default,
@@ -50,91 +51,91 @@ namespace Alor.OpenAPI.Models.Slim
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrder"]/Member[@name="id"]/*' />
         [DataMember(Name = "id", EmitDefaultValue = false)]
-        public string? Id { get; private set; }
+        public string? Id { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrder"]/Member[@name="symbol"]/*' />
         [DataMember(Name = "sym", EmitDefaultValue = false)]
-        public string? Symbol { get; private set; }
+        public string? Symbol { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrder"]/Member[@name="board"]/*' />
         [DataMember(Name = "bd", EmitDefaultValue = false)]
-        public string? Board { get; private set; }
+        public string? Board { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrder"]/Member[@name="brokerSymbol"]/*' />
         [DataMember(Name = "tic", EmitDefaultValue = false)]
-        public string? BrokerSymbol { get; set; }
+        public string? BrokerSymbol { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrder"]/Member[@name="portfolio"]/*' />
         [DataMember(Name = "p", EmitDefaultValue = false)]
-        public string? Portfolio { get; set; }
+        public string? Portfolio { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrder"]/Member[@name="exchange"]/*' />
         [DataMember(Name = "ex", EmitDefaultValue = false)]
-        public Exchange Exchange { get; private set; }
+        public Exchange Exchange { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrder"]/Member[@name="comment"]/*' />
         [DataMember(Name = "cmt", EmitDefaultValue = false)]
-        public string? Comment { get; set; }
+        public string? Comment { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrder"]/Member[@name="type"]/*' />
         [DataMember(Name = "t", EmitDefaultValue = false)]
-        public Type Type { get; set; }
+        public Type Type { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrder"]/Member[@name="side"]/*' />
         [DataMember(Name = "s", EmitDefaultValue = false)]
-        public Side Side { get; set; }
+        public Side Side { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrder"]/Member[@name="status"]/*' />
         [DataMember(Name = "st", EmitDefaultValue = false)]
-        public OrderStatus Status { get; set; }
+        public OrderStatus Status { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrder"]/Member[@name="transTime"]/*' />
         [DataMember(Name = "tt", EmitDefaultValue = false)]
-        public DateTime? TransTime { get; set; }
+        public DateTime? TransTime { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrder"]/Member[@name="updateTime"]/*' />
         [DataMember(Name = "ut", EmitDefaultValue = false)]
-        public DateTime? UpdateTime { get; set; }
+        public DateTime? UpdateTime { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrder"]/Member[@name="endTime"]/*' />
         [DataMember(Name = "et", EmitDefaultValue = false)]
-        public DateTime? EndTime { get; set; }
+        public DateTime? EndTime { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrder"]/Member[@name="qtyUnits"]/*' />
         [DataMember(Name = "q", EmitDefaultValue = false)]
-        public int? QtyUnits { get; set; }
+        public int? QtyUnits { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrder"]/Member[@name="qtyBatch"]/*' />
         [DataMember(Name = "qb", EmitDefaultValue = false)]
-        public int? QtyBatch { get; set; }
+        public int? QtyBatch { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrder"]/Member[@name="filledQtyUnits"]/*' />
         [DataMember(Name = "fq", EmitDefaultValue = false)]
-        public decimal? FilledQtyUnits { get; set; }
+        public decimal? FilledQtyUnits { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrder"]/Member[@name="filledQtyBatch"]/*' />
         [DataMember(Name = "fqb", EmitDefaultValue = false)]
-        public decimal? FilledQtyBatch { get; set; }
+        public decimal? FilledQtyBatch { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrder"]/Member[@name="price"]/*' />
         [DataMember(Name = "px", EmitDefaultValue = false)]
-        public decimal? Price { get; set; }
+        public decimal? Price { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrder"]/Member[@name="existing"]/*' />
         [DataMember(Name = "h", EmitDefaultValue = false)]
-        public bool? Existing { get; set; }
+        public bool? Existing { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrder"]/Member[@name="timeInForce"]/*' />
         [DataMember(Name = "tf", EmitDefaultValue = false)]
-        public TimeInForce TimeInForce { get; set; }
+        public TimeInForce TimeInForce { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrder"]/Member[@name="iceberg"]/*' />
         [DataMember(Name = "i", EmitDefaultValue = false)]
-        public Iceberg? Iceberg { get; set; }
+        public Iceberg? Iceberg { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrder"]/Member[@name="volume"]/*' />
         [DataMember(Name = "v", EmitDefaultValue = false)]
-        public decimal? Volume { get; set; }
+        public decimal? Volume { get; init; }
 
         public override string ToString()
         {
@@ -168,14 +169,33 @@ namespace Alor.OpenAPI.Models.Slim
 
         public string ToJson() => Encoding.UTF8.GetString(JsonSerializer.Generic.Utf8.Serialize(this));
 
-        public override int GetHashCode() => Utilities.Utilities.GetHashCodeHelper(
-            [
-                Id?.GetHashCode() ?? 0,
-                Symbol?.GetHashCode() ?? 0,
-                Board?.GetHashCode() ?? 0,
-                Exchange.GetHashCode(),
-            ]
-        );
+        public override int GetHashCode()
+        {
+            var hash = new HashCode();
+            hash.Add(Id);
+            hash.Add(Symbol);
+            hash.Add(Board);
+            hash.Add(BrokerSymbol);
+            hash.Add(Portfolio);
+            hash.Add(Exchange);
+            hash.Add(Comment);
+            hash.Add(Type);
+            hash.Add(Side);
+            hash.Add(Status);
+            hash.Add(TransTime);
+            hash.Add(UpdateTime);
+            hash.Add(EndTime);
+            hash.Add(QtyUnits);
+            hash.Add(QtyBatch);
+            hash.Add(FilledQtyUnits);
+            hash.Add(FilledQtyBatch);
+            hash.Add(Price);
+            hash.Add(Existing);
+            hash.Add(TimeInForce);
+            hash.Add(Iceberg);
+            hash.Add(Volume);
+            return hash.ToHashCode();
+        }
 
         private static bool EqualsHelper(OrderSlim? first, OrderSlim? second) =>
             first?.Id == second?.Id &&
@@ -200,9 +220,7 @@ namespace Alor.OpenAPI.Models.Slim
             first?.TimeInForce == second?.TimeInForce &&
             first?.Iceberg == second?.Iceberg &&
             first?.Volume == second?.Volume;
-
-
-
+        
         public bool Equals(OrderSlim? other)
         {
             if (this == (object?)other)
@@ -211,10 +229,7 @@ namespace Alor.OpenAPI.Models.Slim
             if ((object?)other == null)
                 return false;
 
-            if (GetType() != other.GetType())
-                return false;
-
-            return EqualsHelper(this, other);
+            return GetType() == other.GetType() && EqualsHelper(this, other);
         }
 
         public override bool Equals(object? obj) => Equals(obj as OrderSlim);

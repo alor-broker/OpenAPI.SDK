@@ -29,7 +29,7 @@ namespace Alor.OpenAPI.Tests
         [InlineData("https://example.com", "wss://example.com/ws", null, "https://example.com/auth", "cwsUrl")]
         [InlineData("https://example.com", "wss://example.com/ws", "wss://example.com/cws", null, "authUrl")]
         public void ConfigurationCreate_ThrowsArgumentNullExceptionForInvalidParameters(
-            string baseUrl, string wsUrl, string cwsUrl, string authUrl, string expectedParamName)
+            string baseUrl, string? wsUrl, string cwsUrl, string authUrl, string expectedParamName)
         {
             var exception = Assert.Throws<ArgumentNullException>(() => Configuration.Create(baseUrl, wsUrl, cwsUrl, authUrl));
 

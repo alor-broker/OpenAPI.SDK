@@ -1,8 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Alor.OpenAPI.Enums;
+using SpanJson;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
-using Alor.OpenAPI.Enums;
-using SpanJson;
 
 namespace Alor.OpenAPI.Models
 {
@@ -12,6 +12,7 @@ namespace Alor.OpenAPI.Models
         public RiskRate() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseRiskRate"]/Member[@name="responseRiskRate"]/*' />
+        [JsonConstructor]
         public RiskRate(long? id = default, string? instrument = default,
             Exchange exchange = default, int? riskCategoryId = default,
             decimal? securityRiskCategoryId = default, string? assetType = default,
@@ -46,83 +47,83 @@ namespace Alor.OpenAPI.Models
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseRiskRate"]/Member[@name="id"]/*' />
         [DataMember(Name = "id", EmitDefaultValue = false)]
-        public long? Id { get; private set; }
+        public long? Id { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseRiskRate"]/Member[@name="instrument"]/*' />
         [DataMember(Name = "instrument", EmitDefaultValue = false)]
-        public string? Instrument { get; private set; }
+        public string? Instrument { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseRiskRate"]/Member[@name="exchange"]/*' />
         [DataMember(Name = "exchange", EmitDefaultValue = false)]
-        public Exchange Exchange { get; private set; }
+        public Exchange Exchange { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseRiskRate"]/Member[@name="riskCategoryId"]/*' />
         [DataMember(Name = "riskCategoryId", EmitDefaultValue = false)]
-        public int? RiskCategoryId { get; set; }
+        public int? RiskCategoryId { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseRiskRate"]/Member[@name="securityRiskCategoryId"]/*' />
         [DataMember(Name = "securityRiskCategoryId", EmitDefaultValue = false)]
-        public decimal? SecurityRiskCategoryId { get; set; }
+        public decimal? SecurityRiskCategoryId { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseRiskRate"]/Member[@name="assetType"]/*' />
         [DataMember(Name = "assetType", EmitDefaultValue = false)]
-        public string? AssetType { get; set; }
+        public string? AssetType { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseRiskRate"]/Member[@name="underlyingAsset"]/*' />
         [DataMember(Name = "underlyingAsset", EmitDefaultValue = false)]
-        public string? UnderlyingAsset { get; set; }
+        public string? UnderlyingAsset { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseRiskRate"]/Member[@name="setName"]/*' />
         [DataMember(Name = "setName", EmitDefaultValue = false)]
-        public string? SetName { get; set; }
+        public string? SetName { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseRiskRate"]/Member[@name="isDirect"]/*' />
         [DataMember(Name = "isDirect", EmitDefaultValue = false)]
-        public bool? IsDirect { get; set; }
+        public bool? IsDirect { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseRiskRate"]/Member[@name="isin"]/*' />
         [DataMember(Name = "isin", EmitDefaultValue = false)]
-        public string? Isin { get; set; }
+        public string? Isin { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseRiskRate"]/Member[@name="currencyCode"]/*' />
         [DataMember(Name = "currencyCode", EmitDefaultValue = false)]
-        public string? CurrencyCode { get; set; }
+        public string? CurrencyCode { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseRiskRate"]/Member[@name="rateUp"]/*' />
         [DataMember(Name = "rateUp", EmitDefaultValue = false)]
-        public decimal? RateUp { get; set; }
+        public decimal? RateUp { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseRiskRate"]/Member[@name="rateDown"]/*' />
         [DataMember(Name = "rateDown", EmitDefaultValue = false)]
-        public decimal? RateDown { get; set; }
+        public decimal? RateDown { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseRiskRate"]/Member[@name="rateSymmetric"]/*' />
         [DataMember(Name = "rateSymmetric", EmitDefaultValue = false)]
-        public decimal? RateSymmetric { get; set; }
+        public decimal? RateSymmetric { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseRiskRate"]/Member[@name="isShortSellPossible"]/*' />
         [DataMember(Name = "isShortSellPossible", EmitDefaultValue = false)]
-        public bool? IsShortSellPossible { get; set; }
+        public bool? IsShortSellPossible { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseRiskRate"]/Member[@name="isMarginal"]/*' />
         [DataMember(Name = "isMarginal", EmitDefaultValue = false)]
-        public bool? IsMarginal { get; set; }
+        public bool? IsMarginal { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseRiskRate"]/Member[@name="setRate"]/*' />
         [DataMember(Name = "setRate", EmitDefaultValue = false)]
-        public decimal? SetRate { get; set; }
+        public decimal? SetRate { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseRiskRate"]/Member[@name="createdAt"]/*' />
         [DataMember(Name = "createdAt", EmitDefaultValue = false)]
-        public DateTime? CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseRiskRate"]/Member[@name="updatedAt"]/*' />
         [DataMember(Name = "updatedAt", EmitDefaultValue = false)]
-        public DateTime? UpdatedAt { get; set; }
+        public DateTime? UpdatedAt { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseRiskRate"]/Member[@name="updatedBy"]/*' />
         [DataMember(Name = "updatedBy", EmitDefaultValue = false)]
-        public string? UpdatedBy { get; set; }
+        public string? UpdatedBy { get; init; }
 
         public override string ToString()
         {
@@ -154,13 +155,31 @@ namespace Alor.OpenAPI.Models
 
         public string ToJson() => Encoding.UTF8.GetString(JsonSerializer.Generic.Utf8.Serialize(this));
 
-        public override int GetHashCode() => Utilities.Utilities.GetHashCodeHelper(
-            [
-                Id?.GetHashCode() ?? 0,
-                Instrument?.GetHashCode() ?? 0,
-                Exchange.GetHashCode(),
-            ]
-        );
+        public override int GetHashCode()
+        {
+            var hash = new HashCode();
+            hash.Add(Id);
+            hash.Add(Instrument);
+            hash.Add(Exchange);
+            hash.Add(RiskCategoryId);
+            hash.Add(SecurityRiskCategoryId);
+            hash.Add(AssetType);
+            hash.Add(UnderlyingAsset);
+            hash.Add(SetName);
+            hash.Add(IsDirect);
+            hash.Add(Isin);
+            hash.Add(CurrencyCode);
+            hash.Add(RateUp);
+            hash.Add(RateDown);
+            hash.Add(RateSymmetric);
+            hash.Add(IsShortSellPossible);
+            hash.Add(IsMarginal);
+            hash.Add(SetRate);
+            hash.Add(CreatedAt);
+            hash.Add(UpdatedAt);
+            hash.Add(UpdatedBy);
+            return hash.ToHashCode();
+        }
 
         private static bool EqualsHelper(RiskRate? first, RiskRate? second) =>
             first?.Id == second?.Id &&
@@ -176,10 +195,7 @@ namespace Alor.OpenAPI.Models
             if ((object?)other == null)
                 return false;
 
-            if (GetType() != other.GetType())
-                return false;
-
-            return EqualsHelper(this, other);
+            return GetType() == other.GetType() && EqualsHelper(this, other);
         }
 
         public override bool Equals(object? obj) => Equals(obj as RiskRate);

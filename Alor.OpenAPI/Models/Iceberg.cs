@@ -11,6 +11,7 @@ namespace Alor.OpenAPI.Models
         public Iceberg() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectIcebergFields"]/Member[@name="objectIcebergFields"]/*' />
+        [JsonConstructor]
         public Iceberg(int? creationFixedQuantity = default, int? creationVarianceQuantity = default,
             int? visibleQuantity = default, int? visibleQuantityBatch = default,
             int? visibleFilledQuantity = default, int? visibleFilledQuantityBatch = default)
@@ -25,27 +26,27 @@ namespace Alor.OpenAPI.Models
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectIcebergFields"]/Member[@name="creationFixedQuantity"]/*' />
         [DataMember(Name = "creationFixedQuantity", EmitDefaultValue = false)]
-        public int? CreationFixedQuantity { get; private set; }
+        public int? CreationFixedQuantity { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectIcebergFields"]/Member[@name="creationVarianceQuantity"]/*' />
         [DataMember(Name = "creationVarianceQuantity", EmitDefaultValue = false)]
-        public int? CreationVarianceQuantity { get; private set; }
+        public int? CreationVarianceQuantity { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectIcebergFields"]/Member[@name="visibleQuantity"]/*' />
         [DataMember(Name = "visibleQuantity", EmitDefaultValue = false)]
-        public int? VisibleQuantity { get; private set; }
+        public int? VisibleQuantity { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectIcebergFields"]/Member[@name="visibleQuantityBatch"]/*' />
         [DataMember(Name = "visibleQuantityBatch", EmitDefaultValue = false)]
-        public int? VisibleQuantityBatch { get; private set; }
+        public int? VisibleQuantityBatch { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectIcebergFields"]/Member[@name="visibleFilledQuantity"]/*' />
         [DataMember(Name = "visibleFilledQuantity", EmitDefaultValue = false)]
-        public int? VisibleFilledQuantity { get; private set; }
+        public int? VisibleFilledQuantity { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectIcebergFields"]/Member[@name="visibleFilledQuantityBatch"]/*' />
         [DataMember(Name = "visibleFilledQuantityBatch", EmitDefaultValue = false)]
-        public int? VisibleFilledQuantityBatch { get; private set; }
+        public int? VisibleFilledQuantityBatch { get; init; }
 
         public override string ToString()
         {
@@ -63,16 +64,8 @@ namespace Alor.OpenAPI.Models
 
         public string ToJson() => Encoding.UTF8.GetString(JsonSerializer.Generic.Utf8.Serialize(this));
 
-        public override int GetHashCode() => Utilities.Utilities.GetHashCodeHelper(
-            [
-                CreationFixedQuantity?.GetHashCode() ?? 0,
-                CreationVarianceQuantity?.GetHashCode() ?? 0,
-                VisibleQuantity?.GetHashCode() ?? 0,
-                VisibleQuantityBatch?.GetHashCode() ?? 0,
-                VisibleFilledQuantity?.GetHashCode() ?? 0,
-                VisibleFilledQuantityBatch?.GetHashCode() ?? 0,
-            ]
-        );
+        public override int GetHashCode() => HashCode.Combine(CreationFixedQuantity, CreationVarianceQuantity,
+            VisibleQuantity, VisibleQuantityBatch, VisibleFilledQuantity, VisibleFilledQuantityBatch);
 
         private static bool EqualsHelper(Iceberg? first, Iceberg? second) =>
             first?.CreationFixedQuantity == second?.CreationFixedQuantity &&
@@ -90,10 +83,7 @@ namespace Alor.OpenAPI.Models
             if ((object?)other == null)
                 return false;
 
-            if (GetType() != other.GetType())
-                return false;
-
-            return EqualsHelper(this, other);
+            return GetType() == other.GetType() && EqualsHelper(this, other);
         }
 
         public override bool Equals(object? obj) => Equals(obj as Iceberg);

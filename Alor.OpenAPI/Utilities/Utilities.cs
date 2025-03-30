@@ -65,19 +65,6 @@ namespace Alor.OpenAPI.Utilities
             }
         }
 
-        internal static int GetHashCodeHelper(IReadOnlyList<int>? subCodes)
-        {
-            if (subCodes is null || subCodes.Count == 0)
-                return 0;
-
-            var result = subCodes[0];
-
-            for (var i = 1; i < subCodes.Count; i++)
-                result = unchecked(result * 397) ^ subCodes[i];
-
-            return result;
-        }
-
         private static string? ConvertToBase62<T>(T? number) where T : struct, IComparable, IConvertible
         {
             if (number == null) return null;

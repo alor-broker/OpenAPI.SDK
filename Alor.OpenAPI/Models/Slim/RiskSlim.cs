@@ -17,7 +17,7 @@ namespace Alor.OpenAPI.Models.Slim
             decimal? minimalMargin = default, decimal? correctedMargin = default,
             decimal? riskCoverageRatioOne = default, decimal? riskCoverageRatioTwo = default,
             int? riskCategoryId = default, ClientType clientType = default,
-            bool? hasForbiddenPositions = default, bool? hasNegativeQuantity = default)
+            bool? hasForbiddenPositions = default, bool? hasNegativeQuantity = default, RiskStatus riskStatus = default)
         {
             Portfolio = portfolio;
             Exchange = exchange;
@@ -32,59 +32,64 @@ namespace Alor.OpenAPI.Models.Slim
             ClientType = clientType;
             HasForbiddenPositions = hasForbiddenPositions;
             HasNegativeQuantity = hasNegativeQuantity;
+            RiskStatus = riskStatus;
         }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseRisk"]/Member[@name="portfolio"]/*' />
         [DataMember(Name = "p", EmitDefaultValue = false)]
-        public string? Portfolio { get; set; }
+        public string? Portfolio { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseRisk"]/Member[@name="exchange"]/*' />
         [DataMember(Name = "ex", EmitDefaultValue = false)]
-        public Exchange Exchange { get; set; }
+        public Exchange Exchange { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseRisk"]/Member[@name="portfolioEvaluation"]/*' />
         [DataMember(Name = "pe", EmitDefaultValue = false)]
-        public decimal? PortfolioEvaluation { get; set; }
+        public decimal? PortfolioEvaluation { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseRisk"]/Member[@name="portfolioLiquidationValue"]/*' />
         [DataMember(Name = "plv", EmitDefaultValue = false)]
-        public decimal? PortfolioLiquidationValue { get; set; }
+        public decimal? PortfolioLiquidationValue { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseRisk"]/Member[@name="initialMargin"]/*' />
         [DataMember(Name = "mgi", EmitDefaultValue = false)]
-        public decimal? InitialMargin { get; set; }
+        public decimal? InitialMargin { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseRisk"]/Member[@name="minimalMargin"]/*' />
         [DataMember(Name = "mgmn", EmitDefaultValue = false)]
-        public decimal? MinimalMargin { get; set; }
+        public decimal? MinimalMargin { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseRisk"]/Member[@name="correctedMargin"]/*' />
         [DataMember(Name = "mgc", EmitDefaultValue = false)]
-        public decimal? CorrectedMargin { get; set; }
+        public decimal? CorrectedMargin { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseRisk"]/Member[@name="riskCoverageRatioOne"]/*' />
         [DataMember(Name = "r1", EmitDefaultValue = false)]
-        public decimal? RiskCoverageRatioOne { get; set; }
+        public decimal? RiskCoverageRatioOne { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseRisk"]/Member[@name="riskCoverageRatioTwo"]/*' />
         [DataMember(Name = "r2", EmitDefaultValue = false)]
-        public decimal? RiskCoverageRatioTwo { get; set; }
+        public decimal? RiskCoverageRatioTwo { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseRisk"]/Member[@name="riskCategoryId"]/*' />
         [DataMember(Name = "rid", EmitDefaultValue = false)]
-        public int? RiskCategoryId { get; set; }
+        public int? RiskCategoryId { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseRisk"]/Member[@name="clientType"]/*' />
         [DataMember(Name = "ct", EmitDefaultValue = false)]
-        public ClientType ClientType { get; set; }
+        public ClientType ClientType { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseRisk"]/Member[@name="hasForbiddenPositions"]/*' />
         [DataMember(Name = "fpos", EmitDefaultValue = false)]
-        public bool? HasForbiddenPositions { get; set; }
+        public bool? HasForbiddenPositions { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseRisk"]/Member[@name="hasNegativeQuantity"]/*' />
         [DataMember(Name = "nq", EmitDefaultValue = false)]
-        public bool? HasNegativeQuantity { get; set; }
+        public bool? HasNegativeQuantity { get; init; }
+
+        /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseRisk"]/Member[@name="riskStatus"]/*' />
+        [DataMember(Name = "rst", EmitDefaultValue = false)]
+        public RiskStatus RiskStatus { get; init; }
 
         public override string ToString()
         {
@@ -103,18 +108,32 @@ namespace Alor.OpenAPI.Models.Slim
             sb.Append("  ClientType: ").Append(ClientType).Append(Environment.NewLine);
             sb.Append("  HasForbiddenPositions: ").Append(HasForbiddenPositions).Append(Environment.NewLine);
             sb.Append("  HasNegativeQuantity: ").Append(HasNegativeQuantity).Append(Environment.NewLine);
+            sb.Append("  RiskStatus: ").Append(RiskStatus).Append(Environment.NewLine);
             sb.Append('}').Append(Environment.NewLine);
             return sb.ToString();
         }
 
         public string ToJson() => Encoding.UTF8.GetString(JsonSerializer.Generic.Utf8.Serialize(this));
 
-        public override int GetHashCode() => Utilities.Utilities.GetHashCodeHelper(
-            [
-                Portfolio?.GetHashCode() ?? 0,
-                Exchange.GetHashCode(),
-            ]
-        );
+        public override int GetHashCode()
+        {
+            var hash = new HashCode();
+            hash.Add(Portfolio);
+            hash.Add(Exchange);
+            hash.Add(PortfolioEvaluation);
+            hash.Add(PortfolioLiquidationValue);
+            hash.Add(InitialMargin);
+            hash.Add(MinimalMargin);
+            hash.Add(CorrectedMargin);
+            hash.Add(RiskCoverageRatioOne);
+            hash.Add(RiskCoverageRatioTwo);
+            hash.Add(RiskCategoryId);
+            hash.Add(ClientType);
+            hash.Add(HasForbiddenPositions);
+            hash.Add(HasNegativeQuantity);
+            hash.Add(RiskStatus);
+            return hash.ToHashCode();
+        }
 
         private static bool EqualsHelper(RiskSlim? first, RiskSlim? second) =>
             first?.Portfolio == second?.Portfolio &&
@@ -129,11 +148,8 @@ namespace Alor.OpenAPI.Models.Slim
             first?.RiskCategoryId == second?.RiskCategoryId &&
             first?.ClientType == second?.ClientType &&
             first?.HasForbiddenPositions == second?.HasForbiddenPositions &&
-            first?.HasNegativeQuantity == second?.HasNegativeQuantity;
-
-
-
-
+            first?.HasNegativeQuantity == second?.HasNegativeQuantity &&
+            first?.RiskStatus == second?.RiskStatus;
 
         public bool Equals(RiskSlim? other)
         {
@@ -143,10 +159,7 @@ namespace Alor.OpenAPI.Models.Slim
             if ((object?)other == null)
                 return false;
 
-            if (GetType() != other.GetType())
-                return false;
-
-            return EqualsHelper(this, other);
+            return GetType() == other.GetType() && EqualsHelper(this, other);
         }
 
         public override bool Equals(object? obj) => Equals(obj as RiskSlim);

@@ -43,17 +43,17 @@ namespace Alor.OpenAPI.Services
         public Task<ICollection<OrderHeavy>> MdV2ClientsExchangePortfolioOrdersGetHeavyAsync(Exchange exchange, string portfolio) =>
             MdV2ClientsExchangePortfolioOrdersGetAsync<ICollection<OrderHeavy>>(Format.Heavy, exchange, portfolio, _cancellationTokenSource.Token);
 
-        public Task<OrderActionLimitMarket> CommandapiWarptransTradeV2ClientOrdersActionsMarketPostAsync(string portfolio, Side side, int quantity, string symbol, Exchange exchange, string? instrumentGroup = null, string? comment = null, TimeInForce timeInForce = TimeInForce.OneDay) =>
-            CommandapiWarptransTradeV2ClientOrdersActionsMarketPostAsync(side, quantity, symbol, exchange, instrumentGroup, portfolio, timeInForce, comment, _cancellationTokenSource.Token);
+        public Task<OrderActionLimitMarket> CommandapiWarptransTradeV2ClientOrdersActionsMarketPostAsync(string portfolio, Side side, int quantity, string symbol, Exchange exchange, string? instrumentGroup = null, string? comment = null, TimeInForce timeInForce = TimeInForce.OneDay, bool? allowMargin = null) =>
+            CommandapiWarptransTradeV2ClientOrdersActionsMarketPostAsync(side, quantity, symbol, exchange, instrumentGroup, portfolio, timeInForce, comment, allowMargin, _cancellationTokenSource.Token);
 
-        public Task<OrderActionLimitMarket> CommandapiWarptransTradeV2ClientOrdersActionsLimitPostAsync(string portfolio, Side side, int quantity, decimal price, string symbol, Exchange exchange, string? instrumentGroup = null, string? comment = null, TimeInForce timeInForce = TimeInForce.OneDay, int? icebergFixed = null, decimal? icebergVariance = null) =>
-            CommandapiWarptransTradeV2ClientOrdersActionsLimitPostAsync(side, quantity, price, symbol, exchange, instrumentGroup, portfolio, comment, timeInForce, icebergFixed, icebergVariance, _cancellationTokenSource.Token);
+        public Task<OrderActionLimitMarket> CommandapiWarptransTradeV2ClientOrdersActionsLimitPostAsync(string portfolio, Side side, int quantity, decimal price, string symbol, Exchange exchange, string? instrumentGroup = null, string? comment = null, TimeInForce timeInForce = TimeInForce.OneDay, int? icebergFixed = null, decimal? icebergVariance = null, bool? allowMargin = null) =>
+            CommandapiWarptransTradeV2ClientOrdersActionsLimitPostAsync(side, quantity, price, symbol, exchange, instrumentGroup, portfolio, comment, timeInForce, icebergFixed, icebergVariance, allowMargin, _cancellationTokenSource.Token);
 
-        public Task<OrderActionLimitMarket> CommandapiWarptransTradeV2ClientOrdersActionsMarketOrderIdPutAsync(int orderId, string portfolio, Side side, int quantity, string symbol, Exchange exchange, string? instrumentGroup = null, string? comment = null, TimeInForce timeInForce = TimeInForce.OneDay) =>
-            CommandapiWarptransTradeV2ClientOrdersActionsMarketOrderIdPutAsync(orderId, side, quantity, symbol, exchange, instrumentGroup, portfolio, comment, timeInForce, _cancellationTokenSource.Token);
+        public Task<OrderActionLimitMarket> CommandapiWarptransTradeV2ClientOrdersActionsMarketOrderIdPutAsync(int orderId, string portfolio, Side side, int quantity, string symbol, Exchange exchange, string? instrumentGroup = null, string? comment = null, TimeInForce timeInForce = TimeInForce.OneDay, bool? allowMargin = null) =>
+            CommandapiWarptransTradeV2ClientOrdersActionsMarketOrderIdPutAsync(orderId, side, quantity, symbol, exchange, instrumentGroup, portfolio, comment, timeInForce, allowMargin, _cancellationTokenSource.Token);
 
-        public Task<OrderActionLimitMarket> CommandapiWarptransTradeV2ClientOrdersActionsLimitOrderIdPutAsync(int orderId, string portfolio, Side side, int quantity, decimal price, string symbol, Exchange exchange, string? instrumentGroup = null, string? comment = null, TimeInForce timeInForce = TimeInForce.OneDay, int? icebergFixed = null, decimal? icebergVariance = null) =>
-            CommandapiWarptransTradeV2ClientOrdersActionsLimitOrderIdPutAsync(orderId, side, quantity, price, symbol, exchange, instrumentGroup, portfolio, comment, timeInForce, icebergFixed, icebergVariance, _cancellationTokenSource.Token);
+        public Task<OrderActionLimitMarket> CommandapiWarptransTradeV2ClientOrdersActionsLimitOrderIdPutAsync(int orderId, string portfolio, Side side, int quantity, decimal price, string symbol, Exchange exchange, string? instrumentGroup = null, string? comment = null, TimeInForce timeInForce = TimeInForce.OneDay, int? icebergFixed = null, decimal? icebergVariance = null, bool? allowMargin = null) =>
+            CommandapiWarptransTradeV2ClientOrdersActionsLimitOrderIdPutAsync(orderId, side, quantity, price, symbol, exchange, instrumentGroup, portfolio, comment, timeInForce, icebergFixed, icebergVariance, allowMargin, _cancellationTokenSource.Token);
 
         public Task<ResponseEstimateOrder> CommandapiWarptransTradeV2ClientOrdersEstimatePostAsync(string portfolio, string ticker, Exchange exchange, decimal? price, int? lotQuantity, decimal? budget, string? board, bool? includeLimitOrders) =>
             CommandapiWarptransTradeV2ClientOrdersEstimatePostAsync(portfolio, ticker, exchange, price, lotQuantity, budget, board, includeLimitOrders, _cancellationTokenSource.Token);
@@ -99,7 +99,7 @@ namespace Alor.OpenAPI.Services
 
         private Task<OrderActionLimitMarket> CommandapiWarptransTradeV2ClientOrdersActionsMarketPostAsync(Side side,
             int quantity, string? symbol, Exchange exchange, string? instrumentGroup, string? portfolio, TimeInForce timeInForce, string? comment,
-            CancellationToken cancellationToken)
+            bool? allowMargin, CancellationToken cancellationToken)
         {
             if (string.IsNullOrEmpty(symbol))
                 throw new ArgumentNullException(nameof(symbol));
@@ -107,7 +107,7 @@ namespace Alor.OpenAPI.Services
                 throw new ArgumentNullException(nameof(portfolio));
 
             var order = new RequestOrdersActionsMarketTv(side, quantity, new Instrument(symbol, exchange, instrumentGroup), comment,
-                new User(portfolio), timeInForce);
+                new User(portfolio), timeInForce, allowMargin);
             var body = order.ToJson();
 
             var uriBuilder = new UriBuilder(_baseUrl)
@@ -120,7 +120,7 @@ namespace Alor.OpenAPI.Services
 
         private Task<OrderActionLimitMarket> CommandapiWarptransTradeV2ClientOrdersActionsLimitPostAsync(Side side, int quantity, decimal price, string? symbol,
             Exchange exchange, string? instrumentGroup, string? portfolio, string? comment, TimeInForce timeInForce, int? icebergFixed, decimal? icebergVariance,
-            CancellationToken cancellationToken)
+            bool? allowMargin, CancellationToken cancellationToken)
         {
             if (string.IsNullOrEmpty(symbol))
                 throw new ArgumentNullException(nameof(symbol));
@@ -128,7 +128,7 @@ namespace Alor.OpenAPI.Services
                 throw new ArgumentNullException(nameof(portfolio));
 
             var order = new RequestOrdersActionsLimitTv(side, quantity, price, new Instrument(symbol, exchange, instrumentGroup),
-                comment, new User(portfolio), timeInForce, icebergFixed, icebergVariance);
+                comment, new User(portfolio), timeInForce, icebergFixed, icebergVariance, allowMargin);
             var body = order.ToJson();
 
             var uriBuilder = new UriBuilder(_baseUrl)
@@ -141,7 +141,7 @@ namespace Alor.OpenAPI.Services
 
         private Task<OrderActionLimitMarket> CommandapiWarptransTradeV2ClientOrdersActionsMarketOrderIdPutAsync(
             int orderId, Side side, int quantity, string? symbol, Exchange exchange, string? instrumentGroup, string? portfolio, string? comment, TimeInForce timeInForce,
-            CancellationToken cancellationToken)
+            bool? allowMargin, CancellationToken cancellationToken)
         {
             if (string.IsNullOrEmpty(symbol))
                 throw new ArgumentNullException(nameof(symbol));
@@ -149,7 +149,7 @@ namespace Alor.OpenAPI.Services
                 throw new ArgumentNullException(nameof(portfolio));
 
             var order = new RequestOrdersActionsMarketTv(side, quantity, new Instrument(symbol, exchange, instrumentGroup), comment,
-                new User(portfolio), timeInForce);
+                new User(portfolio), timeInForce, allowMargin);
             var body = order.ToJson();
 
             var uriBuilder = new UriBuilder(_baseUrl)
@@ -163,7 +163,7 @@ namespace Alor.OpenAPI.Services
         private Task<OrderActionLimitMarket> CommandapiWarptransTradeV2ClientOrdersActionsLimitOrderIdPutAsync(
             int orderId, Side side, int quantity, decimal price, string? symbol, Exchange exchange, string? instrumentGroup,
             string? portfolio, string? comment, TimeInForce timeInForce, int? icebergFixed,
-            decimal? icebergVariance, CancellationToken cancellationToken)
+            decimal? icebergVariance, bool? allowMargin, CancellationToken cancellationToken)
         {
             if (string.IsNullOrEmpty(symbol))
                 throw new ArgumentNullException(nameof(symbol));
@@ -171,7 +171,7 @@ namespace Alor.OpenAPI.Services
                 throw new ArgumentNullException(nameof(portfolio));
 
             var order = new RequestOrdersActionsLimitTv(side, quantity, price, new Instrument(symbol, exchange, instrumentGroup),
-                comment, new User(portfolio), timeInForce, icebergFixed, icebergVariance);
+                comment, new User(portfolio), timeInForce, icebergFixed, icebergVariance, allowMargin);
             var body = order.ToJson();
 
             var uriBuilder = new UriBuilder(_baseUrl)

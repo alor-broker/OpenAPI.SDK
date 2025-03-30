@@ -12,9 +12,10 @@ namespace Alor.OpenAPI.Models
         public CwsRequestOrderMarket() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderMarket"]/Member[@name="wsCmdUpdateOrderMarket"]/*' />
+        [JsonConstructor]
         public CwsRequestOrderMarket(string? opcode = default, string? guid = default, string? orderId = default, Side side = default,
             int? quantity = default, Instrument? instrument = default, Exchange? exchange = default, string? comment = default, string? board = default,
-            User? user = default, TimeInForce? timeInForce = default, bool? checkDuplicates = default)
+            User? user = default, TimeInForce? timeInForce = default, bool? checkDuplicates = default, bool? allowMargin = default)
         {
             Opcode = opcode;
             Guid = guid;
@@ -28,55 +29,60 @@ namespace Alor.OpenAPI.Models
             User = user;
             TimeInForce = timeInForce;
             CheckDuplicates = checkDuplicates;
+            AllowMargin = allowMargin;
         }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderMarket"]/Member[@name="opcode"]/*' />
         [DataMember(Name = "opcode", EmitDefaultValue = false)]
-        public string? Opcode { get; set; }
+        public string? Opcode { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderMarket"]/Member[@name="guid"]/*' />
         [DataMember(Name = "guid", EmitDefaultValue = false)]
-        public string? Guid { get; private set; }
+        public string? Guid { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderMarket"]/Member[@name="orderId"]/*' />
         [DataMember(Name = "orderId", EmitDefaultValue = false)]
-        public string? OrderId { get; set; }
+        public string? OrderId { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderMarket"]/Member[@name="side"]/*' />
         [DataMember(Name = "side", EmitDefaultValue = false)]
-        public Side Side { get; set; }
+        public Side Side { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderMarket"]/Member[@name="quantity"]/*' />
         [DataMember(Name = "quantity", EmitDefaultValue = false)]
-        public int? Quantity { get; set; }
+        public int? Quantity { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderMarket"]/Member[@name="instrument"]/*' />
         [DataMember(Name = "instrument", EmitDefaultValue = false)]
-        public Instrument? Instrument { get; set; }
+        public Instrument? Instrument { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdDeleteOrderMarket"]/Member[@name="exchange"]/*' />
         [DataMember(Name = "exchange", EmitDefaultValue = false)]
-        public Exchange? Exchange { get; set; }
+        public Exchange? Exchange { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderMarket"]/Member[@name="comment"]/*' />
         [DataMember(Name = "comment", EmitDefaultValue = false)]
-        public string? Comment { get; set; }
+        public string? Comment { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderMarket"]/Member[@name="board"]/*' />
         [DataMember(Name = "board", EmitDefaultValue = false)]
-        public string? Board { get; set; }
+        public string? Board { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderMarket"]/Member[@name="user"]/*' />
         [DataMember(Name = "user", EmitDefaultValue = false)]
-        public User? User { get; set; }
+        public User? User { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderMarket"]/Member[@name="timeInForce"]/*' />
         [DataMember(Name = "timeInForce", EmitDefaultValue = false)]
-        public TimeInForce? TimeInForce { get; set; }
+        public TimeInForce? TimeInForce { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderMarket"]/Member[@name="checkDuplicates"]/*' />
         [DataMember(Name = "checkDuplicates", EmitDefaultValue = false)]
-        public bool? CheckDuplicates { get; set; }
+        public bool? CheckDuplicates { get; init; }
+
+        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderMarket"]/Member[@name="allowMargin"]/*' />
+        [DataMember(Name = "allowMargin", EmitDefaultValue = false)]
+        public bool? AllowMargin { get; init; }
 
         public override string ToString()
         {
@@ -94,17 +100,31 @@ namespace Alor.OpenAPI.Models
             sb.Append("  User: ").Append(User).Append(Environment.NewLine);
             sb.Append("  TimeInForce: ").Append(TimeInForce).Append(Environment.NewLine);
             sb.Append("  CheckDuplicates: ").Append(CheckDuplicates).Append(Environment.NewLine);
+            sb.Append("  AllowMargin: ").Append(AllowMargin).Append(Environment.NewLine);
             sb.Append('}').Append(Environment.NewLine);
             return sb.ToString();
         }
 
         public string ToJson() => Encoding.UTF8.GetString(JsonSerializer.Generic.Utf8.Serialize(this));
 
-        public override int GetHashCode() => Utilities.Utilities.GetHashCodeHelper(
-            [
-                Guid?.GetHashCode() ?? 0,
-            ]
-        );
+        public override int GetHashCode()
+        {
+            var hash = new HashCode();
+            hash.Add(Opcode);
+            hash.Add(Guid);
+            hash.Add(OrderId);
+            hash.Add(Side);
+            hash.Add(Quantity);
+            hash.Add(Instrument);
+            hash.Add(Exchange);
+            hash.Add(Comment);
+            hash.Add(Board);
+            hash.Add(User);
+            hash.Add(TimeInForce);
+            hash.Add(CheckDuplicates);
+            hash.Add(AllowMargin);
+            return hash.ToHashCode();
+        }
 
         private static bool EqualsHelper(CwsRequestOrderMarket? first, CwsRequestOrderMarket? second) =>
             first?.Opcode == second?.Opcode &&
@@ -118,7 +138,8 @@ namespace Alor.OpenAPI.Models
             first?.Board == second?.Board &&
             first?.User == second?.User &&
             first?.TimeInForce == second?.TimeInForce &&
-            first?.CheckDuplicates == second?.CheckDuplicates;
+            first?.CheckDuplicates == second?.CheckDuplicates &&
+            first?.AllowMargin == second?.AllowMargin;
 
         public bool Equals(CwsRequestOrderMarket? other)
         {
@@ -128,10 +149,7 @@ namespace Alor.OpenAPI.Models
             if ((object?)other == null)
                 return false;
 
-            if (GetType() != other.GetType())
-                return false;
-
-            return EqualsHelper(this, other);
+            return GetType() == other.GetType() && EqualsHelper(this, other);
         }
 
         public override bool Equals(object? obj) => Equals(obj as CwsRequestOrderMarket);

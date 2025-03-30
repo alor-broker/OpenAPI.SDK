@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
+using SpanJson;
 
 namespace Alor.OpenAPI.Models
 {
@@ -11,6 +12,7 @@ namespace Alor.OpenAPI.Models
         public ResponseOrderGroupInfo() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrderGroupInfo"]/Member[@name="responseOrderGroupInfo"]/*' />
+        [JsonConstructor]
         public ResponseOrderGroupInfo(Guid? id = default, string? login = default,
             List<ResponseOrderGroupItem>? orders = default, ExecutionPolicy executionPolicy = default,
             OrderGroupStatus status = default, DateTime? createdAt = default, DateTime? closedAt = default)
@@ -26,31 +28,31 @@ namespace Alor.OpenAPI.Models
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrderGroupInfo"]/Member[@name="id"]/*' />
         [DataMember(Name = "id", EmitDefaultValue = false)]
-        public Guid? Id { get; private set; }
+        public Guid? Id { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrderGroupInfo"]/Member[@name="login"]/*' />
         [DataMember(Name = "login", EmitDefaultValue = false)]
-        public string? Login { get; private set; }
+        public string? Login { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrderGroupInfo"]/Member[@name="orders"]/*' />
         [DataMember(Name = "orders", EmitDefaultValue = false)]
-        public List<ResponseOrderGroupItem>? Orders { get; set; }
+        public List<ResponseOrderGroupItem>? Orders { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrderGroupInfo"]/Member[@name="executionPolicy"]/*' />
         [DataMember(Name = "executionPolicy", EmitDefaultValue = false)]
-        public ExecutionPolicy ExecutionPolicy { get; set; }
+        public ExecutionPolicy ExecutionPolicy { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrderGroupInfo"]/Member[@name="status"]/*' />
         [DataMember(Name = "status", EmitDefaultValue = false)]
-        public OrderGroupStatus Status { get; set; }
+        public OrderGroupStatus Status { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrderGroupInfo"]/Member[@name="createdAt"]/*' />
         [DataMember(Name = "createdAt", EmitDefaultValue = false)]
-        public DateTime? CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrderGroupInfo"]/Member[@name="closedAt"]/*' />
         [DataMember(Name = "closedAt", EmitDefaultValue = false)]
-        public DateTime? ClosedAt { get; set; }
+        public DateTime? ClosedAt { get; init; }
 
         public override string ToString()
         {
@@ -69,12 +71,8 @@ namespace Alor.OpenAPI.Models
 
         public string ToJson() => Encoding.UTF8.GetString(SpanJson.JsonSerializer.Generic.Utf8.Serialize(this));
 
-        public override int GetHashCode() => Utilities.Utilities.GetHashCodeHelper(
-            [
-                Id?.GetHashCode() ?? 0,
-                Login ?.GetHashCode() ?? 0,
-            ]
-        );
+        public override int GetHashCode() =>
+            HashCode.Combine(Id, Login, Orders, ExecutionPolicy, Status, CreatedAt, ClosedAt);
 
         private static bool EqualsHelper(ResponseOrderGroupInfo? first,
             ResponseOrderGroupInfo? second) =>
@@ -96,10 +94,7 @@ namespace Alor.OpenAPI.Models
             if ((object?)other == null)
                 return false;
 
-            if (GetType() != other.GetType())
-                return false;
-
-            return EqualsHelper(this, other);
+            return GetType() == other.GetType() && EqualsHelper(this, other);
         }
 
         public override bool Equals(object? obj) => Equals(obj as ResponseOrderGroupInfo);

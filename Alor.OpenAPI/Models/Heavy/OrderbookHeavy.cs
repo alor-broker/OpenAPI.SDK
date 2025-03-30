@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
+using SpanJson;
 
 namespace Alor.OpenAPI.Models.Heavy
 {
@@ -10,6 +11,7 @@ namespace Alor.OpenAPI.Models.Heavy
         public OrderbookHeavy() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrderBook"]/Member[@name="responseOrderBook"]/*' />
+        [JsonConstructor]
         public OrderbookHeavy(ICollection<LiquidityHeavy>? bids, ICollection<LiquidityHeavy>? asks, long? msTimestamp, bool? existing)
         {
             Bids = bids;
@@ -17,23 +19,22 @@ namespace Alor.OpenAPI.Models.Heavy
             MsTimestamp = msTimestamp;
             Existing = existing;
         }
-
-
+        
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrderBook"]/Member[@name="bids"]/*' />
         [DataMember(Name = "bids", EmitDefaultValue = false)]
-        public ICollection<LiquidityHeavy>? Bids { get; private set; }
+        public ICollection<LiquidityHeavy>? Bids { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrderBook"]/Member[@name="asks"]/*' />
         [DataMember(Name = "asks", EmitDefaultValue = false)]
-        public ICollection<LiquidityHeavy>? Asks { get; private set; }
+        public ICollection<LiquidityHeavy>? Asks { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrderBook"]/Member[@name="msTimestamp"]/*' />
         [DataMember(Name = "msTimestamp", EmitDefaultValue = false)]
-        public long? MsTimestamp { get; private set; }
+        public long? MsTimestamp { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrderBook"]/Member[@name="existing"]/*' />
         [DataMember(Name = "existing", EmitDefaultValue = false)]
-        public bool? Existing { get; set; }
+        public bool? Existing { get; init; }
 
         public override string ToString()
         {
@@ -47,15 +48,9 @@ namespace Alor.OpenAPI.Models.Heavy
             return sb.ToString();
         }
 
-        public string ToJson() => Encoding.UTF8.GetString(SpanJson.JsonSerializer.Generic.Utf8.Serialize(this));
+        public string ToJson() => Encoding.UTF8.GetString(JsonSerializer.Generic.Utf8.Serialize(this));
 
-        public override int GetHashCode() => Utilities.Utilities.GetHashCodeHelper(
-            [
-                Bids?.GetHashCode() ?? 0,
-                Asks?.GetHashCode() ?? 0,
-                MsTimestamp?.GetHashCode() ?? 0,
-            ]
-        );
+        public override int GetHashCode() => HashCode.Combine(Bids, Asks, MsTimestamp, Existing);
 
         private static bool EqualsHelper(OrderbookHeavy? first, OrderbookHeavy? second) =>
             first?.Bids != null && second?.Bids != null
@@ -75,10 +70,7 @@ namespace Alor.OpenAPI.Models.Heavy
             if ((object?)other == null)
                 return false;
 
-            if (GetType() != other.GetType())
-                return false;
-
-            return EqualsHelper(this, other);
+            return GetType() == other.GetType() && EqualsHelper(this, other);
         }
 
         public override bool Equals(object? obj) => Equals(obj as OrderbookHeavy);

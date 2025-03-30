@@ -10,7 +10,9 @@ namespace Alor.OpenAPI.Models
     public sealed class Instrument : IEquatable<Instrument>, IValidatableObject
     {
         public Instrument() { }
+
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectInstrumentFieldsSymbolExchangeGroup"]/Member[@name="objectInstrumentFieldsSymbolExchangeGroup"]/*' />
+        [JsonConstructor]
         public Instrument(string? symbol = default, Exchange exchange = default, string? instrumentGroup = default)
         {
             Symbol = symbol;
@@ -20,15 +22,15 @@ namespace Alor.OpenAPI.Models
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectInstrumentFieldsSymbolExchangeGroup"]/Member[@name="symbol"]/*' />
         [DataMember(Name = "symbol", EmitDefaultValue = false)]
-        public string? Symbol { get; private set; }
+        public string? Symbol { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectInstrumentFieldsSymbolExchangeGroup"]/Member[@name="exchange"]/*' />
         [DataMember(Name = "exchange", EmitDefaultValue = false)]
-        public Exchange Exchange { get; private set; }
+        public Exchange Exchange { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectInstrumentFieldsSymbolExchangeGroup"]/Member[@name="instrumentGroup"]/*' />
         [DataMember(Name = "instrumentGroup", EmitDefaultValue = false)]
-        public string? InstrumentGroup { get; set; }
+        public string? InstrumentGroup { get; init; }
 
         public override string ToString()
         {
@@ -43,13 +45,7 @@ namespace Alor.OpenAPI.Models
 
         public string ToJson() => Encoding.UTF8.GetString(JsonSerializer.Generic.Utf8.Serialize(this));
 
-        public override int GetHashCode() => Utilities.Utilities.GetHashCodeHelper(
-            [
-                Symbol?.GetHashCode() ?? 0,
-                Exchange.GetHashCode(),
-                InstrumentGroup?.GetHashCode() ?? 0,
-            ]
-        );
+        public override int GetHashCode() => HashCode.Combine(Symbol, Exchange, InstrumentGroup);
 
         private static bool EqualsHelper(Instrument? first, Instrument? second) =>
             first?.Symbol == second?.Symbol &&
@@ -65,10 +61,7 @@ namespace Alor.OpenAPI.Models
             if ((object?)other == null)
                 return false;
 
-            if (GetType() != other.GetType())
-                return false;
-
-            return EqualsHelper(this, other);
+            return GetType() == other.GetType() && EqualsHelper(this, other);
         }
 
         public override bool Equals(object? obj) => Equals(obj as Instrument);

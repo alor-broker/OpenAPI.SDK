@@ -12,9 +12,10 @@ namespace Alor.OpenAPI.Models
         public RequestOrdersActionsLimitTv() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsLimitTV"]/Member[@name="OrdersActionsLimitTV"]/*' />
+        [JsonConstructor]
         public RequestOrdersActionsLimitTv(Side side = default, int? quantity = default, decimal? price = default,
             Instrument? instrument = default, string? comment = default, User? user = default,
-            TimeInForce timeInForce = default, int? icebergFixed = default, decimal? icebergVariance = default)
+            TimeInForce timeInForce = default, int? icebergFixed = default, decimal? icebergVariance = default, bool? allowMargin = default)
         {
             Side = side;
             Quantity = quantity;
@@ -25,43 +26,48 @@ namespace Alor.OpenAPI.Models
             TimeInForce = timeInForce;
             IcebergFixed = icebergFixed;
             IcebergVariance = icebergVariance;
+            AllowMargin = allowMargin;
         }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsLimitTV"]/Member[@name="side"]/*' />
         [DataMember(Name = "side", EmitDefaultValue = false)]
-        public Side Side { get; set; }
+        public Side Side { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsLimitTV"]/Member[@name="quantity"]/*' />
         [DataMember(Name = "quantity", EmitDefaultValue = false)]
-        public int? Quantity { get; set; }
+        public int? Quantity { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsLimitTV"]/Member[@name="price"]/*' />
         [DataMember(Name = "price", EmitDefaultValue = false)]
-        public decimal? Price { get; set; }
+        public decimal? Price { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsLimitTV"]/Member[@name="instrument"]/*' />
         [DataMember(Name = "instrument", EmitDefaultValue = false)]
-        public Instrument? Instrument { get; set; }
+        public Instrument? Instrument { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsLimitTV"]/Member[@name="comment"]/*' />
         [DataMember(Name = "comment", EmitDefaultValue = false)]
-        public string? Comment { get; set; }
+        public string? Comment { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsLimitTV"]/Member[@name="user"]/*' />
         [DataMember(Name = "user", EmitDefaultValue = false)]
-        public User? User { get; set; }
+        public User? User { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsLimitTV"]/Member[@name="timeInForce"]/*' />
         [DataMember(Name = "timeInForce", EmitDefaultValue = false)]
-        public TimeInForce TimeInForce { get; set; }
+        public TimeInForce TimeInForce { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsLimitTV"]/Member[@name="icebergFixed"]/*' />
         [DataMember(Name = "icebergFixed", EmitDefaultValue = false)]
-        public int? IcebergFixed { get; set; }
+        public int? IcebergFixed { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsLimitTV"]/Member[@name="icebergVariance"]/*' />
         [DataMember(Name = "icebergVariance", EmitDefaultValue = false)]
-        public decimal? IcebergVariance { get; set; }
+        public decimal? IcebergVariance { get; init; }
+
+        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsLimitTV"]/Member[@name="allowMargin"]/*' />
+        [DataMember(Name = "allowMargin", EmitDefaultValue = false)]
+        public bool? AllowMargin { get; init; }
 
         public override string ToString()
         {
@@ -76,25 +82,28 @@ namespace Alor.OpenAPI.Models
             sb.Append("  TimeInForce: ").Append(TimeInForce).Append(Environment.NewLine);
             sb.Append("  IcebergFixed: ").Append(IcebergFixed).Append(Environment.NewLine);
             sb.Append("  IcebergVariance: ").Append(IcebergVariance).Append(Environment.NewLine);
+            sb.Append("  AllowMargin: ").Append(AllowMargin).Append(Environment.NewLine);
             sb.Append('}').Append(Environment.NewLine);
             return sb.ToString();
         }
 
         public string ToJson() => Encoding.UTF8.GetString(JsonSerializer.Generic.Utf8.Serialize(this));
 
-        public override int GetHashCode() => Utilities.Utilities.GetHashCodeHelper(
-            [
-                Side.GetHashCode(),
-                Quantity?.GetHashCode() ?? 0,
-                Price?.GetHashCode() ?? 0,
-                Instrument?.GetHashCode() ?? 0,
-                Comment?.GetHashCode() ?? 0,
-                User?.GetHashCode() ?? 0,
-                TimeInForce.GetHashCode(),
-                IcebergFixed?.GetHashCode() ?? 0,
-                IcebergVariance?.GetHashCode() ?? 0,
-            ]
-        );
+        public override int GetHashCode()
+        {
+            var hash = new HashCode();
+            hash.Add(Side);
+            hash.Add(Quantity);
+            hash.Add(Price);
+            hash.Add(Instrument);
+            hash.Add(Comment);
+            hash.Add(User);
+            hash.Add(TimeInForce);
+            hash.Add(IcebergFixed);
+            hash.Add(IcebergVariance);
+            hash.Add(AllowMargin);
+            return hash.ToHashCode();
+        }
 
         private static bool EqualsHelper(RequestOrdersActionsLimitTv? first, RequestOrdersActionsLimitTv? second) =>
             first?.Side == second?.Side &&
@@ -105,8 +114,9 @@ namespace Alor.OpenAPI.Models
             first?.User == second?.User &&
             first?.TimeInForce == second?.TimeInForce &&
             first?.IcebergFixed == second?.IcebergFixed &&
-            first?.IcebergVariance == second?.IcebergVariance;
-
+            first?.IcebergVariance == second?.IcebergVariance &&
+            first?.AllowMargin == second?.AllowMargin;
+        
         public bool Equals(RequestOrdersActionsLimitTv? other)
         {
             if (this == (object?)other)
@@ -115,10 +125,7 @@ namespace Alor.OpenAPI.Models
             if ((object?)other == null)
                 return false;
 
-            if (GetType() != other.GetType())
-                return false;
-
-            return EqualsHelper(this, other);
+            return GetType() == other.GetType() && EqualsHelper(this, other);
         }
 
         public override bool Equals(object? obj) => Equals(obj as RequestOrdersActionsLimitTv);

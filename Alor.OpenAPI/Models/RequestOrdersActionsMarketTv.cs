@@ -12,9 +12,10 @@ namespace Alor.OpenAPI.Models
         public RequestOrdersActionsMarketTv() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsMarketTV"]/Member[@name="OrdersActionsMarketTV"]/*' />
+        [JsonConstructor]
         public RequestOrdersActionsMarketTv(Side side = default,
             int? quantity = default, Instrument? instrument = default, string? comment = default,
-            User? user = default, TimeInForce? timeInForce = default)
+            User? user = default, TimeInForce? timeInForce = default, bool? allowMargin = default)
         {
             Side = side;
             Quantity = quantity;
@@ -22,31 +23,36 @@ namespace Alor.OpenAPI.Models
             Comment = comment;
             User = user;
             TimeInForce = timeInForce;
+            AllowMargin = allowMargin;
         }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsMarketTV"]/Member[@name="side"]/*' />
         [DataMember(Name = "side", EmitDefaultValue = false)]
-        public Side Side { get; private set; }
+        public Side Side { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsMarketTV"]/Member[@name="quantity"]/*' />
         [DataMember(Name = "quantity", EmitDefaultValue = false)]
-        public int? Quantity { get; private set; }
+        public int? Quantity { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsMarketTV"]/Member[@name="instrument"]/*' />
         [DataMember(Name = "instrument", EmitDefaultValue = false)]
-        public Instrument? Instrument { get; private set; }
+        public Instrument? Instrument { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsMarketTV"]/Member[@name="comment"]/*' />
         [DataMember(Name = "comment", EmitDefaultValue = false)]
-        public string? Comment { get; private set; }
+        public string? Comment { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsMarketTV"]/Member[@name="user"]/*' />
         [DataMember(Name = "user", EmitDefaultValue = false)]
-        public User? User { get; private set; }
+        public User? User { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsMarketTV"]/Member[@name="timeInForce"]/*' />
         [DataMember(Name = "timeInForce", EmitDefaultValue = false)]
-        public TimeInForce? TimeInForce { get; private set; }
+        public TimeInForce? TimeInForce { get; init; }
+
+        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsMarketTV"]/Member[@name="allowMargin"]/*' />
+        [DataMember(Name = "allowMargin", EmitDefaultValue = false)]
+        public bool? AllowMargin { get; init; }
 
         public override string ToString()
         {
@@ -58,22 +64,15 @@ namespace Alor.OpenAPI.Models
             sb.Append("  Comment: ").Append(Comment).Append(Environment.NewLine);
             sb.Append("  User: ").Append(User).Append(Environment.NewLine);
             sb.Append("  TimeInForce: ").Append(TimeInForce).Append(Environment.NewLine);
+            sb.Append("  AllowMargin: ").Append(AllowMargin).Append(Environment.NewLine);
             sb.Append('}').Append(Environment.NewLine);
             return sb.ToString();
         }
 
         public string ToJson() => Encoding.UTF8.GetString(JsonSerializer.Generic.Utf8.Serialize(this));
 
-        public override int GetHashCode() => Utilities.Utilities.GetHashCodeHelper(
-            [
-                Side.GetHashCode(),
-                Quantity?.GetHashCode() ?? 0,
-                Instrument?.GetHashCode() ?? 0,
-                Comment?.GetHashCode() ?? 0,
-                User?.GetHashCode() ?? 0,
-                TimeInForce?.GetHashCode() ?? 0,
-            ]
-        );
+        public override int GetHashCode() =>
+            HashCode.Combine(Side, Quantity, Instrument, Comment, User, TimeInForce, AllowMargin);
 
         private static bool EqualsHelper(RequestOrdersActionsMarketTv? first, RequestOrdersActionsMarketTv? second) =>
             first?.Side == second?.Side &&
@@ -81,7 +80,8 @@ namespace Alor.OpenAPI.Models
             first?.Instrument == second?.Instrument &&
             first?.Comment == second?.Comment &&
             first?.User == second?.User &&
-            first?.TimeInForce == second?.TimeInForce;
+            first?.TimeInForce == second?.TimeInForce &&
+            first?.AllowMargin == second?.AllowMargin;
 
         public bool Equals(RequestOrdersActionsMarketTv? other)
         {
@@ -91,10 +91,7 @@ namespace Alor.OpenAPI.Models
             if ((object?)other == null)
                 return false;
 
-            if (GetType() != other.GetType())
-                return false;
-
-            return EqualsHelper(this, other);
+            return GetType() == other.GetType() && EqualsHelper(this, other);
         }
 
         public override bool Equals(object? obj) => Equals(obj as RequestOrdersActionsMarketTv);

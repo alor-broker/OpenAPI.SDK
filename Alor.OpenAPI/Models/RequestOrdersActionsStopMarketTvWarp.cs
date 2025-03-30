@@ -14,9 +14,11 @@ namespace Alor.OpenAPI.Models
         public RequestOrdersActionsStopMarketTvWarp() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsStopMarketTVWarp"]/Member[@name="OrdersActionsStopMarketTVWarp"]/*' />
+        [JsonConstructor]
         public RequestOrdersActionsStopMarketTvWarp(Side side = default, Condition condition = default,
             decimal? triggerPrice = default, long? stopEndUnixTime = default,
-            int? quantity = default, Instrument? instrument = default, User? user = default, int? protectingSeconds = null, bool? activate = true)
+            int? quantity = default, Instrument? instrument = default, User? user = default,
+            int? protectingSeconds = null, bool? activate = true, bool? allowMargin = default)
         {
             Side = side;
             Condition = condition;
@@ -27,43 +29,48 @@ namespace Alor.OpenAPI.Models
             User = user;
             ProtectingSeconds = protectingSeconds;
             Activate = activate ?? true;
+            AllowMargin = allowMargin;
         }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsStopMarketTVWarp"]/Member[@name="side"]/*' />
         [DataMember(Name = "side", EmitDefaultValue = false)]
-        public Side Side { get; private set; }
+        public Side Side { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsStopMarketTVWarp"]/Member[@name="condition"]/*' />
         [DataMember(Name = "condition", EmitDefaultValue = false)]
-        public Condition Condition { get; private set; }
+        public Condition Condition { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsStopMarketTVWarp"]/Member[@name="triggerPrice"]/*' />
         [DataMember(Name = "triggerPrice", EmitDefaultValue = false)]
-        public decimal? TriggerPrice { get; private set; }
+        public decimal? TriggerPrice { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsStopMarketTVWarp"]/Member[@name="stopEndUnixTime"]/*' />
         [DataMember(Name = "stopEndUnixTime", EmitDefaultValue = false)]
-        public long? StopEndUnixTime { get; private set; }
+        public long? StopEndUnixTime { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsStopMarketTVWarp"]/Member[@name="quantity"]/*' />
         [DataMember(Name = "quantity", EmitDefaultValue = false)]
-        public int? Quantity { get; private set; }
+        public int? Quantity { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsStopMarketTVWarp"]/Member[@name="instrument"]/*' />
         [DataMember(Name = "instrument", EmitDefaultValue = false)]
-        public Instrument? Instrument { get; private set; }
+        public Instrument? Instrument { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsStopMarketTVWarp"]/Member[@name="user"]/*' />
         [DataMember(Name = "user", EmitDefaultValue = false)]
-        public User? User { get; private set; }
+        public User? User { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsStopMarketTVWarp"]/Member[@name="protectingSeconds"]/*' />
         [DataMember(Name = "protectingSeconds", EmitDefaultValue = false)]
-        public int? ProtectingSeconds { get; set; }
+        public int? ProtectingSeconds { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsStopMarketTVWarp"]/Member[@name="activate"]/*' />
         [DataMember(Name = "activate", EmitDefaultValue = false)]
-        public bool? Activate { get; private set; }
+        public bool? Activate { get; init; }
+
+        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsStopMarketTVWarp"]/Member[@name="allowMargin"]/*' />
+        [DataMember(Name = "allowMargin", EmitDefaultValue = false)]
+        public bool? AllowMargin { get; init; }
 
         public override string ToString()
         {
@@ -78,25 +85,28 @@ namespace Alor.OpenAPI.Models
             sb.Append("  User: ").Append(User).Append(Environment.NewLine);
             sb.Append("  ProtectingSeconds: ").Append(ProtectingSeconds).Append(Environment.NewLine);
             sb.Append("  Activate: ").Append(Activate).Append(Environment.NewLine);
+            sb.Append("  AllowMargin: ").Append(AllowMargin).Append(Environment.NewLine);
             sb.Append('}').Append(Environment.NewLine);
             return sb.ToString();
         }
 
         public string ToJson() => Encoding.UTF8.GetString(JsonSerializer.Generic.Utf8.Serialize(this));
 
-        public override int GetHashCode() => Utilities.Utilities.GetHashCodeHelper(
-            [
-                Side.GetHashCode(),
-                Condition.GetHashCode(),
-                TriggerPrice?.GetHashCode() ?? 0,
-                StopEndUnixTime?.GetHashCode() ?? 0,
-                Quantity?.GetHashCode() ?? 0,
-                Instrument?.GetHashCode() ?? 0,
-                User?.GetHashCode() ?? 0,
-                ProtectingSeconds?.GetHashCode() ?? 0,
-                Activate?.GetHashCode() ?? 0,
-            ]
-        );
+        public override int GetHashCode()
+        {
+            var hash = new HashCode();
+            hash.Add(Side);
+            hash.Add(Condition);
+            hash.Add(TriggerPrice);
+            hash.Add(StopEndUnixTime);
+            hash.Add(Quantity);
+            hash.Add(Instrument);
+            hash.Add(User);
+            hash.Add(ProtectingSeconds);
+            hash.Add(Activate);
+            hash.Add(AllowMargin);
+            return hash.ToHashCode();
+        }
 
         private static bool EqualsHelper(RequestOrdersActionsStopMarketTvWarp? first,
             RequestOrdersActionsStopMarketTvWarp? second) =>
@@ -108,7 +118,8 @@ namespace Alor.OpenAPI.Models
             first?.Instrument == second?.Instrument &&
             first?.User == second?.User &&
             first?.ProtectingSeconds == second?.ProtectingSeconds &&
-            first?.Activate == second?.Activate;
+            first?.Activate == second?.Activate &&
+            first?.AllowMargin == second?.AllowMargin;
 
         public bool Equals(RequestOrdersActionsStopMarketTvWarp? other)
         {
@@ -118,10 +129,7 @@ namespace Alor.OpenAPI.Models
             if ((object?)other == null)
                 return false;
 
-            if (GetType() != other.GetType())
-                return false;
-
-            return EqualsHelper(this, other);
+            return GetType() == other.GetType() && EqualsHelper(this, other);
         }
 
         public override bool Equals(object? obj) => Equals(obj as RequestOrdersActionsStopMarketTvWarp);

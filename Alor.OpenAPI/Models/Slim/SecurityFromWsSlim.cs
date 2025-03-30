@@ -12,6 +12,7 @@ namespace Alor.OpenAPI.Models.Slim
         public SecurityFromWsSlim() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseInstruments"]/Member[@name="responseInstruments"]/*' />
+        [JsonConstructor]
         public SecurityFromWsSlim(string? symbol = default, Exchange exchange = default,
             string? board = default, decimal? priceMax = default, decimal? priceMin = default,
             int? tradingStatus = default, string? tradingStatusInfo = default,
@@ -35,55 +36,55 @@ namespace Alor.OpenAPI.Models.Slim
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseInstruments"]/Member[@name="symbol"]/*' />
         [DataMember(Name = "sym", EmitDefaultValue = false)]
-        public string? Symbol { get; private set; }
+        public string? Symbol { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseInstruments"]/Member[@name="exchange"]/*' />
         [DataMember(Name = "ex", EmitDefaultValue = false)]
-        public Exchange Exchange { get; private set; }
+        public Exchange Exchange { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseInstruments"]/Member[@name="priceMax"]/*' />
         [DataMember(Name = "pxmx", EmitDefaultValue = false)]
-        public decimal? PriceMax { get; set; }
+        public decimal? PriceMax { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseInstruments"]/Member[@name="priceMin"]/*' />
         [DataMember(Name = "pxmn", EmitDefaultValue = false)]
-        public decimal? PriceMin { get; set; }
+        public decimal? PriceMin { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseInstruments"]/Member[@name="board"]/*' />
         [DataMember(Name = "bd", EmitDefaultValue = false)]
-        public string? Board { get; private set; }
+        public string? Board { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseInstruments"]/Member[@name="tradingStatus"]/*' />
         [DataMember(Name = "st", EmitDefaultValue = false)]
-        public int? TradingStatus { get; set; }
+        public int? TradingStatus { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseInstruments"]/Member[@name="tradingStatusInfo"]/*' />
         [DataMember(Name = "sti", EmitDefaultValue = false)]
-        public string? TradingStatusInfo { get; set; }
+        public string? TradingStatusInfo { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseInstruments"]/Member[@name="marginBuy"]/*' />
         [DataMember(Name = "mgb", EmitDefaultValue = false)]
-        public decimal? MarginBuy { get; set; }
+        public decimal? MarginBuy { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseInstruments"]/Member[@name="marginSell"]/*' />
         [DataMember(Name = "mgs", EmitDefaultValue = false)]
-        public decimal? MarginSell { get; set; }
+        public decimal? MarginSell { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseInstruments"]/Member[@name="marginSyntetic"]/*' />
         [DataMember(Name = "mgsnt", EmitDefaultValue = false)]
-        public decimal? MarginSyntetic { get; set; }
+        public decimal? MarginSyntetic { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseInstruments"]/Member[@name="theorPrice"]/*' />
         [DataMember(Name = "pxt", EmitDefaultValue = false)]
-        public decimal? TheorPrice { get; set; }
+        public decimal? TheorPrice { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseInstruments"]/Member[@name="theorPriceLimit"]/*' />
         [DataMember(Name = "pxtl", EmitDefaultValue = false)]
-        public decimal? TheorPriceLimit { get; set; }
+        public decimal? TheorPriceLimit { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseInstruments"]/Member[@name="volatility"]/*' />
         [DataMember(Name = "vl", EmitDefaultValue = false)]
-        public decimal? Volatility { get; set; }
+        public decimal? Volatility { get; init; }
 
         public override string ToString()
         {
@@ -108,13 +109,24 @@ namespace Alor.OpenAPI.Models.Slim
 
         public string ToJson() => Encoding.UTF8.GetString(JsonSerializer.Generic.Utf8.Serialize(this));
 
-        public override int GetHashCode() => Utilities.Utilities.GetHashCodeHelper(
-            [
-                Symbol?.GetHashCode() ?? 0,
-                Exchange.GetHashCode(),
-                Board?.GetHashCode() ?? 0,
-            ]
-        );
+        public override int GetHashCode()
+        {
+            var hash = new HashCode();
+            hash.Add(Symbol);
+            hash.Add(Exchange);
+            hash.Add(PriceMax);
+            hash.Add(PriceMin);
+            hash.Add(Board);
+            hash.Add(TradingStatus);
+            hash.Add(TradingStatusInfo);
+            hash.Add(MarginBuy);
+            hash.Add(MarginSell);
+            hash.Add(MarginSyntetic);
+            hash.Add(TheorPrice);
+            hash.Add(TheorPriceLimit);
+            hash.Add(Volatility);
+            return hash.ToHashCode();
+        }
 
         private static bool EqualsHelper(SecurityFromWsSlim? first, SecurityFromWsSlim? second) =>
             first?.Symbol == second?.Symbol &&
@@ -139,10 +151,7 @@ namespace Alor.OpenAPI.Models.Slim
             if ((object?)other == null)
                 return false;
 
-            if (GetType() != other.GetType())
-                return false;
-
-            return EqualsHelper(this, other);
+            return GetType() == other.GetType() && EqualsHelper(this, other);
         }
 
         public override bool Equals(object? obj) => Equals(obj as SecurityFromWsSlim);

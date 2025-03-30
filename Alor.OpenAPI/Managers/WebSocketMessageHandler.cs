@@ -287,8 +287,7 @@ namespace Alor.OpenAPI.Managers
                     {
                         if (_wsResponseCommandMessageChangedToUser == null) return;
                         var obj = JsonSerializer.Generic.Utf8.Deserialize<WsResponseCommandMessage>(
-                            byteMsg.data.AsSpan(0, byteMsg.len));
-                        obj.SocketName = wsName;
+                            byteMsg.data.AsSpan(0, byteMsg.len)) with { SocketName = wsName };
                         _wsResponseCommandMessageChangedToUser(obj);
 
                         if (_logLevel == AlorOpenApiLogLevel.Verbose)
@@ -299,8 +298,7 @@ namespace Alor.OpenAPI.Managers
                         //парсинг ответов на обычные подписки через /ws
                         if (_wsResponseMessageChangedToUser == null) return;
                         var obj = JsonSerializer.Generic.Utf8.Deserialize<WsResponseMessage>(
-                            byteMsg.data.AsSpan(0, byteMsg.len));
-                        obj.SocketName = wsName;
+                            byteMsg.data.AsSpan(0, byteMsg.len)) with { SocketName = wsName};
                         _wsResponseMessageChangedToUser(obj);
 
                         if (_logLevel == AlorOpenApiLogLevel.Verbose)

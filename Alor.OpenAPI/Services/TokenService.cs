@@ -2,6 +2,7 @@
 using Alor.OpenAPI.Utilities;
 using Serilog;
 using System.Net;
+using System.Net.Http.Headers;
 using System.Text.Json;
 
 namespace Alor.OpenAPI.Services
@@ -41,7 +42,7 @@ namespace Alor.OpenAPI.Services
                 catch (Exception ex)
                 {
                     _logger.Error(
-                        $"Сокет ордеров: Ошибка получения токена. {ex.Message}{Environment.NewLine}Пробую повторить через 5 сек...");
+                        $"Unable to obtain access token. {ex.Message}{Environment.NewLine}Try again in 5 seconds...");
                     await Task.Delay(5000, _cancellationTokenSource.Token);
                 }
             }
@@ -58,7 +59,7 @@ namespace Alor.OpenAPI.Services
                     }
                     catch (Exception ex)
                     {
-                        _logger.Error($"Ошибка: {ex.Message}");
+                        _logger.Error($"Error: {ex.Message}");
                     }
                 });
             };
@@ -70,12 +71,18 @@ namespace Alor.OpenAPI.Services
             if (string.IsNullOrEmpty(refreshToken))
                 return accessToken;
             using var request =
-            new HttpRequestMessage(HttpMethod.Post, $"{_authUrl}{refreshToken}");
+                new HttpRequestMessage(HttpMethod.Post, _authUrl);
+            request.Headers.Accept.Add(
+                MediaTypeWithQualityHeaderValue.Parse("application/json"));
+            var content = new StringContent(JsonSerializer.Serialize(new { Token = refreshToken }));
+            request.Content = content;
+            content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
 
             using var response = await _httpClient.SendAsync(request, _cancellationTokenSource.Token);
             if (response.StatusCode != HttpStatusCode.OK)
             {
-                throw new Exception($"Unable to obtain access token{Environment.NewLine}{await response.Content.ReadAsStringAsync(_cancellationTokenSource.Token)}");
+                throw new Exception(
+                    $"Unable to obtain access token{Environment.NewLine}{await response.Content.ReadAsStringAsync(_cancellationTokenSource.Token)}");
             }
 
             var resp = await response.Content.ReadAsStringAsync(_cancellationTokenSource.Token);

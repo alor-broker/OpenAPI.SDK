@@ -14,6 +14,7 @@ namespace Alor.OpenAPI.Models.Slim
         public WsRiskSlim() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsResponseSubRisksGetAndSubscribe"]/Member[@name="wsResponseSubRisksGetAndSubscribe"]/*' />
+        [SpanJson.JsonConstructor]
         public WsRiskSlim(RiskSlim? dataSlim, string? guid)
         {
             Data = dataSlim;
@@ -22,11 +23,11 @@ namespace Alor.OpenAPI.Models.Slim
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsResponseSubRisksGetAndSubscribe"]/Member[@name="dataSlim"]/*' />
         [DataMember(Name = "data", EmitDefaultValue = false)]
-        public RiskSlim? Data { get; private set; }
+        public RiskSlim? Data { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsResponseSubRisksGetAndSubscribe"]/Member[@name="guid"]/*' />
         [DataMember(Name = "guid", EmitDefaultValue = false)]
-        public string? Guid { get; private set; }
+        public string? Guid { get; init; }
 
         [IgnoreDataMember]
         [JsonIgnore]
@@ -48,15 +49,10 @@ namespace Alor.OpenAPI.Models.Slim
 
         public string ToJson() => Encoding.UTF8.GetString(JsonSerializer.Generic.Utf8.Serialize(this));
 
-        public override int GetHashCode() => Utilities.Utilities.GetHashCodeHelper(
-            [
-                Data?.GetHashCode() ?? 0,
-                Guid?.GetHashCode() ?? 0,
-            ]
-        );
+        public override int GetHashCode() => HashCode.Combine(Data, Guid);
 
         private static bool EqualsHelper(WsRiskSlim? first, WsRiskSlim? second) =>
-            (bool)first?.Data?.Equals(second?.Data) &&
+            Equals(first?.Data, second?.Data) &&
             first?.Guid == second?.Guid;
 
         public bool Equals(WsRiskSlim? other)
@@ -67,10 +63,7 @@ namespace Alor.OpenAPI.Models.Slim
             if ((object?)other == null)
                 return false;
 
-            if (GetType() != other.GetType())
-                return false;
-
-            return EqualsHelper(this, other);
+            return GetType() == other.GetType() && EqualsHelper(this, other);
         }
 
         public override bool Equals(object? obj) => Equals(obj as WsRiskSlim);

@@ -1,7 +1,13 @@
 ﻿using Alor.OpenAPI.Enums;
+using SpanJson;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
+using System.Drawing;
 using System.Runtime.Serialization;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Xml.Linq;
 
 namespace Alor.OpenAPI.Models.Heavy
 {
@@ -11,6 +17,7 @@ namespace Alor.OpenAPI.Models.Heavy
         public TradeHeavy() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseTradeV2"]/Member[@name="responseTradeV2"]/*' />
+        [JsonConstructor]
         public TradeHeavy(string? id = default, string? orderno = default,
             string? symbol = default, string? shortName = default, string? brokerSymbol = default,
             Exchange exchange = default, string? comment = default, DateTime? date = default, string? board = default,
@@ -43,87 +50,87 @@ namespace Alor.OpenAPI.Models.Heavy
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseTradeV2"]/Member[@name="id"]/*' />
         [DataMember(Name = "id", EmitDefaultValue = false)]
-        public string? Id { get; private set; }
+        public string? Id { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseTradeV2"]/Member[@name="orderno"]/*' />
         [DataMember(Name = "orderno", EmitDefaultValue = false)]
-        public string? Orderno { get; private set; }
+        public string? Orderno { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseTradeV2"]/Member[@name="symbol"]/*' />
         [DataMember(Name = "symbol", EmitDefaultValue = false)]
-        public string? Symbol { get; private set; }
+        public string? Symbol { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseTradeV2"]/Member[@name="shortNameHeavy"]/*' />
         [DataMember(Name = "shortName", EmitDefaultValue = false)]
-        public string? ShortName { get; private set; }
+        public string? ShortName { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseTradeV2"]/Member[@name="brokerSymbol"]/*' />
         [DataMember(Name = "brokerSymbol", EmitDefaultValue = false)]
-        public string? BrokerSymbol { get; set; }
+        public string? BrokerSymbol { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseTradeV2"]/Member[@name="exchange"]/*' />
         [DataMember(Name = "exchange", EmitDefaultValue = false)]
-        public Exchange Exchange { get; private set; }
+        public Exchange Exchange { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseTradeV2"]/Member[@name="comment"]/*' />
         [DataMember(Name = "comment", EmitDefaultValue = false)]
-        public string? Comment { get; set; }
+        public string? Comment { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseTradeV2"]/Member[@name="date"]/*' />
         [DataMember(Name = "date", EmitDefaultValue = false)]
-        public DateTime? Date { get; set; }
+        public DateTime? Date { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseTradeV2"]/Member[@name="board"]/*' />
         [DataMember(Name = "board", EmitDefaultValue = false)]
-        public string? Board { get; set; }
+        public string? Board { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseTradeV2"]/Member[@name="qtyUnits"]/*' />
         [DataMember(Name = "qtyUnits", EmitDefaultValue = false)]
-        public int? QtyUnits { get; set; }
+        public int? QtyUnits { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseTradeV2"]/Member[@name="qtyBatch"]/*' />
         [DataMember(Name = "qtyBatch", EmitDefaultValue = false)]
-        public int? QtyBatch { get; set; }
+        public int? QtyBatch { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseTradeV2"]/Member[@name="qty"]/*' />
         [DataMember(Name = "qty", EmitDefaultValue = false)]
-        public int? Qty { get; set; }
+        public int? Qty { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseTradeV2"]/Member[@name="price"]/*' />
         [DataMember(Name = "price", EmitDefaultValue = false)]
-        public decimal? Price { get; set; }
+        public decimal? Price { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseTradeV2"]/Member[@name="currencyHeavy"]/*' />
         [DataMember(Name = "currency", EmitDefaultValue = false)]
-        public string? Currency { get; set; }
+        public string? Currency { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseTradeV2"]/Member[@name="accruedInt"]/*' />
         [DataMember(Name = "accruedInt", EmitDefaultValue = false)]
-        public decimal? AccruedInt { get; set; }
+        public decimal? AccruedInt { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseTradeV2"]/Member[@name="side"]/*' />
         [DataMember(Name = "side", EmitDefaultValue = false)]
-        public Side Side { get; set; }
+        public Side Side { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseTradeV2"]/Member[@name="existing"]/*' />
         [DataMember(Name = "existing", EmitDefaultValue = false)]
-        public bool? Existing { get; set; }
+        public bool? Existing { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseTradeV2"]/Member[@name="commission"]/*' />
         [DataMember(Name = "commission", EmitDefaultValue = false)]
-        public decimal? Commission { get; set; }
+        public decimal? Commission { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseTradeV2"]/Member[@name="repoSpecificFields"]/*' />
         [DataMember(Name = "repoSpecificFields", EmitDefaultValue = false)]
-        public TradeRepoSpecificFieldsHeavy? RepoSpecificFields { get; set; }
+        public TradeRepoSpecificFieldsHeavy? RepoSpecificFields { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseTradeV2"]/Member[@name="volume"]/*' />
         [DataMember(Name = "volume", EmitDefaultValue = false)]
-        public decimal? Volume { get; set; }
+        public decimal? Volume { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseTradeV2"]/Member[@name="settleDateHeavy"]/*' />
         [DataMember(Name = "settleDate", EmitDefaultValue = false)]
-        public DateTime? SettleDate { get; set; }
+        public DateTime? SettleDate { get; init; }
 
         public override string ToString()
         {
@@ -154,16 +161,34 @@ namespace Alor.OpenAPI.Models.Heavy
             return sb.ToString();
         }
 
-        public string ToJson() => Encoding.UTF8.GetString(SpanJson.JsonSerializer.Generic.Utf8.Serialize(this));
+        public string ToJson() => Encoding.UTF8.GetString(JsonSerializer.Generic.Utf8.Serialize(this));
 
-        public override int GetHashCode() => Utilities.Utilities.GetHashCodeHelper(
-            [
-                Id?.GetHashCode() ?? 0,
-                Orderno?.GetHashCode() ?? 0,
-                Symbol?.GetHashCode() ?? 0,
-                Exchange.GetHashCode(),
-            ]
-        );
+        public override int GetHashCode()
+        {
+            var hash = new HashCode();
+            hash.Add(Id);
+            hash.Add(Orderno);
+            hash.Add(Symbol);
+            hash.Add(ShortName);
+            hash.Add(BrokerSymbol);
+            hash.Add(Exchange);
+            hash.Add(Comment);
+            hash.Add(Date);
+            hash.Add(Board);
+            hash.Add(QtyUnits);
+            hash.Add(QtyBatch);
+            hash.Add(Qty);
+            hash.Add(Price);
+            hash.Add(Currency);
+            hash.Add(AccruedInt);
+            hash.Add(Side);
+            hash.Add(Existing);
+            hash.Add(Commission);
+            hash.Add(RepoSpecificFields);
+            hash.Add(Volume);
+            hash.Add(SettleDate);
+            return hash.ToHashCode();
+        }
 
         private static bool EqualsHelper(TradeHeavy? first, TradeHeavy? second) =>
             first?.Id == second?.Id &&
@@ -196,10 +221,7 @@ namespace Alor.OpenAPI.Models.Heavy
             if ((object?)other == null)
                 return false;
 
-            if (GetType() != other.GetType())
-                return false;
-
-            return EqualsHelper(this, other);
+            return GetType() == other.GetType() && EqualsHelper(this, other);
         }
 
         public override bool Equals(object? obj) => Equals(obj as TradeHeavy);

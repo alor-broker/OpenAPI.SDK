@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
+using SpanJson;
 
 namespace Alor.OpenAPI.Models
 {
@@ -10,6 +11,8 @@ namespace Alor.OpenAPI.Models
     {
         public RequestCreateOrderGroup() { }
 
+        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrderGroupCreate"]/Member[@name="OrderGroupCreate"]/*' />
+        [JsonConstructor]
         public RequestCreateOrderGroup(ICollection<RequestOrderGroupItem>? orders = default, ExecutionPolicy? executionPolicy = default)
         {
             // to ensure "orders" is required (not null)
@@ -21,11 +24,13 @@ namespace Alor.OpenAPI.Models
                     "executionPolicy is a required property for RequestCreateOrderGroup and cannot be null");
         }
 
+        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrderGroupCreate"]/Member[@name="orders"]/*' />
         [DataMember(Name = "orders", EmitDefaultValue = false)]
-        public ICollection<RequestOrderGroupItem>? Orders { get; private set; }
+        public ICollection<RequestOrderGroupItem>? Orders { get; init; }
 
+        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrderGroupCreate"]/Member[@name="executionPolicy"]/*' />
         [DataMember(Name = "executionPolicy", EmitDefaultValue = false)]
-        public ExecutionPolicy? ExecutionPolicy { get; private set; }
+        public ExecutionPolicy? ExecutionPolicy { get; init; }
 
         public override string ToString()
         {
@@ -37,15 +42,9 @@ namespace Alor.OpenAPI.Models
             return sb.ToString();
         }
 
-        public string ToJson() => Encoding.UTF8.GetString(SpanJson.JsonSerializer.Generic.Utf8.Serialize(this));
+        public string ToJson() => Encoding.UTF8.GetString(JsonSerializer.Generic.Utf8.Serialize(this));
 
-        public override int GetHashCode() => Utilities.Utilities.GetHashCodeHelper(
-            new[]
-            {
-                Orders?.GetHashCode() ?? 0,
-                ExecutionPolicy ?.GetHashCode() ?? 0,
-            }
-        );
+        public override int GetHashCode() => HashCode.Combine(Orders, ExecutionPolicy);
 
         private static bool EqualsHelper(RequestCreateOrderGroup? first, RequestCreateOrderGroup? second) =>
             first?.Orders != null && second?.Orders != null
@@ -61,10 +60,7 @@ namespace Alor.OpenAPI.Models
             if ((object?)other == null)
                 return false;
 
-            if (GetType() != other.GetType())
-                return false;
-
-            return EqualsHelper(this, other);
+            return GetType() == other.GetType() && EqualsHelper(this, other);
         }
 
         public override bool Equals(object? obj) => Equals(obj as RequestCreateOrderGroup);

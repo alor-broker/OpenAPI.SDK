@@ -197,14 +197,17 @@
             <description>Тип клиента:</description>
           </listheader>
           <item>
+            <term>LowRisk</term>
+            <description />Клиент с начальным уровнем риска (КНУР)</item>
+          <item>
             <term>StandardRisk</term>
-            <description />Стандартный уровень риска (КСУР)</item>
+            <description />Клиент со стандартным уровнем риска (КСУР)</item>
           <item>
             <term>HighRisk</term>
-            <description />Высокий уровень риска (КПУР)</item>
+            <description />Клиент с повышенным уровнем риска (КПУР)</item>
           <item>
             <term>Special</term>
-            <description />Особый уровень риска (КОУР)</item>
+            <description />Клиент с особым уровнем риска (КОУР)</item>
         </list>
       </summary>
     </Member>
@@ -441,6 +444,26 @@
       </summary>
     </Member>
   </Members>
+  <Members name="fieldFrequency">
+    <Member name="fieldFrequency">
+      <summary>
+        <list type="table">
+          <listheader>
+            <description>Частота (интервал) передачи данных сервером. Сервер вернёт последние данные по запросу за тот временной интервал, который указан в качестве значения параметра. Пример: биржа передаёт данные каждые 2 мс, но, при значении параметра 10 мс, сервер вернёт только последнее значение, отбросив предыдущие.</description>
+          </listheader>
+          <item>
+            <term>Simple</term>
+            <description />25 миллисекунд</item>
+          <item>
+            <term>Slim</term>
+            <description />10 миллисекунд</item>
+          <item>
+            <term>Heavy</term>
+            <description />500 миллисекунд</item>
+        </list>
+      </summary>
+    </Member>
+  </Members>
   <Members name="fieldFuturesNameFull">
     <Member name="fieldFuturesNameFull">
       <summary>Полное название фьючерса</summary>
@@ -597,6 +620,12 @@
       <summary>Скорректированная маржа</summary>
     </Member>
   </Members>
+  <Members name="fieldMarginIndicative">
+    <Member name="fieldMarginIndicative">
+      <summary>Индикативная вариационная маржа с учетом текущего индикативного курса валют, руб (рассчитывается аналогично текущей индикативной ВМ, учитывает в т.ч. вар.маржу по закрытым позициям)
+</summary>
+    </Member>
+  </Members>
   <Members name="fieldMarginInitial">
     <Member name="fieldMarginInitial">
       <summary>Начальная маржа</summary>
@@ -670,6 +699,12 @@
       <summary>Свободные средства. Сумма рублей и залогов, дисконтированных в рубли, доступная для открытия позиций. (<paramref name="MoneyFree" /> = <paramref name="MoneyAmount" /> + <paramref name="VmInterCl" /> – <paramref name="MoneyBlocked" /> – <paramref name="VmReserve" /> – <paramref name="Fee" />)</summary>
     </Member>
   </Members>
+  <Members name="fieldNetOptionValue">
+    <Member name="fieldNetOptionValue">
+      <summary>Сумма произведений теоретических цен опционов, рассчитанных по итогам текущей клиринговой сессии, и объемов соответствующих позиций с учетом знака. Опционы на акции будут использованы в качестве обеспечения по портфелю. Величина NetOptionValue влияет на объём свободных средств и дисконтируется за счет требований к ГО
+</summary>
+    </Member>
+  </Members>
   <Members name="fieldOpenInterest">
     <Member name="fieldOpenInterest">
       <summary>Открытый интерес (open interest). Если не поддерживается инструментом — значение <paramref name="0" /> или <paramref name="null" /></summary>
@@ -734,12 +769,12 @@
   </Members>
   <Members name="fieldPortfolioEvaluationValue">
     <Member name="fieldPortfolioEvaluationValue">
-      <summary>Общая стоимость портфеля</summary>
+      <summary>Оценка ликвидного портфеля</summary>
     </Member>
   </Members>
   <Members name="fieldPortfolioLiquidationValue">
     <Member name="fieldPortfolioLiquidationValue">
-      <summary>Стоимость ликвидного портфеля</summary>
+      <summary>Оценка портфеля</summary>
     </Member>
   </Members>
   <Members name="fieldPreviousClosePrice">
@@ -991,7 +1026,7 @@
   </Members>
   <Members name="fieldRatingCommon">
     <Member name="fieldRatingCommon">
-      <summary />
+      <summary>Рейтинг инструмента, основанный на объёме торгов за предыдущий день. Используется для сортировки инструментов</summary>
     </Member>
   </Members>
   <Members name="fieldRatingMargin">
@@ -1052,6 +1087,32 @@
   <Members name="fieldRiskCoverageRatioTwo">
     <Member name="fieldRiskCoverageRatioTwo">
       <summary>НПР2</summary>
+    </Member>
+  </Members>
+  <Members name="fieldRiskPosition">
+    <Member name="fieldRiskPosition">
+      <summary>Текущий оперативный риск. Дополнительная величина, несущая прогнозную функцию и отвечающая на вопрос «какое будет ГО, если клиринг прямо сейчас». Не используется при расчёте НПР
+</summary>
+    </Member>
+  </Members>
+  <Members name="fieldRiskStatus">
+    <Member name="fieldRiskStatus">
+      <summary>
+        <list type="table">
+          <listheader>
+            <description>Статус клиента согласно его уровня риска, рассчитанного на основе показателей НПР1 и НПР2. Определяет возможность ведения маржинальной торговли:</description>
+          </listheader>
+          <item>
+            <term>Ok</term>
+            <description />уровень риска в норме. Доступны любые операции с маржинальными позициями, включая открытие новых (НПР1≥0, НПР2≥0);</item>
+          <item>
+            <term>Demand</term>
+            <description />уровень, требующий повышенного внимания к рискам. Доступны операции по уменьшению и закрытию существующих маржинальных позиций, но запрещено открытие новых (НПР1&lt;0, НПР2≥0);</item>
+          <item>
+            <term>ToClose</term>
+            <description />критический уровень риска, при котором открытые позиции могут быть принудительно закрыты (НПР1&lt;0, НПР2&lt;0).</item>
+        </list>
+      </summary>
     </Member>
   </Members>
   <Members name="fieldRoundTo">
@@ -1216,9 +1277,16 @@
       <summary>Дата и время изменения статуса заявки (UTC)</summary>
     </Member>
   </Members>
-  <Members name="fieldToken">
-    <Member name="fieldToken">
-      <summary>JWT токен для авторизации</summary>
+  <Members name="fieldTokenAccess">
+    <Member name="fieldTokenAccess">
+      <summary>JWT токен для авторизации запросов к API
+</summary>
+    </Member>
+  </Members>
+  <Members name="fieldTokenRefresh">
+    <Member name="fieldTokenRefresh">
+      <summary>Refresh token из кабинета разработчика. Используется для создания JWT токена
+</summary>
     </Member>
   </Members>
   <Members name="fieldTotalEntries">
@@ -1441,6 +1509,20 @@
 Не активная заявка отображается в системе, но не участвует в процессе выставления на биржу, пока не станет активной.
 Данный флаг необходим при создании группы заявок с типом 'TriggerBracketOrders'
 </summary>
+    </Member>
+  </Members>
+  <Members name="flagAllowMargin">
+    <Member name="flagAllowMargin">
+      <summary>
+        <description>Флаг, подтверждающий согласие клиента с начальным уровнем риска (КНУР) на выставление заявки с потенциальной непокрытой позицией. Должен быть `true`:</description>
+        <list type="bullet">
+          <item>При любом выставлении или изменении биржевых заявок на срочном рынке, в том числе для закрытия ранее открытых позиций</item>
+          <item>При выставлении или изменении биржевых заявок на фондовом и валютном рынках, если в результате откроется новая непокрытая позиция или увеличится минус по существующей</item>
+          <item>При выставлении или изменении условных заявок независимо от выбранного рынка</item>
+          <item>Клиенту присвоен другой уровень риска</item>
+          <item>Подключена услуга 100% обеспечения</item>
+        </list>
+      </summary>
     </Member>
   </Members>
   <Members name="flagCheckDuplicates">
@@ -2039,6 +2121,18 @@
         </list>
       </summary>
     </Member>
+    <Member name="allowMargin">
+      <summary>
+        <description>Флаг, подтверждающий согласие клиента с начальным уровнем риска (КНУР) на выставление заявки с потенциальной непокрытой позицией. Должен быть `true`:</description>
+        <list type="bullet">
+          <item>При любом выставлении или изменении биржевых заявок на срочном рынке, в том числе для закрытия ранее открытых позиций</item>
+          <item>При выставлении или изменении биржевых заявок на фондовом и валютном рынках, если в результате откроется новая непокрытая позиция или увеличится минус по существующей</item>
+          <item>При выставлении или изменении условных заявок независимо от выбранного рынка</item>
+          <item>Клиенту присвоен другой уровень риска</item>
+          <item>Подключена услуга 100% обеспечения</item>
+        </list>
+      </summary>
+    </Member>
     <Member name="icebergFixed">
       <summary>Видимая постоянная часть айсберг-заявки в лотах, указанная при создании лимитной заявки</summary>
     </Member>
@@ -2081,6 +2175,16 @@
           <item>
             <term>goodtillcancelled</term>
             <description />Активна до отмены</item>
+        </list>
+      </param>
+      <param name="allowMargin">
+        <description>Флаг, подтверждающий согласие клиента с начальным уровнем риска (КНУР) на выставление заявки с потенциальной непокрытой позицией. Должен быть `true`:</description>
+        <list type="bullet">
+          <item>При любом выставлении или изменении биржевых заявок на срочном рынке, в том числе для закрытия ранее открытых позиций</item>
+          <item>При выставлении или изменении биржевых заявок на фондовом и валютном рынках, если в результате откроется новая непокрытая позиция или увеличится минус по существующей</item>
+          <item>При выставлении или изменении условных заявок независимо от выбранного рынка</item>
+          <item>Клиенту присвоен другой уровень риска</item>
+          <item>Подключена услуга 100% обеспечения</item>
         </list>
       </param>
       <param name="icebergFixed">Видимая постоянная часть айсберг-заявки в лотах, указанная при создании лимитной заявки</param>
@@ -2136,6 +2240,18 @@
         </list>
       </summary>
     </Member>
+    <Member name="allowMargin">
+      <summary>
+        <description>Флаг, подтверждающий согласие клиента с начальным уровнем риска (КНУР) на выставление заявки с потенциальной непокрытой позицией. Должен быть `true`:</description>
+        <list type="bullet">
+          <item>При любом выставлении или изменении биржевых заявок на срочном рынке, в том числе для закрытия ранее открытых позиций</item>
+          <item>При выставлении или изменении биржевых заявок на фондовом и валютном рынках, если в результате откроется новая непокрытая позиция или увеличится минус по существующей</item>
+          <item>При выставлении или изменении условных заявок независимо от выбранного рынка</item>
+          <item>Клиенту присвоен другой уровень риска</item>
+          <item>Подключена услуга 100% обеспечения</item>
+        </list>
+      </summary>
+    </Member>
     <Member name="OrdersActionsMarketTV">
       <param name="side">
         <list type="table">
@@ -2171,6 +2287,16 @@
           <item>
             <term>goodtillcancelled</term>
             <description />Активна до отмены</item>
+        </list>
+      </param>
+      <param name="allowMargin">
+        <description>Флаг, подтверждающий согласие клиента с начальным уровнем риска (КНУР) на выставление заявки с потенциальной непокрытой позицией. Должен быть `true`:</description>
+        <list type="bullet">
+          <item>При любом выставлении или изменении биржевых заявок на срочном рынке, в том числе для закрытия ранее открытых позиций</item>
+          <item>При выставлении или изменении биржевых заявок на фондовом и валютном рынках, если в результате откроется новая непокрытая позиция или увеличится минус по существующей</item>
+          <item>При выставлении или изменении условных заявок независимо от выбранного рынка</item>
+          <item>Клиенту присвоен другой уровень риска</item>
+          <item>Подключена услуга 100% обеспечения</item>
         </list>
       </param>
     </Member>
@@ -2251,6 +2377,18 @@
         </list>
       </summary>
     </Member>
+    <Member name="allowMargin">
+      <summary>
+        <description>Флаг, подтверждающий согласие клиента с начальным уровнем риска (КНУР) на выставление заявки с потенциальной непокрытой позицией. Должен быть `true`:</description>
+        <list type="bullet">
+          <item>При любом выставлении или изменении биржевых заявок на срочном рынке, в том числе для закрытия ранее открытых позиций</item>
+          <item>При выставлении или изменении биржевых заявок на фондовом и валютном рынках, если в результате откроется новая непокрытая позиция или увеличится минус по существующей</item>
+          <item>При выставлении или изменении условных заявок независимо от выбранного рынка</item>
+          <item>Клиенту присвоен другой уровень риска</item>
+          <item>Подключена услуга 100% обеспечения</item>
+        </list>
+      </summary>
+    </Member>
     <Member name="icebergFixed">
       <summary>Видимая постоянная часть айсберг-заявки в лотах, указанная при создании лимитной заявки</summary>
     </Member>
@@ -2324,6 +2462,16 @@
             <description />Активна до отмены</item>
         </list>
       </param>
+      <param name="allowMargin">
+        <description>Флаг, подтверждающий согласие клиента с начальным уровнем риска (КНУР) на выставление заявки с потенциальной непокрытой позицией. Должен быть `true`:</description>
+        <list type="bullet">
+          <item>При любом выставлении или изменении биржевых заявок на срочном рынке, в том числе для закрытия ранее открытых позиций</item>
+          <item>При выставлении или изменении биржевых заявок на фондовом и валютном рынках, если в результате откроется новая непокрытая позиция или увеличится минус по существующей</item>
+          <item>При выставлении или изменении условных заявок независимо от выбранного рынка</item>
+          <item>Клиенту присвоен другой уровень риска</item>
+          <item>Подключена услуга 100% обеспечения</item>
+        </list>
+      </param>
       <param name="icebergFixed">Видимая постоянная часть айсберг-заявки в лотах, указанная при создании лимитной заявки</param>
       <param name="icebergVariance">Амплитуда отклонения (в % от постоянной части) случайной надбавки к видимой части айсберг-заявки, указанная при создании лимитной заявки. Только срочный рынок</param>
       <param name="protectingSeconds">Защитное время. Непрерывный период времени в секундах, в течение которого рыночная цена инструмента должна соответствовать указанным в заявке цене и условию срабатывания (<paramref name="triggerPrice" /> и <paramref name="condition" />). Предназначено для защиты условных заявок от срабатывания при краткосрочных колебаниях цены.</param>
@@ -2385,6 +2533,18 @@
     <Member name="user">
       <summary>Информация о пользователе</summary>
     </Member>
+    <Member name="allowMargin">
+      <summary>
+        <description>Флаг, подтверждающий согласие клиента с начальным уровнем риска (КНУР) на выставление заявки с потенциальной непокрытой позицией. Должен быть `true`:</description>
+        <list type="bullet">
+          <item>При любом выставлении или изменении биржевых заявок на срочном рынке, в том числе для закрытия ранее открытых позиций</item>
+          <item>При выставлении или изменении биржевых заявок на фондовом и валютном рынках, если в результате откроется новая непокрытая позиция или увеличится минус по существующей</item>
+          <item>При выставлении или изменении условных заявок независимо от выбранного рынка</item>
+          <item>Клиенту присвоен другой уровень риска</item>
+          <item>Подключена услуга 100% обеспечения</item>
+        </list>
+      </summary>
+    </Member>
     <Member name="protectingSeconds">
       <summary>Защитное время. Непрерывный период времени в секундах, в течение которого рыночная цена инструмента должна соответствовать указанным в заявке цене и условию срабатывания (<paramref name="triggerPrice" /> и <paramref name="condition" />). Предназначено для защиты условных заявок от срабатывания при краткосрочных колебаниях цены.</summary>
     </Member>
@@ -2432,6 +2592,16 @@
       <param name="quantity">Количество (лоты)</param>
       <param name="instrument">Информация об инструменте и бирже</param>
       <param name="user">Информация о пользователе</param>
+      <param name="allowMargin">
+        <description>Флаг, подтверждающий согласие клиента с начальным уровнем риска (КНУР) на выставление заявки с потенциальной непокрытой позицией. Должен быть `true`:</description>
+        <list type="bullet">
+          <item>При любом выставлении или изменении биржевых заявок на срочном рынке, в том числе для закрытия ранее открытых позиций</item>
+          <item>При выставлении или изменении биржевых заявок на фондовом и валютном рынках, если в результате откроется новая непокрытая позиция или увеличится минус по существующей</item>
+          <item>При выставлении или изменении условных заявок независимо от выбранного рынка</item>
+          <item>Клиенту присвоен другой уровень риска</item>
+          <item>Подключена услуга 100% обеспечения</item>
+        </list>
+      </param>
       <param name="protectingSeconds">Защитное время. Непрерывный период времени в секундах, в течение которого рыночная цена инструмента должна соответствовать указанным в заявке цене и условию срабатывания (<paramref name="triggerPrice" /> и <paramref name="condition" />). Предназначено для защиты условных заявок от срабатывания при краткосрочных колебаниях цены.</param>
       <param name="activate">Флаг указывает, создать активную заявку, или не активную.
 Не активная заявка отображается в системе, но не участвует в процессе выставления на биржу, пока не станет активной.
@@ -2505,6 +2675,12 @@
       <summary>Принимает несколько пар биржа-тикер. Пары отделены запятыми. Биржа и тикер разделены двоеточием</summary>
     </Member>
   </Members>
+  <Members name="queryAllowedPortfoliosOptional">
+    <Member name="queryAllowedPortfoliosOptional">
+      <summary>Список портфелей, на которые распространяется действие Access токена. Значение всегда является массивом вида <paramref name="[&quot;portfolio1&quot;, &quot;portfolio2&quot;]" />
+</summary>
+    </Member>
+  </Members>
   <Members name="queryCfiCodeOptional">
     <Member name="queryCfiCodeOptional">
       <summary>Код финансового инструмента по стандарту ISO 10962</summary>
@@ -2524,7 +2700,14 @@
   </Members>
   <Members name="queryDateFromOptional">
     <Member name="queryDateFromOptional">
-      <summary>Начиная с какой даты отдавать историю сделок</summary>
+      <summary>
+        <description>Начало отрезка времени, за которое требуется получить историю сделок. Может содержать:</description>
+        <list type="bullet">
+          <item>только дату (например, <paramref name="2021-10-13" />)</item>
+          <item>дату и время в формате UTC (например, <paramref name="2021-10-13T09:00:00.0000000Z" />)</item>
+        </list>
+        <description>Если точное время не указано, к значению даты будет автоматически добавляться <paramref name="00:00:00.0000000Z" />. </description>
+      </summary>
     </Member>
   </Members>
   <Members name="queryDateFromSecOptional">
@@ -2717,7 +2900,10 @@
   </Members>
   <Members name="queryOrderByTradeDateOptional">
     <Member name="queryOrderByTradeDateOptional">
-      <summary>Флаг сортировки возвращаемых результатов по дате совершения сделки</summary>
+      <summary>Флаг сортировки возвращаемых результатов по дате совершения сделки.
+
+При использовании единой денежной позиции должен быть <paramref name="true" /> для корректной сортировки результатов. Сделки, относящиеся к разным рынкам, могут иметь разную длину идентификатора, в связи с чем стандартная сортировка по ID может возвращать результаты в некорректной последовательности
+</summary>
     </Member>
   </Members>
   <Members name="queryPortfolioFONDRequired">
@@ -2745,8 +2931,8 @@
       <summary>Верхняя граница объёма сделки в лотах</summary>
     </Member>
   </Members>
-  <Members name="queryRiskCategoryIdOptional">
-    <Member name="queryRiskCategoryIdOptional">
+  <Members name="queryRiskCategoryIdRequired">
+    <Member name="queryRiskCategoryIdRequired">
       <summary>Id вашей (или той которая интересует) категории риска. Можно получить из запроса информации по клиенту или через кабинет клиента</summary>
     </Member>
   </Members>
@@ -2876,6 +3062,11 @@
       <summary>Конечный номер сделки для фильтра результатов</summary>
     </Member>
   </Members>
+  <Members name="queryTokenOptional">
+    <Member name="queryTokenOptional">
+      <summary>Refresh token из кабинета разработчика. Используется для создания JWT токена</summary>
+    </Member>
+  </Members>
   <Members name="queryUntradedOptional">
     <Member name="queryUntradedOptional">
       <summary>Флаг для поиска данных по устаревшим или экспирированным инструментам. При использовании требуется точное совпадение тикера</summary>
@@ -2889,6 +3080,22 @@
   <Members name="queryWithRepoOptional">
     <Member name="queryWithRepoOptional">
       <summary>Флаг отображения заявок с РЕПО</summary>
+    </Member>
+  </Members>
+  <Members name="RefreshAccessToken">
+    <Member name="token">
+      <summary>Refresh token из кабинета разработчика. Используется для создания JWT токена
+</summary>
+    </Member>
+    <Member name="allowedPortfolios">
+      <summary>Список портфелей, на которые распространяется действие Access токена. Значение всегда является массивом вида <paramref name="[&quot;portfolio1&quot;, &quot;portfolio2&quot;]" />
+</summary>
+    </Member>
+    <Member name="RefreshAccessToken">
+      <param name="token">Refresh token из кабинета разработчика. Используется для создания JWT токена
+</param>
+      <param name="allowedPortfolios">Список портфелей, на которые распространяется действие Access токена. Значение всегда является массивом вида <paramref name="[&quot;portfolio1&quot;, &quot;portfolio2&quot;]" />
+</param>
     </Member>
   </Members>
   <Members name="responseAllTrade">
@@ -3155,6 +3362,18 @@
     <Member name="varMargin">
       <summary>Вариационная маржа, рассчитанная по формуле <paramref name="VmCurrentPositions" /> + <paramref name="VmInterCl" /></summary>
     </Member>
+    <Member name="indicativeVarMargin">
+      <summary>Индикативная вариационная маржа с учетом текущего индикативного курса валют, руб (рассчитывается аналогично текущей индикативной ВМ, учитывает в т.ч. вар.маржу по закрытым позициям)
+</summary>
+    </Member>
+    <Member name="netOptionValue">
+      <summary>Сумма произведений теоретических цен опционов, рассчитанных по итогам текущей клиринговой сессии, и объемов соответствующих позиций с учетом знака. Опционы на акции будут использованы в качестве обеспечения по портфелю. Величина NetOptionValue влияет на объём свободных средств и дисконтируется за счет требований к ГО
+</summary>
+    </Member>
+    <Member name="posRisk">
+      <summary>Текущий оперативный риск. Дополнительная величина, несущая прогнозную функцию и отвечающая на вопрос «какое будет ГО, если клиринг прямо сейчас». Не используется при расчёте НПР
+</summary>
+    </Member>
     <Member name="isLimitsSet">
       <summary>Наличие установленных денежного и залогового лимитов</summary>
     </Member>
@@ -3170,6 +3389,12 @@
       <param name="vmInterCl">Вариационная маржа, списанная или полученная в пром. клиринг</param>
       <param name="vmCurrentPositions">Сагрегированная вармаржа по текущим позициям</param>
       <param name="varMargin">Вариационная маржа, рассчитанная по формуле <paramref name="VmCurrentPositions" /> + <paramref name="VmInterCl" /></param>
+      <param name="indicativeVarMargin">Индикативная вариационная маржа с учетом текущего индикативного курса валют, руб (рассчитывается аналогично текущей индикативной ВМ, учитывает в т.ч. вар.маржу по закрытым позициям)
+</param>
+      <param name="netOptionValue">Сумма произведений теоретических цен опционов, рассчитанных по итогам текущей клиринговой сессии, и объемов соответствующих позиций с учетом знака. Опционы на акции будут использованы в качестве обеспечения по портфелю. Величина NetOptionValue влияет на объём свободных средств и дисконтируется за счет требований к ГО
+</param>
+      <param name="posRisk">Текущий оперативный риск. Дополнительная величина, несущая прогнозную функцию и отвечающая на вопрос «какое будет ГО, если клиринг прямо сейчас». Не используется при расчёте НПР
+</param>
       <param name="isLimitsSet">Наличие установленных денежного и залогового лимитов</param>
     </Member>
   </Members>
@@ -4183,10 +4408,10 @@
       </summary>
     </Member>
     <Member name="portfolioEvaluation">
-      <summary>Общая стоимость портфеля</summary>
+      <summary>Оценка ликвидного портфеля</summary>
     </Member>
     <Member name="portfolioLiquidationValue">
-      <summary>Стоимость ликвидного портфеля</summary>
+      <summary>Оценка портфеля</summary>
     </Member>
     <Member name="initialMargin">
       <summary>Начальная маржа</summary>
@@ -4214,14 +4439,17 @@
             <description>Тип клиента:</description>
           </listheader>
           <item>
+            <term>LowRisk</term>
+            <description />Клиент с начальным уровнем риска (КНУР)</item>
+          <item>
             <term>StandardRisk</term>
-            <description />Стандартный уровень риска (КСУР)</item>
+            <description />Клиент со стандартным уровнем риска (КСУР)</item>
           <item>
             <term>HighRisk</term>
-            <description />Высокий уровень риска (КПУР)</item>
+            <description />Клиент с повышенным уровнем риска (КПУР)</item>
           <item>
             <term>Special</term>
-            <description />Особый уровень риска (КОУР)</item>
+            <description />Клиент с особым уровнем риска (КОУР)</item>
         </list>
       </summary>
     </Member>
@@ -4230,6 +4458,24 @@
     </Member>
     <Member name="hasNegativeQuantity">
       <summary>Имеются ли отрицательные количества</summary>
+    </Member>
+    <Member name="riskStatus">
+      <summary>
+        <list type="table">
+          <listheader>
+            <description>Статус клиента согласно его уровня риска, рассчитанного на основе показателей НПР1 и НПР2. Определяет возможность ведения маржинальной торговли:</description>
+          </listheader>
+          <item>
+            <term>Ok</term>
+            <description />уровень риска в норме. Доступны любые операции с маржинальными позициями, включая открытие новых (НПР1≥0, НПР2≥0);</item>
+          <item>
+            <term>Demand</term>
+            <description />уровень, требующий повышенного внимания к рискам. Доступны операции по уменьшению и закрытию существующих маржинальных позиций, но запрещено открытие новых (НПР1&lt;0, НПР2≥0);</item>
+          <item>
+            <term>ToClose</term>
+            <description />критический уровень риска, при котором открытые позиции могут быть принудительно закрыты (НПР1&lt;0, НПР2&lt;0).</item>
+        </list>
+      </summary>
     </Member>
     <Member name="responseRisk">
       <param name="portfolio">Уникальный идентификатор клиентского портфеля</param>
@@ -4246,8 +4492,8 @@
             <description />СПБ Биржа</item>
         </list>
       </param>
-      <param name="portfolioEvaluation">Общая стоимость портфеля</param>
-      <param name="portfolioLiquidationValue">Стоимость ликвидного портфеля</param>
+      <param name="portfolioEvaluation">Оценка ликвидного портфеля</param>
+      <param name="portfolioLiquidationValue">Оценка портфеля</param>
       <param name="initialMargin">Начальная маржа</param>
       <param name="minimalMargin">Минимальная маржа</param>
       <param name="correctedMargin">Скорректированная маржа</param>
@@ -4261,18 +4507,37 @@
             <description>Тип клиента:</description>
           </listheader>
           <item>
+            <term>LowRisk</term>
+            <description />Клиент с начальным уровнем риска (КНУР)</item>
+          <item>
             <term>StandardRisk</term>
-            <description />Стандартный уровень риска (КСУР)</item>
+            <description />Клиент со стандартным уровнем риска (КСУР)</item>
           <item>
             <term>HighRisk</term>
-            <description />Высокий уровень риска (КПУР)</item>
+            <description />Клиент с повышенным уровнем риска (КПУР)</item>
           <item>
             <term>Special</term>
-            <description />Особый уровень риска (КОУР)</item>
+            <description />Клиент с особым уровнем риска (КОУР)</item>
         </list>
       </param>
       <param name="hasForbiddenPositions">Имеются ли запретные позиции</param>
       <param name="hasNegativeQuantity">Имеются ли отрицательные количества</param>
+      <param name="riskStatus">
+        <list type="table">
+          <listheader>
+            <description>Статус клиента согласно его уровня риска, рассчитанного на основе показателей НПР1 и НПР2. Определяет возможность ведения маржинальной торговли:</description>
+          </listheader>
+          <item>
+            <term>Ok</term>
+            <description />уровень риска в норме. Доступны любые операции с маржинальными позициями, включая открытие новых (НПР1≥0, НПР2≥0);</item>
+          <item>
+            <term>Demand</term>
+            <description />уровень, требующий повышенного внимания к рискам. Доступны операции по уменьшению и закрытию существующих маржинальных позиций, но запрещено открытие новых (НПР1&lt;0, НПР2≥0);</item>
+          <item>
+            <term>ToClose</term>
+            <description />критический уровень риска, при котором открытые позиции могут быть принудительно закрыты (НПР1&lt;0, НПР2&lt;0).</item>
+        </list>
+      </param>
     </Member>
   </Members>
   <Members name="responseRiskRate">
@@ -4507,7 +4772,7 @@
       <summary>Минимальный шаг цены</summary>
     </Member>
     <Member name="rating">
-      <summary />
+      <summary>Рейтинг инструмента, основанный на объёме торгов за предыдущий день. Используется для сортировки инструментов</summary>
     </Member>
     <Member name="marginbuy">
       <summary>Цена маржинальной покупки (заемные средства). Только срочный рынок</summary>
@@ -4801,7 +5066,7 @@
       <param name="cfiCode">Тип ценной бумаги согласно стандарту ISO 10962</param>
       <param name="cancellation">Дата и время завершения (UTC)</param>
       <param name="minstep">Минимальный шаг цены</param>
-      <param name="rating" />
+      <param name="rating">Рейтинг инструмента, основанный на объёме торгов за предыдущий день. Используется для сортировки инструментов</param>
       <param name="marginbuy">Цена маржинальной покупки (заемные средства). Только срочный рынок</param>
       <param name="marginsell">Цена маржинальной продажи (заемные средства). Только срочный рынок</param>
       <param name="marginrate">Отношение цены маржинальной покупки к цене последней сделки. Только срочный рынок</param>
@@ -5289,10 +5554,10 @@
       <summary>Норма прибыли, %</summary>
     </Member>
     <Member name="portfolioEvaluation">
-      <summary>Общая стоимость портфеля</summary>
+      <summary>Оценка ликвидного портфеля</summary>
     </Member>
     <Member name="portfolioLiquidationValue">
-      <summary>Стоимость ликвидного портфеля</summary>
+      <summary>Оценка портфеля</summary>
     </Member>
     <Member name="initialMargin">
       <summary>Начальная маржа</summary>
@@ -5314,8 +5579,8 @@
       <param name="buyingPower">Покупательная способность</param>
       <param name="profit">Прибыль за сегодня</param>
       <param name="profitRate">Норма прибыли, %</param>
-      <param name="portfolioEvaluation">Общая стоимость портфеля</param>
-      <param name="portfolioLiquidationValue">Стоимость ликвидного портфеля</param>
+      <param name="portfolioEvaluation">Оценка ликвидного портфеля</param>
+      <param name="portfolioLiquidationValue">Оценка портфеля</param>
       <param name="initialMargin">Начальная маржа</param>
       <param name="riskBeforeForcePositionClosing">Риск до закрытия</param>
       <param name="commission">Суммарная комиссия (null для Срочного рынка)</param>
@@ -5911,7 +6176,8 @@
       <summary>Клиентский идентификатор команды. В качестве идентификатора требуется уникальная случайная строка. Если уже приходил запрос с таким идентификатором, то команда не будет исполнена повторно.</summary>
     </Member>
     <Member name="token">
-      <summary>JWT токен для авторизации</summary>
+      <summary>JWT токен для авторизации запросов к API
+</summary>
     </Member>
     <Member name="wsCmdAuthorize">
       <param name="opcode">
@@ -5961,7 +6227,8 @@
         </list>
       </param>
       <param name="guid">Клиентский идентификатор команды. В качестве идентификатора требуется уникальная случайная строка. Если уже приходил запрос с таким идентификатором, то команда не будет исполнена повторно.</param>
-      <param name="token">JWT токен для авторизации</param>
+      <param name="token">JWT токен для авторизации запросов к API
+</param>
     </Member>
   </Members>
   <Members name="wsCmdCreateOrderLimit">
@@ -6076,6 +6343,18 @@
         </list>
       </summary>
     </Member>
+    <Member name="allowMargin">
+      <summary>
+        <description>Флаг, подтверждающий согласие клиента с начальным уровнем риска (КНУР) на выставление заявки с потенциальной непокрытой позицией. Должен быть `true`:</description>
+        <list type="bullet">
+          <item>При любом выставлении или изменении биржевых заявок на срочном рынке, в том числе для закрытия ранее открытых позиций</item>
+          <item>При выставлении или изменении биржевых заявок на фондовом и валютном рынках, если в результате откроется новая непокрытая позиция или увеличится минус по существующей</item>
+          <item>При выставлении или изменении условных заявок независимо от выбранного рынка</item>
+          <item>Клиенту присвоен другой уровень риска</item>
+          <item>Подключена услуга 100% обеспечения</item>
+        </list>
+      </summary>
+    </Member>
     <Member name="icebergFixed">
       <summary>Видимая постоянная часть айсберг-заявки в лотах, указанная при создании лимитной заявки</summary>
     </Member>
@@ -6175,6 +6454,16 @@
           <item>
             <term>goodtillcancelled</term>
             <description />Активна до отмены</item>
+        </list>
+      </param>
+      <param name="allowMargin">
+        <description>Флаг, подтверждающий согласие клиента с начальным уровнем риска (КНУР) на выставление заявки с потенциальной непокрытой позицией. Должен быть `true`:</description>
+        <list type="bullet">
+          <item>При любом выставлении или изменении биржевых заявок на срочном рынке, в том числе для закрытия ранее открытых позиций</item>
+          <item>При выставлении или изменении биржевых заявок на фондовом и валютном рынках, если в результате откроется новая непокрытая позиция или увеличится минус по существующей</item>
+          <item>При выставлении или изменении условных заявок независимо от выбранного рынка</item>
+          <item>Клиенту присвоен другой уровень риска</item>
+          <item>Подключена услуга 100% обеспечения</item>
         </list>
       </param>
       <param name="icebergFixed">Видимая постоянная часть айсберг-заявки в лотах, указанная при создании лимитной заявки</param>
@@ -6291,6 +6580,18 @@
         </list>
       </summary>
     </Member>
+    <Member name="allowMargin">
+      <summary>
+        <description>Флаг, подтверждающий согласие клиента с начальным уровнем риска (КНУР) на выставление заявки с потенциальной непокрытой позицией. Должен быть `true`:</description>
+        <list type="bullet">
+          <item>При любом выставлении или изменении биржевых заявок на срочном рынке, в том числе для закрытия ранее открытых позиций</item>
+          <item>При выставлении или изменении биржевых заявок на фондовом и валютном рынках, если в результате откроется новая непокрытая позиция или увеличится минус по существующей</item>
+          <item>При выставлении или изменении условных заявок независимо от выбранного рынка</item>
+          <item>Клиенту присвоен другой уровень риска</item>
+          <item>Подключена услуга 100% обеспечения</item>
+        </list>
+      </summary>
+    </Member>
     <Member name="checkDuplicates">
       <summary>Флаг, отвечающий за проверку уникальности команд. По умолчанию включен. При отключении ускоряет прием заявки.</summary>
     </Member>
@@ -6383,6 +6684,16 @@
           <item>
             <term>goodtillcancelled</term>
             <description />Активна до отмены</item>
+        </list>
+      </param>
+      <param name="allowMargin">
+        <description>Флаг, подтверждающий согласие клиента с начальным уровнем риска (КНУР) на выставление заявки с потенциальной непокрытой позицией. Должен быть `true`:</description>
+        <list type="bullet">
+          <item>При любом выставлении или изменении биржевых заявок на срочном рынке, в том числе для закрытия ранее открытых позиций</item>
+          <item>При выставлении или изменении биржевых заявок на фондовом и валютном рынках, если в результате откроется новая непокрытая позиция или увеличится минус по существующей</item>
+          <item>При выставлении или изменении условных заявок независимо от выбранного рынка</item>
+          <item>Клиенту присвоен другой уровень риска</item>
+          <item>Подключена услуга 100% обеспечения</item>
         </list>
       </param>
       <param name="checkDuplicates">Флаг, отвечающий за проверку уникальности команд. По умолчанию включен. При отключении ускоряет прием заявки.</param>
@@ -6500,6 +6811,18 @@
     <Member name="user">
       <summary>Информация о пользователе</summary>
     </Member>
+    <Member name="allowMargin">
+      <summary>
+        <description>Флаг, подтверждающий согласие клиента с начальным уровнем риска (КНУР) на выставление заявки с потенциальной непокрытой позицией. Должен быть `true`:</description>
+        <list type="bullet">
+          <item>При любом выставлении или изменении биржевых заявок на срочном рынке, в том числе для закрытия ранее открытых позиций</item>
+          <item>При выставлении или изменении биржевых заявок на фондовом и валютном рынках, если в результате откроется новая непокрытая позиция или увеличится минус по существующей</item>
+          <item>При выставлении или изменении условных заявок независимо от выбранного рынка</item>
+          <item>Клиенту присвоен другой уровень риска</item>
+          <item>Подключена услуга 100% обеспечения</item>
+        </list>
+      </summary>
+    </Member>
     <Member name="checkDuplicates">
       <summary>Флаг, отвечающий за проверку уникальности команд. По умолчанию включен. При отключении ускоряет прием заявки.</summary>
     </Member>
@@ -6604,6 +6927,16 @@
         </list>
       </param>
       <param name="user">Информация о пользователе</param>
+      <param name="allowMargin">
+        <description>Флаг, подтверждающий согласие клиента с начальным уровнем риска (КНУР) на выставление заявки с потенциальной непокрытой позицией. Должен быть `true`:</description>
+        <list type="bullet">
+          <item>При любом выставлении или изменении биржевых заявок на срочном рынке, в том числе для закрытия ранее открытых позиций</item>
+          <item>При выставлении или изменении биржевых заявок на фондовом и валютном рынках, если в результате откроется новая непокрытая позиция или увеличится минус по существующей</item>
+          <item>При выставлении или изменении условных заявок независимо от выбранного рынка</item>
+          <item>Клиенту присвоен другой уровень риска</item>
+          <item>Подключена услуга 100% обеспечения</item>
+        </list>
+      </param>
       <param name="checkDuplicates">Флаг, отвечающий за проверку уникальности команд. По умолчанию включен. При отключении ускоряет прием заявки.</param>
       <param name="protectingSeconds">Защитное время. Непрерывный период времени в секундах, в течение которого рыночная цена инструмента должна соответствовать указанным в заявке цене и условию срабатывания (<paramref name="triggerPrice" /> и <paramref name="condition" />). Предназначено для защиты условных заявок от срабатывания при краткосрочных колебаниях цены.</param>
       <param name="activate">Флаг указывает, создать активную заявку, или не активную.
@@ -6748,6 +7081,18 @@
         </list>
       </summary>
     </Member>
+    <Member name="allowMargin">
+      <summary>
+        <description>Флаг, подтверждающий согласие клиента с начальным уровнем риска (КНУР) на выставление заявки с потенциальной непокрытой позицией. Должен быть `true`:</description>
+        <list type="bullet">
+          <item>При любом выставлении или изменении биржевых заявок на срочном рынке, в том числе для закрытия ранее открытых позиций</item>
+          <item>При выставлении или изменении биржевых заявок на фондовом и валютном рынках, если в результате откроется новая непокрытая позиция или увеличится минус по существующей</item>
+          <item>При выставлении или изменении условных заявок независимо от выбранного рынка</item>
+          <item>Клиенту присвоен другой уровень риска</item>
+          <item>Подключена услуга 100% обеспечения</item>
+        </list>
+      </summary>
+    </Member>
     <Member name="icebergFixed">
       <summary>Видимая постоянная часть айсберг-заявки в лотах, указанная при создании лимитной заявки</summary>
     </Member>
@@ -6876,6 +7221,16 @@
           <item>
             <term>goodtillcancelled</term>
             <description />Активна до отмены</item>
+        </list>
+      </param>
+      <param name="allowMargin">
+        <description>Флаг, подтверждающий согласие клиента с начальным уровнем риска (КНУР) на выставление заявки с потенциальной непокрытой позицией. Должен быть `true`:</description>
+        <list type="bullet">
+          <item>При любом выставлении или изменении биржевых заявок на срочном рынке, в том числе для закрытия ранее открытых позиций</item>
+          <item>При выставлении или изменении биржевых заявок на фондовом и валютном рынках, если в результате откроется новая непокрытая позиция или увеличится минус по существующей</item>
+          <item>При выставлении или изменении условных заявок независимо от выбранного рынка</item>
+          <item>Клиенту присвоен другой уровень риска</item>
+          <item>Подключена услуга 100% обеспечения</item>
         </list>
       </param>
       <param name="icebergFixed">Видимая постоянная часть айсберг-заявки в лотах, указанная при создании лимитной заявки</param>
@@ -7571,6 +7926,18 @@
         </list>
       </summary>
     </Member>
+    <Member name="allowMargin">
+      <summary>
+        <description>Флаг, подтверждающий согласие клиента с начальным уровнем риска (КНУР) на выставление заявки с потенциальной непокрытой позицией. Должен быть `true`:</description>
+        <list type="bullet">
+          <item>При любом выставлении или изменении биржевых заявок на срочном рынке, в том числе для закрытия ранее открытых позиций</item>
+          <item>При выставлении или изменении биржевых заявок на фондовом и валютном рынках, если в результате откроется новая непокрытая позиция или увеличится минус по существующей</item>
+          <item>При выставлении или изменении условных заявок независимо от выбранного рынка</item>
+          <item>Клиенту присвоен другой уровень риска</item>
+          <item>Подключена услуга 100% обеспечения</item>
+        </list>
+      </summary>
+    </Member>
     <Member name="icebergFixed">
       <summary>Видимая постоянная часть айсберг-заявки в лотах, указанная при создании лимитной заявки</summary>
     </Member>
@@ -7671,6 +8038,16 @@
           <item>
             <term>goodtillcancelled</term>
             <description />Активна до отмены</item>
+        </list>
+      </param>
+      <param name="allowMargin">
+        <description>Флаг, подтверждающий согласие клиента с начальным уровнем риска (КНУР) на выставление заявки с потенциальной непокрытой позицией. Должен быть `true`:</description>
+        <list type="bullet">
+          <item>При любом выставлении или изменении биржевых заявок на срочном рынке, в том числе для закрытия ранее открытых позиций</item>
+          <item>При выставлении или изменении биржевых заявок на фондовом и валютном рынках, если в результате откроется новая непокрытая позиция или увеличится минус по существующей</item>
+          <item>При выставлении или изменении условных заявок независимо от выбранного рынка</item>
+          <item>Клиенту присвоен другой уровень риска</item>
+          <item>Подключена услуга 100% обеспечения</item>
         </list>
       </param>
       <param name="icebergFixed">Видимая постоянная часть айсберг-заявки в лотах, указанная при создании лимитной заявки</param>
@@ -7790,6 +8167,18 @@
         </list>
       </summary>
     </Member>
+    <Member name="allowMargin">
+      <summary>
+        <description>Флаг, подтверждающий согласие клиента с начальным уровнем риска (КНУР) на выставление заявки с потенциальной непокрытой позицией. Должен быть `true`:</description>
+        <list type="bullet">
+          <item>При любом выставлении или изменении биржевых заявок на срочном рынке, в том числе для закрытия ранее открытых позиций</item>
+          <item>При выставлении или изменении биржевых заявок на фондовом и валютном рынках, если в результате откроется новая непокрытая позиция или увеличится минус по существующей</item>
+          <item>При выставлении или изменении условных заявок независимо от выбранного рынка</item>
+          <item>Клиенту присвоен другой уровень риска</item>
+          <item>Подключена услуга 100% обеспечения</item>
+        </list>
+      </summary>
+    </Member>
     <Member name="checkDuplicates">
       <summary>Флаг, отвечающий за проверку уникальности команд. По умолчанию включен. При отключении ускоряет прием заявки.</summary>
     </Member>
@@ -7883,6 +8272,16 @@
           <item>
             <term>goodtillcancelled</term>
             <description />Активна до отмены</item>
+        </list>
+      </param>
+      <param name="allowMargin">
+        <description>Флаг, подтверждающий согласие клиента с начальным уровнем риска (КНУР) на выставление заявки с потенциальной непокрытой позицией. Должен быть `true`:</description>
+        <list type="bullet">
+          <item>При любом выставлении или изменении биржевых заявок на срочном рынке, в том числе для закрытия ранее открытых позиций</item>
+          <item>При выставлении или изменении биржевых заявок на фондовом и валютном рынках, если в результате откроется новая непокрытая позиция или увеличится минус по существующей</item>
+          <item>При выставлении или изменении условных заявок независимо от выбранного рынка</item>
+          <item>Клиенту присвоен другой уровень риска</item>
+          <item>Подключена услуга 100% обеспечения</item>
         </list>
       </param>
       <param name="checkDuplicates">Флаг, отвечающий за проверку уникальности команд. По умолчанию включен. При отключении ускоряет прием заявки.</param>
@@ -8003,6 +8402,18 @@
     <Member name="user">
       <summary>Информация о пользователе</summary>
     </Member>
+    <Member name="allowMargin">
+      <summary>
+        <description>Флаг, подтверждающий согласие клиента с начальным уровнем риска (КНУР) на выставление заявки с потенциальной непокрытой позицией. Должен быть `true`:</description>
+        <list type="bullet">
+          <item>При любом выставлении или изменении биржевых заявок на срочном рынке, в том числе для закрытия ранее открытых позиций</item>
+          <item>При выставлении или изменении биржевых заявок на фондовом и валютном рынках, если в результате откроется новая непокрытая позиция или увеличится минус по существующей</item>
+          <item>При выставлении или изменении условных заявок независимо от выбранного рынка</item>
+          <item>Клиенту присвоен другой уровень риска</item>
+          <item>Подключена услуга 100% обеспечения</item>
+        </list>
+      </summary>
+    </Member>
     <Member name="checkDuplicates">
       <summary>Флаг, отвечающий за проверку уникальности команд. По умолчанию включен. При отключении ускоряет прием заявки.</summary>
     </Member>
@@ -8108,6 +8519,16 @@
         </list>
       </param>
       <param name="user">Информация о пользователе</param>
+      <param name="allowMargin">
+        <description>Флаг, подтверждающий согласие клиента с начальным уровнем риска (КНУР) на выставление заявки с потенциальной непокрытой позицией. Должен быть `true`:</description>
+        <list type="bullet">
+          <item>При любом выставлении или изменении биржевых заявок на срочном рынке, в том числе для закрытия ранее открытых позиций</item>
+          <item>При выставлении или изменении биржевых заявок на фондовом и валютном рынках, если в результате откроется новая непокрытая позиция или увеличится минус по существующей</item>
+          <item>При выставлении или изменении условных заявок независимо от выбранного рынка</item>
+          <item>Клиенту присвоен другой уровень риска</item>
+          <item>Подключена услуга 100% обеспечения</item>
+        </list>
+      </param>
       <param name="checkDuplicates">Флаг, отвечающий за проверку уникальности команд. По умолчанию включен. При отключении ускоряет прием заявки.</param>
       <param name="protectingSeconds">Защитное время. Непрерывный период времени в секундах, в течение которого рыночная цена инструмента должна соответствовать указанным в заявке цене и условию срабатывания (<paramref name="triggerPrice" /> и <paramref name="condition" />). Предназначено для защиты условных заявок от срабатывания при краткосрочных колебаниях цены.</param>
       <param name="activate">Флаг указывает, создать активную заявку, или не активную.
@@ -8255,6 +8676,18 @@
         </list>
       </summary>
     </Member>
+    <Member name="allowMargin">
+      <summary>
+        <description>Флаг, подтверждающий согласие клиента с начальным уровнем риска (КНУР) на выставление заявки с потенциальной непокрытой позицией. Должен быть `true`:</description>
+        <list type="bullet">
+          <item>При любом выставлении или изменении биржевых заявок на срочном рынке, в том числе для закрытия ранее открытых позиций</item>
+          <item>При выставлении или изменении биржевых заявок на фондовом и валютном рынках, если в результате откроется новая непокрытая позиция или увеличится минус по существующей</item>
+          <item>При выставлении или изменении условных заявок независимо от выбранного рынка</item>
+          <item>Клиенту присвоен другой уровень риска</item>
+          <item>Подключена услуга 100% обеспечения</item>
+        </list>
+      </summary>
+    </Member>
     <Member name="icebergFixed">
       <summary>Видимая постоянная часть айсберг-заявки в лотах, указанная при создании лимитной заявки</summary>
     </Member>
@@ -8384,6 +8817,16 @@
           <item>
             <term>goodtillcancelled</term>
             <description />Активна до отмены</item>
+        </list>
+      </param>
+      <param name="allowMargin">
+        <description>Флаг, подтверждающий согласие клиента с начальным уровнем риска (КНУР) на выставление заявки с потенциальной непокрытой позицией. Должен быть `true`:</description>
+        <list type="bullet">
+          <item>При любом выставлении или изменении биржевых заявок на срочном рынке, в том числе для закрытия ранее открытых позиций</item>
+          <item>При выставлении или изменении биржевых заявок на фондовом и валютном рынках, если в результате откроется новая непокрытая позиция или увеличится минус по существующей</item>
+          <item>При выставлении или изменении условных заявок независимо от выбранного рынка</item>
+          <item>Клиенту присвоен другой уровень риска</item>
+          <item>Подключена услуга 100% обеспечения</item>
         </list>
       </param>
       <param name="icebergFixed">Видимая постоянная часть айсберг-заявки в лотах, указанная при создании лимитной заявки</param>
@@ -8532,29 +8975,12 @@
         <description>От формата объекта также зависит минимальное значение параметра <paramref name="frequency" /> для WebSocket-подписок. </description>
       </summary>
     </Member>
-    <Member name="frequency">
-      <summary>
-        <list type="table">
-          <listheader>
-            <description>Частота (интервал) передачи данных сервером. Сервер вернёт последние данные по запросу за тот временной интервал, который указан в качестве значения параметра. Пример: биржа передаёт данные каждые 2 мс, но, при значении параметра 10 мс, сервер вернёт только последнее значение, отбросив предыдущие.</description>
-          </listheader>
-          <item>
-            <term>Simple</term>
-            <description />25 миллисекунд</item>
-          <item>
-            <term>Slim</term>
-            <description />10 миллисекунд</item>
-          <item>
-            <term>Heavy</term>
-            <description />500 миллисекунд</item>
-        </list>
-      </summary>
-    </Member>
     <Member name="guid">
       <summary>Клиентский идентификатор подписки. В качестве идентификатора требуется уникальная случайная строка. Значение в возвращаемых в рамках подписки сообщениях равно значению поля <paramref name="guid" />, переданному при отправке команды.</summary>
     </Member>
     <Member name="token">
-      <summary>JWT токен для авторизации</summary>
+      <summary>JWT токен для авторизации запросов к API
+</summary>
     </Member>
     <Member name="wsRequestSubBaseObject">
       <param name="instrumentGroup">
@@ -8594,24 +9020,9 @@
         </list>
         <description>От формата объекта также зависит минимальное значение параметра <paramref name="frequency" /> для WebSocket-подписок. </description>
       </param>
-      <param name="frequency">
-        <list type="table">
-          <listheader>
-            <description>Частота (интервал) передачи данных сервером. Сервер вернёт последние данные по запросу за тот временной интервал, который указан в качестве значения параметра. Пример: биржа передаёт данные каждые 2 мс, но, при значении параметра 10 мс, сервер вернёт только последнее значение, отбросив предыдущие.</description>
-          </listheader>
-          <item>
-            <term>Simple</term>
-            <description />25 миллисекунд</item>
-          <item>
-            <term>Slim</term>
-            <description />10 миллисекунд</item>
-          <item>
-            <term>Heavy</term>
-            <description />500 миллисекунд</item>
-        </list>
-      </param>
       <param name="guid">Клиентский идентификатор подписки. В качестве идентификатора требуется уникальная случайная строка. Значение в возвращаемых в рамках подписки сообщениях равно значению поля <paramref name="guid" />, переданному при отправке команды.</param>
-      <param name="token">JWT токен для авторизации</param>
+      <param name="token">JWT токен для авторизации запросов к API
+</param>
     </Member>
   </Members>
   <Members name="wsResponseSubAllTradesGetAndSubscribe">
@@ -8907,7 +9318,8 @@
       </summary>
     </Member>
     <Member name="token">
-      <summary>JWT токен для авторизации</summary>
+      <summary>JWT токен для авторизации запросов к API
+</summary>
     </Member>
     <Member name="depth">
       <summary>Если указать, то перед актуальными данными придут данные о последних N сделках.
@@ -8960,24 +9372,6 @@
             <description />полный формат данных, развивающийся и дополняющийся новыми полями. Не поддерживает устаревшие параметры</item>
         </list>
         <description>От формата объекта также зависит минимальное значение параметра <paramref name="frequency" /> для WebSocket-подписок. </description>
-      </summary>
-    </Member>
-    <Member name="frequency">
-      <summary>
-        <list type="table">
-          <listheader>
-            <description>Частота (интервал) передачи данных сервером. Сервер вернёт последние данные по запросу за тот временной интервал, который указан в качестве значения параметра. Пример: биржа передаёт данные каждые 2 мс, но, при значении параметра 10 мс, сервер вернёт только последнее значение, отбросив предыдущие.</description>
-          </listheader>
-          <item>
-            <term>Simple</term>
-            <description />25 миллисекунд</item>
-          <item>
-            <term>Slim</term>
-            <description />10 миллисекунд</item>
-          <item>
-            <term>Heavy</term>
-            <description />500 миллисекунд</item>
-        </list>
       </summary>
     </Member>
     <Member name="guid">
@@ -9033,7 +9427,8 @@
             <description />Отмена действующей подписки</item>
         </list>
       </param>
-      <param name="token">JWT токен для авторизации</param>
+      <param name="token">JWT токен для авторизации запросов к API
+</param>
       <param name="depth">Если указать, то перед актуальными данными придут данные о последних N сделках.
 </param>
       <param name="includeVirtualTrades">Указывает, нужно ли отправлять виртуальные (индикативные) сделки</param>
@@ -9074,22 +9469,6 @@
             <description />полный формат данных, развивающийся и дополняющийся новыми полями. Не поддерживает устаревшие параметры</item>
         </list>
         <description>От формата объекта также зависит минимальное значение параметра <paramref name="frequency" /> для WebSocket-подписок. </description>
-      </param>
-      <param name="frequency">
-        <list type="table">
-          <listheader>
-            <description>Частота (интервал) передачи данных сервером. Сервер вернёт последние данные по запросу за тот временной интервал, который указан в качестве значения параметра. Пример: биржа передаёт данные каждые 2 мс, но, при значении параметра 10 мс, сервер вернёт только последнее значение, отбросив предыдущие.</description>
-          </listheader>
-          <item>
-            <term>Simple</term>
-            <description />25 миллисекунд</item>
-          <item>
-            <term>Slim</term>
-            <description />10 миллисекунд</item>
-          <item>
-            <term>Heavy</term>
-            <description />500 миллисекунд</item>
-        </list>
       </param>
       <param name="guid">Клиентский идентификатор подписки. В качестве идентификатора требуется уникальная случайная строка. Значение в возвращаемых в рамках подписки сообщениях равно значению поля <paramref name="guid" />, переданному при отправке команды.</param>
     </Member>
@@ -9212,6 +9591,24 @@
         </list>
       </summary>
     </Member>
+    <Member name="frequency">
+      <summary>
+        <list type="table">
+          <listheader>
+            <description>Частота (интервал) передачи данных сервером. Сервер вернёт последние данные по запросу за тот временной интервал, который указан в качестве значения параметра. Пример: биржа передаёт данные каждые 2 мс, но, при значении параметра 10 мс, сервер вернёт только последнее значение, отбросив предыдущие.</description>
+          </listheader>
+          <item>
+            <term>Simple</term>
+            <description />25 миллисекунд</item>
+          <item>
+            <term>Slim</term>
+            <description />10 миллисекунд</item>
+          <item>
+            <term>Heavy</term>
+            <description />500 миллисекунд</item>
+        </list>
+      </summary>
+    </Member>
     <Member name="instrumentGroup">
       <summary>
         <description>Код режима торгов (Борд):</description>
@@ -9255,29 +9652,12 @@
         <description>От формата объекта также зависит минимальное значение параметра <paramref name="frequency" /> для WebSocket-подписок. </description>
       </summary>
     </Member>
-    <Member name="frequency">
-      <summary>
-        <list type="table">
-          <listheader>
-            <description>Частота (интервал) передачи данных сервером. Сервер вернёт последние данные по запросу за тот временной интервал, который указан в качестве значения параметра. Пример: биржа передаёт данные каждые 2 мс, но, при значении параметра 10 мс, сервер вернёт только последнее значение, отбросив предыдущие.</description>
-          </listheader>
-          <item>
-            <term>Simple</term>
-            <description />25 миллисекунд</item>
-          <item>
-            <term>Slim</term>
-            <description />10 миллисекунд</item>
-          <item>
-            <term>Heavy</term>
-            <description />500 миллисекунд</item>
-        </list>
-      </summary>
-    </Member>
     <Member name="guid">
       <summary>Клиентский идентификатор подписки. В качестве идентификатора требуется уникальная случайная строка. Значение в возвращаемых в рамках подписки сообщениях равно значению поля <paramref name="guid" />, переданному при отправке команды.</summary>
     </Member>
     <Member name="token">
-      <summary>JWT токен для авторизации</summary>
+      <summary>JWT токен для авторизации запросов к API
+</summary>
     </Member>
     <Member name="wsSubBarsGetAndSubscribe">
       <param name="opcode">
@@ -9385,6 +9765,22 @@
             <description />свечи отображаются как есть, т.е. без корректировки.</item>
         </list>
       </param>
+      <param name="frequency">
+        <list type="table">
+          <listheader>
+            <description>Частота (интервал) передачи данных сервером. Сервер вернёт последние данные по запросу за тот временной интервал, который указан в качестве значения параметра. Пример: биржа передаёт данные каждые 2 мс, но, при значении параметра 10 мс, сервер вернёт только последнее значение, отбросив предыдущие.</description>
+          </listheader>
+          <item>
+            <term>Simple</term>
+            <description />25 миллисекунд</item>
+          <item>
+            <term>Slim</term>
+            <description />10 миллисекунд</item>
+          <item>
+            <term>Heavy</term>
+            <description />500 миллисекунд</item>
+        </list>
+      </param>
       <param name="instrumentGroup">
         <description>Код режима торгов (Борд):</description>
         <list type="bullet">
@@ -9422,24 +9818,9 @@
         </list>
         <description>От формата объекта также зависит минимальное значение параметра <paramref name="frequency" /> для WebSocket-подписок. </description>
       </param>
-      <param name="frequency">
-        <list type="table">
-          <listheader>
-            <description>Частота (интервал) передачи данных сервером. Сервер вернёт последние данные по запросу за тот временной интервал, который указан в качестве значения параметра. Пример: биржа передаёт данные каждые 2 мс, но, при значении параметра 10 мс, сервер вернёт только последнее значение, отбросив предыдущие.</description>
-          </listheader>
-          <item>
-            <term>Simple</term>
-            <description />25 миллисекунд</item>
-          <item>
-            <term>Slim</term>
-            <description />10 миллисекунд</item>
-          <item>
-            <term>Heavy</term>
-            <description />500 миллисекунд</item>
-        </list>
-      </param>
       <param name="guid">Клиентский идентификатор подписки. В качестве идентификатора требуется уникальная случайная строка. Значение в возвращаемых в рамках подписки сообщениях равно значению поля <paramref name="guid" />, переданному при отправке команды.</param>
-      <param name="token">JWT токен для авторизации</param>
+      <param name="token">JWT токен для авторизации запросов к API
+</param>
     </Member>
   </Members>
   <Members name="wsSubInstrumentsGetAndSubscribeV2">
@@ -9540,29 +9921,12 @@
         <description>От формата объекта также зависит минимальное значение параметра <paramref name="frequency" /> для WebSocket-подписок. </description>
       </summary>
     </Member>
-    <Member name="frequency">
-      <summary>
-        <list type="table">
-          <listheader>
-            <description>Частота (интервал) передачи данных сервером. Сервер вернёт последние данные по запросу за тот временной интервал, который указан в качестве значения параметра. Пример: биржа передаёт данные каждые 2 мс, но, при значении параметра 10 мс, сервер вернёт только последнее значение, отбросив предыдущие.</description>
-          </listheader>
-          <item>
-            <term>Simple</term>
-            <description />25 миллисекунд</item>
-          <item>
-            <term>Slim</term>
-            <description />10 миллисекунд</item>
-          <item>
-            <term>Heavy</term>
-            <description />500 миллисекунд</item>
-        </list>
-      </summary>
-    </Member>
     <Member name="guid">
       <summary>Клиентский идентификатор подписки. В качестве идентификатора требуется уникальная случайная строка. Значение в возвращаемых в рамках подписки сообщениях равно значению поля <paramref name="guid" />, переданному при отправке команды.</summary>
     </Member>
     <Member name="token">
-      <summary>JWT токен для авторизации</summary>
+      <summary>JWT токен для авторизации запросов к API
+</summary>
     </Member>
     <Member name="wsSubInstrumentsGetAndSubscribeV2">
       <param name="opcode">
@@ -9652,24 +10016,9 @@
         </list>
         <description>От формата объекта также зависит минимальное значение параметра <paramref name="frequency" /> для WebSocket-подписок. </description>
       </param>
-      <param name="frequency">
-        <list type="table">
-          <listheader>
-            <description>Частота (интервал) передачи данных сервером. Сервер вернёт последние данные по запросу за тот временной интервал, который указан в качестве значения параметра. Пример: биржа передаёт данные каждые 2 мс, но, при значении параметра 10 мс, сервер вернёт только последнее значение, отбросив предыдущие.</description>
-          </listheader>
-          <item>
-            <term>Simple</term>
-            <description />25 миллисекунд</item>
-          <item>
-            <term>Slim</term>
-            <description />10 миллисекунд</item>
-          <item>
-            <term>Heavy</term>
-            <description />500 миллисекунд</item>
-        </list>
-      </param>
       <param name="guid">Клиентский идентификатор подписки. В качестве идентификатора требуется уникальная случайная строка. Значение в возвращаемых в рамках подписки сообщениях равно значению поля <paramref name="guid" />, переданному при отправке команды.</param>
-      <param name="token">JWT токен для авторизации</param>
+      <param name="token">JWT токен для авторизации запросов к API
+</param>
     </Member>
   </Members>
   <Members name="wsSubOrderBookGetAndSubscribe">
@@ -9730,6 +10079,24 @@
     <Member name="depth">
       <summary>Глубина стакана. Стандартное значение — 20 (20х20), максимальное — 50 (50х50)</summary>
     </Member>
+    <Member name="frequency">
+      <summary>
+        <list type="table">
+          <listheader>
+            <description>Частота (интервал) передачи данных сервером. Сервер вернёт последние данные по запросу за тот временной интервал, который указан в качестве значения параметра. Пример: биржа передаёт данные каждые 2 мс, но, при значении параметра 10 мс, сервер вернёт только последнее значение, отбросив предыдущие.</description>
+          </listheader>
+          <item>
+            <term>Simple</term>
+            <description />25 миллисекунд</item>
+          <item>
+            <term>Slim</term>
+            <description />10 миллисекунд</item>
+          <item>
+            <term>Heavy</term>
+            <description />500 миллисекунд</item>
+        </list>
+      </summary>
+    </Member>
     <Member name="instrumentGroup">
       <summary>
         <description>Код режима торгов (Борд):</description>
@@ -9773,29 +10140,12 @@
         <description>От формата объекта также зависит минимальное значение параметра <paramref name="frequency" /> для WebSocket-подписок. </description>
       </summary>
     </Member>
-    <Member name="frequency">
-      <summary>
-        <list type="table">
-          <listheader>
-            <description>Частота (интервал) передачи данных сервером. Сервер вернёт последние данные по запросу за тот временной интервал, который указан в качестве значения параметра. Пример: биржа передаёт данные каждые 2 мс, но, при значении параметра 10 мс, сервер вернёт только последнее значение, отбросив предыдущие.</description>
-          </listheader>
-          <item>
-            <term>Simple</term>
-            <description />25 миллисекунд</item>
-          <item>
-            <term>Slim</term>
-            <description />10 миллисекунд</item>
-          <item>
-            <term>Heavy</term>
-            <description />500 миллисекунд</item>
-        </list>
-      </summary>
-    </Member>
     <Member name="guid">
       <summary>Клиентский идентификатор подписки. В качестве идентификатора требуется уникальная случайная строка. Значение в возвращаемых в рамках подписки сообщениях равно значению поля <paramref name="guid" />, переданному при отправке команды.</summary>
     </Member>
     <Member name="token">
-      <summary>JWT токен для авторизации</summary>
+      <summary>JWT токен для авторизации запросов к API
+</summary>
     </Member>
     <Member name="wsSubOrderBookGetAndSubscribe">
       <param name="opcode">
@@ -9849,6 +10199,22 @@
       </param>
       <param name="code">Тикер (Код финансового инструмента)</param>
       <param name="depth">Глубина стакана. Стандартное значение — 20 (20х20), максимальное — 50 (50х50)</param>
+      <param name="frequency">
+        <list type="table">
+          <listheader>
+            <description>Частота (интервал) передачи данных сервером. Сервер вернёт последние данные по запросу за тот временной интервал, который указан в качестве значения параметра. Пример: биржа передаёт данные каждые 2 мс, но, при значении параметра 10 мс, сервер вернёт только последнее значение, отбросив предыдущие.</description>
+          </listheader>
+          <item>
+            <term>Simple</term>
+            <description />25 миллисекунд</item>
+          <item>
+            <term>Slim</term>
+            <description />10 миллисекунд</item>
+          <item>
+            <term>Heavy</term>
+            <description />500 миллисекунд</item>
+        </list>
+      </param>
       <param name="instrumentGroup">
         <description>Код режима торгов (Борд):</description>
         <list type="bullet">
@@ -9886,24 +10252,9 @@
         </list>
         <description>От формата объекта также зависит минимальное значение параметра <paramref name="frequency" /> для WebSocket-подписок. </description>
       </param>
-      <param name="frequency">
-        <list type="table">
-          <listheader>
-            <description>Частота (интервал) передачи данных сервером. Сервер вернёт последние данные по запросу за тот временной интервал, который указан в качестве значения параметра. Пример: биржа передаёт данные каждые 2 мс, но, при значении параметра 10 мс, сервер вернёт только последнее значение, отбросив предыдущие.</description>
-          </listheader>
-          <item>
-            <term>Simple</term>
-            <description />25 миллисекунд</item>
-          <item>
-            <term>Slim</term>
-            <description />10 миллисекунд</item>
-          <item>
-            <term>Heavy</term>
-            <description />500 миллисекунд</item>
-        </list>
-      </param>
       <param name="guid">Клиентский идентификатор подписки. В качестве идентификатора требуется уникальная случайная строка. Значение в возвращаемых в рамках подписки сообщениях равно значению поля <paramref name="guid" />, переданному при отправке команды.</param>
-      <param name="token">JWT токен для авторизации</param>
+      <param name="token">JWT токен для авторизации запросов к API
+</param>
     </Member>
   </Members>
   <Members name="wsSubOrdersGetAndSubscribe">
@@ -10022,29 +10373,12 @@
         <description>От формата объекта также зависит минимальное значение параметра <paramref name="frequency" /> для WebSocket-подписок. </description>
       </summary>
     </Member>
-    <Member name="frequency">
-      <summary>
-        <list type="table">
-          <listheader>
-            <description>Частота (интервал) передачи данных сервером. Сервер вернёт последние данные по запросу за тот временной интервал, который указан в качестве значения параметра. Пример: биржа передаёт данные каждые 2 мс, но, при значении параметра 10 мс, сервер вернёт только последнее значение, отбросив предыдущие.</description>
-          </listheader>
-          <item>
-            <term>Simple</term>
-            <description />25 миллисекунд</item>
-          <item>
-            <term>Slim</term>
-            <description />10 миллисекунд</item>
-          <item>
-            <term>Heavy</term>
-            <description />500 миллисекунд</item>
-        </list>
-      </summary>
-    </Member>
     <Member name="guid">
       <summary>Клиентский идентификатор подписки. В качестве идентификатора требуется уникальная случайная строка. Значение в возвращаемых в рамках подписки сообщениях равно значению поля <paramref name="guid" />, переданному при отправке команды.</summary>
     </Member>
     <Member name="token">
-      <summary>JWT токен для авторизации</summary>
+      <summary>JWT токен для авторизации запросов к API
+</summary>
     </Member>
     <Member name="wsSubOrdersGetAndSubscribe">
       <param name="opcode">
@@ -10148,24 +10482,9 @@
         </list>
         <description>От формата объекта также зависит минимальное значение параметра <paramref name="frequency" /> для WebSocket-подписок. </description>
       </param>
-      <param name="frequency">
-        <list type="table">
-          <listheader>
-            <description>Частота (интервал) передачи данных сервером. Сервер вернёт последние данные по запросу за тот временной интервал, который указан в качестве значения параметра. Пример: биржа передаёт данные каждые 2 мс, но, при значении параметра 10 мс, сервер вернёт только последнее значение, отбросив предыдущие.</description>
-          </listheader>
-          <item>
-            <term>Simple</term>
-            <description />25 миллисекунд</item>
-          <item>
-            <term>Slim</term>
-            <description />10 миллисекунд</item>
-          <item>
-            <term>Heavy</term>
-            <description />500 миллисекунд</item>
-        </list>
-      </param>
       <param name="guid">Клиентский идентификатор подписки. В качестве идентификатора требуется уникальная случайная строка. Значение в возвращаемых в рамках подписки сообщениях равно значению поля <paramref name="guid" />, переданному при отправке команды.</param>
-      <param name="token">JWT токен для авторизации</param>
+      <param name="token">JWT токен для авторизации запросов к API
+</param>
     </Member>
   </Members>
   <Members name="wsSubPositionsGetAndSubscribe">
@@ -10281,29 +10600,12 @@
         <description>От формата объекта также зависит минимальное значение параметра <paramref name="frequency" /> для WebSocket-подписок. </description>
       </summary>
     </Member>
-    <Member name="frequency">
-      <summary>
-        <list type="table">
-          <listheader>
-            <description>Частота (интервал) передачи данных сервером. Сервер вернёт последние данные по запросу за тот временной интервал, который указан в качестве значения параметра. Пример: биржа передаёт данные каждые 2 мс, но, при значении параметра 10 мс, сервер вернёт только последнее значение, отбросив предыдущие.</description>
-          </listheader>
-          <item>
-            <term>Simple</term>
-            <description />25 миллисекунд</item>
-          <item>
-            <term>Slim</term>
-            <description />10 миллисекунд</item>
-          <item>
-            <term>Heavy</term>
-            <description />500 миллисекунд</item>
-        </list>
-      </summary>
-    </Member>
     <Member name="guid">
       <summary>Клиентский идентификатор подписки. В качестве идентификатора требуется уникальная случайная строка. Значение в возвращаемых в рамках подписки сообщениях равно значению поля <paramref name="guid" />, переданному при отправке команды.</summary>
     </Member>
     <Member name="token">
-      <summary>JWT токен для авторизации</summary>
+      <summary>JWT токен для авторизации запросов к API
+</summary>
     </Member>
     <Member name="wsSubPositionsGetAndSubscribe">
       <param name="opcode">
@@ -10406,24 +10708,9 @@
         </list>
         <description>От формата объекта также зависит минимальное значение параметра <paramref name="frequency" /> для WebSocket-подписок. </description>
       </param>
-      <param name="frequency">
-        <list type="table">
-          <listheader>
-            <description>Частота (интервал) передачи данных сервером. Сервер вернёт последние данные по запросу за тот временной интервал, который указан в качестве значения параметра. Пример: биржа передаёт данные каждые 2 мс, но, при значении параметра 10 мс, сервер вернёт только последнее значение, отбросив предыдущие.</description>
-          </listheader>
-          <item>
-            <term>Simple</term>
-            <description />25 миллисекунд</item>
-          <item>
-            <term>Slim</term>
-            <description />10 миллисекунд</item>
-          <item>
-            <term>Heavy</term>
-            <description />500 миллисекунд</item>
-        </list>
-      </param>
       <param name="guid">Клиентский идентификатор подписки. В качестве идентификатора требуется уникальная случайная строка. Значение в возвращаемых в рамках подписки сообщениях равно значению поля <paramref name="guid" />, переданному при отправке команды.</param>
-      <param name="token">JWT токен для авторизации</param>
+      <param name="token">JWT токен для авторизации запросов к API
+</param>
     </Member>
   </Members>
   <Members name="wsSubQuotesSubscribe">
@@ -10481,6 +10768,24 @@
     <Member name="code">
       <summary>Тикер (Код финансового инструмента)</summary>
     </Member>
+    <Member name="frequency">
+      <summary>
+        <list type="table">
+          <listheader>
+            <description>Частота (интервал) передачи данных сервером. Сервер вернёт последние данные по запросу за тот временной интервал, который указан в качестве значения параметра. Пример: биржа передаёт данные каждые 2 мс, но, при значении параметра 10 мс, сервер вернёт только последнее значение, отбросив предыдущие.</description>
+          </listheader>
+          <item>
+            <term>Simple</term>
+            <description />25 миллисекунд</item>
+          <item>
+            <term>Slim</term>
+            <description />10 миллисекунд</item>
+          <item>
+            <term>Heavy</term>
+            <description />500 миллисекунд</item>
+        </list>
+      </summary>
+    </Member>
     <Member name="instrumentGroup">
       <summary>
         <description>Код режима торгов (Борд):</description>
@@ -10524,29 +10829,12 @@
         <description>От формата объекта также зависит минимальное значение параметра <paramref name="frequency" /> для WebSocket-подписок. </description>
       </summary>
     </Member>
-    <Member name="frequency">
-      <summary>
-        <list type="table">
-          <listheader>
-            <description>Частота (интервал) передачи данных сервером. Сервер вернёт последние данные по запросу за тот временной интервал, который указан в качестве значения параметра. Пример: биржа передаёт данные каждые 2 мс, но, при значении параметра 10 мс, сервер вернёт только последнее значение, отбросив предыдущие.</description>
-          </listheader>
-          <item>
-            <term>Simple</term>
-            <description />25 миллисекунд</item>
-          <item>
-            <term>Slim</term>
-            <description />10 миллисекунд</item>
-          <item>
-            <term>Heavy</term>
-            <description />500 миллисекунд</item>
-        </list>
-      </summary>
-    </Member>
     <Member name="guid">
       <summary>Клиентский идентификатор подписки. В качестве идентификатора требуется уникальная случайная строка. Значение в возвращаемых в рамках подписки сообщениях равно значению поля <paramref name="guid" />, переданному при отправке команды.</summary>
     </Member>
     <Member name="token">
-      <summary>JWT токен для авторизации</summary>
+      <summary>JWT токен для авторизации запросов к API
+</summary>
     </Member>
     <Member name="wsSubQuotesSubscribe">
       <param name="opcode">
@@ -10599,6 +10887,22 @@
         </list>
       </param>
       <param name="code">Тикер (Код финансового инструмента)</param>
+      <param name="frequency">
+        <list type="table">
+          <listheader>
+            <description>Частота (интервал) передачи данных сервером. Сервер вернёт последние данные по запросу за тот временной интервал, который указан в качестве значения параметра. Пример: биржа передаёт данные каждые 2 мс, но, при значении параметра 10 мс, сервер вернёт только последнее значение, отбросив предыдущие.</description>
+          </listheader>
+          <item>
+            <term>Simple</term>
+            <description />25 миллисекунд</item>
+          <item>
+            <term>Slim</term>
+            <description />10 миллисекунд</item>
+          <item>
+            <term>Heavy</term>
+            <description />500 миллисекунд</item>
+        </list>
+      </param>
       <param name="instrumentGroup">
         <description>Код режима торгов (Борд):</description>
         <list type="bullet">
@@ -10636,24 +10940,9 @@
         </list>
         <description>От формата объекта также зависит минимальное значение параметра <paramref name="frequency" /> для WebSocket-подписок. </description>
       </param>
-      <param name="frequency">
-        <list type="table">
-          <listheader>
-            <description>Частота (интервал) передачи данных сервером. Сервер вернёт последние данные по запросу за тот временной интервал, который указан в качестве значения параметра. Пример: биржа передаёт данные каждые 2 мс, но, при значении параметра 10 мс, сервер вернёт только последнее значение, отбросив предыдущие.</description>
-          </listheader>
-          <item>
-            <term>Simple</term>
-            <description />25 миллисекунд</item>
-          <item>
-            <term>Slim</term>
-            <description />10 миллисекунд</item>
-          <item>
-            <term>Heavy</term>
-            <description />500 миллисекунд</item>
-        </list>
-      </param>
       <param name="guid">Клиентский идентификатор подписки. В качестве идентификатора требуется уникальная случайная строка. Значение в возвращаемых в рамках подписки сообщениях равно значению поля <paramref name="guid" />, переданному при отправке команды.</param>
-      <param name="token">JWT токен для авторизации</param>
+      <param name="token">JWT токен для авторизации запросов к API
+</param>
     </Member>
   </Members>
   <Members name="wsSubRisksGetAndSubscribe">
@@ -10769,29 +11058,12 @@
         <description>От формата объекта также зависит минимальное значение параметра <paramref name="frequency" /> для WebSocket-подписок. </description>
       </summary>
     </Member>
-    <Member name="frequency">
-      <summary>
-        <list type="table">
-          <listheader>
-            <description>Частота (интервал) передачи данных сервером. Сервер вернёт последние данные по запросу за тот временной интервал, который указан в качестве значения параметра. Пример: биржа передаёт данные каждые 2 мс, но, при значении параметра 10 мс, сервер вернёт только последнее значение, отбросив предыдущие.</description>
-          </listheader>
-          <item>
-            <term>Simple</term>
-            <description />25 миллисекунд</item>
-          <item>
-            <term>Slim</term>
-            <description />10 миллисекунд</item>
-          <item>
-            <term>Heavy</term>
-            <description />500 миллисекунд</item>
-        </list>
-      </summary>
-    </Member>
     <Member name="guid">
       <summary>Клиентский идентификатор подписки. В качестве идентификатора требуется уникальная случайная строка. Значение в возвращаемых в рамках подписки сообщениях равно значению поля <paramref name="guid" />, переданному при отправке команды.</summary>
     </Member>
     <Member name="token">
-      <summary>JWT токен для авторизации</summary>
+      <summary>JWT токен для авторизации запросов к API
+</summary>
     </Member>
     <Member name="wsSubRisksGetAndSubscribe">
       <param name="opcode">
@@ -10894,24 +11166,9 @@
         </list>
         <description>От формата объекта также зависит минимальное значение параметра <paramref name="frequency" /> для WebSocket-подписок. </description>
       </param>
-      <param name="frequency">
-        <list type="table">
-          <listheader>
-            <description>Частота (интервал) передачи данных сервером. Сервер вернёт последние данные по запросу за тот временной интервал, который указан в качестве значения параметра. Пример: биржа передаёт данные каждые 2 мс, но, при значении параметра 10 мс, сервер вернёт только последнее значение, отбросив предыдущие.</description>
-          </listheader>
-          <item>
-            <term>Simple</term>
-            <description />25 миллисекунд</item>
-          <item>
-            <term>Slim</term>
-            <description />10 миллисекунд</item>
-          <item>
-            <term>Heavy</term>
-            <description />500 миллисекунд</item>
-        </list>
-      </param>
       <param name="guid">Клиентский идентификатор подписки. В качестве идентификатора требуется уникальная случайная строка. Значение в возвращаемых в рамках подписки сообщениях равно значению поля <paramref name="guid" />, переданному при отправке команды.</param>
-      <param name="token">JWT токен для авторизации</param>
+      <param name="token">JWT токен для авторизации запросов к API
+</param>
     </Member>
   </Members>
   <Members name="wsSubSpectraRisksGetAndSubscribe">
@@ -11027,29 +11284,12 @@
         <description>От формата объекта также зависит минимальное значение параметра <paramref name="frequency" /> для WebSocket-подписок. </description>
       </summary>
     </Member>
-    <Member name="frequency">
-      <summary>
-        <list type="table">
-          <listheader>
-            <description>Частота (интервал) передачи данных сервером. Сервер вернёт последние данные по запросу за тот временной интервал, который указан в качестве значения параметра. Пример: биржа передаёт данные каждые 2 мс, но, при значении параметра 10 мс, сервер вернёт только последнее значение, отбросив предыдущие.</description>
-          </listheader>
-          <item>
-            <term>Simple</term>
-            <description />25 миллисекунд</item>
-          <item>
-            <term>Slim</term>
-            <description />10 миллисекунд</item>
-          <item>
-            <term>Heavy</term>
-            <description />500 миллисекунд</item>
-        </list>
-      </summary>
-    </Member>
     <Member name="guid">
       <summary>Клиентский идентификатор подписки. В качестве идентификатора требуется уникальная случайная строка. Значение в возвращаемых в рамках подписки сообщениях равно значению поля <paramref name="guid" />, переданному при отправке команды.</summary>
     </Member>
     <Member name="token">
-      <summary>JWT токен для авторизации</summary>
+      <summary>JWT токен для авторизации запросов к API
+</summary>
     </Member>
     <Member name="wsSubSpectraRisksGetAndSubscribe">
       <param name="opcode">
@@ -11152,24 +11392,9 @@
         </list>
         <description>От формата объекта также зависит минимальное значение параметра <paramref name="frequency" /> для WebSocket-подписок. </description>
       </param>
-      <param name="frequency">
-        <list type="table">
-          <listheader>
-            <description>Частота (интервал) передачи данных сервером. Сервер вернёт последние данные по запросу за тот временной интервал, который указан в качестве значения параметра. Пример: биржа передаёт данные каждые 2 мс, но, при значении параметра 10 мс, сервер вернёт только последнее значение, отбросив предыдущие.</description>
-          </listheader>
-          <item>
-            <term>Simple</term>
-            <description />25 миллисекунд</item>
-          <item>
-            <term>Slim</term>
-            <description />10 миллисекунд</item>
-          <item>
-            <term>Heavy</term>
-            <description />500 миллисекунд</item>
-        </list>
-      </param>
       <param name="guid">Клиентский идентификатор подписки. В качестве идентификатора требуется уникальная случайная строка. Значение в возвращаемых в рамках подписки сообщениях равно значению поля <paramref name="guid" />, переданному при отправке команды.</param>
-      <param name="token">JWT токен для авторизации</param>
+      <param name="token">JWT токен для авторизации запросов к API
+</param>
     </Member>
   </Members>
   <Members name="wsSubStopOrdersGetAndSubscribeV2">
@@ -11288,29 +11513,12 @@
         <description>От формата объекта также зависит минимальное значение параметра <paramref name="frequency" /> для WebSocket-подписок. </description>
       </summary>
     </Member>
-    <Member name="frequency">
-      <summary>
-        <list type="table">
-          <listheader>
-            <description>Частота (интервал) передачи данных сервером. Сервер вернёт последние данные по запросу за тот временной интервал, который указан в качестве значения параметра. Пример: биржа передаёт данные каждые 2 мс, но, при значении параметра 10 мс, сервер вернёт только последнее значение, отбросив предыдущие.</description>
-          </listheader>
-          <item>
-            <term>Simple</term>
-            <description />25 миллисекунд</item>
-          <item>
-            <term>Slim</term>
-            <description />10 миллисекунд</item>
-          <item>
-            <term>Heavy</term>
-            <description />500 миллисекунд</item>
-        </list>
-      </summary>
-    </Member>
     <Member name="guid">
       <summary>Клиентский идентификатор подписки. В качестве идентификатора требуется уникальная случайная строка. Значение в возвращаемых в рамках подписки сообщениях равно значению поля <paramref name="guid" />, переданному при отправке команды.</summary>
     </Member>
     <Member name="token">
-      <summary>JWT токен для авторизации</summary>
+      <summary>JWT токен для авторизации запросов к API
+</summary>
     </Member>
     <Member name="wsSubStopOrdersGetAndSubscribeV2">
       <param name="opcode">
@@ -11414,24 +11622,9 @@
         </list>
         <description>От формата объекта также зависит минимальное значение параметра <paramref name="frequency" /> для WebSocket-подписок. </description>
       </param>
-      <param name="frequency">
-        <list type="table">
-          <listheader>
-            <description>Частота (интервал) передачи данных сервером. Сервер вернёт последние данные по запросу за тот временной интервал, который указан в качестве значения параметра. Пример: биржа передаёт данные каждые 2 мс, но, при значении параметра 10 мс, сервер вернёт только последнее значение, отбросив предыдущие.</description>
-          </listheader>
-          <item>
-            <term>Simple</term>
-            <description />25 миллисекунд</item>
-          <item>
-            <term>Slim</term>
-            <description />10 миллисекунд</item>
-          <item>
-            <term>Heavy</term>
-            <description />500 миллисекунд</item>
-        </list>
-      </param>
       <param name="guid">Клиентский идентификатор подписки. В качестве идентификатора требуется уникальная случайная строка. Значение в возвращаемых в рамках подписки сообщениях равно значению поля <paramref name="guid" />, переданному при отправке команды.</param>
-      <param name="token">JWT токен для авторизации</param>
+      <param name="token">JWT токен для авторизации запросов к API
+</param>
     </Member>
   </Members>
   <Members name="wsSubSummariesGetAndSubscribeV2">
@@ -11547,29 +11740,12 @@
         <description>От формата объекта также зависит минимальное значение параметра <paramref name="frequency" /> для WebSocket-подписок. </description>
       </summary>
     </Member>
-    <Member name="frequency">
-      <summary>
-        <list type="table">
-          <listheader>
-            <description>Частота (интервал) передачи данных сервером. Сервер вернёт последние данные по запросу за тот временной интервал, который указан в качестве значения параметра. Пример: биржа передаёт данные каждые 2 мс, но, при значении параметра 10 мс, сервер вернёт только последнее значение, отбросив предыдущие.</description>
-          </listheader>
-          <item>
-            <term>Simple</term>
-            <description />25 миллисекунд</item>
-          <item>
-            <term>Slim</term>
-            <description />10 миллисекунд</item>
-          <item>
-            <term>Heavy</term>
-            <description />500 миллисекунд</item>
-        </list>
-      </summary>
-    </Member>
     <Member name="guid">
       <summary>Клиентский идентификатор подписки. В качестве идентификатора требуется уникальная случайная строка. Значение в возвращаемых в рамках подписки сообщениях равно значению поля <paramref name="guid" />, переданному при отправке команды.</summary>
     </Member>
     <Member name="token">
-      <summary>JWT токен для авторизации</summary>
+      <summary>JWT токен для авторизации запросов к API
+</summary>
     </Member>
     <Member name="wsSubSummariesGetAndSubscribeV2">
       <param name="opcode">
@@ -11672,24 +11848,9 @@
         </list>
         <description>От формата объекта также зависит минимальное значение параметра <paramref name="frequency" /> для WebSocket-подписок. </description>
       </param>
-      <param name="frequency">
-        <list type="table">
-          <listheader>
-            <description>Частота (интервал) передачи данных сервером. Сервер вернёт последние данные по запросу за тот временной интервал, который указан в качестве значения параметра. Пример: биржа передаёт данные каждые 2 мс, но, при значении параметра 10 мс, сервер вернёт только последнее значение, отбросив предыдущие.</description>
-          </listheader>
-          <item>
-            <term>Simple</term>
-            <description />25 миллисекунд</item>
-          <item>
-            <term>Slim</term>
-            <description />10 миллисекунд</item>
-          <item>
-            <term>Heavy</term>
-            <description />500 миллисекунд</item>
-        </list>
-      </param>
       <param name="guid">Клиентский идентификатор подписки. В качестве идентификатора требуется уникальная случайная строка. Значение в возвращаемых в рамках подписки сообщениях равно значению поля <paramref name="guid" />, переданному при отправке команды.</param>
-      <param name="token">JWT токен для авторизации</param>
+      <param name="token">JWT токен для авторизации запросов к API
+</param>
     </Member>
   </Members>
   <Members name="wsSubTradesGetAndSubscribe">
@@ -11805,29 +11966,12 @@
         <description>От формата объекта также зависит минимальное значение параметра <paramref name="frequency" /> для WebSocket-подписок. </description>
       </summary>
     </Member>
-    <Member name="frequency">
-      <summary>
-        <list type="table">
-          <listheader>
-            <description>Частота (интервал) передачи данных сервером. Сервер вернёт последние данные по запросу за тот временной интервал, который указан в качестве значения параметра. Пример: биржа передаёт данные каждые 2 мс, но, при значении параметра 10 мс, сервер вернёт только последнее значение, отбросив предыдущие.</description>
-          </listheader>
-          <item>
-            <term>Simple</term>
-            <description />25 миллисекунд</item>
-          <item>
-            <term>Slim</term>
-            <description />10 миллисекунд</item>
-          <item>
-            <term>Heavy</term>
-            <description />500 миллисекунд</item>
-        </list>
-      </summary>
-    </Member>
     <Member name="guid">
       <summary>Клиентский идентификатор подписки. В качестве идентификатора требуется уникальная случайная строка. Значение в возвращаемых в рамках подписки сообщениях равно значению поля <paramref name="guid" />, переданному при отправке команды.</summary>
     </Member>
     <Member name="token">
-      <summary>JWT токен для авторизации</summary>
+      <summary>JWT токен для авторизации запросов к API
+</summary>
     </Member>
     <Member name="wsSubTradesGetAndSubscribe">
       <param name="opcode">
@@ -11930,24 +12074,9 @@
         </list>
         <description>От формата объекта также зависит минимальное значение параметра <paramref name="frequency" /> для WebSocket-подписок. </description>
       </param>
-      <param name="frequency">
-        <list type="table">
-          <listheader>
-            <description>Частота (интервал) передачи данных сервером. Сервер вернёт последние данные по запросу за тот временной интервал, который указан в качестве значения параметра. Пример: биржа передаёт данные каждые 2 мс, но, при значении параметра 10 мс, сервер вернёт только последнее значение, отбросив предыдущие.</description>
-          </listheader>
-          <item>
-            <term>Simple</term>
-            <description />25 миллисекунд</item>
-          <item>
-            <term>Slim</term>
-            <description />10 миллисекунд</item>
-          <item>
-            <term>Heavy</term>
-            <description />500 миллисекунд</item>
-        </list>
-      </param>
       <param name="guid">Клиентский идентификатор подписки. В качестве идентификатора требуется уникальная случайная строка. Значение в возвращаемых в рамках подписки сообщениях равно значению поля <paramref name="guid" />, переданному при отправке команды.</param>
-      <param name="token">JWT токен для авторизации</param>
+      <param name="token">JWT токен для авторизации запросов к API
+</param>
     </Member>
   </Members>
   <Members name="wsSubUnsubscribe">
@@ -12003,7 +12132,8 @@
       </summary>
     </Member>
     <Member name="token">
-      <summary>JWT токен для авторизации</summary>
+      <summary>JWT токен для авторизации запросов к API
+</summary>
     </Member>
     <Member name="guid">
       <summary>Уникальный идентификатор подписки, от которой отписываемся.</summary>
@@ -12058,7 +12188,8 @@
             <description />Отмена действующей подписки</item>
         </list>
       </param>
-      <param name="token">JWT токен для авторизации</param>
+      <param name="token">JWT токен для авторизации запросов к API
+</param>
       <param name="guid">Уникальный идентификатор подписки, от которой отписываемся.</param>
     </Member>
   </Members>

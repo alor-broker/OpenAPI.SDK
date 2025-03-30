@@ -36,24 +36,24 @@ namespace Alor.OpenAPI.Interfaces
         /// <include file='../XmlDocs/IOrdersService.xml' path='Docs/Members[@name="IOrdersService"]/Member[@name="CommandapiWarptransTradeV2ClientOrdersActionsMarketPostAsync"]/*' />
         public Task<OrderActionLimitMarket> CommandapiWarptransTradeV2ClientOrdersActionsMarketPostAsync(
             string portfolio, Side side, int quantity, string symbol, Exchange exchange, string? instrumentGroup = null, string? comment = null,
-            TimeInForce timeInForce = TimeInForce.OneDay);
+            TimeInForce timeInForce = TimeInForce.OneDay, bool? allowMargin = null);
 
         /// <include file='../XmlDocs/IOrdersService.xml' path='Docs/Members[@name="IOrdersService"]/Member[@name="CommandapiWarptransTradeV2ClientOrdersActionsLimitPostAsync"]/*' />
         public Task<OrderActionLimitMarket> CommandapiWarptransTradeV2ClientOrdersActionsLimitPostAsync(
             string portfolio, Side side, int quantity, decimal price, string symbol, Exchange exchange,
             string? instrumentGroup = null, string? comment = null, TimeInForce timeInForce = TimeInForce.OneDay,
-            int? icebergFixed = null, decimal? icebergVariance = null);
+            int? icebergFixed = null, decimal? icebergVariance = null, bool? allowMargin = null);
 
         /// <include file='../XmlDocs/IOrdersService.xml' path='Docs/Members[@name="IOrdersService"]/Member[@name="CommandapiWarptransTradeV2ClientOrdersActionsMarketOrderIdPutAsync"]/*' />
         public Task<OrderActionLimitMarket> CommandapiWarptransTradeV2ClientOrdersActionsMarketOrderIdPutAsync(
             int orderId, string portfolio, Side side, int quantity, string symbol, Exchange exchange,
-            string? instrumentGroup = null, string? comment = null, TimeInForce timeInForce = TimeInForce.OneDay);
+            string? instrumentGroup = null, string? comment = null, TimeInForce timeInForce = TimeInForce.OneDay, bool? allowMargin = null);
 
         /// <include file='../XmlDocs/IOrdersService.xml' path='Docs/Members[@name="IOrdersService"]/Member[@name="CommandapiWarptransTradeV2ClientOrdersActionsLimitOrderIdPutAsync"]/*' />
         public Task<OrderActionLimitMarket> CommandapiWarptransTradeV2ClientOrdersActionsLimitOrderIdPutAsync(
             int orderId, string portfolio, Side side, int quantity, decimal price, string symbol, Exchange exchange,
             string? instrumentGroup = null, string? comment = null, TimeInForce timeInForce = TimeInForce.OneDay,
-            int? icebergFixed = null, decimal? icebergVariance = null);
+            int? icebergFixed = null, decimal? icebergVariance = null, bool? allowMargin = null);
 
         /// <include file='../XmlDocs/IOrdersService.xml' path='Docs/Members[@name="IOrdersService"]/Member[@name="CommandapiWarptransTradeV2ClientOrdersEstimatePostAsync"]/*' />
         public Task<ResponseEstimateOrder> CommandapiWarptransTradeV2ClientOrdersEstimatePostAsync(string portfolio,

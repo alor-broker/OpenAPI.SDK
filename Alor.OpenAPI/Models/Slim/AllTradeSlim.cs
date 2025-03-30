@@ -12,6 +12,7 @@ namespace Alor.OpenAPI.Models.Slim
         public AllTradeSlim() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseAllTrade"]/Member[@name="responseAllTrade"]/*' />
+        [JsonConstructor]
         public AllTradeSlim(long? id = default,
             string? symbol = default, string? board = default, int? qty = default,
             decimal? price = default, long? timestamp = default,
@@ -30,39 +31,39 @@ namespace Alor.OpenAPI.Models.Slim
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseAllTrade"]/Member[@name="id"]/*' />
         [DataMember(Name = "id", EmitDefaultValue = false)]
-        public long? Id { get; private set; }
+        public long? Id { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseAllTrade"]/Member[@name="symbol"]/*' />
         [DataMember(Name = "sym", EmitDefaultValue = false)]
-        public string? Symbol { get; private set; }
+        public string? Symbol { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseAllTrade"]/Member[@name="board"]/*' />
         [DataMember(Name = "bd", EmitDefaultValue = false)]
-        public string? Board { get; private set; }
+        public string? Board { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseAllTrade"]/Member[@name="qty"]/*' />
         [DataMember(Name = "q", EmitDefaultValue = false)]
-        public int? Qty { get; set; }
+        public int? Qty { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseAllTrade"]/Member[@name="price"]/*' />
         [DataMember(Name = "px", EmitDefaultValue = false)]
-        public decimal? Price { get; set; }
+        public decimal? Price { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseAllTrade"]/Member[@name="timestamp"]/*' />
         [DataMember(Name = "t", EmitDefaultValue = false)]
-        public long? Timestamp { get; set; }
+        public long? Timestamp { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseAllTrade"]/Member[@name="side"]/*' />
         [DataMember(Name = "s", EmitDefaultValue = false)]
-        public Side Side { get; set; }
+        public Side Side { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseAllTrade"]/Member[@name="oi"]/*' />
         [DataMember(Name = "oi", EmitDefaultValue = false)]
-        public long? Oi { get; set; }
+        public long? Oi { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseAllTrade"]/Member[@name="existing"]/*' />
         [DataMember(Name = "h", EmitDefaultValue = false)]
-        public bool? Existing { get; set; }
+        public bool? Existing { get; init; }
 
         public override string ToString()
         {
@@ -83,13 +84,20 @@ namespace Alor.OpenAPI.Models.Slim
 
         public string ToJson() => Encoding.UTF8.GetString(JsonSerializer.Generic.Utf8.Serialize(this));
 
-        public override int GetHashCode() => Utilities.Utilities.GetHashCodeHelper(
-            [
-                Id?.GetHashCode() ?? 0,
-                Symbol?.GetHashCode() ?? 0,
-                Board?.GetHashCode() ?? 0,
-            ]
-        );
+        public override int GetHashCode()
+        {
+            var hash = new HashCode();
+            hash.Add(Id);
+            hash.Add(Symbol);
+            hash.Add(Board);
+            hash.Add(Qty);
+            hash.Add(Price);
+            hash.Add(Timestamp);
+            hash.Add(Side);
+            hash.Add(Oi);
+            hash.Add(Existing);
+            return hash.ToHashCode();
+        }
 
         private static bool EqualsHelper(AllTradeSlim? first, AllTradeSlim? second) =>
             first?.Id == second?.Id &&
@@ -111,10 +119,7 @@ namespace Alor.OpenAPI.Models.Slim
             if ((object?)other == null)
                 return false;
 
-            if (GetType() != other.GetType())
-                return false;
-
-            return EqualsHelper(this, other);
+            return GetType() == other.GetType() && EqualsHelper(this, other);
         }
 
         public override bool Equals(object? obj) => Equals(obj as AllTradeSlim);

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
 using SpanJson;
@@ -11,10 +12,12 @@ namespace Alor.OpenAPI.Models.Slim
         public FortsriskSlim() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseFortsRisk"]/Member[@name="responseFortsRisk"]/*' />
+        [JsonConstructor]
         public FortsriskSlim(string? portfolio = default, decimal? moneyFree = default,
             decimal? moneyBlocked = default, decimal? fee = default, decimal? moneyOld = default,
             decimal? moneyAmount = default, decimal? moneyPledgeAmount = default, decimal? vmInterCl = default,
-            decimal? vmCurrentPositions = default, bool? isLimitsSet = default)
+            decimal? vmCurrentPositions = default, bool? isLimitsSet = default,
+            decimal? indicativeVarMargin = default, decimal? netOptionValue = default, decimal? posRisk = default)
         {
             Portfolio = portfolio;
             MoneyFree = moneyFree;
@@ -26,47 +29,62 @@ namespace Alor.OpenAPI.Models.Slim
             VmInterCl = vmInterCl;
             VmCurrentPositions = vmCurrentPositions;
             IsLimitsSet = isLimitsSet;
+            IndicativeVarMargin = indicativeVarMargin;
+            NetOptionValue = netOptionValue;
+            PosRisk = posRisk;
         }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseFortsRisk"]/Member[@name="portfolio"]/*' />
         [DataMember(Name = "p", EmitDefaultValue = false)]
-        public string? Portfolio { get; private set; }
+        public string? Portfolio { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseFortsRisk"]/Member[@name="moneyFree"]/*' />
         [DataMember(Name = "f", EmitDefaultValue = false)]
-        public decimal? MoneyFree { get; private set; }
+        public decimal? MoneyFree { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseFortsRisk"]/Member[@name="moneyBlocked"]/*' />
         [DataMember(Name = "b", EmitDefaultValue = false)]
-        public decimal? MoneyBlocked { get; private set; }
+        public decimal? MoneyBlocked { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseFortsRisk"]/Member[@name="fee"]/*' />
         [DataMember(Name = "fee", EmitDefaultValue = false)]
-        public decimal? Fee { get; private set; }
+        public decimal? Fee { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseFortsRisk"]/Member[@name="moneyOld"]/*' />
         [DataMember(Name = "o", EmitDefaultValue = false)]
-        public decimal? MoneyOld { get; private set; }
+        public decimal? MoneyOld { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseFortsRisk"]/Member[@name="moneyAmount"]/*' />
         [DataMember(Name = "a", EmitDefaultValue = false)]
-        public decimal? MoneyAmount { get; private set; }
+        public decimal? MoneyAmount { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseFortsRisk"]/Member[@name="moneyPledgeAmount"]/*' />
         [DataMember(Name = "pa", EmitDefaultValue = false)]
-        public decimal? MoneyPledgeAmount { get; private set; }
+        public decimal? MoneyPledgeAmount { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseFortsRisk"]/Member[@name="vmInterCl"]/*' />
         [DataMember(Name = "mgc", EmitDefaultValue = false)]
-        public decimal? VmInterCl { get; private set; }
+        public decimal? VmInterCl { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseFortsRisk"]/Member[@name="vmCurrentPositions"]/*' />
         [DataMember(Name = "mgp", EmitDefaultValue = false)]
-        public decimal? VmCurrentPositions { get; private set; }
+        public decimal? VmCurrentPositions { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseFortsRisk"]/Member[@name="isLimitsSet"]/*' />
         [DataMember(Name = "lim", EmitDefaultValue = false)]
-        public bool? IsLimitsSet { get; private set; }
+        public bool? IsLimitsSet { get; init; }
+
+        /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseFortsRisk"]/Member[@name="indicativeVarMargin"]/*' />
+        [DataMember(Name = "ivm", EmitDefaultValue = false)]
+        public decimal? IndicativeVarMargin { get; init; }
+
+        /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseFortsRisk"]/Member[@name="netOptionValue"]/*' />
+        [DataMember(Name = "nov", EmitDefaultValue = false)]
+        public decimal? NetOptionValue { get; init; }
+
+        /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseFortsRisk"]/Member[@name="posRisk"]/*' />
+        [DataMember(Name = "pr", EmitDefaultValue = false)]
+        public decimal? PosRisk { get; init; }
 
         public override string ToString()
         {
@@ -82,26 +100,33 @@ namespace Alor.OpenAPI.Models.Slim
             sb.Append("  VmInterCl: ").Append(VmInterCl).Append(Environment.NewLine);
             sb.Append("  VmCurrentPositions: ").Append(VmCurrentPositions).Append(Environment.NewLine);
             sb.Append("  IsLimitsSet: ").Append(IsLimitsSet).Append(Environment.NewLine);
+            sb.Append("  IndicativeVarMargin: ").Append(IndicativeVarMargin).Append(Environment.NewLine);
+            sb.Append("  NetOptionValue: ").Append(NetOptionValue).Append(Environment.NewLine);
+            sb.Append("  PosRisk: ").Append(PosRisk).Append(Environment.NewLine);
             sb.Append('}').Append(Environment.NewLine);
             return sb.ToString();
         }
 
         public string ToJson() => Encoding.UTF8.GetString(JsonSerializer.Generic.Utf8.Serialize(this));
 
-        public override int GetHashCode() => Utilities.Utilities.GetHashCodeHelper(
-            [
-                Portfolio?.GetHashCode() ?? 0,
-                MoneyFree?.GetHashCode() ?? 0,
-                MoneyBlocked?.GetHashCode() ?? 0,
-                Fee?.GetHashCode() ?? 0,
-                MoneyOld?.GetHashCode() ?? 0,
-                MoneyAmount?.GetHashCode() ?? 0,
-                MoneyPledgeAmount?.GetHashCode() ?? 0,
-                VmInterCl?.GetHashCode() ?? 0,
-                VmCurrentPositions?.GetHashCode() ?? 0,
-                IsLimitsSet?.GetHashCode() ?? 0,
-            ]
-        );
+        public override int GetHashCode()
+        {
+            var hash = new HashCode();
+            hash.Add(Portfolio);
+            hash.Add(MoneyFree);
+            hash.Add(MoneyBlocked);
+            hash.Add(Fee);
+            hash.Add(MoneyOld);
+            hash.Add(MoneyAmount);
+            hash.Add(MoneyPledgeAmount);
+            hash.Add(VmInterCl);
+            hash.Add(VmCurrentPositions);
+            hash.Add(IsLimitsSet);
+            hash.Add(IndicativeVarMargin);
+            hash.Add(NetOptionValue);
+            hash.Add(PosRisk);
+            return hash.ToHashCode();
+        }
 
         private static bool EqualsHelper(FortsriskSlim? first, FortsriskSlim? second) =>
             first?.Portfolio == second?.Portfolio &&
@@ -113,7 +138,10 @@ namespace Alor.OpenAPI.Models.Slim
             first?.MoneyPledgeAmount == second?.MoneyPledgeAmount &&
             first?.VmInterCl == second?.VmInterCl &&
             first?.VmCurrentPositions == second?.VmCurrentPositions &&
-            first?.IsLimitsSet == second?.IsLimitsSet;
+            first?.IsLimitsSet == second?.IsLimitsSet &&
+            first?.IndicativeVarMargin == second?.IndicativeVarMargin &&
+            first?.NetOptionValue == second?.NetOptionValue &&
+            first?.PosRisk == second?.PosRisk;
 
         public bool Equals(FortsriskSlim? other)
         {
@@ -123,10 +151,7 @@ namespace Alor.OpenAPI.Models.Slim
             if ((object?)other == null)
                 return false;
 
-            if (GetType() != other.GetType())
-                return false;
-
-            return EqualsHelper(this, other);
+            return GetType() == other.GetType() && EqualsHelper(this, other);
         }
 
         public override bool Equals(object? obj) => Equals(obj as FortsriskSlim);

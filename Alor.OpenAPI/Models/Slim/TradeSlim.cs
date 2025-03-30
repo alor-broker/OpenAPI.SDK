@@ -1,4 +1,5 @@
 ﻿using Alor.OpenAPI.Enums;
+using SpanJson;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
@@ -11,6 +12,7 @@ namespace Alor.OpenAPI.Models.Slim
         public TradeSlim() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseTradeV2"]/Member[@name="responseTradeV2"]/*' />
+        [JsonConstructor]
         public TradeSlim(string? id = default, string? orderno = default,
             string? symbol = default, string? brokerSymbol = default,
             Exchange exchange = default, string? comment = default, DateTime? date = default, string? board = default,
@@ -39,71 +41,71 @@ namespace Alor.OpenAPI.Models.Slim
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseTradeV2"]/Member[@name="id"]/*' />
         [DataMember(Name = "id", EmitDefaultValue = false)]
-        public string? Id { get; private set; }
+        public string? Id { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseTradeV2"]/Member[@name="orderno"]/*' />
         [DataMember(Name = "eid", EmitDefaultValue = false)]
-        public string? Orderno { get; private set; }
+        public string? Orderno { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseTradeV2"]/Member[@name="symbol"]/*' />
         [DataMember(Name = "sym", EmitDefaultValue = false)]
-        public string? Symbol { get; private set; }
+        public string? Symbol { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseTradeV2"]/Member[@name="brokerSymbol"]/*' />
         [DataMember(Name = "tic", EmitDefaultValue = false)]
-        public string? BrokerSymbol { get; set; }
+        public string? BrokerSymbol { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseTradeV2"]/Member[@name="exchange"]/*' />
         [DataMember(Name = "ex", EmitDefaultValue = false)]
-        public Exchange Exchange { get; private set; }
+        public Exchange Exchange { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseTradeV2"]/Member[@name="comment"]/*' />
         [DataMember(Name = "cmt", EmitDefaultValue = false)]
-        public string? Comment { get; set; }
+        public string? Comment { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseTradeV2"]/Member[@name="date"]/*' />
         [DataMember(Name = "d", EmitDefaultValue = false)]
-        public DateTime? Date { get; set; }
+        public DateTime? Date { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseTradeV2"]/Member[@name="board"]/*' />
         [DataMember(Name = "b", EmitDefaultValue = false)]
-        public string? Board { get; set; }
+        public string? Board { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseTradeV2"]/Member[@name="qtyUnits"]/*' />
         [DataMember(Name = "q", EmitDefaultValue = false)]
-        public int? QtyUnits { get; set; }
+        public int? QtyUnits { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseTradeV2"]/Member[@name="qtyBatch"]/*' />
         [DataMember(Name = "qb", EmitDefaultValue = false)]
-        public int? QtyBatch { get; set; }
+        public int? QtyBatch { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseTradeV2"]/Member[@name="price"]/*' />
         [DataMember(Name = "px", EmitDefaultValue = false)]
-        public decimal? Price { get; set; }
+        public decimal? Price { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseTradeV2"]/Member[@name="accruedInt"]/*' />
         [DataMember(Name = "ai", EmitDefaultValue = false)]
-        public decimal? AccruedInt { get; set; }
+        public decimal? AccruedInt { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseTradeV2"]/Member[@name="side"]/*' />
         [DataMember(Name = "s", EmitDefaultValue = false)]
-        public Side Side { get; set; }
+        public Side Side { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseTradeV2"]/Member[@name="existing"]/*' />
         [DataMember(Name = "h", EmitDefaultValue = false)]
-        public bool? Existing { get; set; }
+        public bool? Existing { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseTradeV2"]/Member[@name="commission"]/*' />
         [DataMember(Name = "cms", EmitDefaultValue = false)]
-        public decimal? Commission { get; set; }
+        public decimal? Commission { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseTradeV2"]/Member[@name="rSlim"]/*' />
         [DataMember(Name = "r", EmitDefaultValue = false)]
-        public TradeRepoSpecificFieldsSlim? RepoSpecificFields { get; set; }
+        public TradeRepoSpecificFieldsSlim? RepoSpecificFields { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseTradeV2"]/Member[@name="volume"]/*' />
         [DataMember(Name = "v", EmitDefaultValue = false)]
-        public decimal? Volume { get; set; }
+        public decimal? Volume { get; init; }
 
         public override string ToString()
         {
@@ -130,16 +132,30 @@ namespace Alor.OpenAPI.Models.Slim
             return sb.ToString();
         }
 
-        public string ToJson() => Encoding.UTF8.GetString(SpanJson.JsonSerializer.Generic.Utf8.Serialize(this));
+        public string ToJson() => Encoding.UTF8.GetString(JsonSerializer.Generic.Utf8.Serialize(this));
 
-        public override int GetHashCode() => Utilities.Utilities.GetHashCodeHelper(
-            [
-                Id?.GetHashCode() ?? 0,
-                Orderno?.GetHashCode() ?? 0,
-                Symbol?.GetHashCode() ?? 0,
-                Exchange.GetHashCode(),
-            ]
-        );
+        public override int GetHashCode()
+        {
+            var hash = new HashCode();
+            hash.Add(Id);
+            hash.Add(Orderno);
+            hash.Add(Symbol);
+            hash.Add(BrokerSymbol);
+            hash.Add(Exchange);
+            hash.Add(Comment);
+            hash.Add(Date);
+            hash.Add(Board);
+            hash.Add(QtyUnits);
+            hash.Add(QtyBatch);
+            hash.Add(Price);
+            hash.Add(AccruedInt);
+            hash.Add(Side);
+            hash.Add(Existing);
+            hash.Add(Commission);
+            hash.Add(RepoSpecificFields);
+            hash.Add(Volume);
+            return hash.ToHashCode();
+        }
 
         private static bool EqualsHelper(TradeSlim? first, TradeSlim? second) =>
             first?.Id == second?.Id &&
@@ -168,10 +184,7 @@ namespace Alor.OpenAPI.Models.Slim
             if ((object?)other == null)
                 return false;
 
-            if (GetType() != other.GetType())
-                return false;
-
-            return EqualsHelper(this, other);
+            return GetType() == other.GetType() && EqualsHelper(this, other);
         }
 
         public override bool Equals(object? obj) => Equals(obj as TradeSlim);

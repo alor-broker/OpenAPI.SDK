@@ -151,7 +151,7 @@ namespace Alor.OpenAPI.Tests
 
             // Assert
             loggerMock.Verify(x => x.Error(
-                It.Is<string>(s => s.Contains("Ошибка получения токена"))),
+                It.Is<string>(s => s.Contains("Unable to obtain access token"))),
                 Times.AtLeastOnce()
             );
         }

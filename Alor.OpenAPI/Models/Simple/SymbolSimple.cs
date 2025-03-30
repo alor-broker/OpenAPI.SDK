@@ -12,6 +12,7 @@ namespace Alor.OpenAPI.Models.Simple
         public SymbolSimple() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSymbol"]/Member[@name="responseSymbol"]/*' />
+        [JsonConstructor]
         public SymbolSimple(string? symbol = default, Exchange exchange = default,
             string? description = default, decimal? ask = default, decimal? bid = default,
             int? askVol = default, int? bidVol = default, long? obMsTimestamp = default,
@@ -21,7 +22,7 @@ namespace Alor.OpenAPI.Models.Simple
             decimal? lowPrice = default, decimal? accruedInterest = default,
             decimal? volume = default,
             long? openInterest = default, decimal? openPrice = default,
-            int? yield = default, decimal? lotsize = default, decimal? lotvalue = default,
+            decimal? yield = default, decimal? lotsize = default, decimal? lotvalue = default,
             decimal? facevalue = default, string? type = default,
             int? totalAskVol = default, int? totalBidVol = default)
         {
@@ -55,107 +56,107 @@ namespace Alor.OpenAPI.Models.Simple
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSymbol"]/Member[@name="symbol"]/*' />
         [DataMember(Name = "symbol", EmitDefaultValue = false)]
-        public string? Symbol { get; private set; }
+        public string? Symbol { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSymbol"]/Member[@name="exchange"]/*' />
         [DataMember(Name = "exchange", EmitDefaultValue = false)]
-        public Exchange Exchange { get; private set; }
+        public Exchange Exchange { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSymbol"]/Member[@name="description"]/*' />
         [DataMember(Name = "description", EmitDefaultValue = false)]
-        public string? Description { get; set; }
+        public string? Description { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSymbol"]/Member[@name="ask"]/*' />
         [DataMember(Name = "ask", EmitDefaultValue = false)]
-        public decimal? Ask { get; set; }
+        public decimal? Ask { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSymbol"]/Member[@name="bid"]/*' />
         [DataMember(Name = "bid", EmitDefaultValue = false)]
-        public decimal? Bid { get; set; }
+        public decimal? Bid { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSymbol"]/Member[@name="askVol"]/*' />
         [DataMember(Name = "ask_vol", EmitDefaultValue = false)]
-        public int? AskVol { get; set; }
+        public int? AskVol { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSymbol"]/Member[@name="bidVol"]/*' />
         [DataMember(Name = "bid_vol", EmitDefaultValue = false)]
-        public int? BidVol { get; set; }
+        public int? BidVol { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSymbol"]/Member[@name="obMsTimestamp"]/*' />
         [DataMember(Name = "ob_ms_timestamp", EmitDefaultValue = false)]
-        public long? ObMsTimestamp { get; set; }
+        public long? ObMsTimestamp { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSymbol"]/Member[@name="prevClosePrice"]/*' />
         [DataMember(Name = "prev_close_price", EmitDefaultValue = false)]
-        public decimal? PrevClosePrice { get; set; }
+        public decimal? PrevClosePrice { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSymbol"]/Member[@name="lastPrice"]/*' />
         [DataMember(Name = "last_price", EmitDefaultValue = false)]
-        public decimal? LastPrice { get; set; }
+        public decimal? LastPrice { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSymbol"]/Member[@name="lastPriceTimestamp"]/*' />
         [DataMember(Name = "last_price_timestamp", EmitDefaultValue = false)]
-        public long? LastPriceTimestamp { get; set; }
+        public long? LastPriceTimestamp { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSymbol"]/Member[@name="change"]/*' />
         [DataMember(Name = "change", EmitDefaultValue = false)]
-        public decimal? Change { get; set; }
+        public decimal? Change { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSymbol"]/Member[@name="changePercent"]/*' />
         [DataMember(Name = "change_percent", EmitDefaultValue = false)]
-        public decimal? ChangePercent { get; set; }
+        public decimal? ChangePercent { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSymbol"]/Member[@name="highPrice"]/*' />
         [DataMember(Name = "high_price", EmitDefaultValue = false)]
-        public decimal? HighPrice { get; set; }
+        public decimal? HighPrice { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSymbol"]/Member[@name="lowPrice"]/*' />
         [DataMember(Name = "low_price", EmitDefaultValue = false)]
-        public decimal? LowPrice { get; set; }
+        public decimal? LowPrice { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSymbol"]/Member[@name="accruedInt"]/*' />
         [DataMember(Name = "accruedInt", EmitDefaultValue = false)]
-        public decimal? AccruedInterest { get; set; }
+        public decimal? AccruedInterest { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSymbol"]/Member[@name="volume"]/*' />
         [DataMember(Name = "volume", EmitDefaultValue = false)]
-        public decimal? Volume { get; set; }
+        public decimal? Volume { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSymbol"]/Member[@name="openInterest"]/*' />
         [DataMember(Name = "open_interest", EmitDefaultValue = false)]
-        public long? OpenInterest { get; set; }
+        public long? OpenInterest { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSymbol"]/Member[@name="openPrice"]/*' />
         [DataMember(Name = "open_price", EmitDefaultValue = false)]
-        public decimal? OpenPrice { get; set; }
+        public decimal? OpenPrice { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSymbol"]/Member[@name="yield"]/*' />
         [DataMember(Name = "yield", EmitDefaultValue = false)]
-        public int? Yield { get; set; }
+        public decimal? Yield { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSymbol"]/Member[@name="lotsize"]/*' />
         [DataMember(Name = "lotsize", EmitDefaultValue = false)]
-        public decimal? Lotsize { get; set; }
+        public decimal? Lotsize { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSymbol"]/Member[@name="lotvalue"]/*' />
         [DataMember(Name = "lotvalue", EmitDefaultValue = false)]
-        public decimal? Lotvalue { get; set; }
+        public decimal? Lotvalue { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSymbol"]/Member[@name="facevalue"]/*' />
         [DataMember(Name = "facevalue", EmitDefaultValue = false)]
-        public decimal? Facevalue { get; set; }
+        public decimal? Facevalue { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSymbol"]/Member[@name="type"]/*' />
         [DataMember(Name = "type", EmitDefaultValue = false)]
-        public string? Type { get; set; }
+        public string? Type { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSymbol"]/Member[@name="totalBidVol"]/*' />
         [DataMember(Name = "total_bid_vol", EmitDefaultValue = false)]
-        public int? TotalBidVol { get; set; }
+        public int? TotalBidVol { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSymbol"]/Member[@name="totalAskVol"]/*' />
         [DataMember(Name = "total_ask_vol", EmitDefaultValue = false)]
-        public int? TotalAskVol { get; set; }
+        public int? TotalAskVol { get; init; }
 
         public override string ToString()
         {
@@ -193,12 +194,37 @@ namespace Alor.OpenAPI.Models.Simple
 
         public string ToJson() => Encoding.UTF8.GetString(JsonSerializer.Generic.Utf8.Serialize(this));
 
-        public override int GetHashCode() => Utilities.Utilities.GetHashCodeHelper(
-            [
-                Symbol?.GetHashCode() ?? 0,
-                Exchange.GetHashCode(),
-            ]
-        );
+        public override int GetHashCode()
+        {
+            var hash = new HashCode();
+            hash.Add(Symbol);
+            hash.Add(Exchange);
+            hash.Add(Description);
+            hash.Add(PrevClosePrice);
+            hash.Add(LastPrice);
+            hash.Add(LastPriceTimestamp);
+            hash.Add(HighPrice);
+            hash.Add(LowPrice);
+            hash.Add(AccruedInterest);
+            hash.Add(Volume);
+            hash.Add(OpenInterest);
+            hash.Add(Ask);
+            hash.Add(Bid);
+            hash.Add(AskVol);
+            hash.Add(BidVol);
+            hash.Add(ObMsTimestamp);
+            hash.Add(OpenPrice);
+            hash.Add(Yield);
+            hash.Add(Lotsize);
+            hash.Add(Lotvalue);
+            hash.Add(Facevalue);
+            hash.Add(Type);
+            hash.Add(TotalBidVol);
+            hash.Add(TotalAskVol);
+            hash.Add(Change);
+            hash.Add(ChangePercent);
+            return hash.ToHashCode();
+        }
 
         private static bool EqualsHelper(SymbolSimple? first, SymbolSimple? second) =>
             first?.Symbol == second?.Symbol &&
@@ -228,7 +254,6 @@ namespace Alor.OpenAPI.Models.Simple
             first?.TotalAskVol == second?.TotalAskVol &&
             first?.TotalBidVol == second?.TotalBidVol;
 
-
         public bool Equals(SymbolSimple? other)
         {
             if (this == (object?)other)
@@ -237,10 +262,7 @@ namespace Alor.OpenAPI.Models.Simple
             if ((object?)other == null)
                 return false;
 
-            if (GetType() != other.GetType())
-                return false;
-
-            return EqualsHelper(this, other);
+            return GetType() == other.GetType() && EqualsHelper(this, other);
         }
 
         public override bool Equals(object? obj) => Equals(obj as SymbolSimple);

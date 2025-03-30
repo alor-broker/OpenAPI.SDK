@@ -11,6 +11,7 @@ namespace Alor.OpenAPI.Models.Slim
         public SummarySlim() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSummary"]/Member[@name="responseSummary"]/*' />
+        [JsonConstructor]
         public SummarySlim(decimal? buyingPowerAtMorning = default, decimal? buyingPower = default,
             decimal? profit = default, decimal? profitRate = default,
             decimal? portfolioEvaluation = default, decimal? portfolioLiquidationValue = default,
@@ -31,43 +32,43 @@ namespace Alor.OpenAPI.Models.Slim
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSummary"]/Member[@name="buyingPowerAtMorning"]/*' />
         [DataMember(Name = "bpm", EmitDefaultValue = false)]
-        public decimal? BuyingPowerAtMorning { get; private set; }
+        public decimal? BuyingPowerAtMorning { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSummary"]/Member[@name="buyingPowerAtMorning"]/*' />
         [DataMember(Name = "bp", EmitDefaultValue = false)]
-        public decimal? BuyingPower { get; private set; }
+        public decimal? BuyingPower { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSummary"]/Member[@name="profit"]/*' />
         [DataMember(Name = "p", EmitDefaultValue = false)]
-        public decimal? Profit { get; private set; }
+        public decimal? Profit { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSummary"]/Member[@name="profitRate"]/*' />
         [DataMember(Name = "pr", EmitDefaultValue = false)]
-        public decimal? ProfitRate { get; private set; }
+        public decimal? ProfitRate { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSummary"]/Member[@name="portfolioEvaluation"]/*' />
         [DataMember(Name = "pe", EmitDefaultValue = false)]
-        public decimal? PortfolioEvaluation { get; private set; }
+        public decimal? PortfolioEvaluation { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSummary"]/Member[@name="portfolioLiquidationValue"]/*' />
         [DataMember(Name = "plv", EmitDefaultValue = false)]
-        public decimal? PortfolioLiquidationValue { get; private set; }
+        public decimal? PortfolioLiquidationValue { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSummary"]/Member[@name="initialMargin"]/*' />
         [DataMember(Name = "im", EmitDefaultValue = false)]
-        public decimal? InitialMargin { get; private set; }
+        public decimal? InitialMargin { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSummary"]/Member[@name="riskBeforeForcePositionClosing"]/*' />
         [DataMember(Name = "r", EmitDefaultValue = false)]
-        public decimal? RiskBeforeForcePositionClosing { get; private set; }
+        public decimal? RiskBeforeForcePositionClosing { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSummary"]/Member[@name="commission"]/*' />
         [DataMember(Name = "cms", EmitDefaultValue = false)]
-        public decimal? Commission { get; private set; }
+        public decimal? Commission { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSummary"]/Member[@name="bpv2Slim"]/*' />
         [DataMember(Name = "bpv2", EmitDefaultValue = false)]
-        public ICollection<BuyingPowerByCurrencySlim>? BuyingPowerByCurrency { get; private set; }
+        public ICollection<BuyingPowerByCurrencySlim>? BuyingPowerByCurrency { get; init; }
 
         public override string ToString()
         {
@@ -89,20 +90,21 @@ namespace Alor.OpenAPI.Models.Slim
 
         public string ToJson() => Encoding.UTF8.GetString(JsonSerializer.Generic.Utf8.Serialize(this));
 
-        public override int GetHashCode() => Utilities.Utilities.GetHashCodeHelper(
-            [
-                BuyingPowerAtMorning?.GetHashCode() ?? 0,
-                BuyingPower?.GetHashCode() ?? 0,
-                Profit?.GetHashCode() ?? 0,
-                ProfitRate?.GetHashCode() ?? 0,
-                PortfolioEvaluation?.GetHashCode() ?? 0,
-                PortfolioLiquidationValue?.GetHashCode() ?? 0,
-                InitialMargin?.GetHashCode() ?? 0,
-                RiskBeforeForcePositionClosing?.GetHashCode() ?? 0,
-                Commission?.GetHashCode() ?? 0,
-                BuyingPowerByCurrency?.GetHashCode() ?? 0,
-            ]
-        );
+        public override int GetHashCode()
+        {
+            var hash = new HashCode();
+            hash.Add(BuyingPowerAtMorning);
+            hash.Add(BuyingPower);
+            hash.Add(Profit);
+            hash.Add(ProfitRate);
+            hash.Add(PortfolioEvaluation);
+            hash.Add(PortfolioLiquidationValue);
+            hash.Add(InitialMargin);
+            hash.Add(RiskBeforeForcePositionClosing);
+            hash.Add(Commission);
+            hash.Add(BuyingPowerByCurrency);
+            return hash.ToHashCode();
+        }
 
         private static bool EqualsHelper(SummarySlim? first, SummarySlim? second) =>
             first?.BuyingPowerAtMorning == second?.BuyingPowerAtMorning &&

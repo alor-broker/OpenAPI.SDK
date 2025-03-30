@@ -9,7 +9,9 @@ namespace Alor.OpenAPI.Models.Simple
     public sealed class LiquiditySimple : IEquatable<LiquiditySimple>, IValidatableObject
     {
         public LiquiditySimple() { }
-        public LiquiditySimple(decimal price, int volume)
+
+        [JsonConstructor]
+        public LiquiditySimple(decimal price, long volume)
         {
             Price = price;
             Volume = volume;
@@ -17,11 +19,11 @@ namespace Alor.OpenAPI.Models.Simple
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrderBookBid"]/Member[@name="price"]/*' />
         [DataMember(Name = "price", EmitDefaultValue = false)]
-        public decimal Price { get; private set; }
+        public decimal Price { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrderBookBid"]/Member[@name="volume"]/*' />
         [DataMember(Name = "volume", EmitDefaultValue = false)]
-        public int Volume { get; private set; }
+        public long Volume { get; init; }
 
         public override string ToString()
         {
@@ -35,13 +37,7 @@ namespace Alor.OpenAPI.Models.Simple
 
         public string ToJson() => Encoding.UTF8.GetString(JsonSerializer.Generic.Utf8.Serialize(this));
 
-        public override int GetHashCode() => Utilities.Utilities.GetHashCodeHelper(
-            [
-                Price.GetHashCode(),
-                Volume.GetHashCode(),
-            ]
-        );
-
+        public override int GetHashCode() => HashCode.Combine(Price, Volume);
         private static bool EqualsHelper(LiquiditySimple? first, LiquiditySimple? second) =>
             first?.Price == second?.Price &&
             first?.Volume == second?.Volume;
@@ -54,10 +50,7 @@ namespace Alor.OpenAPI.Models.Simple
             if ((object?)other == null)
                 return false;
 
-            if (GetType() != other.GetType())
-                return false;
-
-            return EqualsHelper(this, other);
+            return GetType() == other.GetType() && EqualsHelper(this, other);
         }
 
         public override bool Equals(object? obj) => Equals(obj as LiquiditySimple);

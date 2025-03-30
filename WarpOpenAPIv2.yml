@@ -162,15 +162,17 @@ paths:
         - url: https://oauth.alor.ru
           description: Боевой контур
       description: |
-        Запрос генерации JWT токена на основе Refresh токена из кабинета разработчика. JWT токен используется для авторизации прочих обращений к API.
+        Запрос на создание JWT токена, использующегося в качестве токена доступа при авторизации запросов к остальным ресурсам API.
+
+        Для создания JWT токена используется создаваемый в кабинете разработчика Refresh токен. При этом:
+        * Передать его серверу можно как в пути (как `Query`), так и в теле запроса (как `Body`);
+        * При одновременном заполнении `Query` и `Body` приоритет отдаётся телу запроса;
+        * Комбинировать `Query` и `Body` в одном запросе нельзя
+      requestBody:
+        $ref: '#/components/requestBodies/RefreshAccessToken'
       parameters:
-        - name: token
-          in: query
-          description: |
-            Refresh token, получаемый в кабинете разработчика
-          required: true
-          schema:
-            type: string
+        - $ref: '#/components/parameters/query_Token_Optional'
+        - $ref: '#/components/parameters/query_AllowedPortfolios_Optional'
       responses:
         '200':
           description: 'Запрос успешно обработан'
@@ -393,11 +395,13 @@ paths:
     get:
       tags:
         - ClientInfo
-      summary: 'Информация о сделках'
+      summary: 'Сделки по портфелю (Все | Текущая сессия)'
       description: |
         **Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок `Authorization` со значением `Bearer <ваш JWT>`.
 
-        Запрос информации о сделках (только за текущую торговую сессию)
+        Запрос возвращает информацию обо всех сделках с участием указанного в `portfolio` портфеля за текущую торговую сессию.
+
+        Временные рамки сессий зависят от выбранного рынка и могут различаться.
       operationId: MdV2ClientsExchangePortfolioTradesGet
       parameters:
         - $ref: '#/components/parameters/path_Exchange_All'
@@ -419,11 +423,13 @@ paths:
     get:
       tags:
         - ClientInfo
-      summary: 'Информация о сделках по выбранному инструменту'
+      summary: 'Сделки по портфелю (Инструмент | Текущая сессия)'
       description: |
         **Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок `Authorization` со значением `Bearer <ваш JWT>`.
 
-        Запрос информации о сделках по выбранному инструменту
+        Запрос возвращает информацию обо всех сделках с участием указанного в `portfolio` портфеля по указанному в `symbol` финансовому инструменту за текущую торговую сессию.
+
+        Временные рамки сессий зависят от выбранного рынка и могут различаться.
       operationId: MdV2ClientsExchangePortfolioSymbolTradesGet
       parameters:
         - $ref: '#/components/parameters/path_Exchange_All'
@@ -521,6 +527,8 @@ paths:
 
         Запрос списка сделок за предыдущие дни (не более 1000 сделок за один
         запрос)
+
+        При использовании единой денежной позиции параметр `orderByTradeDate` должен быть `true` для корректной сортировки результатов. Сделки, относящиеся к разным рынкам, могут иметь разную длину идентификатора, в связи с чем стандартная сортировка по ID может возвращать результаты в некорректной последовательности
       operationId: TradeStats
       parameters:
         - $ref: '#/components/parameters/path_Exchange_All'
@@ -551,6 +559,8 @@ paths:
         **Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок `Authorization` со значением `Bearer <ваш JWT>`.
 
         Запрос списка сделок за предыдущие дни (не более 1000 сделок за один запрос) по одному инструменту. 
+
+        При использовании единой денежной позиции параметр `orderByTradeDate` должен быть `true` для корректной сортировки результатов. Сделки, относящиеся к разным рынкам, могут иметь разную длину идентификатора, в связи с чем стандартная сортировка по ID может возвращать результаты в некорректной последовательности
       operationId: TradeStatsBySymbol
       parameters:
         - $ref: '#/components/parameters/path_Exchange_All'
@@ -575,12 +585,19 @@ paths:
     get:
       tags:
         - ClientInfo
-      summary: 'История сделок v2'
+      summary: 'Сделки по портфелю (Все | Прошлые сессии)'
       description: |
         **Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок `Authorization` со значением `Bearer <ваш JWT>`.
 
-        Запрос списка сделок за предыдущие дни (не более 1000 сделок за один
-        запрос)
+        Запрос возвращает информацию обо всех сделках с участием указанного в `portfolio` портфеля за прошлые торговые сессии.
+        
+        Информация за текущую торговую сессию в ответ не входит — для её получения используйте соответствующий запрос.
+
+        Временные рамки сессий зависят от выбранного рынка и могут различаться.
+        
+        За один запрос можно вернуть не более 1000 записей.
+
+        При использовании единой денежной позиции параметр `orderByTradeDate` должен быть `true` для корректной сортировки результатов. Сделки, относящиеся к разным рынкам, могут иметь разную длину идентификатора, в связи с чем стандартная сортировка по ID может возвращать результаты в некорректной последовательности
       operationId: MdV2StatsExchangePortfolioHistoryTradesGet
       parameters:
         - $ref: '#/components/parameters/path_Exchange_All'
@@ -608,11 +625,19 @@ paths:
     get:
       tags:
         - ClientInfo
-      summary: 'История сделок по выбранному инструменту v2'
+      summary: 'Сделки по портфелю (Инструмент | Прошлые сессии)'
       description: |
         **Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок `Authorization` со значением `Bearer <ваш JWT>`.
 
-        Запрос списка сделок за предыдущие дни (не более 1000 сделок за один запрос) по одному инструменту. 
+        Запрос возвращает информацию обо всех сделках с участием указанного в `portfolio` портфеля по указанному в `symbol` финансовому инструменту за прошлые торговые сессии.
+        
+        Информация за текущую торговую сессию в ответ не входит — для её получения используйте соответствующий запрос.
+
+        Временные рамки сессий зависят от выбранного рынка и могут различаться.
+
+        За один запрос можно вернуть не более 1000 записей.
+
+        При использовании единой денежной позиции параметр `orderByTradeDate` должен быть `true` для корректной сортировки результатов. Сделки, относящиеся к разным рынкам, могут иметь разную длину идентификатора, в связи с чем стандартная сортировка по ID может возвращать результаты в некорректной последовательности
       operationId: MdV2StatsExchangePortfolioHistoryTradesSymbolGet
       parameters:
         - $ref: '#/components/parameters/path_Exchange_All'
@@ -739,12 +764,13 @@ paths:
       tags:
         - Instruments
         #- Warp.API.HTTP.Marketdata
-      summary: 'Информация о всех сделках по ценным бумагам за сегодня'
+      summary: 'Сделки по инструменту (Текущая сессия)'
       description: |
         **Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок `Authorization` со значением `Bearer <ваш JWT>`.
 
-        Запросить данные о всех сделках (лента) по ценным бумагам за сегодняшний
-        день
+        Запрос возвращает обезличенную информацию обо всех сделках с участием указанного в `symbol` инструмента, совершённых всеми участниками торгов за текущую торговую сессию.
+
+        Временные рамки сессий зависят от выбранного рынка и могут различаться.
       operationId: MdV2SecuritiesExchangeSymbolAlltradesGet
       parameters:
         - $ref: '#/components/parameters/path_Exchange_All'
@@ -778,11 +804,15 @@ paths:
       tags:
         - Instruments
         #- Warp.API.HTTP.Marketdata
-      summary: 'Информация о всех сделках по ценным бумагам за выбранный период'
+      summary: 'Сделки по инструменту (Прошлые сессии)'
       description: |
         **Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок `Authorization` со значением `Bearer <ваш JWT>`.
 
-        Запросить данные о сделках (лента) по ценным бумагам за исторический период (за текущий день сделки не отдаются)
+        Запрос возвращает обезличенную информацию обо всех сделках с участием указанного в `symbol` инструмента, совершённых всеми участниками торгов за прошлые торговые сессии.
+        
+        Информация за текущую торговую сессию в ответ не входит — для её получения используйте соответствующий запрос.
+
+        Временные рамки сессий зависят от выбранного рынка и могут различаться.
       operationId: MdV2SecuritiesExchangeSymbolAlltradesHistoryGet
       parameters:
         - $ref: '#/components/parameters/path_Exchange_All'
@@ -903,9 +933,9 @@ paths:
         Получение ставок риска для маржинальной торговли.
       operationId: MdV2RiskRatesGet
       parameters:
-        - $ref: '#/components/parameters/query_Exchange_All_Required'
+        - $ref: '#/components/parameters/query_Exchange_All_Optional'
         - $ref: '#/components/parameters/query_Ticker_Optional'
-        - $ref: '#/components/parameters/query_RiskCategoryId_Optional'
+        - $ref: '#/components/parameters/query_RiskCategoryId_Required'
         - $ref: '#/components/parameters/query_Search_Optional'
         - $ref: '#/components/parameters/query_Limit_Optional'
         - $ref: '#/components/parameters/query_Offset_Optional'
@@ -1224,7 +1254,7 @@ paths:
       description: |
         **Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок `Authorization` со значением `Bearer <ваш JWT>`.
 
-        Запрос изменяет характеристики ранее поданной рыночной заявки с указанным номером
+        Запрос на изменение ранее поданной рыночной заявки. При обработке запроса исходная заявка с указанным номером отменяется, после чего выставляется новая заявка с новым номером и изменёнными параметрами.
       operationId: CommandapiWarptransTradeV2ClientOrdersActionsMarketOrderIdPut
       requestBody:
         $ref: '#/components/requestBodies/OrdersActionsMarketTV'
@@ -1250,7 +1280,9 @@ paths:
       description: |
         **Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок `Authorization` со значением `Bearer <ваш JWT>`.
 
-        Запрос изменяет характеристики ранее поданной лимитной заявки с указанным номером
+        Запрос на изменение ранее поданной лимитной заявки. При обработке запроса исходная заявка с указанным номером отменяется, после чего выставляется новая заявка с новым номером и изменёнными параметрами.
+
+        Из-за ограничения со стороны биржи параметры `side` и `symbol` не учитываются при изменении заявок, относящихся к срочному рынку. Ограничение не распространяется на первичное выставление заявок на срочном рынке и изменение заявок на прочих рынках.
       operationId: CommandapiWarptransTradeV2ClientOrdersActionsLimitOrderIdPut
       requestBody:
         $ref: '#/components/requestBodies/OrdersActionsLimitTV'
@@ -1385,7 +1417,7 @@ paths:
       description: |
         **Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок `Authorization` со значением `Bearer <ваш JWT>`.
 
-        Изменение стоп-заявки
+        Запрос на изменение ранее поданной стоп-заявки. При обработке запроса исходная заявка с указанным номером отменяется, после чего выставляется новая заявка с новым номером и изменёнными параметрами.
       operationId: CommandapiWarptransTradeV2ClientOrdersActionsStopStopOrderIdPut
       requestBody:
         $ref: '#/components/requestBodies/OrdersActionsStopMarketTVWarp'
@@ -1409,7 +1441,7 @@ paths:
       description: |
         **Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок `Authorization` со значением `Bearer <ваш JWT>`.
 
-        Изменение стоп-лимитной заявки
+        Запрос на изменение ранее поданной стоп-лимитной заявки. При обработке запроса исходная заявка с указанным номером отменяется, после чего выставляется новая заявка с новым номером и изменёнными параметрами.
       operationId: CommandapiWarptransTradeV2ClientOrdersActionsStopLimitStopOrderIdPut
       requestBody:
         $ref: '#/components/requestBodies/OrdersActionsStopLimitTVWarp'
@@ -2138,7 +2170,7 @@ paths:
       description: |
         **Web Socket** запрос выполняется по URL `wss://api.alor.ru/cws` (бой) или `wss://apidev.alor.ru/cws` (тест).
         
-        Запрос изменяет характеристики ранее поданной рыночной заявки с указанным номером
+        Запрос на изменение ранее поданной рыночной заявки. При обработке запроса исходная заявка с указанным номером отменяется, после чего выставляется новая заявка с новым номером и изменёнными параметрами.
       operationId: UpdateMarketOrder
       requestBody:
         $ref: "#/components/requestBodies/ws_cmd_UpdateOrder_Market"
@@ -2164,7 +2196,9 @@ paths:
       description: |
         **Web Socket** запрос выполняется по URL `wss://api.alor.ru/cws` (бой) или `wss://apidev.alor.ru/cws` (тест).
         
-        Запрос изменяет характеристики ранее поданной лимитной заявки с указанным номером
+        Запрос на изменение ранее поданной лимитной заявки. При обработке запроса исходная заявка с указанным номером отменяется, после чего выставляется новая заявка с новым номером и изменёнными параметрами.
+
+        Из-за ограничения со стороны биржи параметры `side` и `symbol` не учитываются при изменении заявок, относящихся к срочному рынку. Ограничение не распространяется на первичное выставление заявок на срочном рынке и изменение заявок на прочих рынках.
       operationId: UpdateLimitOrder
       requestBody:
         $ref: "#/components/requestBodies/ws_cmd_UpdateOrder_Limit"
@@ -2189,6 +2223,8 @@ paths:
       summary: 'Изменение стоп-заявки'
       description: |
         **Web Socket** запрос выполняется по URL `wss://api.alor.ru/cws` (бой) или `wss://apidev.alor.ru/cws` (тест).
+
+        Запрос на изменение ранее поданной стоп-заявки. При обработке запроса исходная заявка с указанным номером отменяется, после чего выставляется новая заявка с новым номером и изменёнными параметрами.
       operationId: UpdateStopOrder
       requestBody:
         $ref: "#/components/requestBodies/ws_cmd_UpdateOrder_Stop"
@@ -2213,6 +2249,8 @@ paths:
       summary: 'Изменение стоп-лимитной заявки'
       description: |
         **Web Socket** запрос выполняется по URL `wss://api.alor.ru/cws` (бой) или `wss://apidev.alor.ru/cws` (тест).
+
+        Запрос на изменение ранее поданной стоп-лимитной заявки. При обработке запроса исходная заявка с указанным номером отменяется, после чего выставляется новая заявка с новым номером и изменёнными параметрами.
       operationId: UpdateStopLimitOrder
       requestBody:
         $ref: "#/components/requestBodies/ws_cmd_UpdateOrder_StopLimit"
@@ -2523,6 +2561,18 @@ components:
           Код торгового сервера
       example: TRADE
     # Query parameters
+    query_AllowedPortfolios_Optional:
+      deprecated: false
+      required: false
+      name: allowedPortfolios
+      in: query
+      description: |
+        Список портфелей, на которые распространяется действие Access токена. Значение всегда является массивом вида `["portfolio1", "portfolio2"]`
+      schema:
+        type: string
+        description: |
+          Список портфелей, на которые распространяется действие Access токена. Значение всегда является массивом вида `["portfolio1", "portfolio2"]`
+      example: '["portfolio1", "portfolio2"]'
     query_CfiCode_Optional:
       deprecated: false
       required: false
@@ -2557,12 +2607,26 @@ components:
       required: false
       name: dateFrom
       in: query
-      description: 'Начиная с какой даты отдавать историю сделок'
+      description: |
+        Начало отрезка времени, за которое требуется получить историю сделок.
+
+        Может содержать:
+        * только дату (например, `2021-10-13`)
+        * дату и время в формате UTC (например, `2021-10-13T09:00:00.0000000Z`)
+
+        Если точное время не указано, к значению даты будет автоматически добавляться `00:00:00.0000000Z`.
       schema:
         type: string
         format: date
-        description: 'Начиная с какой даты отдавать историю сделок'
-      example: '2021-10-13'
+        description: |
+          Начало отрезка времени, за которое требуется получить историю сделок.
+
+          Может содержать:
+          * только дату (например, `2021-10-13`)
+          * дату и время в формате UTC (например, `2021-10-13T09:00:00.0000000Z`)
+
+          Если точное время не указано, к значению даты будет автоматически добавляться `00:00:00.0000000Z`.
+      example: '2021-10-13T09:00:00.0000000Z'
     query_DateFromSec_Optional:
       deprecated: false
       required: false
@@ -2877,10 +2941,16 @@ components:
       required: false
       name: orderByTradeDate
       in: query
-      description: 'Флаг сортировки возвращаемых результатов по дате совершения сделки'
+      description: |
+        Флаг сортировки возвращаемых результатов по дате совершения сделки.
+
+        При использовании единой денежной позиции должен быть `true` для корректной сортировки результатов. Сделки, относящиеся к разным рынкам, могут иметь разную длину идентификатора, в связи с чем стандартная сортировка по ID может возвращать результаты в некорректной последовательности
       schema:
         type: boolean
-        description: 'Флаг сортировки возвращаемых результатов по дате совершения сделки'
+        description: |
+          Флаг сортировки возвращаемых результатов по дате совершения сделки.
+
+          При использовании единой денежной позиции должен быть `true` для корректной сортировки результатов. Сделки, относящиеся к разным рынкам, могут иметь разную длину идентификатора, в связи с чем стандартная сортировка по ID может возвращать результаты в некорректной последовательности
       example: false
     query_Portfolio_FOND_Required:
       deprecated: false
@@ -2946,9 +3016,9 @@ components:
         format: int32
         description: 'Верхняя граница объёма сделки в лотах'
       example: 100
-    query_RiskCategoryId_Optional:
+    query_RiskCategoryId_Required:
       deprecated: false
-      required: false
+      required: true
       name: riskCategoryId
       in: query
       description: 'Id вашей (или той которая интересует) категории риска. Можно получить из запроса информации по клиенту или через кабинет клиента'
@@ -3119,6 +3189,15 @@ components:
         format: int64
         description: 'Конечный номер сделки для фильтра результатов'
       example: 7796897280
+    query_Token_Optional:
+      deprecated: false
+      required: false
+      name: token
+      in: query
+      description: 'Refresh token из кабинета разработчика. Используется для создания JWT токена'
+      schema:
+        type: string
+        description: 'Refresh token из кабинета разработчика. Используется для создания JWT токена'
     query_Untraded_Optional:
       deprecated: false
       required: false
@@ -3152,6 +3231,12 @@ components:
   schemas:
     # Reusable components for schemas
     ## Basic arrays used in complex schemas
+    array_AllowedPortfolios:
+      type: array
+      description: |
+        Список портфелей, на которые распространяется действие Access токена. Значение всегда является массивом вида `["portfolio1", "portfolio2"]`
+      items:
+        $ref: '#/components/schemas/field_IdentifierPortfolio_FOND'
     array_Asks_Simple:
       type: array
       description: 'Список асков в биржевом стакане'
@@ -3285,13 +3370,15 @@ components:
       description: 'Разность цены и цены предыдущего закрытия'
     field_ClientType:
       type: string
-      example: HighRisk
+      example: StandardRisk
       description: |
         Тип клиента:
-          * `StandardRisk` — Стандартный уровень риска (КСУР)
-          * `HighRisk` — Высокий уровень риска (КПУР)
-          * `Special` —  Особый уровень риска (КОУР)
+          * `LowRisk` — Клиент с начальным уровнем риска (КНУР)
+          * `StandardRisk` — Клиент со стандартным уровнем риска (КСУР)
+          * `HighRisk` — Клиент с повышенным уровнем риска (КПУР)
+          * `Special` —  Клиент с особым уровнем риска (КОУР)
       enum:
+        - LowRisk
         - StandardRisk
         - HighRisk
         - Special
@@ -3461,6 +3548,17 @@ components:
         - Simple
         - Slim
         - Heavy
+    field_Frequency:
+      type: integer
+      format: int32
+      description: |
+        Частота (интервал) передачи данных сервером. Сервер вернёт последние данные по запросу за тот временной интервал, который указан в качестве значения параметра. Пример: биржа передаёт данные каждые 2 мс, но, при значении параметра 10 мс, сервер вернёт только последнее значение, отбросив предыдущие.
+        
+        Минимальное значение параметра зависит от выбранного формата возвращаемого JSON-объекта:
+        * `Simple` — 25 миллисекунд
+        * `Slim` — 10 миллисекунд
+        * `Heavy` — 500 миллисекунд
+      default: 175
     field_FuturesNameFull:
       type: string
       example: Фьючерсный контракт SBRF-12.23
@@ -3591,6 +3689,12 @@ components:
       format: decimal
       example: 15752.115
       description: 'Скорректированная маржа'
+    field_MarginIndicative:
+      type: number
+      format: decimal
+      example: 1720.32124
+      description: |
+        Индикативная вариационная маржа с учетом текущего индикативного курса валют, руб (рассчитывается аналогично текущей индикативной ВМ, учитывает в т.ч. вар.маржу по закрытым позициям)
     field_MarginInitial:
       type: number
       format: decimal
@@ -3679,6 +3783,12 @@ components:
       format: decimal
       example: 45536.11
       description: 'Количество использованных'
+    field_NetOptionValue:
+      type: number
+      format: decimal
+      example: 0
+      description: |
+        Сумма произведений теоретических цен опционов, рассчитанных по итогам текущей клиринговой сессии, и объемов соответствующих позиций с учетом знака. Опционы на акции будут использованы в качестве обеспечения по портфелю. Величина NetOptionValue влияет на объём свободных средств и дисконтируется за счет требований к ГО
     field_OpenInterest:
       type: integer
       format: int64
@@ -3721,12 +3831,12 @@ components:
       type: number
       format: decimal
       example: 646270.9
-      description: 'Общая стоимость портфеля'
+      description: 'Оценка ликвидного портфеля'
     field_PortfolioLiquidationValue:
       type: number
       format: decimal
       example: 646270.9
-      description: 'Стоимость ликвидного портфеля'
+      description: 'Оценка портфеля'
     field_PreviousClosePrice:
       type: number
       format: decimal
@@ -3992,7 +4102,7 @@ components:
       type: number
       format: decimal
       example: 195613886
-      description: ''
+      description: 'Рейтинг инструмента, основанный на объёме торгов за предыдущий день. Используется для сортировки инструментов'
     field_RatingMargin:
       type: number
       format: decimal
@@ -4050,6 +4160,24 @@ components:
       format: decimal
       example: 638394.8425
       description: 'НПР2'
+    field_RiskPosition:
+      type: number
+      format: decimal
+      example: 0
+      description: |
+        Текущий оперативный риск. Дополнительная величина, несущая прогнозную функцию и отвечающая на вопрос «какое будет ГО, если клиринг прямо сейчас». Не используется при расчёте НПР
+    field_RiskStatus:
+      type: string
+      example: Ok
+      description: |
+        Статус клиента согласно его уровня риска, рассчитанного на основе показателей НПР1 и НПР2. Определяет возможность ведения маржинальной торговли:
+        * `Ok` — уровень риска в норме. Доступны любые операции с маржинальными позициями, включая открытие новых (НПР1≥0, НПР2≥0);
+        * `Demand` — уровень, требующий повышенного внимания к рискам. Доступны операции по уменьшению и закрытию существующих маржинальных позиций, но запрещено открытие новых (НПР1<0, НПР2≥0);
+        * `ToClose` — критический уровень риска, при котором открытые позиции могут быть принудительно закрыты (НПР1<0, НПР2<0).
+      enum:
+        - Ok
+        - Demand
+        - ToClose
     field_RoundTo:
       type: integer
       format: int32
@@ -4179,10 +4307,16 @@ components:
       format: date-time
       example: '2020-06-16T23:59:59.9990000Z'
       description: 'Дата и время изменения статуса заявки (UTC)'
-    field_Token:
+    field_TokenAccess:
       type: string
       example: eyJhbGciOiJ...
-      description: JWT токен для авторизации
+      description: |
+        JWT токен для авторизации запросов к API
+    field_TokenRefresh:
+      type: string
+      example: c29...635
+      description: |
+        Refresh token из кабинета разработчика. Используется для создания JWT токена
     field_TotalEntries:
       type: integer
       format: int32
@@ -4323,8 +4457,8 @@ components:
         - TradesGetAndSubscribeV2
         - unsubscribe
     field_Yield_Common:
-      type: integer
-      format: int32
+      type: number
+      format: decimal
       nullable: true
       example: null
       description: 'Доходность, рассчитанная по цене сделки'
@@ -4343,6 +4477,21 @@ components:
         Не активная заявка отображается в системе, но не участвует в процессе выставления на биржу, пока не станет активной.
         Данный флаг необходим при создании группы заявок с типом 'TriggerBracketOrders'
       example: true
+    flag_AllowMargin:
+      type: boolean
+      default: false
+      example: false
+      description: |
+        Флаг, подтверждающий согласие клиента с начальным уровнем риска (КНУР) на выставление заявки с потенциальной непокрытой позицией.
+
+        Должен быть `true`:
+        * При любом выставлении или изменении биржевых заявок на срочном рынке, в том числе для закрытия ранее открытых позиций
+        * При выставлении или изменении биржевых заявок на фондовом и валютном рынках, если в результате откроется новая непокрытая позиция или увеличится минус по существующей
+        * При выставлении или изменении условных заявок независимо от выбранного рынка
+
+        Может быть `false` или не указан в запросе, если:
+        * Клиенту присвоен другой уровень риска
+        * Подключена услуга 100% обеспечения
     flag_CheckDuplicates:
       type: boolean
       example: true
@@ -4773,6 +4922,12 @@ components:
           $ref: '#/components/schemas/field_MarginAgregatedByPositions'
         varMargin:
           $ref: '#/components/schemas/field_MarginTotal'
+        indicativeVarMargin:
+          $ref: '#/components/schemas/field_MarginIndicative'
+        netOptionValue:
+          $ref: '#/components/schemas/field_NetOptionValue'
+        posRisk:
+          $ref: '#/components/schemas/field_RiskPosition'
         isLimitsSet:
           $ref: '#/components/schemas/flag_Limits'
     response_FortsRisk_Simple:
@@ -4801,6 +4956,12 @@ components:
           $ref: '#/components/schemas/field_MarginAgregatedByPositions'
         varMargin:
           $ref: '#/components/schemas/field_MarginTotal'
+        indicativeVarMargin:
+          $ref: '#/components/schemas/field_MarginIndicative'
+        netOptionValue:
+          $ref: '#/components/schemas/field_NetOptionValue'
+        posRisk:
+          $ref: '#/components/schemas/field_RiskPosition'
         isLimitsSet:
           $ref: '#/components/schemas/flag_Limits'
     response_FortsRisk_Slim:
@@ -4825,6 +4986,12 @@ components:
           $ref: '#/components/schemas/field_MarginCleared'
         mgp:
           $ref: '#/components/schemas/field_MarginAgregatedByPositions'
+        ivm:
+          $ref: '#/components/schemas/field_MarginIndicative'
+        nov:
+          $ref: '#/components/schemas/field_NetOptionValue'
+        pr:
+          $ref: '#/components/schemas/field_RiskPosition'
         lim:
           $ref: '#/components/schemas/flag_Limits'
     response_Futures_Heavy:
@@ -5800,6 +5967,8 @@ components:
           $ref: '#/components/schemas/flag_ForbiddenPositions'
         hasNegativeQuantity:
           $ref: '#/components/schemas/flag_NegativeQuantity'
+        riskStatus:
+          $ref: '#/components/schemas/field_RiskStatus'
     response_Risk_Simple:
       type: object
       description: 'Сведения о рисках в формате `Simple`'
@@ -5830,6 +5999,8 @@ components:
           $ref: '#/components/schemas/flag_ForbiddenPositions'
         hasNegativeQuantity:
           $ref: '#/components/schemas/flag_NegativeQuantity'
+        riskStatus:
+          $ref: '#/components/schemas/field_RiskStatus'
     response_Risk_Slim:
       type: object
       description: 'Сведения о рисках в формате `Slim`'
@@ -5860,6 +6031,8 @@ components:
           $ref: '#/components/schemas/flag_ForbiddenPositions'
         nq:
           $ref: '#/components/schemas/flag_NegativeQuantity'
+        rst:
+          $ref: '#/components/schemas/field_RiskStatus'
     response_RiskRate:
       type: object
       description: 'Ставки риска для одного инструмента'
@@ -5897,6 +6070,7 @@ components:
           description: Чаще всего будет null. Поле показывает к какому множеству инструментов принадлежит данный инструмент
         isDirect:
           type: boolean
+          nullable: true
           example: false
           description: Является ли зависимость инструмента к базовому активу прямой или обратной
         isin:
@@ -7076,21 +7250,10 @@ components:
           $ref: '#/components/schemas/field_ExchangeCode'
         format:
           $ref: '#/components/schemas/field_Format'
-        frequency:
-          type: integer
-          format: int32
-          description: |
-            Частота (интервал) передачи данных сервером. Сервер вернёт последние данные по запросу за тот временной интервал, который указан в качестве значения параметра. Пример: биржа передаёт данные каждые 2 мс, но, при значении параметра 10 мс, сервер вернёт только последнее значение, отбросив предыдущие.
-            
-            Минимальное значение параметра зависит от выбранного формата возвращаемого JSON-объекта:
-            * `Simple` — 25 миллисекунд
-            * `Slim` — 10 миллисекунд
-            * `Heavy` — 500 миллисекунд
-          default: 175
         guid:
           $ref: '#/components/schemas/field_GuidWs'
         token:
-          $ref: '#/components/schemas/field_Token'
+          $ref: '#/components/schemas/field_TokenAccess'
     ### Subscription response bodies
     ws_response_sub_AllTradesGetAndSubscribe_Heavy:
       type: object
@@ -7443,6 +7606,8 @@ components:
                 $ref: '#/components/schemas/object_UserPortfolioOnly'
               timeInForce:
                 $ref: '#/components/schemas/field_ExecutionPeriod'
+              AllowMargin:
+                $ref: '#/components/schemas/flag_AllowMargin'
               icebergFixed:
                 $ref: '#/components/schemas/field_QuantityFixed'
               icebergVariance:
@@ -7468,6 +7633,8 @@ components:
                 $ref: '#/components/schemas/object_UserPortfolioOnly'
               timeInForce:
                 $ref: '#/components/schemas/field_ExecutionPeriod'
+              AllowMargin:
+                $ref: '#/components/schemas/flag_AllowMargin'
     OrdersActionsStop:
       description: 'Тело заявки'
       required: true
@@ -7549,6 +7716,8 @@ components:
                 $ref: '#/components/schemas/object_UserPortfolioOnly'
               timeInForce:
                 $ref: '#/components/schemas/field_ExecutionPeriod'
+              AllowMargin:
+                $ref: '#/components/schemas/flag_AllowMargin'
               icebergFixed:
                 $ref: '#/components/schemas/field_QuantityFixed'
               icebergVariance:
@@ -7580,10 +7749,27 @@ components:
                 $ref: '#/components/schemas/object_InstrumentFieldsSymbolExchangeGroup'
               user:
                 $ref: '#/components/schemas/object_UserPortfolioOnly'
+              AllowMargin:
+                $ref: '#/components/schemas/flag_AllowMargin'
               protectingSeconds:
                 $ref: '#/components/schemas/field_ProtectingSeconds'
               activate:
                 $ref: '#/components/schemas/flag_ActivateOrder'
+    RefreshAccessToken:
+      description: 'Тело запроса на обновление JWT токена'
+      required: false
+      content:
+        application/json:
+          schema:
+            type: object
+            description: 'Тело запроса на обновление JWT токена'
+            required:
+              - token
+            properties:
+              token:
+                $ref: '#/components/schemas/field_TokenRefresh'
+              allowedPortfolios:
+                $ref: '#/components/schemas/array_AllowedPortfolios'
     ## WebSocket
     ### CommandWS request bodies
     ws_cmd_Authorize:
@@ -7601,7 +7787,7 @@ components:
               guid:
                 $ref: '#/components/schemas/field_GuidCws'
               token:
-                $ref: '#/components/schemas/field_Token'
+                $ref: '#/components/schemas/field_TokenAccess'
     ws_cmd_CreateOrder_Limit:
       required: true
       content:
@@ -7632,6 +7818,8 @@ components:
                 $ref: '#/components/schemas/object_UserPortfolioOnly'
               timeInForce:
                 $ref: '#/components/schemas/field_ExecutionPeriod'
+              AllowMargin:
+                $ref: '#/components/schemas/flag_AllowMargin'
               icebergFixed:
                 $ref: '#/components/schemas/field_QuantityFixed'
               icebergVariance:
@@ -7666,6 +7854,8 @@ components:
                 $ref: '#/components/schemas/object_UserPortfolioOnly'
               timeInForce:
                 $ref: '#/components/schemas/field_ExecutionPeriod'
+              AllowMargin:
+                $ref: '#/components/schemas/flag_AllowMargin'
               checkDuplicates:
                 $ref: '#/components/schemas/flag_CheckDuplicates'
     ws_cmd_CreateOrder_Stop:
@@ -7698,6 +7888,8 @@ components:
                 $ref: '#/components/schemas/field_Board'
               user:
                 $ref: '#/components/schemas/object_UserPortfolioOnly'
+              AllowMargin:
+                $ref: '#/components/schemas/flag_AllowMargin'
               checkDuplicates:
                 $ref: '#/components/schemas/flag_CheckDuplicates'
               protectingSeconds:
@@ -7738,6 +7930,8 @@ components:
                 $ref: '#/components/schemas/object_UserPortfolioOnly'
               timeInForce:
                 $ref: '#/components/schemas/field_ExecutionPeriod'
+              AllowMargin:
+                $ref: '#/components/schemas/flag_AllowMargin'
               icebergFixed:
                 $ref: '#/components/schemas/field_QuantityFixed'
               icebergVariance:
@@ -7868,6 +8062,8 @@ components:
                 $ref: '#/components/schemas/object_UserPortfolioOnly'
               timeInForce:
                 $ref: '#/components/schemas/field_ExecutionPeriod'
+              AllowMargin:
+                $ref: '#/components/schemas/flag_AllowMargin'
               icebergFixed:
                 $ref: '#/components/schemas/field_QuantityFixed'
               icebergVariance:
@@ -7904,6 +8100,8 @@ components:
                 $ref: '#/components/schemas/object_UserPortfolioOnly'
               timeInForce:
                 $ref: '#/components/schemas/field_ExecutionPeriod'
+              AllowMargin:
+                $ref: '#/components/schemas/flag_AllowMargin'
               checkDuplicates:
                 $ref: '#/components/schemas/flag_CheckDuplicates'
     ws_cmd_UpdateOrder_Stop:
@@ -7938,6 +8136,8 @@ components:
                 $ref: '#/components/schemas/field_Board'
               user:
                 $ref: '#/components/schemas/object_UserPortfolioOnly'
+              AllowMargin:
+                $ref: '#/components/schemas/flag_AllowMargin'
               checkDuplicates:
                 $ref: '#/components/schemas/flag_CheckDuplicates'
               protectingSeconds:
@@ -7980,6 +8180,8 @@ components:
                 $ref: '#/components/schemas/object_UserPortfolioOnly'
               timeInForce:
                 $ref: '#/components/schemas/field_ExecutionPeriod'
+              AllowMargin:
+                $ref: '#/components/schemas/flag_AllowMargin'
               icebergFixed:
                 $ref: '#/components/schemas/field_QuantityFixed'
               icebergVariance:
@@ -8004,9 +8206,7 @@ components:
                       - $ref: '#/components/schemas/field_WSOperationCodeSubscription'
                       - example: AllTradesGetAndSubscribe
                   token:
-                    description: JWT токен для авторизации
-                    type: string
-                    example: eyJhbGciOiJ...
+                    $ref: '#/components/schemas/field_TokenAccess'
                   depth:
                     description: |
                       Если указать, то перед актуальными данными придут данные о последних N сделках.
@@ -8056,6 +8256,8 @@ components:
                     $ref: '#/components/schemas/flag_SkipHistory'
                   splitAdjust:
                     $ref: '#/components/schemas/flag_SplitAdjust'
+                  frequency:
+                    $ref: '#/components/schemas/field_Frequency'
               - $ref: '#/components/schemas/ws_request_sub_BaseObject'
     ws_sub_InstrumentsGetAndSubscribeV2:
       required: true
@@ -8089,6 +8291,8 @@ components:
                     $ref: '#/components/schemas/field_Ticker'
                   depth:
                     $ref: '#/components/schemas/field_Depth'
+                  frequency:
+                    $ref: '#/components/schemas/field_Frequency'
               - $ref: '#/components/schemas/ws_request_sub_BaseObject'
     ws_sub_OrdersGetAndSubscribe:
       required: true
@@ -8144,6 +8348,8 @@ components:
                     example: QuotesSubscribe
                   code:
                     $ref: '#/components/schemas/field_Ticker'
+                  frequency:
+                    $ref: '#/components/schemas/field_Frequency'
               - $ref: '#/components/schemas/ws_request_sub_BaseObject'
     ws_sub_RisksGetAndSubscribe:
       required: true
@@ -8262,7 +8468,7 @@ components:
                   - $ref: '#/components/schemas/field_WSOperationCodeSubscription'
                   - example: unsubscribe
               token:
-                $ref: '#/components/schemas/field_Token'
+                $ref: '#/components/schemas/field_TokenAccess'
               guid:
                 description: Уникальный идентификатор подписки, от которой отписываемся.
                 type: string
@@ -9268,6 +9474,9 @@ components:
         vmInterCl: 651717
         vmCurrentPositions: 199313
         varMargin: 552061
+        indicativeVarMargin: 1720.32124
+        netOptionValue: 0
+        posRisk: 0
         isLimitsSet: false
     FortsRisk_Simple:
       summary: Пример ответа в формате Simple
@@ -9283,6 +9492,9 @@ components:
         vmInterCl: 651717
         vmCurrentPositions: 199313
         varMargin: 552061
+        indicativeVarMargin: 1720.32124
+        netOptionValue: 0
+        posRisk: 0
         isLimitsSet: false
     FortsRisk_Slim:
       summary: Пример ответа в формате Slim
@@ -9296,6 +9508,9 @@ components:
         pa: 552061
         mgc: 651717
         mgp: 199313
+        ivm: 1720.32124
+        nov: 0
+        pr: 0
         lim: false
     Futures_Heavy:
       summary: Пример ответа в формате Heavy
@@ -9864,6 +10079,7 @@ components:
         clientType: StandardRisk
         hasForbiddenPositions: false
         hasNegativeQuantity: false
+        riskStatus: Ok
     Risk_Simple:
       summary: Пример ответа в формате Simple
       value:
@@ -9880,6 +10096,7 @@ components:
         clientType: StandardRisk
         hasForbiddenPositions: false
         hasNegativeQuantity: false
+        riskStatus: Ok
     Risk_Slim:
       summary: Пример ответа в формате Slim
       value:
@@ -9896,6 +10113,7 @@ components:
         ct: StandardRisk
         fpos: false
         nq: false
+        rst: Ok
     RiskRates:
       summary: Пример ответа
       value:
@@ -11218,6 +11436,7 @@ components:
           clientType: StandardRisk
           hasForbiddenPositions: false
           hasNegativeQuantity: false
+          riskStatus: Ok
         guid: c328fcf1-e495-408a-a0ed-e20f95d6b813
     ws_RisksGetAndSubscribe_Simple:
       summary: Пример ответа в формате Simple
@@ -11236,6 +11455,7 @@ components:
           clientType: StandardRisk
           hasForbiddenPositions: false
           hasNegativeQuantity: false
+          riskStatus: Ok
         guid: c328fcf1-e495-408a-a0ed-e20f95d6b813
     ws_RisksGetAndSubscribe_Slim:
       summary: Пример ответа в формате Slim
@@ -11254,6 +11474,7 @@ components:
           ct: StandardRisk
           fpos: false
           nq: false
+          rst: Ok
         guid: c328fcf1-e495-408a-a0ed-e20f95d6b813
     ws_SpectraRisksGetAndSubscribe_Heavy:
       summary: Пример ответа в формате Heavy
@@ -11269,6 +11490,9 @@ components:
           vmInterCl: 651717
           vmCurrentPositions: 199313
           varMargin: 552061
+          indicativeVarMargin: 1720.32124
+          netOptionValue: 0
+          posRisk: 0
           isLimitsSet: false
         guid: c328fcf1-e495-408a-a0ed-e20f95d6b813
     ws_SpectraRisksGetAndSubscribe_Simple:
@@ -11286,6 +11510,9 @@ components:
           vmInterCl: 651717
           vmCurrentPositions: 199313
           varMargin: 552061
+          indicativeVarMargin: 1720.32124
+          netOptionValue: 0
+          posRisk: 0
           isLimitsSet: false
         guid: c328fcf1-e495-408a-a0ed-e20f95d6b813
     ws_SpectraRisksGetAndSubscribe_Slim:
@@ -11301,6 +11528,9 @@ components:
           pa: 552061
           mgc: 651717
           mgp: 199313
+          ivm: 1720.32124
+          nov: 0
+          pr: 0
           lim: false
         guid: c328fcf1-e495-408a-a0ed-e20f95d6b813
     ws_StopOrdersGetAndSubscribe_Heavy:

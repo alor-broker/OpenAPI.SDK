@@ -44,31 +44,33 @@ namespace Alor.OpenAPI.Services
 
         public Task<OrderActionLimitMarket> CommandapiWarptransTradeV2ClientOrdersActionsStopPostAsync(string portfolio, Side side,
             Condition condition, decimal triggerPrice, DateTime stopEndUtcTime, int quantity,
-            string symbol, Exchange exchange, string? instrumentGroup = null, int? protectingSeconds = null, bool? activate = null) =>
+            string symbol, Exchange exchange, string? instrumentGroup = null, int? protectingSeconds = null, bool? activate = null, bool? allowMargin = null) =>
             CommandapiWarptransTradeV2ClientOrdersActionsStopPostAsync(side, condition, triggerPrice,
-                stopEndUtcTime, quantity, symbol, exchange, portfolio, instrumentGroup, protectingSeconds, activate, _cancellationTokenSource.Token);
+                stopEndUtcTime, quantity, symbol, exchange, portfolio, instrumentGroup, protectingSeconds, activate, allowMargin, _cancellationTokenSource.Token);
 
         public Task<OrderActionLimitMarket> CommandapiWarptransTradeV2ClientOrdersActionsStopLimitPostAsync(string portfolio, Side side,
             Condition condition, decimal triggerPrice, DateTime stopEndUtcTime, int quantity, decimal price,
             string symbol, Exchange exchange, string? instrumentGroup = null,
-            TimeInForce timeInForce = TimeInForce.OneDay, int? icebergFixed = null, decimal? icebergVariance = null, int? protectingSeconds = null, bool? activate = null) =>
+            TimeInForce timeInForce = TimeInForce.OneDay, int? icebergFixed = null, decimal? icebergVariance = null,
+            int? protectingSeconds = null, bool? activate = null, bool? allowMargin = null) =>
             CommandapiWarptransTradeV2ClientOrdersActionsStopLimitPostAsync(side, condition, triggerPrice,
                 stopEndUtcTime, quantity, price, symbol, exchange, portfolio, instrumentGroup, timeInForce,
-                icebergFixed, icebergVariance, protectingSeconds, activate, _cancellationTokenSource.Token);
+                icebergFixed, icebergVariance, protectingSeconds, activate, allowMargin, _cancellationTokenSource.Token);
 
         public Task<OrderActionLimitMarket> CommandapiWarptransTradeV2ClientOrdersActionsStopStopOrderIdPutAsync(int stopOrderId, string portfolio, Side side,
             Condition condition, decimal triggerPrice, DateTime stopEndUtcTime, int quantity,
-            string symbol, Exchange exchange, string? instrumentGroup = null, int? protectingSeconds = null, bool? activate = null) =>
+            string symbol, Exchange exchange, string? instrumentGroup = null, int? protectingSeconds = null, bool? activate = null, bool? allowMargin = null) =>
             CommandapiWarptransTradeV2ClientOrdersActionsStopStopOrderIdPutAsync(stopOrderId, side, condition, triggerPrice,
-                stopEndUtcTime, quantity, symbol, exchange, portfolio, instrumentGroup, protectingSeconds, activate, _cancellationTokenSource.Token);
+                stopEndUtcTime, quantity, symbol, exchange, portfolio, instrumentGroup, protectingSeconds, activate, allowMargin, _cancellationTokenSource.Token);
 
         public Task<OrderActionLimitMarket> CommandapiWarptransTradeV2ClientOrdersActionsStopLimitStopOrderIdPutAsync(int stopOrderId, string portfolio, Side side,
             Condition condition, decimal triggerPrice, DateTime stopEndUtcTime, int quantity, decimal price,
             string symbol, Exchange exchange, string? instrumentGroup = null,
-            TimeInForce timeInForce = TimeInForce.OneDay, int? icebergFixed = null, decimal? icebergVariance = null, int? protectingSeconds = null, bool? activate = null) =>
+            TimeInForce timeInForce = TimeInForce.OneDay, int? icebergFixed = null, decimal? icebergVariance = null,
+            int? protectingSeconds = null, bool? activate = null, bool? allowMargin = null) =>
             CommandapiWarptransTradeV2ClientOrdersActionsStopLimitStopOrderIdPutAsync(stopOrderId, side, condition, triggerPrice,
                 stopEndUtcTime, quantity, price, symbol, exchange, portfolio, instrumentGroup, timeInForce,
-                icebergFixed, icebergVariance, protectingSeconds, activate, _cancellationTokenSource.Token);
+                icebergFixed, icebergVariance, protectingSeconds, activate, allowMargin, _cancellationTokenSource.Token);
         #endregion
 
         #region StopOrders Methods
@@ -103,7 +105,7 @@ namespace Alor.OpenAPI.Services
         private Task<OrderActionLimitMarket> CommandapiWarptransTradeV2ClientOrdersActionsStopPostAsync(
             Side side, Condition condition, decimal triggerPrice, DateTime stopEndUtcTime, int quantity,
             string? symbol, Exchange exchange, string? portfolio, string? instrumentGroup, int? protectingSeconds,
-            bool? activate, CancellationToken cancellationToken)
+            bool? activate, bool? allowMargin, CancellationToken cancellationToken)
         {
             if (string.IsNullOrEmpty(symbol))
                 throw new ArgumentNullException(nameof(symbol));
@@ -113,7 +115,7 @@ namespace Alor.OpenAPI.Services
             var order = new RequestOrdersActionsStopMarketTvWarp(side, condition, triggerPrice,
                 stopEndUtcTime.GetUnixTimestampSecondsFromDateTime(), quantity,
                 new Instrument(symbol, exchange, instrumentGroup),
-                new User(portfolio), protectingSeconds, activate);
+                new User(portfolio), protectingSeconds, activate, allowMargin);
             var body = order.ToJson();
 
             var uriBuilder = new UriBuilder(_baseUrl)
@@ -127,8 +129,9 @@ namespace Alor.OpenAPI.Services
         private Task<OrderActionLimitMarket> CommandapiWarptransTradeV2ClientOrdersActionsStopLimitPostAsync(
             Side side, Condition condition, decimal triggerPrice, DateTime stopEndUtcTime, int quantity,
             decimal price, string? symbol, Exchange exchange, string? portfolio, string? instrumentGroup,
-            TimeInForce timeInForce, int? icebergFixed, decimal? icebergVariance, int? protectingSeconds, bool? activate,
-            CancellationToken cancellationToken)
+            TimeInForce timeInForce, int? icebergFixed, decimal? icebergVariance, int? protectingSeconds,
+            bool? activate,
+            bool? allowMargin, CancellationToken cancellationToken)
         {
             if (string.IsNullOrEmpty(symbol))
                 throw new ArgumentNullException(nameof(symbol));
@@ -138,21 +141,24 @@ namespace Alor.OpenAPI.Services
             var order = new RequestOrdersActionsStopLimitTvWarp(side, condition, triggerPrice,
                 stopEndUtcTime.GetUnixTimestampSecondsFromDateTime(), price, quantity,
                 new Instrument(symbol, exchange, instrumentGroup),
-                new User(portfolio), timeInForce, icebergFixed, icebergVariance, protectingSeconds, activate);
+                new User(portfolio), timeInForce, icebergFixed, icebergVariance, protectingSeconds, activate,
+                allowMargin);
             var body = order.ToJson();
 
             var uriBuilder = new UriBuilder(_baseUrl)
-                             {
-                                 Path = $"{_baseUrl.AbsolutePath.TrimEnd('/')}/commandapi/warptrans/TRADE/v2/client/orders/actions/stopLimit",
-                             };
+            {
+                Path =
+                    $"{_baseUrl.AbsolutePath.TrimEnd('/')}/commandapi/warptrans/TRADE/v2/client/orders/actions/stopLimit",
+            };
 
-            return _apiHttpClient.ProcessRequest<OrderActionLimitMarket>(HttpMethod.Post, uriBuilder.Uri, cancellationToken, body: body, needXReqid: true, needAuthorization: true);
+            return _apiHttpClient.ProcessRequest<OrderActionLimitMarket>(HttpMethod.Post, uriBuilder.Uri,
+                cancellationToken, body: body, needXReqid: true, needAuthorization: true);
         }
 
         private Task<OrderActionLimitMarket> CommandapiWarptransTradeV2ClientOrdersActionsStopStopOrderIdPutAsync(int stopOrderId,
             Side side, Condition condition, decimal triggerPrice, DateTime stopEndUtcTime, int quantity,
             string? symbol, Exchange exchange, string? portfolio, string? instrumentGroup, int? protectingSeconds,
-            bool? activate, CancellationToken cancellationToken)
+            bool? activate, bool? allowMargin, CancellationToken cancellationToken)
         {
             if (string.IsNullOrEmpty(symbol))
                 throw new ArgumentNullException(nameof(symbol));
@@ -162,7 +168,7 @@ namespace Alor.OpenAPI.Services
             var order = new RequestOrdersActionsStopMarketTvWarp(side, condition, triggerPrice,
                 stopEndUtcTime.GetUnixTimestampSecondsFromDateTime(), quantity,
                 new Instrument(symbol, exchange, instrumentGroup),
-                new User(portfolio), protectingSeconds, activate);
+                new User(portfolio), protectingSeconds, activate, allowMargin);
             var body = order.ToJson();
 
             var uriBuilder = new UriBuilder(_baseUrl)
@@ -177,7 +183,7 @@ namespace Alor.OpenAPI.Services
             Side side, Condition condition, decimal triggerPrice, DateTime stopEndUtcTime, int quantity,
             decimal price, string? symbol, Exchange exchange, string? portfolio, string? instrumentGroup,
             TimeInForce timeInForce, int? icebergFixed, decimal? icebergVariance, int? protectingSeconds, bool? activate,
-            CancellationToken cancellationToken)
+            bool? allowMargin, CancellationToken cancellationToken)
         {
             if (string.IsNullOrEmpty(symbol))
                 throw new ArgumentNullException(nameof(symbol));
@@ -187,7 +193,7 @@ namespace Alor.OpenAPI.Services
             var order = new RequestOrdersActionsStopLimitTvWarp(side, condition, triggerPrice,
                 stopEndUtcTime.GetUnixTimestampSecondsFromDateTime(), price, quantity,
                 new Instrument(symbol, exchange, instrumentGroup),
-                new User(portfolio), timeInForce, icebergFixed, icebergVariance, protectingSeconds, activate);
+                new User(portfolio), timeInForce, icebergFixed, icebergVariance, protectingSeconds, activate, allowMargin);
             var body = order.ToJson();
 
             var uriBuilder = new UriBuilder(_baseUrl)

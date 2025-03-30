@@ -12,6 +12,7 @@ namespace Alor.OpenAPI.Models
         public RequestOrderGroupItem() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectOrderGroupItem"]/Member[@name="objectOrderGroupItem"]/*' />
+        [JsonConstructor]
         public RequestOrderGroupItem(string? portfolio = default, Exchange exchange = default, string? orderId = default, OrderType type = default)
         {
             Portfolio = portfolio;
@@ -22,19 +23,19 @@ namespace Alor.OpenAPI.Models
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectOrderGroupItem"]/Member[@name="portfolio"]/*' />
         [DataMember(Name = "portfolio", EmitDefaultValue = false)]
-        public string? Portfolio { get; private set; }
+        public string? Portfolio { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectOrderGroupItem"]/Member[@name="exchange"]/*' />
         [DataMember(Name = "exchange", EmitDefaultValue = false)]
-        public Exchange Exchange { get; private set; }
+        public Exchange Exchange { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectOrderGroupItem"]/Member[@name="orderId"]/*' />
         [DataMember(Name = "orderId", EmitDefaultValue = false)]
-        public string? OrderId { get; private set; }
+        public string? OrderId { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectOrderGroupItem"]/Member[@name="type"]/*' />
         [DataMember(Name = "type", EmitDefaultValue = false)]
-        public OrderType Type { get; private set; }
+        public OrderType Type { get; init; }
 
         public override string ToString()
         {
@@ -50,14 +51,7 @@ namespace Alor.OpenAPI.Models
 
         public string ToJson() => Encoding.UTF8.GetString(JsonSerializer.Generic.Utf8.Serialize(this));
 
-        public override int GetHashCode() => Utilities.Utilities.GetHashCodeHelper(
-            [
-                Portfolio?.GetHashCode() ?? 0,
-                Exchange.GetHashCode(),
-                OrderId?.GetHashCode() ?? 0,
-                Type.GetHashCode(),
-            ]
-        );
+        public override int GetHashCode() => HashCode.Combine(Portfolio, Exchange, OrderId, Type);
 
         private static bool EqualsHelper(RequestOrderGroupItem? first, RequestOrderGroupItem? second) =>
             first?.Portfolio == second?.Portfolio &&
@@ -73,10 +67,7 @@ namespace Alor.OpenAPI.Models
             if ((object?)other == null)
                 return false;
 
-            if (GetType() != other.GetType())
-                return false;
-
-            return EqualsHelper(this, other);
+            return GetType() == other.GetType() && EqualsHelper(this, other);
         }
 
         public override bool Equals(object? obj) => Equals(obj as RequestOrderGroupItem);

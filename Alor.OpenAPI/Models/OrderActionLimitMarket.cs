@@ -11,6 +11,7 @@ namespace Alor.OpenAPI.Models
         public OrderActionLimitMarket() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrderActionLimitMarketCommandAPI"]/Member[@name="responseOrderActionLimitMarketCommandAPI"]/*' />
+        [JsonConstructor]
         public OrderActionLimitMarket(string? message = default, string? orderNumber = default)
         {
             Message = message;
@@ -19,11 +20,11 @@ namespace Alor.OpenAPI.Models
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrderActionLimitMarketCommandAPI"]/Member[@name="message"]/*' />
         [DataMember(Name = "message", EmitDefaultValue = false)]
-        public string? Message { get; private set; }
+        public string? Message { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrderActionLimitMarketCommandAPI"]/Member[@name="orderNumber"]/*' />
         [DataMember(Name = "orderNumber", EmitDefaultValue = false)]
-        public string? OrderNumber { get; private set; }
+        public string? OrderNumber { get; init; }
 
         public override string ToString()
         {
@@ -37,12 +38,7 @@ namespace Alor.OpenAPI.Models
 
         public string ToJson() => Encoding.UTF8.GetString(JsonSerializer.Generic.Utf8.Serialize(this));
 
-        public override int GetHashCode() => Utilities.Utilities.GetHashCodeHelper(
-            [
-                Message?.GetHashCode() ?? 0,
-                OrderNumber?.GetHashCode() ?? 0,
-            ]
-        );
+        public override int GetHashCode() => HashCode.Combine(Message, OrderNumber);
 
         private static bool EqualsHelper(OrderActionLimitMarket? first, OrderActionLimitMarket? second) =>
             first?.Message == second?.Message &&
@@ -56,10 +52,7 @@ namespace Alor.OpenAPI.Models
             if ((object?)other == null)
                 return false;
 
-            if (GetType() != other.GetType())
-                return false;
-
-            return EqualsHelper(this, other);
+            return GetType() == other.GetType() && EqualsHelper(this, other);
         }
 
         public override bool Equals(object? obj) => Equals(obj as OrderActionLimitMarket);

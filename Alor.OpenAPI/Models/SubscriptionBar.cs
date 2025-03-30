@@ -12,6 +12,7 @@ namespace Alor.OpenAPI.Models
         public SubscriptionBar() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubBarsGetAndSubscribe"]/Member[@name="wsSubBarsGetAndSubscribe"]/*' />
+        [JsonConstructor]
         public SubscriptionBar(string? code = default, string? tf = default,
             long? from = default, string? instrumentGroup = default, bool? skipHistory = default,
             bool? splitAdjust = default, CandleSliceMode? sliceMode = default, Exchange exchange = default,
@@ -32,56 +33,55 @@ namespace Alor.OpenAPI.Models
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubBarsGetAndSubscribe"]/Member[@name="opcode"]/*' />
         [DataMember(Name = "opcode", EmitDefaultValue = false)]
-        public string? Opcode { get; private set; } = "BarsGetAndSubscribe";
+        public string? Opcode { get; init; } = "BarsGetAndSubscribe";
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubBarsGetAndSubscribe"]/Member[@name="code"]/*' />
         [DataMember(Name = "code", EmitDefaultValue = false)]
-        public string? Code { get; set; }
+        public string? Code { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubBarsGetAndSubscribe"]/Member[@name="tf"]/*' />
         [DataMember(Name = "tf", EmitDefaultValue = false)]
-        public string? Tf { get; set; }
+        public string? Tf { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubBarsGetAndSubscribe"]/Member[@name="from"]/*' />
         [DataMember(Name = "from", EmitDefaultValue = false)]
-        public long? From { get; set; }
+        public long? From { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubBarsGetAndSubscribe"]/Member[@name="instrumentGroup"]/*' />
         [DataMember(Name = "instrumentGroup", EmitDefaultValue = false)]
-        public string? InstrumentGroup { get; set; }
+        public string? InstrumentGroup { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubBarsGetAndSubscribe"]/Member[@name="skipHistory"]/*' />
         [DataMember(Name = "skipHistory", EmitDefaultValue = false)]
-        public bool? SkipHistory { get; set; }
+        public bool? SkipHistory { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubBarsGetAndSubscribe"]/Member[@name="splitAdjust"]/*' />
         [DataMember(Name = "splitAdjust", EmitDefaultValue = false)]
-        public bool? SplitAdjust { get; set; }
+        public bool? SplitAdjust { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubBarsGetAndSubscribe"]/Member[@name="sliceMode"]/*' />
         [DataMember(Name = "sliceMode", EmitDefaultValue = false)]
-        public CandleSliceMode? SliceMode { get; set; }
+        public CandleSliceMode? SliceMode { get; init; }
         
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubBarsGetAndSubscribe"]/Member[@name="exchange"]/*' />
         [DataMember(Name = "exchange", EmitDefaultValue = false)]
-        public Exchange Exchange { get; set; }
+        public Exchange Exchange { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubBarsGetAndSubscribe"]/Member[@name="format"]/*' />
         [DataMember(Name = "format", EmitDefaultValue = false)]
-        public Format Format { get; set; }
+        public Format Format { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubBarsGetAndSubscribe"]/Member[@name="frequency"]/*' />
         [DataMember(Name = "frequency", EmitDefaultValue = false)]
-        public int? Frequency { get; set; }
+        public int? Frequency { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubBarsGetAndSubscribe"]/Member[@name="guid"]/*' />
         [DataMember(Name = "guid", EmitDefaultValue = false)]
-        public string? Guid { get; private set; }
+        public string? Guid { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubBarsGetAndSubscribe"]/Member[@name="token"]/*' />
         [DataMember(Name = "token", EmitDefaultValue = false)]
-        public string? Token { get; private set; } = "JwtToken";
-
+        public string? Token { get; init; } = "JwtToken";
 
         public override string ToString()
         {
@@ -105,11 +105,24 @@ namespace Alor.OpenAPI.Models
 
         public string ToJson() => Encoding.UTF8.GetString(JsonSerializer.Generic.Utf8.Serialize(this));
 
-        public override int GetHashCode() => Utilities.Utilities.GetHashCodeHelper(
-            [
-                Guid?.GetHashCode() ?? 0,
-            ]
-        );
+        public override int GetHashCode()
+        {
+            var hash = new HashCode();
+            hash.Add(Opcode);
+            hash.Add(Code);
+            hash.Add(Tf);
+            hash.Add(From);
+            hash.Add(InstrumentGroup);
+            hash.Add(SkipHistory);
+            hash.Add(SplitAdjust);
+            hash.Add(SliceMode);
+            hash.Add(Exchange);
+            hash.Add(Format);
+            hash.Add(Frequency);
+            hash.Add(Guid);
+            hash.Add(Token);
+            return hash.ToHashCode();
+        }
 
         private static bool EqualsHelper(SubscriptionBar? first, SubscriptionBar? second) =>
             first?.Opcode == second?.Opcode &&
@@ -133,10 +146,7 @@ namespace Alor.OpenAPI.Models
             if ((object?)other == null)
                 return false;
 
-            if (GetType() != other.GetType())
-                return false;
-
-            return EqualsHelper(this, other);
+            return GetType() == other.GetType() && EqualsHelper(this, other);
         }
 
         public override bool Equals(object? obj) => Equals(obj as SubscriptionBar);

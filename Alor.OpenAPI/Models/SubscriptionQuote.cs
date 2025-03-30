@@ -12,6 +12,7 @@ namespace Alor.OpenAPI.Models
         public SubscriptionQuote() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubQuotesSubscribe"]/Member[@name="wsSubQuotesSubscribe"]/*' />
+        [JsonConstructor]
         public SubscriptionQuote(string? code = default, Exchange exchange = default, string? instrumentGroup = default,
             Format format = default, int? frequency = default, string? guid = default)
         {
@@ -25,36 +26,35 @@ namespace Alor.OpenAPI.Models
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubQuotesSubscribe"]/Member[@name="opcode"]/*' />
         [DataMember(Name = "opcode", EmitDefaultValue = false)]
-        public string? Opcode { get; private set; } = "QuotesSubscribe";
+        public string? Opcode { get; init; } = "QuotesSubscribe";
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubQuotesSubscribe"]/Member[@name="code"]/*' />
         [DataMember(Name = "code", EmitDefaultValue = false)]
-        public string? Code { get; set; }
+        public string? Code { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubQuotesSubscribe"]/Member[@name="exchange"]/*' />
         [DataMember(Name = "exchange", EmitDefaultValue = false)]
-        public Exchange Exchange { get; set; }
+        public Exchange Exchange { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubQuotesSubscribe"]/Member[@name="instrumentGroup"]/*' />
         [DataMember(Name = "instrumentGroup", EmitDefaultValue = false)]
-        public string? InstrumentGroup { get; set; }
+        public string? InstrumentGroup { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubQuotesSubscribe"]/Member[@name="format"]/*' />
         [DataMember(Name = "format", EmitDefaultValue = false)]
-        public Format Format { get; set; }
+        public Format Format { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubQuotesSubscribe"]/Member[@name="frequency"]/*' />
         [DataMember(Name = "frequency", EmitDefaultValue = false)]
-        public int? Frequency { get; set; }
+        public int? Frequency { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubQuotesSubscribe"]/Member[@name="guid"]/*' />
         [DataMember(Name = "guid", EmitDefaultValue = false)]
-        public string? Guid { get; private set; }
+        public string? Guid { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubQuotesSubscribe"]/Member[@name="token"]/*' />
         [DataMember(Name = "token", EmitDefaultValue = false)]
-        public string? Token { get; private set; } = "JwtToken";
-
+        public string? Token { get; init; } = "JwtToken";
 
         public override string ToString()
         {
@@ -74,11 +74,8 @@ namespace Alor.OpenAPI.Models
 
         public string ToJson() => Encoding.UTF8.GetString(JsonSerializer.Generic.Utf8.Serialize(this));
 
-        public override int GetHashCode() => Utilities.Utilities.GetHashCodeHelper(
-            [
-                Guid?.GetHashCode() ?? 0,
-            ]
-        );
+        public override int GetHashCode() =>
+            HashCode.Combine(Opcode, Code, Exchange, InstrumentGroup, Format, Frequency, Guid, Token);
 
         private static bool EqualsHelper(SubscriptionQuote? first, SubscriptionQuote? second) =>
             first?.Opcode == second?.Opcode &&
@@ -98,10 +95,7 @@ namespace Alor.OpenAPI.Models
             if ((object?)other == null)
                 return false;
 
-            if (GetType() != other.GetType())
-                return false;
-
-            return EqualsHelper(this, other);
+            return GetType() == other.GetType() && EqualsHelper(this, other);
         }
 
         public override bool Equals(object? obj) => Equals(obj as SubscriptionQuote);

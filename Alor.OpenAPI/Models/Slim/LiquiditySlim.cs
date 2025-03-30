@@ -9,7 +9,9 @@ namespace Alor.OpenAPI.Models.Slim
     public sealed class LiquiditySlim : IEquatable<LiquiditySlim>, IValidatableObject
     {
         public LiquiditySlim() { }
-        public LiquiditySlim(decimal price, int volume, decimal? yield)
+
+        [JsonConstructor]
+        public LiquiditySlim(decimal price, long volume, decimal? yield)
         {
             Price = price;
             Volume = volume;
@@ -18,15 +20,15 @@ namespace Alor.OpenAPI.Models.Slim
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrderBookBid"]/Member[@name="price"]/*' />
         [DataMember(Name = "p", EmitDefaultValue = false)]
-        public decimal Price { get; private set; }
+        public decimal Price { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrderBookBid"]/Member[@name="volume"]/*' />
         [DataMember(Name = "v", EmitDefaultValue = false)]
-        public int Volume { get; private set; }
+        public long Volume { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrderBookBid"]/Member[@name="ySlim"]/*' />
         [DataMember(Name = "v", EmitDefaultValue = false)]
-        public decimal? Yield { get; private set; }
+        public decimal? Yield { get; init; }
 
         public override string ToString()
         {
@@ -41,13 +43,7 @@ namespace Alor.OpenAPI.Models.Slim
 
         public string ToJson() => Encoding.UTF8.GetString(JsonSerializer.Generic.Utf8.Serialize(this));
 
-        public override int GetHashCode() => Utilities.Utilities.GetHashCodeHelper(
-            [
-                Price.GetHashCode(),
-                Volume.GetHashCode(),
-                Yield?.GetHashCode() ?? 0,
-            ]
-        );
+        public override int GetHashCode() => HashCode.Combine(Price, Volume, Yield);
 
         private static bool EqualsHelper(LiquiditySlim? first, LiquiditySlim? second) =>
             first?.Price == second?.Price &&
@@ -62,10 +58,7 @@ namespace Alor.OpenAPI.Models.Slim
             if ((object?)other == null)
                 return false;
 
-            if (GetType() != other.GetType())
-                return false;
-
-            return EqualsHelper(this, other);
+            return GetType() == other.GetType() && EqualsHelper(this, other);
         }
 
         public override bool Equals(object? obj) => Equals(obj as LiquiditySlim);

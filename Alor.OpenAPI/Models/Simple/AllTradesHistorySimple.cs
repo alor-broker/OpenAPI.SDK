@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SpanJson;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
-using SpanJson;
 
 namespace Alor.OpenAPI.Models.Simple
 {
@@ -11,6 +11,7 @@ namespace Alor.OpenAPI.Models.Simple
         public AllTradesHistorySimple() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseAllTradesHistory"]/Member[@name="responseAllTradesHistory"]/*' />
+        [JsonConstructor]
         public AllTradesHistorySimple(int? total = default, List<AllTradeSimple>? list = default)
         {
             Total = total;
@@ -19,11 +20,11 @@ namespace Alor.OpenAPI.Models.Simple
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseAllTradesHistory"]/Member[@name="total"]/*' />
         [DataMember(Name = "total", EmitDefaultValue = false)]
-        public int? Total { get; private set; }
+        public int? Total { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseAllTradesHistory"]/Member[@name="list"]/*' />
         [DataMember(Name = "list", EmitDefaultValue = false)]
-        public List<AllTradeSimple>? List { get; private set; }
+        public List<AllTradeSimple>? List { get; init; }
 
         public override string ToString()
         {
@@ -37,12 +38,7 @@ namespace Alor.OpenAPI.Models.Simple
 
         public string ToJson() => Encoding.UTF8.GetString(JsonSerializer.Generic.Utf8.Serialize(this));
 
-        public override int GetHashCode() => Utilities.Utilities.GetHashCodeHelper(
-            [
-                Total?.GetHashCode() ?? 0,
-                List?.GetHashCode() ?? 0,
-            ]
-        );
+        public override int GetHashCode() => HashCode.Combine(Total, List);
 
         private static bool EqualsHelper(AllTradesHistorySimple? first, AllTradesHistorySimple? second)
         {
@@ -70,10 +66,7 @@ namespace Alor.OpenAPI.Models.Simple
             if ((object?)other == null)
                 return false;
 
-            if (GetType() != other.GetType())
-                return false;
-
-            return EqualsHelper(this, other);
+            return GetType() == other.GetType() && EqualsHelper(this, other);
         }
 
         public override bool Equals(object? obj) => Equals(obj as AllTradesHistorySimple);

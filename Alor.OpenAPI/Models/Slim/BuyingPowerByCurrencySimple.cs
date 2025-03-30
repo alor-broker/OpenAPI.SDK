@@ -11,6 +11,7 @@ namespace Alor.OpenAPI.Models.Slim
         public BuyingPowerByCurrencySlim() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectBuyingPowerByCurrency"]/Member[@name="objectBuyingPowerByCurrency"]/*' />
+        [JsonConstructor]
         public BuyingPowerByCurrencySlim(string? currency = default, decimal? buyingPower = default)
         {
             Currency = currency;
@@ -19,11 +20,11 @@ namespace Alor.OpenAPI.Models.Slim
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectBuyingPowerByCurrency"]/Member[@name="currency"]/*' />
         [DataMember(Name = "cr", EmitDefaultValue = false)]
-        public string? Currency { get; private set; }
+        public string? Currency { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectBuyingPowerByCurrency"]/Member[@name="buyingPower"]/*' />
         [DataMember(Name = "bp", EmitDefaultValue = false)]
-        public decimal? BuyingPower { get; private set; }
+        public decimal? BuyingPower { get; init; }
 
         public override string ToString()
         {
@@ -37,17 +38,11 @@ namespace Alor.OpenAPI.Models.Slim
 
         public string ToJson() => Encoding.UTF8.GetString(JsonSerializer.Generic.Utf8.Serialize(this));
 
-        public override int GetHashCode() => Utilities.Utilities.GetHashCodeHelper(
-            [
-                Currency?.GetHashCode() ?? 0,
-                BuyingPower?.GetHashCode() ?? 0,
-            ]
-        );
+        public override int GetHashCode() => HashCode.Combine(Currency, BuyingPower);
 
         private static bool EqualsHelper(BuyingPowerByCurrencySlim? first, BuyingPowerByCurrencySlim? second) =>
             first?.Currency == second?.Currency &&
             first?.BuyingPower == second?.BuyingPower;
-
 
         public bool Equals(BuyingPowerByCurrencySlim? other)
         {
@@ -57,10 +52,7 @@ namespace Alor.OpenAPI.Models.Slim
             if ((object?)other == null)
                 return false;
 
-            if (GetType() != other.GetType())
-                return false;
-
-            return EqualsHelper(this, other);
+            return GetType() == other.GetType() && EqualsHelper(this, other);
         }
 
         public override bool Equals(object? obj) => Equals(obj as BuyingPowerByCurrencySlim);

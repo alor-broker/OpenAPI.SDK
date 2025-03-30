@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Alor.OpenAPI.Models
 {
@@ -11,6 +12,7 @@ namespace Alor.OpenAPI.Models
         public CwsRequestAuthorize() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdAuthorize"]/Member[@name="wsCmdAuthorize"]/*' />
+        [JsonConstructor]
         public CwsRequestAuthorize(string? guid = default)
         {
             Guid = guid;
@@ -18,15 +20,15 @@ namespace Alor.OpenAPI.Models
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdAuthorize"]/Member[@name="opcode"]/*' />
         [DataMember(Name = "opcode", EmitDefaultValue = false)]
-        public string? Opcode { get; private set; } = "authorize";
+        public string? Opcode { get; init; } = "authorize";
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdAuthorize"]/Member[@name="guid"]/*' />
         [DataMember(Name = "guid", EmitDefaultValue = false)]
-        public string? Guid { get; private set; }
+        public string? Guid { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdAuthorize"]/Member[@name="token"]/*' />
         [DataMember(Name = "token", EmitDefaultValue = false)]
-        public string? Token { get; private set; } = "JwtToken";
+        public string? Token { get; init; } = "JwtToken";
 
         public override string ToString()
         {
@@ -41,11 +43,7 @@ namespace Alor.OpenAPI.Models
 
         public string ToJson() => Encoding.UTF8.GetString(JsonSerializer.Generic.Utf8.Serialize(this));
 
-        public override int GetHashCode() => Utilities.Utilities.GetHashCodeHelper(
-            [
-                Guid?.GetHashCode() ?? 0,
-            ]
-        );
+        public override int GetHashCode() => HashCode.Combine(Opcode, Guid, Token);
 
         private static bool EqualsHelper(CwsRequestAuthorize? first, CwsRequestAuthorize? second) =>
             first?.Opcode == second?.Opcode &&
@@ -60,10 +58,7 @@ namespace Alor.OpenAPI.Models
             if ((object?)other == null)
                 return false;
 
-            if (GetType() != other.GetType())
-                return false;
-
-            return EqualsHelper(this, other);
+            return GetType() == other.GetType() && EqualsHelper(this, other);
         }
 
         public override bool Equals(object? obj) => Equals(obj as CwsRequestAuthorize);

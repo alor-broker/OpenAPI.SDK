@@ -10,8 +10,9 @@ namespace Alor.OpenAPI.Models
     public class ResponseEstimateOrder : IEquatable<ResponseEstimateOrder>, IValidatableObject
     {
         public ResponseEstimateOrder() { }
-        
+
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseEstimateOrder"]/Member[@name="responseEstimateOrder"]/*' />
+        [JsonConstructor]
         public ResponseEstimateOrder(string? portfolio = default, string? ticker = default, Exchange exchange = default,
             decimal? quantityToSell = default, decimal? quantityToBuy = default,
             decimal? notMarginQuantityToSell = default, decimal? notMarginQuantityToBuy = default,
@@ -32,47 +33,47 @@ namespace Alor.OpenAPI.Models
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseEstimateOrder"]/Member[@name="portfolio"]/*' />
         [DataMember(Name = "portfolio", EmitDefaultValue = false)]
-        public string? Portfolio { get; private set; }
+        public string? Portfolio { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseEstimateOrder"]/Member[@name="ticker"]/*' />
         [DataMember(Name = "ticker", EmitDefaultValue = false)]
-        public string? Ticker { get; private set; }
+        public string? Ticker { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseEstimateOrder"]/Member[@name="exchange"]/*' />
         [DataMember(Name = "exchange", EmitDefaultValue = false)]
-        public Exchange Exchange { get; private set; }
+        public Exchange Exchange { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseEstimateOrder"]/Member[@name="quantityToSell"]/*' />
         [DataMember(Name = "quantityToSell", EmitDefaultValue = false)]
-        public decimal? QuantityToSell { get; private set; }
+        public decimal? QuantityToSell { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseEstimateOrder"]/Member[@name="quantityToBuy"]/*' />
         [DataMember(Name = "quantityToBuy", EmitDefaultValue = false)]
-        public decimal? QuantityToBuy { get; private set; }
+        public decimal? QuantityToBuy { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseEstimateOrder"]/Member[@name="notMarginQuantityToSell"]/*' />
         [DataMember(Name = "notMarginQuantityToSell", EmitDefaultValue = false)]
-        public decimal? NotMarginQuantityToSell { get; private set; }
+        public decimal? NotMarginQuantityToSell { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseEstimateOrder"]/Member[@name="notMarginQuantityToBuy"]/*' />
         [DataMember(Name = "notMarginQuantityToBuy", EmitDefaultValue = false)]
-        public decimal? NotMarginQuantityToBuy { get; private set; }
+        public decimal? NotMarginQuantityToBuy { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseEstimateOrder"]/Member[@name="orderEvaluation"]/*' />
         [DataMember(Name = "orderEvaluation", EmitDefaultValue = false)]
-        public decimal? OrderEvaluation { get; private set; }
+        public decimal? OrderEvaluation { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseEstimateOrder"]/Member[@name="commission"]/*' />
         [DataMember(Name = "commission", EmitDefaultValue = false)]
-        public decimal? Commission { get; private set; }
+        public decimal? Commission { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseEstimateOrder"]/Member[@name="buyPrice"]/*' />
         [DataMember(Name = "buyPrice", EmitDefaultValue = false)]
-        public decimal? BuyPrice { get; private set; }
+        public decimal? BuyPrice { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseEstimateOrder"]/Member[@name="isUnitedPortfolio"]/*' />
         [DataMember(Name = "isUnitedPortfolio", EmitDefaultValue = false)]
-        public bool? IsUnitedPortfolio { get; private set; }
+        public bool? IsUnitedPortfolio { get; init; }
 
         public override string ToString()
         {
@@ -95,21 +96,22 @@ namespace Alor.OpenAPI.Models
 
         public string ToJson() => Encoding.UTF8.GetString(JsonSerializer.Generic.Utf8.Serialize(this));
 
-        public override int GetHashCode() => Utilities.Utilities.GetHashCodeHelper(
-            [
-                Portfolio?.GetHashCode() ?? 0,
-                Ticker?.GetHashCode() ?? 0,
-                Exchange.GetHashCode(),
-                QuantityToSell?.GetHashCode() ?? 0,
-                QuantityToBuy?.GetHashCode() ?? 0,
-                NotMarginQuantityToSell?.GetHashCode() ?? 0,
-                NotMarginQuantityToBuy?.GetHashCode() ?? 0,
-                OrderEvaluation?.GetHashCode() ?? 0,
-                Commission?.GetHashCode() ?? 0,
-                BuyPrice?.GetHashCode() ?? 0,
-                IsUnitedPortfolio?.GetHashCode() ?? 0,
-            ]
-        );
+        public override int GetHashCode()
+        {
+            var hash = new HashCode();
+            hash.Add(Portfolio);
+            hash.Add(Ticker);
+            hash.Add(Exchange);
+            hash.Add(QuantityToSell);
+            hash.Add(QuantityToBuy);
+            hash.Add(NotMarginQuantityToSell);
+            hash.Add(NotMarginQuantityToBuy);
+            hash.Add(OrderEvaluation);
+            hash.Add(Commission);
+            hash.Add(BuyPrice);
+            hash.Add(IsUnitedPortfolio);
+            return hash.ToHashCode();
+        }
 
         private static bool EqualsHelper(ResponseEstimateOrder? first, ResponseEstimateOrder? second) =>
             first?.Portfolio == second?.Portfolio &&
@@ -133,10 +135,7 @@ namespace Alor.OpenAPI.Models
             if ((object?)other == null)
                 return false;
 
-            if (GetType() != other.GetType())
-                return false;
-
-            return EqualsHelper(this, other);
+            return GetType() == other.GetType() && EqualsHelper(this, other);
         }
 
         public override bool Equals(object? obj) => Equals(obj as ResponseEstimateOrder);

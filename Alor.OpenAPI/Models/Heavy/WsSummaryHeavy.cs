@@ -14,6 +14,7 @@ namespace Alor.OpenAPI.Models.Heavy
         public WsSummaryHeavy() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsResponseSubSummariesGetAndSubscribeV2"]/Member[@name="wsResponseSubSummariesGetAndSubscribeV2"]/*' />
+        [SpanJson.JsonConstructor]
         public WsSummaryHeavy(SummaryHeavy? dataHeavy, string? guid)
         {
             Data = dataHeavy;
@@ -22,11 +23,11 @@ namespace Alor.OpenAPI.Models.Heavy
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsResponseSubSummariesGetAndSubscribeV2"]/Member[@name="dataHeavy"]/*' />
         [DataMember(Name = "data", EmitDefaultValue = false)]
-        public SummaryHeavy? Data { get; private set; }
+        public SummaryHeavy? Data { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsResponseSubSummariesGetAndSubscribeV2"]/Member[@name="guid"]/*' />
         [DataMember(Name = "guid", EmitDefaultValue = false)]
-        public string? Guid { get; private set; }
+        public string? Guid { get; init; }
 
         [IgnoreDataMember]
         [JsonIgnore]
@@ -48,15 +49,10 @@ namespace Alor.OpenAPI.Models.Heavy
 
         public string ToJson() => Encoding.UTF8.GetString(JsonSerializer.Generic.Utf8.Serialize(this));
 
-        public override int GetHashCode() => Utilities.Utilities.GetHashCodeHelper(
-            [
-                Data?.GetHashCode() ?? 0,
-                Guid?.GetHashCode() ?? 0,
-            ]
-        );
+        public override int GetHashCode() => HashCode.Combine(Data, Guid);
 
         private static bool EqualsHelper(WsSummaryHeavy? first, WsSummaryHeavy? second) =>
-            (bool)first?.Data?.Equals(second?.Data) &&
+            Equals(first?.Data, second?.Data) &&
             first?.Guid == second?.Guid;
 
         public bool Equals(WsSummaryHeavy? other)
@@ -67,10 +63,7 @@ namespace Alor.OpenAPI.Models.Heavy
             if ((object?)other == null)
                 return false;
 
-            if (GetType() != other.GetType())
-                return false;
-
-            return EqualsHelper(this, other);
+            return GetType() == other.GetType() && EqualsHelper(this, other);
         }
 
         public override bool Equals(object? obj) => Equals(obj as WsSummaryHeavy);

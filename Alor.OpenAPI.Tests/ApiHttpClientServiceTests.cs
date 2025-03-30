@@ -226,7 +226,7 @@ namespace Alor.OpenAPI.Tests
         {
             // Arrange
             var expectedObject = new RiskSimple("7500GHC", Exchange.MOEX, 646270.9m, 646270.9m, 15752.115m, 65177.0575m,
-                15752.115m, 630518.785m, 638394.8425m, 2, ClientType.StandardRisk, false, false);
+                15752.115m, 630518.785m, 638394.8425m, 2, ClientType.StandardRisk, false, false, RiskStatus.Ok);
             var jsonResponseBody = Encoding.UTF8.GetString(JsonSerializer.Generic.Utf8.Serialize(expectedObject));
             var httpMessageHandlerMock = new Mock<HttpMessageHandler>();
 

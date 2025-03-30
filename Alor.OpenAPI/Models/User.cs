@@ -11,6 +11,7 @@ namespace Alor.OpenAPI.Models
         public User() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectUserPortfolioOnly"]/Member[@name="objectUserPortfolioOnly"]/*' />
+        [JsonConstructor]
         public User(string? portfolio = default)
         {
             Portfolio = portfolio;
@@ -18,7 +19,7 @@ namespace Alor.OpenAPI.Models
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectUserPortfolioOnly"]/Member[@name="portfolio"]/*' />
         [DataMember(Name = "portfolio", EmitDefaultValue = false)]
-        public string? Portfolio { get; private set; }
+        public string? Portfolio { get; init; }
 
         public override string ToString()
         {
@@ -31,11 +32,7 @@ namespace Alor.OpenAPI.Models
 
         public string ToJson() => Encoding.UTF8.GetString(JsonSerializer.Generic.Utf8.Serialize(this));
 
-        public override int GetHashCode() => Utilities.Utilities.GetHashCodeHelper(
-            [
-                Portfolio?.GetHashCode() ?? 0,
-            ]
-        );
+        public override int GetHashCode() => HashCode.Combine(Portfolio);
 
         private static bool EqualsHelper(User? first, User? second) =>
             first?.Portfolio == second?.Portfolio;
@@ -49,10 +46,7 @@ namespace Alor.OpenAPI.Models
             if ((object?)other == null)
                 return false;
 
-            if (GetType() != other.GetType())
-                return false;
-
-            return EqualsHelper(this, other);
+            return GetType() == other.GetType() && EqualsHelper(this, other);
         }
 
         public override bool Equals(object? obj) => Equals(obj as User);

@@ -9,9 +9,10 @@ namespace Alor.OpenAPI.Models
     [DataContract]
     internal class SubscriptionOrder : IEquatable<SubscriptionOrder>, IValidatableObject
     {
-        internal SubscriptionOrder() { }
+        public SubscriptionOrder() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubOrdersGetAndSubscribe"]/Member[@name="wsSubOrdersGetAndSubscribe"]/*' />
+        [JsonConstructor]
         internal SubscriptionOrder(string? portfolio = default, List<OrderStatus>? orderStatuses = default,
             bool? skipHistory = default, Exchange exchange = default, Format format = default, int? frequency = default,
             string? guid = default)
@@ -27,39 +28,39 @@ namespace Alor.OpenAPI.Models
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubOrdersGetAndSubscribe"]/Member[@name="opcode"]/*' />
         [DataMember(Name = "opcode", EmitDefaultValue = false)]
-        public string? Opcode { get; private set; } = "OrdersGetAndSubscribeV2";
+        public string? Opcode { get; init; } = "OrdersGetAndSubscribeV2";
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubOrdersGetAndSubscribe"]/Member[@name="portfolio"]/*' />
         [DataMember(Name = "portfolio", EmitDefaultValue = false)]
-        public string? Portfolio { get; private set; }
+        public string? Portfolio { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubOrdersGetAndSubscribe"]/Member[@name="orderStatuses"]/*' />
         [DataMember(Name = "orderStatuses", EmitDefaultValue = false)]
-        public List<OrderStatus>? OrderStatuses { get; private set; }
+        public List<OrderStatus>? OrderStatuses { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubOrdersGetAndSubscribe"]/Member[@name="skipHistory"]/*' />
         [DataMember(Name = "skipHistory", EmitDefaultValue = false)]
-        public bool? SkipHistory { get; private set; }
+        public bool? SkipHistory { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubOrdersGetAndSubscribe"]/Member[@name="exchange"]/*' />
         [DataMember(Name = "exchange", EmitDefaultValue = false)]
-        public Exchange Exchange { get; private set; }
+        public Exchange Exchange { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubOrdersGetAndSubscribe"]/Member[@name="format"]/*' />
         [DataMember(Name = "format", EmitDefaultValue = false)]
-        public Format Format { get; private set; }
+        public Format Format { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubOrdersGetAndSubscribe"]/Member[@name="frequency"]/*' />
         [DataMember(Name = "frequency", EmitDefaultValue = false)]
-        public int? Frequency { get; private set; }
+        public int? Frequency { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubOrdersGetAndSubscribe"]/Member[@name="guid"]/*' />
         [DataMember(Name = "guid", EmitDefaultValue = false)]
-        public string? Guid { get; private set; }
+        public string? Guid { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubOrdersGetAndSubscribe"]/Member[@name="token"]/*' />
         [DataMember(Name = "token", EmitDefaultValue = false)]
-        public string? Token { get; private set; } = "JwtToken";
+        public string? Token { get; init; } = "JwtToken";
 
         public override string ToString()
         {
@@ -80,11 +81,20 @@ namespace Alor.OpenAPI.Models
 
         public string ToJson() => Encoding.UTF8.GetString(JsonSerializer.Generic.Utf8.Serialize(this));
 
-        public override int GetHashCode() => Utilities.Utilities.GetHashCodeHelper(
-            [
-                Guid?.GetHashCode() ?? 0,
-            ]
-        );
+        public override int GetHashCode()
+        {
+            var hash = new HashCode();
+            hash.Add(Opcode);
+            hash.Add(Portfolio);
+            hash.Add(OrderStatuses);
+            hash.Add(SkipHistory);
+            hash.Add(Exchange);
+            hash.Add(Format);
+            hash.Add(Frequency);
+            hash.Add(Guid);
+            hash.Add(Token);
+            return hash.ToHashCode();
+        }
 
         private static bool EqualsHelper(SubscriptionOrder? first, SubscriptionOrder? second) =>
             first?.Opcode == second?.Opcode &&
@@ -107,10 +117,7 @@ namespace Alor.OpenAPI.Models
             if ((object?)other == null)
                 return false;
 
-            if (GetType() != other.GetType())
-                return false;
-
-            return EqualsHelper(this, other);
+            return GetType() == other.GetType() && EqualsHelper(this, other);
         }
 
         public override bool Equals(object? obj) => Equals(obj as SubscriptionOrder);

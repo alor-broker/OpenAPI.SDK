@@ -12,11 +12,12 @@ namespace Alor.OpenAPI.Models
         public CwsRequestOrderLimit() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderLimit"]/Member[@name="wsCmdUpdateOrderLimit"]/*' />
+        [JsonConstructor]
         public CwsRequestOrderLimit(string? opcode = default, string? guid = default, string? orderId = default,
             Side side = default, int? quantity = default, decimal? price = default, Instrument? instrument = default,
             Exchange? exchange = default, string? comment = default, string? board = default, User? user = default,
             TimeInForce timeInForce = default, int? icebergFixed = default, decimal? icebergVariance = default,
-            bool? checkDuplicates = default)
+            bool? checkDuplicates = default, bool? allowMargin = default)
         {
             Opcode = opcode;
             Guid = guid;
@@ -33,67 +34,72 @@ namespace Alor.OpenAPI.Models
             IcebergFixed = icebergFixed;
             IcebergVariance = icebergVariance;
             CheckDuplicates = checkDuplicates;
+            AllowMargin = allowMargin;
         }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderLimit"]/Member[@name="opcode"]/*' />
         [DataMember(Name = "opcode", EmitDefaultValue = false)]
-        public string? Opcode { get; set; }
+        public string? Opcode { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderLimit"]/Member[@name="guid"]/*' />
         [DataMember(Name = "guid", EmitDefaultValue = false)]
-        public string? Guid { get; private set; }
+        public string? Guid { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderLimit"]/Member[@name="orderId"]/*' />
         [DataMember(Name = "orderId", EmitDefaultValue = false)]
-        public string? OrderId { get; set; }
+        public string? OrderId { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderLimit"]/Member[@name="side"]/*' />
         [DataMember(Name = "side", EmitDefaultValue = false)]
-        public Side Side { get; set; }
+        public Side Side { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderLimit"]/Member[@name="quantity"]/*' />
         [DataMember(Name = "quantity", EmitDefaultValue = false)]
-        public int? Quantity { get; set; }
+        public int? Quantity { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderLimit"]/Member[@name="price"]/*' />
         [DataMember(Name = "price", EmitDefaultValue = false)]
-        public decimal? Price { get; set; }
+        public decimal? Price { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderLimit"]/Member[@name="instrument"]/*' />
         [DataMember(Name = "instrument", EmitDefaultValue = false)]
-        public Instrument? Instrument { get; set; }
+        public Instrument? Instrument { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdDeleteOrderLimit"]/Member[@name="exchange"]/*' />
         [DataMember(Name = "exchange", EmitDefaultValue = false)]
-        public Exchange? Exchange { get; set; }
+        public Exchange? Exchange { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderLimit"]/Member[@name="comment"]/*' />
         [DataMember(Name = "comment", EmitDefaultValue = false)]
-        public string? Comment { get; set; }
+        public string? Comment { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderLimit"]/Member[@name="board"]/*' />
         [DataMember(Name = "board", EmitDefaultValue = false)]
-        public string? Board { get; set; }
+        public string? Board { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderLimit"]/Member[@name="user"]/*' />
         [DataMember(Name = "user", EmitDefaultValue = false)]
-        public User? User { get; set; }
+        public User? User { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderLimit"]/Member[@name="timeInForce"]/*' />
         [DataMember(Name = "timeInForce", EmitDefaultValue = false)]
-        public TimeInForce TimeInForce { get; set; }
+        public TimeInForce TimeInForce { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderLimit"]/Member[@name="icebergFixed"]/*' />
         [DataMember(Name = "icebergFixed", EmitDefaultValue = false)]
-        public int? IcebergFixed { get; set; }
+        public int? IcebergFixed { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderLimit"]/Member[@name="icebergVariance"]/*' />
         [DataMember(Name = "icebergVariance", EmitDefaultValue = false)]
-        public decimal? IcebergVariance { get; set; }
+        public decimal? IcebergVariance { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderLimit"]/Member[@name="checkDuplicates"]/*' />
         [DataMember(Name = "checkDuplicates", EmitDefaultValue = false)]
-        public bool? CheckDuplicates { get; set; }
+        public bool? CheckDuplicates { get; init; }
+
+        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderLimit"]/Member[@name="allowMargin"]/*' />
+        [DataMember(Name = "allowMargin", EmitDefaultValue = false)]
+        public bool? AllowMargin { get; init; }
 
         public override string ToString()
         {
@@ -114,22 +120,39 @@ namespace Alor.OpenAPI.Models
             sb.Append("  IcebergFixed: ").Append(IcebergFixed).Append(Environment.NewLine);
             sb.Append("  IcebergVariance: ").Append(IcebergVariance).Append(Environment.NewLine);
             sb.Append("  CheckDuplicates: ").Append(CheckDuplicates).Append(Environment.NewLine);
+            sb.Append("  AllowMargin: ").Append(AllowMargin).Append(Environment.NewLine);
             sb.Append('}').Append(Environment.NewLine);
             return sb.ToString();
         }
 
         public string ToJson() => Encoding.UTF8.GetString(JsonSerializer.Generic.Utf8.Serialize(this));
 
-        public override int GetHashCode() => Utilities.Utilities.GetHashCodeHelper(
-            [
-                Guid?.GetHashCode() ?? 0,
-            ]
-        );
+        public override int GetHashCode()
+        {
+            var hash = new HashCode();
+            hash.Add(Opcode);
+            hash.Add(Guid);
+            hash.Add(OrderId);
+            hash.Add(Side);
+            hash.Add(Quantity);
+            hash.Add(Price);
+            hash.Add(Instrument);
+            hash.Add(Exchange);
+            hash.Add(Comment);
+            hash.Add(Board);
+            hash.Add(User);
+            hash.Add(TimeInForce);
+            hash.Add(IcebergFixed);
+            hash.Add(IcebergVariance);
+            hash.Add(CheckDuplicates);
+            hash.Add(AllowMargin);
+            return hash.ToHashCode();
+        }
 
         private static bool EqualsHelper(CwsRequestOrderLimit? first, CwsRequestOrderLimit? second) =>
             first?.Opcode == second?.Opcode &&
             first?.Guid == second?.Guid &&
-            first?.OrderId == second?.OrderId&&
+            first?.OrderId == second?.OrderId &&
             first?.Side == second?.Side &&
             first?.Quantity == second?.Quantity &&
             first?.Price == second?.Price &&
@@ -141,7 +164,8 @@ namespace Alor.OpenAPI.Models
             first?.TimeInForce == second?.TimeInForce &&
             first?.IcebergFixed == second?.IcebergFixed &&
             first?.IcebergVariance == second?.IcebergVariance &&
-            first?.CheckDuplicates == second?.CheckDuplicates;
+            first?.CheckDuplicates == second?.CheckDuplicates &&
+            first?.AllowMargin == second?.AllowMargin;
 
         public bool Equals(CwsRequestOrderLimit? other)
         {
@@ -151,10 +175,7 @@ namespace Alor.OpenAPI.Models
             if ((object?)other == null)
                 return false;
 
-            if (GetType() != other.GetType())
-                return false;
-
-            return EqualsHelper(this, other);
+            return GetType() == other.GetType() && EqualsHelper(this, other);
         }
 
         public override bool Equals(object? obj) => Equals(obj as CwsRequestOrderLimit);

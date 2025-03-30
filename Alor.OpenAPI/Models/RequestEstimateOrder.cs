@@ -12,6 +12,7 @@ namespace Alor.OpenAPI.Models
         public RequestEstimateOrder() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectEstimateOrder"]/Member[@name="objectEstimateOrder"]/*' />
+        [JsonConstructor]
         public RequestEstimateOrder(string? portfolio = default, string? ticker = default, Exchange exchange = default,
             decimal? price = default, int? lotQuantity = default, decimal? budget = default, string? board = default,
             bool? includeLimitOrders = false)
@@ -28,40 +29,40 @@ namespace Alor.OpenAPI.Models
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectEstimateOrder"]/Member[@name="portfolio"]/*' />
         [DataMember(Name = "portfolio", EmitDefaultValue = false)]
-        public string? Portfolio { get; private set; }
+        public string? Portfolio { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectEstimateOrder"]/Member[@name="ticker"]/*' />
         [DataMember(Name = "ticker", EmitDefaultValue = false)]
-        public string? Ticker { get; private set; }
+        public string? Ticker { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectEstimateOrder"]/Member[@name="exchange"]/*' />
         [DataMember(Name = "exchange", EmitDefaultValue = false)]
-        public Exchange Exchange { get; private set; }
+        public Exchange Exchange { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectEstimateOrder"]/Member[@name="price"]/*' />
         [DataMember(Name = "price", EmitDefaultValue = false)]
-        public decimal? Price { get; private set; }
+        public decimal? Price { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectEstimateOrder"]/Member[@name="lotQuantity"]/*' />
         [DataMember(Name = "lotQuantity", EmitDefaultValue = false)]
-        public int? LotQuantity { get; private set; }
+        public int? LotQuantity { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectEstimateOrder"]/Member[@name="budget"]/*' />
         [DataMember(Name = "budget", EmitDefaultValue = false)]
-        public decimal? Budget { get; private set; }
+        public decimal? Budget { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectEstimateOrder"]/Member[@name="board"]/*' />
         [DataMember(Name = "board", EmitDefaultValue = false)]
-        public string? Board { get; private set; }
+        public string? Board { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectEstimateOrder"]/Member[@name="includeLimitOrders"]/*' />
         [DataMember(Name = "includeLimitOrders", EmitDefaultValue = false)]
-        public bool? IncludeLimitOrders { get; private set; }
+        public bool? IncludeLimitOrders { get; init; }
 
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class objectEstimateOrder {").Append(Environment.NewLine);
+            sb.Append("class RequestEstimateOrder {").Append(Environment.NewLine);
             sb.Append("  Portfolio: ").Append(Portfolio).Append(Environment.NewLine);
             sb.Append("  Ticker: ").Append(Ticker).Append(Environment.NewLine);
             sb.Append("  Exchange: ").Append(Exchange).Append(Environment.NewLine);
@@ -76,18 +77,8 @@ namespace Alor.OpenAPI.Models
 
         public string ToJson() => Encoding.UTF8.GetString(JsonSerializer.Generic.Utf8.Serialize(this));
 
-        public override int GetHashCode() => Utilities.Utilities.GetHashCodeHelper(
-            [
-                Portfolio?.GetHashCode() ?? 0,
-                Ticker?.GetHashCode() ?? 0,
-                Exchange.GetHashCode(),
-                Price?.GetHashCode() ?? 0,
-                LotQuantity?.GetHashCode() ?? 0,
-                Budget?.GetHashCode() ?? 0,
-                Board?.GetHashCode() ?? 0,
-                IncludeLimitOrders?.GetHashCode() ?? 0,
-            ]
-        );
+        public override int GetHashCode() => HashCode.Combine(Portfolio, Ticker, Exchange, Price, LotQuantity, Budget,
+            Board, IncludeLimitOrders);
 
         private static bool EqualsHelper(RequestEstimateOrder? first, RequestEstimateOrder? second) =>
             first?.Portfolio == second?.Portfolio &&
@@ -99,8 +90,6 @@ namespace Alor.OpenAPI.Models
             first?.Board == second?.Board &&
             first?.IncludeLimitOrders == second?.IncludeLimitOrders;
 
-
-
         public bool Equals(RequestEstimateOrder? other)
         {
             if (this == (object?)other)
@@ -109,10 +98,7 @@ namespace Alor.OpenAPI.Models
             if ((object?)other == null)
                 return false;
 
-            if (GetType() != other.GetType())
-                return false;
-
-            return EqualsHelper(this, other);
+            return GetType() == other.GetType() && EqualsHelper(this, other);
         }
 
         public override bool Equals(object? obj) => Equals(obj as RequestEstimateOrder);

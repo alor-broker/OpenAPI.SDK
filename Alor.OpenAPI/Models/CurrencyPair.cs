@@ -11,6 +11,7 @@ namespace Alor.OpenAPI.Models
         public CurrencyPair() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseCurrencyPair"]/Member[@name="responseCurrencyPair"]/*' />
+        [JsonConstructor]
         public CurrencyPair(string? firstCode = default, string? secondCode = default, string? symbolTom = default)
         {
             FirstCode = firstCode;
@@ -20,15 +21,15 @@ namespace Alor.OpenAPI.Models
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseCurrencyPair"]/Member[@name="firstCode"]/*' />
         [DataMember(Name = "firstCode", EmitDefaultValue = false)]
-        public string? FirstCode { get; private set; }
+        public string? FirstCode { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseCurrencyPair"]/Member[@name="secondCode"]/*' />
         [DataMember(Name = "secondCode", EmitDefaultValue = false)]
-        public string? SecondCode { get; private set; }
+        public string? SecondCode { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseCurrencyPair"]/Member[@name="symbolTom"]/*' />
         [DataMember(Name = "symbolTom", EmitDefaultValue = false)]
-        public string? SymbolTom { get; private set; }
+        public string? SymbolTom { get; init; }
 
         public override string ToString()
         {
@@ -43,13 +44,7 @@ namespace Alor.OpenAPI.Models
 
         public string ToJson() => Encoding.UTF8.GetString(JsonSerializer.Generic.Utf8.Serialize(this));
 
-        public override int GetHashCode() => Utilities.Utilities.GetHashCodeHelper(
-            [
-                FirstCode?.GetHashCode() ?? 0,
-                SecondCode?.GetHashCode() ?? 0,
-                SymbolTom?.GetHashCode() ?? 0,
-            ]
-        );
+        public override int GetHashCode() => HashCode.Combine(FirstCode, SecondCode, SymbolTom);
 
         private static bool EqualsHelper(CurrencyPair? first, CurrencyPair? second) =>
             first?.FirstCode == second?.FirstCode &&
@@ -65,10 +60,7 @@ namespace Alor.OpenAPI.Models
             if ((object?)other == null)
                 return false;
 
-            if (GetType() != other.GetType())
-                return false;
-
-            return EqualsHelper(this, other);
+            return GetType() == other.GetType() && EqualsHelper(this, other);
         }
 
         public override bool Equals(object? obj) => Equals(obj as CurrencyPair);

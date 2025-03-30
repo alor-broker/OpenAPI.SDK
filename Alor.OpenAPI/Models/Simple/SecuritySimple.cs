@@ -12,6 +12,7 @@ namespace Alor.OpenAPI.Models.Simple
         public SecuritySimple() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSecurity"]/Member[@name="responseSecurity"]/*' />
+        [JsonConstructor]
         public SecuritySimple(string? symbol = default, string? shortname = default,
             string? description = default, Exchange exchange = default, Market market = default,
             string? type = default, decimal? lotsize = default, decimal? facevalue = default,
@@ -71,153 +72,152 @@ namespace Alor.OpenAPI.Models.Simple
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSecurity"]/Member[@name="symbol"]/*' />
         [DataMember(Name = "symbol", EmitDefaultValue = false)]
-        public string? Symbol { get; private set; }
+        public string? Symbol { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSecurity"]/Member[@name="shortname"]/*' />
         [DataMember(Name = "shortname", EmitDefaultValue = false)]
-        public string? Shortname { get; set; }
+        public string? Shortname { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSecurity"]/Member[@name="description"]/*' />
         [DataMember(Name = "description", EmitDefaultValue = false)]
-        public string? Description { get; set; }
+        public string? Description { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSecurity"]/Member[@name="exchange"]/*' />
         [DataMember(Name = "exchange", EmitDefaultValue = false)]
-        public Exchange Exchange { get; private set; }
+        public Exchange Exchange { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSecurity"]/Member[@name="market"]/*' />
         [DataMember(Name = "market", EmitDefaultValue = false)]
-        public Market Market { get;  set; }
+        public Market Market { get;  init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSecurity"]/Member[@name="type"]/*' />
         [DataMember(Name = "type", EmitDefaultValue = false)]
-        public string? Type { get; set; }
+        public string? Type { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSecurity"]/Member[@name="lotsize"]/*' />
         [DataMember(Name = "lotsize", EmitDefaultValue = false)]
-        public decimal? Lotsize { get; set; }
+        public decimal? Lotsize { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSecurity"]/Member[@name="facevalue"]/*' />
         [DataMember(Name = "facevalue", EmitDefaultValue = false)]
-        public decimal? Facevalue { get; set; }
+        public decimal? Facevalue { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSecurity"]/Member[@name="cfiCode"]/*' />
         [DataMember(Name = "cfiCode", EmitDefaultValue = false)]
-        public string? CfiCode { get; set; }
+        public string? CfiCode { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSecurity"]/Member[@name="cancellation"]/*' />
         [DataMember(Name = "cancellation", EmitDefaultValue = false)]
-        public string? Cancellation { get; set; }
+        public string? Cancellation { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSecurity"]/Member[@name="minstep"]/*' />
         [DataMember(Name = "minstep", EmitDefaultValue = false)]
-        public decimal? Minstep { get; set; }
+        public decimal? Minstep { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSecurity"]/Member[@name="rating"]/*' />
         [DataMember(Name = "rating", EmitDefaultValue = false)]
-        public decimal? Rating { get; set; }
+        public decimal? Rating { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSecurity"]/Member[@name="marginbuy"]/*' />
         [DataMember(Name = "marginbuy", EmitDefaultValue = false)]
-        public decimal? Marginbuy { get; set; }
+        public decimal? Marginbuy { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSecurity"]/Member[@name="marginsell"]/*' />
         [DataMember(Name = "marginsell", EmitDefaultValue = false)]
-        public decimal? Marginsell { get; set; }
+        public decimal? Marginsell { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSecurity"]/Member[@name="marginrate"]/*' />
         [DataMember(Name = "marginrate", EmitDefaultValue = false)]
-        public decimal? Marginrate { get; set; }
+        public decimal? Marginrate { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSecurity"]/Member[@name="pricestep"]/*' />
         [DataMember(Name = "pricestep", EmitDefaultValue = false)]
-        public decimal? Pricestep { get; set; }
+        public decimal? Pricestep { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSecurity"]/Member[@name="priceMax"]/*' />
         [DataMember(Name = "priceMax", EmitDefaultValue = false)]
-        public decimal? PriceMax { get; set; }
+        public decimal? PriceMax { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSecurity"]/Member[@name="priceMin"]/*' />
         [DataMember(Name = "priceMin", EmitDefaultValue = false)]
-        public decimal? PriceMin { get; set; }
+        public decimal? PriceMin { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSecurity"]/Member[@name="theorPrice"]/*' />
         [DataMember(Name = "theorPrice", EmitDefaultValue = false)]
-        public decimal? TheorPrice { get; set; }
+        public decimal? TheorPrice { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSecurity"]/Member[@name="theorPriceLimit"]/*' />
         [DataMember(Name = "theorPriceLimit", EmitDefaultValue = false)]
-        public decimal? TheorPriceLimit { get; set; }
+        public decimal? TheorPriceLimit { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSecurity"]/Member[@name="volatility"]/*' />
         [DataMember(Name = "volatility", EmitDefaultValue = false)]
-        public decimal? Volatility { get; set; }
+        public decimal? Volatility { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSecurity"]/Member[@name="currency"]/*' />
         [DataMember(Name = "currency", EmitDefaultValue = false)]
-        public string? Currency { get; set; }
+        public string? Currency { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSecurity"]/Member[@name="isin"]/*' />
         [DataMember(Name = "ISIN", EmitDefaultValue = false)]
-        public string? Isin { get; set; }
+        public string? Isin { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSecurity"]/Member[@name="yield"]/*' />
         [DataMember(Name = "yield", EmitDefaultValue = false)]
-        public decimal? Yield { get; set; }
+        public decimal? Yield { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSecurity"]/Member[@name="board"]/*' />
         [DataMember(Name = "board", EmitDefaultValue = false)]
-        public string? Board { get; private set; }
+        public string? Board { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSecurity"]/Member[@name="primaryBoard"]/*' />
         [DataMember(Name = "primary_board", EmitDefaultValue = false)]
-        public string? PrimaryBoard { get; set; }
+        public string? PrimaryBoard { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSecurity"]/Member[@name="tradingStatus"]/*' />
         [DataMember(Name = "tradingStatus", EmitDefaultValue = false)]
-        public int? TradingStatus { get; set; }
+        public int? TradingStatus { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSecurity"]/Member[@name="tradingStatusInfo"]/*' />
         [DataMember(Name = "tradingStatusInfo", EmitDefaultValue = false)]
-        public string? TradingStatusInfo { get; set; }
+        public string? TradingStatusInfo { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSecurity"]/Member[@name="complexProductCategory"]/*' />
         [DataMember(Name = "complexProductCategory", EmitDefaultValue = false)]
-        public string? ComplexProductCategory { get; set; }
+        public string? ComplexProductCategory { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSecurity"]/Member[@name="priceMultiplier"]/*' />
         [DataMember(Name = "priceMultiplier", EmitDefaultValue = false)]
-        public decimal? PriceMultiplier { get; set; }
+        public decimal? PriceMultiplier { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSecurity"]/Member[@name="priceShownUnits"]/*' />
         [DataMember(Name = "priceShownUnits", EmitDefaultValue = false)]
-        public decimal? PriceShownUnits { get; set; }
+        public decimal? PriceShownUnits { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSecurity"]/Member[@name="strikePrice"]/*' />
         [DataMember(Name = "strikePrice", EmitDefaultValue = false)]
-        public decimal? StrikePrice { get; set; }
+        public decimal? StrikePrice { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSecurity"]/Member[@name="endExpiration"]/*' />
         [DataMember(Name = "endExpiration", EmitDefaultValue = false)]
-        public DateTime? EndExpiration { get; set; }
+        public DateTime? EndExpiration { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSecurity"]/Member[@name="fixedSpotDiscount"]/*' />
         [DataMember(Name = "fixedSpotDiscount", EmitDefaultValue = false)]
-        public decimal? FixedSpotDiscount { get; set; }
+        public decimal? FixedSpotDiscount { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSecurity"]/Member[@name="projectedSpotDiscount"]/*' />
         [DataMember(Name = "projectedSpotDiscount", EmitDefaultValue = false)]
-        public decimal? ProjectedSpotDiscount { get; set; }
+        public decimal? ProjectedSpotDiscount { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSecurity"]/Member[@name="underlyingSymbol"]/*' />
         [DataMember(Name = "underlyingSymbol", EmitDefaultValue = false)]
-        public string? UnderlyingSymbol { get; set; }
+        public string? UnderlyingSymbol { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSecurity"]/Member[@name="optionSide"]/*' />
         [DataMember(Name = "optionSide", EmitDefaultValue = false)]
-        public OptionSide? OptionSide { get; set; }
-
-
+        public OptionSide? OptionSide { get; init; }
+        
         public override string ToString()
         {
             var sb = new StringBuilder();
@@ -265,13 +265,48 @@ namespace Alor.OpenAPI.Models.Simple
 
         public string ToJson() => Encoding.UTF8.GetString(JsonSerializer.Generic.Utf8.Serialize(this));
 
-        public override int GetHashCode() => Utilities.Utilities.GetHashCodeHelper(
-            [
-                Symbol?.GetHashCode() ?? 0,
-                Exchange.GetHashCode(),
-                Board?.GetHashCode() ?? 0,
-            ]
-        );
+        public override int GetHashCode()
+        {
+            var hash = new HashCode();
+            hash.Add(Symbol);
+            hash.Add(Shortname);
+            hash.Add(Description);
+            hash.Add(Exchange);
+            hash.Add(Market);
+            hash.Add(Type);
+            hash.Add(Lotsize);
+            hash.Add(Facevalue);
+            hash.Add(CfiCode);
+            hash.Add(Cancellation);
+            hash.Add(Minstep);
+            hash.Add(Rating);
+            hash.Add(Marginbuy);
+            hash.Add(Marginsell);
+            hash.Add(Marginrate);
+            hash.Add(Pricestep);
+            hash.Add(PriceMax);
+            hash.Add(PriceMin);
+            hash.Add(TheorPrice);
+            hash.Add(TheorPriceLimit);
+            hash.Add(Volatility);
+            hash.Add(Currency);
+            hash.Add(Isin);
+            hash.Add(Yield);
+            hash.Add(Board);
+            hash.Add(PrimaryBoard);
+            hash.Add(TradingStatus);
+            hash.Add(TradingStatusInfo);
+            hash.Add(ComplexProductCategory);
+            hash.Add(PriceMultiplier);
+            hash.Add(PriceShownUnits);
+            hash.Add(StrikePrice);
+            hash.Add(EndExpiration);
+            hash.Add(FixedSpotDiscount);
+            hash.Add(ProjectedSpotDiscount);
+            hash.Add(UnderlyingSymbol);
+            hash.Add(OptionSide);
+            return hash.ToHashCode();
+        }
 
         private static bool EqualsHelper(SecuritySimple? first, SecuritySimple? second) =>
             first?.Symbol == second?.Symbol &&
@@ -320,10 +355,7 @@ namespace Alor.OpenAPI.Models.Simple
             if ((object?)other == null)
                 return false;
 
-            if (GetType() != other.GetType())
-                return false;
-
-            return EqualsHelper(this, other);
+            return GetType() == other.GetType() && EqualsHelper(this, other);
         }
 
         public override bool Equals(object? obj) => Equals(obj as SecuritySimple);

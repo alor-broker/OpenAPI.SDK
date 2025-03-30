@@ -11,6 +11,7 @@ namespace Alor.OpenAPI.Models.Heavy
         public CandleHeavy() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseHistoryObject"]/Member[@name="responseHistoryObject"]/*' />
+        [JsonConstructor]
         public CandleHeavy(long? time = default, decimal? close = default,
             decimal? open = default, decimal? high = default, decimal? low = default,
             int? volume = default)
@@ -25,27 +26,27 @@ namespace Alor.OpenAPI.Models.Heavy
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseHistoryObject"]/Member[@name="time"]/*' />
         [DataMember(Name = "time", EmitDefaultValue = false)]
-        public long? Time { get; private set; }
+        public long? Time { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseHistoryObject"]/Member[@name="close"]/*' />
         [DataMember(Name = "close", EmitDefaultValue = false)]
-        public decimal? Close { get; private set; }
+        public decimal? Close { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseHistoryObject"]/Member[@name="open"]/*' />
         [DataMember(Name = "open", EmitDefaultValue = false)]
-        public decimal? Open { get; private set; }
+        public decimal? Open { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseHistoryObject"]/Member[@name="high"]/*' />
         [DataMember(Name = "high", EmitDefaultValue = false)]
-        public decimal? High { get; private set; }
+        public decimal? High { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseHistoryObject"]/Member[@name="low"]/*' />
         [DataMember(Name = "low", EmitDefaultValue = false)]
-        public decimal? Low { get; private set; }
+        public decimal? Low { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseHistoryObject"]/Member[@name="volume"]/*' />
         [DataMember(Name = "volume", EmitDefaultValue = false)]
-        public int? Volume { get; private set; }
+        public int? Volume { get; init; }
 
         public override string ToString()
         {
@@ -63,16 +64,7 @@ namespace Alor.OpenAPI.Models.Heavy
 
         public string ToJson() => Encoding.UTF8.GetString(JsonSerializer.Generic.Utf8.Serialize(this));
 
-        public override int GetHashCode() => Utilities.Utilities.GetHashCodeHelper(
-            [
-                Time?.GetHashCode() ?? 0,
-                Close?.GetHashCode() ?? 0,
-                Open?.GetHashCode() ?? 0,
-                High?.GetHashCode() ?? 0,
-                Low?.GetHashCode() ?? 0,
-                Volume?.GetHashCode() ?? 0,
-            ]
-        );
+        public override int GetHashCode() => HashCode.Combine(Time, Close, Open, High, Low, Volume);
 
         private static bool EqualsHelper(CandleHeavy? first, CandleHeavy? second) =>
             first?.Time == second?.Time &&
@@ -82,7 +74,6 @@ namespace Alor.OpenAPI.Models.Heavy
             first?.Low == second?.Low &&
             first?.Volume == second?.Volume;
 
-
         public bool Equals(CandleHeavy? other)
         {
             if (this == (object?)other)
@@ -91,10 +82,7 @@ namespace Alor.OpenAPI.Models.Heavy
             if ((object?)other == null)
                 return false;
 
-            if (GetType() != other.GetType())
-                return false;
-
-            return EqualsHelper(this, other);
+            return GetType() == other.GetType() && EqualsHelper(this, other);
         }
 
         public override bool Equals(object? obj) => Equals(obj as CandleHeavy);

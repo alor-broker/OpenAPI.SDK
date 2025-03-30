@@ -221,10 +221,10 @@
         <see cref="ICollection{T}">ICollection</see>&lt;<see cref="PositionHeavy">PositionHeavy</see>&gt;</returns>
     </Member>
     <Member name="MdV2ClientsExchangePortfolioTradesGetSimpleAsync">
-      <summary>Информация о сделках</summary>
+      <summary>Сделки по портфелю (Все | Текущая сессия)</summary>
       <remarks>
         <b>Запрос нельзя выполнить анонимно.</b>
-        <br />Запрос информации о сделках (только за текущую торговую сессию)</remarks>
+        <br />Запрос возвращает информацию обо всех сделках с участием указанного в <paramref name="portfolio" /> портфеля за текущую торговую сессию. Временные рамки сессий зависят от выбранного рынка и могут различаться.</remarks>
       <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
       <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
       <param name="exchange">
@@ -246,10 +246,10 @@
         <see cref="ICollection{T}">ICollection</see>&lt;<see cref="TradeSimple">TradeSimple</see>&gt;</returns>
     </Member>
     <Member name="MdV2ClientsExchangePortfolioTradesGetSlimAsync">
-      <summary>Информация о сделках</summary>
+      <summary>Сделки по портфелю (Все | Текущая сессия)</summary>
       <remarks>
         <b>Запрос нельзя выполнить анонимно.</b>
-        <br />Запрос информации о сделках (только за текущую торговую сессию)</remarks>
+        <br />Запрос возвращает информацию обо всех сделках с участием указанного в <paramref name="portfolio" /> портфеля за текущую торговую сессию. Временные рамки сессий зависят от выбранного рынка и могут различаться.</remarks>
       <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
       <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
       <param name="exchange">
@@ -271,10 +271,10 @@
         <see cref="ICollection{T}">ICollection</see>&lt;<see cref="TradeSlim">TradeSlim</see>&gt;</returns>
     </Member>
     <Member name="MdV2ClientsExchangePortfolioTradesGetHeavyAsync">
-      <summary>Информация о сделках</summary>
+      <summary>Сделки по портфелю (Все | Текущая сессия)</summary>
       <remarks>
         <b>Запрос нельзя выполнить анонимно.</b>
-        <br />Запрос информации о сделках (только за текущую торговую сессию)</remarks>
+        <br />Запрос возвращает информацию обо всех сделках с участием указанного в <paramref name="portfolio" /> портфеля за текущую торговую сессию. Временные рамки сессий зависят от выбранного рынка и могут различаться.</remarks>
       <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
       <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
       <param name="exchange">
@@ -296,10 +296,10 @@
         <see cref="ICollection{T}">ICollection</see>&lt;<see cref="TradeHeavy">TradeHeavy</see>&gt;</returns>
     </Member>
     <Member name="MdV2ClientsExchangePortfolioSymbolTradesGetSimpleAsync">
-      <summary>Информация о сделках по выбранному инструменту</summary>
+      <summary>Сделки по портфелю (Инструмент | Текущая сессия)</summary>
       <remarks>
         <b>Запрос нельзя выполнить анонимно.</b>
-        <br />Запрос информации о сделках по выбранному инструменту</remarks>
+        <br />Запрос возвращает информацию обо всех сделках с участием указанного в <paramref name="portfolio" /> портфеля по указанному в <paramref name="symbol" /> финансовому инструменту за текущую торговую сессию. Временные рамки сессий зависят от выбранного рынка и могут различаться.</remarks>
       <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
       <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
       <param name="exchange">
@@ -328,10 +328,10 @@
         <see cref="ICollection{T}">ICollection</see>&lt;<see cref="TradeSimple">TradeSimple</see>&gt;</returns>
     </Member>
     <Member name="MdV2ClientsExchangePortfolioSymbolTradesGetSlimAsync">
-      <summary>Информация о сделках по выбранному инструменту</summary>
+      <summary>Сделки по портфелю (Инструмент | Текущая сессия)</summary>
       <remarks>
         <b>Запрос нельзя выполнить анонимно.</b>
-        <br />Запрос информации о сделках по выбранному инструменту</remarks>
+        <br />Запрос возвращает информацию обо всех сделках с участием указанного в <paramref name="portfolio" /> портфеля по указанному в <paramref name="symbol" /> финансовому инструменту за текущую торговую сессию. Временные рамки сессий зависят от выбранного рынка и могут различаться.</remarks>
       <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
       <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
       <param name="exchange">
@@ -360,10 +360,10 @@
         <see cref="ICollection{T}">ICollection</see>&lt;<see cref="TradeSlim">TradeSlim</see>&gt;</returns>
     </Member>
     <Member name="MdV2ClientsExchangePortfolioSymbolTradesGetHeavyAsync">
-      <summary>Информация о сделках по выбранному инструменту</summary>
+      <summary>Сделки по портфелю (Инструмент | Текущая сессия)</summary>
       <remarks>
         <b>Запрос нельзя выполнить анонимно.</b>
-        <br />Запрос информации о сделках по выбранному инструменту</remarks>
+        <br />Запрос возвращает информацию обо всех сделках с участием указанного в <paramref name="portfolio" /> портфеля по указанному в <paramref name="symbol" /> финансовому инструменту за текущую торговую сессию. Временные рамки сессий зависят от выбранного рынка и могут различаться.</remarks>
       <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
       <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
       <param name="exchange">
@@ -533,10 +533,10 @@
       </returns>
     </Member>
     <Member name="MdV2StatsExchangePortfolioHistoryTradesGetSimpleAsync">
-      <summary>История сделок v2</summary>
+      <summary>Сделки по портфелю (Все | Прошлые сессии)</summary>
       <remarks>
         <b>Запрос нельзя выполнить анонимно.</b>
-        <br />Запрос списка сделок за предыдущие дни (не более 1000 сделок за одинзапрос)</remarks>
+        <br />Запрос возвращает информацию обо всех сделках с участием указанного в <paramref name="portfolio" /> портфеля за прошлые торговые сессии. Информация за текущую торговую сессию в ответ не входит — для её получения используйте соответствующий запрос. Временные рамки сессий зависят от выбранного рынка и могут различаться. За один запрос можно вернуть не более 1000 записей. При использовании единой денежной позиции параметр <paramref name="orderByTradeDate" /> должен быть <paramref name="true" /> для корректной сортировки результатов. Сделки, относящиеся к разным рынкам, могут иметь разную длину идентификатора, в связи с чем стандартная сортировка по ID может возвращать результаты в некорректной последовательности</remarks>
       <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
       <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
       <param name="exchange">
@@ -560,11 +560,21 @@
           <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
         </list>
       </param>
-      <param name="dateFrom">Начиная с какой даты отдавать историю сделок</param>
+      <param name="dateFrom">
+        <description>Начало отрезка времени, за которое требуется получить историю сделок. Может содержать:</description>
+        <list type="bullet">
+          <item>только дату (например, <paramref name="2021-10-13" />)</item>
+          <item>дату и время в формате UTC (например, <paramref name="2021-10-13T09:00:00.0000000Z" />)</item>
+        </list>
+        <description>Если точное время не указано, к значению даты будет автоматически добавляться <paramref name="00:00:00.0000000Z" />. </description>
+      </param>
       <param name="ticker">Тикер\код инструмента, ISIN для облигаций</param>
       <param name="from">Начальный номер сделки для фильтра результатов</param>
       <param name="limit">Количество возвращаемых записей (1-1000)</param>
-      <param name="orderByTradeDate">Флаг сортировки возвращаемых результатов по дате совершения сделки</param>
+      <param name="orderByTradeDate">Флаг сортировки возвращаемых результатов по дате совершения сделки.
+
+При использовании единой денежной позиции должен быть <paramref name="true" /> для корректной сортировки результатов. Сделки, относящиеся к разным рынкам, могут иметь разную длину идентификатора, в связи с чем стандартная сортировка по ID может возвращать результаты в некорректной последовательности
+</param>
       <param name="descending">Флаг обратной сортировки выдачи</param>
       <param name="withRepo">Флаг отображения заявок с РЕПО</param>
       <param name="side">
@@ -584,10 +594,10 @@
         <see cref="ICollection{T}">ICollection</see>&lt;<see cref="TradeSimple">TradeSimple</see>&gt;</returns>
     </Member>
     <Member name="MdV2StatsExchangePortfolioHistoryTradesGetSlimAsync">
-      <summary>История сделок v2</summary>
+      <summary>Сделки по портфелю (Все | Прошлые сессии)</summary>
       <remarks>
         <b>Запрос нельзя выполнить анонимно.</b>
-        <br />Запрос списка сделок за предыдущие дни (не более 1000 сделок за одинзапрос)</remarks>
+        <br />Запрос возвращает информацию обо всех сделках с участием указанного в <paramref name="portfolio" /> портфеля за прошлые торговые сессии. Информация за текущую торговую сессию в ответ не входит — для её получения используйте соответствующий запрос. Временные рамки сессий зависят от выбранного рынка и могут различаться. За один запрос можно вернуть не более 1000 записей. При использовании единой денежной позиции параметр <paramref name="orderByTradeDate" /> должен быть <paramref name="true" /> для корректной сортировки результатов. Сделки, относящиеся к разным рынкам, могут иметь разную длину идентификатора, в связи с чем стандартная сортировка по ID может возвращать результаты в некорректной последовательности</remarks>
       <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
       <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
       <param name="exchange">
@@ -611,11 +621,21 @@
           <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
         </list>
       </param>
-      <param name="dateFrom">Начиная с какой даты отдавать историю сделок</param>
+      <param name="dateFrom">
+        <description>Начало отрезка времени, за которое требуется получить историю сделок. Может содержать:</description>
+        <list type="bullet">
+          <item>только дату (например, <paramref name="2021-10-13" />)</item>
+          <item>дату и время в формате UTC (например, <paramref name="2021-10-13T09:00:00.0000000Z" />)</item>
+        </list>
+        <description>Если точное время не указано, к значению даты будет автоматически добавляться <paramref name="00:00:00.0000000Z" />. </description>
+      </param>
       <param name="ticker">Тикер\код инструмента, ISIN для облигаций</param>
       <param name="from">Начальный номер сделки для фильтра результатов</param>
       <param name="limit">Количество возвращаемых записей (1-1000)</param>
-      <param name="orderByTradeDate">Флаг сортировки возвращаемых результатов по дате совершения сделки</param>
+      <param name="orderByTradeDate">Флаг сортировки возвращаемых результатов по дате совершения сделки.
+
+При использовании единой денежной позиции должен быть <paramref name="true" /> для корректной сортировки результатов. Сделки, относящиеся к разным рынкам, могут иметь разную длину идентификатора, в связи с чем стандартная сортировка по ID может возвращать результаты в некорректной последовательности
+</param>
       <param name="descending">Флаг обратной сортировки выдачи</param>
       <param name="withRepo">Флаг отображения заявок с РЕПО</param>
       <param name="side">
@@ -635,10 +655,10 @@
         <see cref="ICollection{T}">ICollection</see>&lt;<see cref="TradeSlim">TradeSlim</see>&gt;</returns>
     </Member>
     <Member name="MdV2StatsExchangePortfolioHistoryTradesGetHeavyAsync">
-      <summary>История сделок v2</summary>
+      <summary>Сделки по портфелю (Все | Прошлые сессии)</summary>
       <remarks>
         <b>Запрос нельзя выполнить анонимно.</b>
-        <br />Запрос списка сделок за предыдущие дни (не более 1000 сделок за одинзапрос)</remarks>
+        <br />Запрос возвращает информацию обо всех сделках с участием указанного в <paramref name="portfolio" /> портфеля за прошлые торговые сессии. Информация за текущую торговую сессию в ответ не входит — для её получения используйте соответствующий запрос. Временные рамки сессий зависят от выбранного рынка и могут различаться. За один запрос можно вернуть не более 1000 записей. При использовании единой денежной позиции параметр <paramref name="orderByTradeDate" /> должен быть <paramref name="true" /> для корректной сортировки результатов. Сделки, относящиеся к разным рынкам, могут иметь разную длину идентификатора, в связи с чем стандартная сортировка по ID может возвращать результаты в некорректной последовательности</remarks>
       <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
       <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
       <param name="exchange">
@@ -662,11 +682,21 @@
           <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
         </list>
       </param>
-      <param name="dateFrom">Начиная с какой даты отдавать историю сделок</param>
+      <param name="dateFrom">
+        <description>Начало отрезка времени, за которое требуется получить историю сделок. Может содержать:</description>
+        <list type="bullet">
+          <item>только дату (например, <paramref name="2021-10-13" />)</item>
+          <item>дату и время в формате UTC (например, <paramref name="2021-10-13T09:00:00.0000000Z" />)</item>
+        </list>
+        <description>Если точное время не указано, к значению даты будет автоматически добавляться <paramref name="00:00:00.0000000Z" />. </description>
+      </param>
       <param name="ticker">Тикер\код инструмента, ISIN для облигаций</param>
       <param name="from">Начальный номер сделки для фильтра результатов</param>
       <param name="limit">Количество возвращаемых записей (1-1000)</param>
-      <param name="orderByTradeDate">Флаг сортировки возвращаемых результатов по дате совершения сделки</param>
+      <param name="orderByTradeDate">Флаг сортировки возвращаемых результатов по дате совершения сделки.
+
+При использовании единой денежной позиции должен быть <paramref name="true" /> для корректной сортировки результатов. Сделки, относящиеся к разным рынкам, могут иметь разную длину идентификатора, в связи с чем стандартная сортировка по ID может возвращать результаты в некорректной последовательности
+</param>
       <param name="descending">Флаг обратной сортировки выдачи</param>
       <param name="withRepo">Флаг отображения заявок с РЕПО</param>
       <param name="side">
@@ -686,10 +716,10 @@
         <see cref="ICollection{T}">ICollection</see>&lt;<see cref="TradeHeavy">TradeHeavy</see>&gt;</returns>
     </Member>
     <Member name="MdV2StatsExchangePortfolioHistoryTradesSymbolGetSimpleAsync">
-      <summary>История сделок по выбранному инструменту v2</summary>
+      <summary>Сделки по портфелю (Инструмент | Прошлые сессии)</summary>
       <remarks>
         <b>Запрос нельзя выполнить анонимно.</b>
-        <br />Запрос списка сделок за предыдущие дни (не более 1000 сделок за один запрос) по одному инструменту.</remarks>
+        <br />Запрос возвращает информацию обо всех сделках с участием указанного в <paramref name="portfolio" /> портфеля по указанному в <paramref name="symbol" /> финансовому инструменту за прошлые торговые сессии. Информация за текущую торговую сессию в ответ не входит — для её получения используйте соответствующий запрос. Временные рамки сессий зависят от выбранного рынка и могут различаться. За один запрос можно вернуть не более 1000 записей. При использовании единой денежной позиции параметр <paramref name="orderByTradeDate" /> должен быть <paramref name="true" /> для корректной сортировки результатов. Сделки, относящиеся к разным рынкам, могут иметь разную длину идентификатора, в связи с чем стандартная сортировка по ID может возвращать результаты в некорректной последовательности</remarks>
       <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
       <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
       <param name="exchange">
@@ -714,10 +744,20 @@
           <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
         </list>
       </param>
-      <param name="dateFrom">Начиная с какой даты отдавать историю сделок</param>
+      <param name="dateFrom">
+        <description>Начало отрезка времени, за которое требуется получить историю сделок. Может содержать:</description>
+        <list type="bullet">
+          <item>только дату (например, <paramref name="2021-10-13" />)</item>
+          <item>дату и время в формате UTC (например, <paramref name="2021-10-13T09:00:00.0000000Z" />)</item>
+        </list>
+        <description>Если точное время не указано, к значению даты будет автоматически добавляться <paramref name="00:00:00.0000000Z" />. </description>
+      </param>
       <param name="from">Начальный номер сделки для фильтра результатов</param>
       <param name="limit">Количество возвращаемых записей (1-1000)</param>
-      <param name="orderByTradeDate">Флаг сортировки возвращаемых результатов по дате совершения сделки</param>
+      <param name="orderByTradeDate">Флаг сортировки возвращаемых результатов по дате совершения сделки.
+
+При использовании единой денежной позиции должен быть <paramref name="true" /> для корректной сортировки результатов. Сделки, относящиеся к разным рынкам, могут иметь разную длину идентификатора, в связи с чем стандартная сортировка по ID может возвращать результаты в некорректной последовательности
+</param>
       <param name="descending">Флаг обратной сортировки выдачи</param>
       <param name="withRepo">Флаг отображения заявок с РЕПО</param>
       <param name="side">
@@ -737,10 +777,10 @@
         <see cref="ICollection{T}">ICollection</see>&lt;<see cref="TradeSimple">TradeSimple</see>&gt;</returns>
     </Member>
     <Member name="MdV2StatsExchangePortfolioHistoryTradesSymbolGetSlimAsync">
-      <summary>История сделок по выбранному инструменту v2</summary>
+      <summary>Сделки по портфелю (Инструмент | Прошлые сессии)</summary>
       <remarks>
         <b>Запрос нельзя выполнить анонимно.</b>
-        <br />Запрос списка сделок за предыдущие дни (не более 1000 сделок за один запрос) по одному инструменту.</remarks>
+        <br />Запрос возвращает информацию обо всех сделках с участием указанного в <paramref name="portfolio" /> портфеля по указанному в <paramref name="symbol" /> финансовому инструменту за прошлые торговые сессии. Информация за текущую торговую сессию в ответ не входит — для её получения используйте соответствующий запрос. Временные рамки сессий зависят от выбранного рынка и могут различаться. За один запрос можно вернуть не более 1000 записей. При использовании единой денежной позиции параметр <paramref name="orderByTradeDate" /> должен быть <paramref name="true" /> для корректной сортировки результатов. Сделки, относящиеся к разным рынкам, могут иметь разную длину идентификатора, в связи с чем стандартная сортировка по ID может возвращать результаты в некорректной последовательности</remarks>
       <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
       <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
       <param name="exchange">
@@ -765,10 +805,20 @@
           <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
         </list>
       </param>
-      <param name="dateFrom">Начиная с какой даты отдавать историю сделок</param>
+      <param name="dateFrom">
+        <description>Начало отрезка времени, за которое требуется получить историю сделок. Может содержать:</description>
+        <list type="bullet">
+          <item>только дату (например, <paramref name="2021-10-13" />)</item>
+          <item>дату и время в формате UTC (например, <paramref name="2021-10-13T09:00:00.0000000Z" />)</item>
+        </list>
+        <description>Если точное время не указано, к значению даты будет автоматически добавляться <paramref name="00:00:00.0000000Z" />. </description>
+      </param>
       <param name="from">Начальный номер сделки для фильтра результатов</param>
       <param name="limit">Количество возвращаемых записей (1-1000)</param>
-      <param name="orderByTradeDate">Флаг сортировки возвращаемых результатов по дате совершения сделки</param>
+      <param name="orderByTradeDate">Флаг сортировки возвращаемых результатов по дате совершения сделки.
+
+При использовании единой денежной позиции должен быть <paramref name="true" /> для корректной сортировки результатов. Сделки, относящиеся к разным рынкам, могут иметь разную длину идентификатора, в связи с чем стандартная сортировка по ID может возвращать результаты в некорректной последовательности
+</param>
       <param name="descending">Флаг обратной сортировки выдачи</param>
       <param name="withRepo">Флаг отображения заявок с РЕПО</param>
       <param name="side">
@@ -788,10 +838,10 @@
         <see cref="ICollection{T}">ICollection</see>&lt;<see cref="TradeSlim">TradeSlim</see>&gt;</returns>
     </Member>
     <Member name="MdV2StatsExchangePortfolioHistoryTradesSymbolGetHeavyAsync">
-      <summary>История сделок по выбранному инструменту v2</summary>
+      <summary>Сделки по портфелю (Инструмент | Прошлые сессии)</summary>
       <remarks>
         <b>Запрос нельзя выполнить анонимно.</b>
-        <br />Запрос списка сделок за предыдущие дни (не более 1000 сделок за один запрос) по одному инструменту.</remarks>
+        <br />Запрос возвращает информацию обо всех сделках с участием указанного в <paramref name="portfolio" /> портфеля по указанному в <paramref name="symbol" /> финансовому инструменту за прошлые торговые сессии. Информация за текущую торговую сессию в ответ не входит — для её получения используйте соответствующий запрос. Временные рамки сессий зависят от выбранного рынка и могут различаться. За один запрос можно вернуть не более 1000 записей. При использовании единой денежной позиции параметр <paramref name="orderByTradeDate" /> должен быть <paramref name="true" /> для корректной сортировки результатов. Сделки, относящиеся к разным рынкам, могут иметь разную длину идентификатора, в связи с чем стандартная сортировка по ID может возвращать результаты в некорректной последовательности</remarks>
       <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
       <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
       <param name="exchange">
@@ -816,10 +866,20 @@
           <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
         </list>
       </param>
-      <param name="dateFrom">Начиная с какой даты отдавать историю сделок</param>
+      <param name="dateFrom">
+        <description>Начало отрезка времени, за которое требуется получить историю сделок. Может содержать:</description>
+        <list type="bullet">
+          <item>только дату (например, <paramref name="2021-10-13" />)</item>
+          <item>дату и время в формате UTC (например, <paramref name="2021-10-13T09:00:00.0000000Z" />)</item>
+        </list>
+        <description>Если точное время не указано, к значению даты будет автоматически добавляться <paramref name="00:00:00.0000000Z" />. </description>
+      </param>
       <param name="from">Начальный номер сделки для фильтра результатов</param>
       <param name="limit">Количество возвращаемых записей (1-1000)</param>
-      <param name="orderByTradeDate">Флаг сортировки возвращаемых результатов по дате совершения сделки</param>
+      <param name="orderByTradeDate">Флаг сортировки возвращаемых результатов по дате совершения сделки.
+
+При использовании единой денежной позиции должен быть <paramref name="true" /> для корректной сортировки результатов. Сделки, относящиеся к разным рынкам, могут иметь разную длину идентификатора, в связи с чем стандартная сортировка по ID может возвращать результаты в некорректной последовательности
+</param>
       <param name="descending">Флаг обратной сортировки выдачи</param>
       <param name="withRepo">Флаг отображения заявок с РЕПО</param>
       <param name="side">

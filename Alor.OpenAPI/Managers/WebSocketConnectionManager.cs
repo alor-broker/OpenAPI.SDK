@@ -165,14 +165,18 @@ namespace Alor.OpenAPI.Managers
         {
             try
             {
-                if (!_webSocketInfo.IsConnected)
-                    await StartSocketAndSubscribe(_webSocketInfo);
-
                 if (messages.Count <= 0) return false;
-                foreach (var msg in messages)
+                if (!_webSocketInfo.IsConnected)
                 {
-                    var str = msg.Replace("JwtToken", _jwtToken);
-                    await SendToSocket(_webSocketInfo, str);
+                    await StartSocketAndSubscribe(_webSocketInfo);
+                }
+                else
+                {
+                    foreach (var msg in messages)
+                    {
+                        var str = msg.Replace("JwtToken", _jwtToken);
+                        await SendToSocket(_webSocketInfo, str);
+                    }
                 }
 
                 return true;
@@ -182,7 +186,6 @@ namespace Alor.OpenAPI.Managers
                 SendSocketStatus(AlorOpenApiLogLevel.Error, $"Ошибка при отправке сообщения: {ex.Message}");
                 return false;
             }
-
         }
 
         private async Task SendToSocket(IWebSocketInfo ws, string msg)
