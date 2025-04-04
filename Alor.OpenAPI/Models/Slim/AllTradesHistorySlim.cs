@@ -38,7 +38,20 @@ namespace Alor.OpenAPI.Models.Slim
 
         public string ToJson() => Encoding.UTF8.GetString(JsonSerializer.Generic.Utf8.Serialize(this));
 
-        public override int GetHashCode() => HashCode.Combine(Total, List);
+        public override int GetHashCode()
+        {
+            var hash = new HashCode();
+
+            hash.Add(Total);
+            if (List == null) return hash.ToHashCode();
+
+            foreach (var item in List)
+            {
+                hash.Add(item.GetHashCode());
+            }
+
+            return hash.ToHashCode();
+        }
 
         private static bool EqualsHelper(AllTradesHistorySlim? first, AllTradesHistorySlim? second)
         {

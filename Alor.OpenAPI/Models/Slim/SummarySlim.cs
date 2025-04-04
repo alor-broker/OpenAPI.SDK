@@ -102,7 +102,13 @@ namespace Alor.OpenAPI.Models.Slim
             hash.Add(InitialMargin);
             hash.Add(RiskBeforeForcePositionClosing);
             hash.Add(Commission);
-            hash.Add(BuyingPowerByCurrency);
+
+            if (BuyingPowerByCurrency == null) return hash.ToHashCode();
+            foreach (var item in BuyingPowerByCurrency)
+            {
+                hash.Add(item.GetHashCode());
+            }
+            
             return hash.ToHashCode();
         }
 

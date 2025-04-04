@@ -51,7 +51,26 @@ namespace Alor.OpenAPI.Models.Slim
 
         public string ToJson() => Encoding.UTF8.GetString(SpanJson.JsonSerializer.Generic.Utf8.Serialize(this));
 
-        public override int GetHashCode() => HashCode.Combine(Bids, Asks, MsTimestamp, Existing);
+        public override int GetHashCode()
+        {
+            var hash = new HashCode();
+
+            if (Asks != null)
+                foreach (var ask in Asks)
+                {
+                    hash.Add(ask.GetHashCode());
+                }
+
+            if (Bids != null)
+                foreach (var bid in Bids)
+                {
+                    hash.Add(bid.GetHashCode());
+                }
+
+            hash.Add(MsTimestamp);
+            hash.Add(Existing);
+            return hash.ToHashCode();
+        }
 
         private static bool EqualsHelper(OrderbookSlim? first, OrderbookSlim? second) =>
             first?.Bids != null && second?.Bids != null

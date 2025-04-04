@@ -71,8 +71,25 @@ namespace Alor.OpenAPI.Models
 
         public string ToJson() => Encoding.UTF8.GetString(SpanJson.JsonSerializer.Generic.Utf8.Serialize(this));
 
-        public override int GetHashCode() =>
-            HashCode.Combine(Id, Login, Orders, ExecutionPolicy, Status, CreatedAt, ClosedAt);
+        public override int GetHashCode()
+        {
+            var hash = new HashCode();
+            hash.Add(Id);
+            hash.Add(Login);
+
+            if (Orders == null) return hash.ToHashCode();
+            foreach (var item in Orders)
+            {
+                hash.Add(item.GetHashCode());
+            }
+
+            hash.Add(ExecutionPolicy);
+            hash.Add(Status);
+            hash.Add(CreatedAt);
+            hash.Add(ClosedAt);
+            return hash.ToHashCode();
+        }
+
 
         private static bool EqualsHelper(ResponseOrderGroupInfo? first,
             ResponseOrderGroupInfo? second) =>

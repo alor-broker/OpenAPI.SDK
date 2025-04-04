@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
+using Alor.OpenAPI.Enums;
 using SpanJson;
 
 namespace Alor.OpenAPI.Models
@@ -38,7 +39,19 @@ namespace Alor.OpenAPI.Models
 
         public string ToJson() => Encoding.UTF8.GetString(JsonSerializer.Generic.Utf8.Serialize(this));
 
-        public override int GetHashCode() => HashCode.Combine(Total, List);
+        public override int GetHashCode()
+        {
+            var hash = new HashCode();
+            hash.Add(Total);
+
+            if (List == null) return hash.ToHashCode();
+            foreach (var item in List)
+            {
+                hash.Add(item.GetHashCode());
+            }
+
+            return hash.ToHashCode();
+        }
 
         private static bool EqualsHelper(RiskRates? first, RiskRates? second)
         {

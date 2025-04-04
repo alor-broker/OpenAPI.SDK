@@ -44,7 +44,19 @@ namespace Alor.OpenAPI.Models
 
         public string ToJson() => Encoding.UTF8.GetString(JsonSerializer.Generic.Utf8.Serialize(this));
 
-        public override int GetHashCode() => HashCode.Combine(Orders, ExecutionPolicy);
+        public override int GetHashCode()
+        {
+            var hash = new HashCode();
+
+            if (Orders == null) return hash.ToHashCode();
+            foreach (var item in Orders)
+            {
+                hash.Add(item.GetHashCode());
+            }
+
+            hash.Add(ExecutionPolicy);
+            return hash.ToHashCode();
+        }
 
         private static bool EqualsHelper(RequestCreateOrderGroup? first, RequestCreateOrderGroup? second) =>
             first?.Orders != null && second?.Orders != null

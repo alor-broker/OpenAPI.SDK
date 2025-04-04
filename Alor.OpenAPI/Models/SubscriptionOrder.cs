@@ -86,7 +86,13 @@ namespace Alor.OpenAPI.Models
             var hash = new HashCode();
             hash.Add(Opcode);
             hash.Add(Portfolio);
-            hash.Add(OrderStatuses);
+
+            if (OrderStatuses != null)
+                foreach (var item in OrderStatuses)
+                {
+                    hash.Add(item);
+                }
+
             hash.Add(SkipHistory);
             hash.Add(Exchange);
             hash.Add(Format);

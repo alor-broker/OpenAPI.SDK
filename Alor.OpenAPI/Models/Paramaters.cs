@@ -112,19 +112,25 @@ namespace Alor.OpenAPI.Models
         {
             var hash = new HashCode();
             hash.Add(Guid);
-                hash.Add(Portfolio);
-                hash.Add(Code);
-                hash.Add(InstrumentGroup);
-                hash.Add(Exchange);
-                hash.Add(Depth);
-                hash.Add(Tf);
-                hash.Add(From);
-                hash.Add(SkipHistory);
-                hash.Add(SplitAdjust);
-                hash.Add(SliceMode);
-                hash.Add(IncludeVirtualTrades);
-                hash.Add(OrderStatuses);
-                return hash.ToHashCode();
+            hash.Add(Portfolio);
+            hash.Add(Code);
+            hash.Add(InstrumentGroup);
+            hash.Add(Exchange);
+            hash.Add(Depth);
+            hash.Add(Tf);
+            hash.Add(From);
+            hash.Add(SkipHistory);
+            hash.Add(SplitAdjust);
+            hash.Add(SliceMode);
+            hash.Add(IncludeVirtualTrades);
+
+            if (OrderStatuses == null) return hash.ToHashCode();
+            foreach (var item in OrderStatuses)
+            {
+                hash.Add(item.GetHashCode());
+            }
+
+            return hash.ToHashCode();
         }
 
         private static bool EqualsHelper(Parameters? first, Parameters? second) =>
