@@ -75,7 +75,7 @@ class Program
         // Подписка на данные стаканов
         var orderbookSubscriptions = await client.WsPoolManager.Subscriptions.OrderBookGetAndSubscribeSimpleAsync(
             data => Console.WriteLine($"Обновление стакана: {data}"),
-            instruments.Take(5),
+            instruments.Take(5).Select(x=> x.Symbol),
             Exchange.MOEX
         );
     }
