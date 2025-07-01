@@ -14,7 +14,6 @@ namespace Alor.OpenAPI.Models.Slim
         public WsSummarySlim() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsResponseSubSummariesGetAndSubscribeV2"]/Member[@name="wsResponseSubSummariesGetAndSubscribeV2"]/*' />
-        [SpanJson.JsonConstructor]
         public WsSummarySlim(SummarySlim? dataSlim, string? guid)
         {
             Data = dataSlim;

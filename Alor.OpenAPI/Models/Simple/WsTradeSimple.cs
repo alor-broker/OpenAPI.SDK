@@ -14,7 +14,6 @@ namespace Alor.OpenAPI.Models.Simple
         public WsTradeSimple() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsResponseSubTradesGetAndSubscribe"]/Member[@name="wsResponseSubTradesGetAndSubscribe"]/*' />
-        [SpanJson.JsonConstructor]
         public WsTradeSimple(TradeSimple? data, string? guid)
         {
             Data = data;

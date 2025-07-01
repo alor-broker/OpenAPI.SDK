@@ -12,7 +12,6 @@ namespace Alor.OpenAPI.Models
         public CwsRequestOrderLimit() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderLimit"]/Member[@name="wsCmdUpdateOrderLimit"]/*' />
-        [JsonConstructor]
         public CwsRequestOrderLimit(string? opcode = default, string? guid = default, string? orderId = default,
             Side side = default, int? quantity = default, decimal? price = default, Instrument? instrument = default,
             Exchange? exchange = default, string? comment = default, string? board = default, User? user = default,

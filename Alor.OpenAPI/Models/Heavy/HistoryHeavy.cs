@@ -11,7 +11,6 @@ namespace Alor.OpenAPI.Models.Heavy
         public HistoryHeavy() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseHistory"]/Member[@name="responseHistory"]/*' />
-        [JsonConstructor]
         public HistoryHeavy(List<CandleHeavy>? history = default, long? next = default,
             long? prev = default)
         {

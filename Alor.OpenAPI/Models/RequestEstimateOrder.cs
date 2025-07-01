@@ -12,7 +12,6 @@ namespace Alor.OpenAPI.Models
         public RequestEstimateOrder() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectEstimateOrder"]/Member[@name="objectEstimateOrder"]/*' />
-        [JsonConstructor]
         public RequestEstimateOrder(string? portfolio = default, string? ticker = default, Exchange exchange = default,
             decimal? price = default, int? lotQuantity = default, decimal? budget = default, string? board = default,
             bool? includeLimitOrders = false)

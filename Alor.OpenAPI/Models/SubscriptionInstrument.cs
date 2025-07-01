@@ -12,7 +12,6 @@ namespace Alor.OpenAPI.Models
         public SubscriptionInstrument() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubInstrumentsGetAndSubscribeV2"]/Member[@name="wsSubInstrumentsGetAndSubscribeV2"]/*' />
-        [JsonConstructor]
         public SubscriptionInstrument(string? code = default, string? instrumentGroup = default,
             Exchange exchange = default, Format format = default, int? frequency = default, string? guid = default)
         {

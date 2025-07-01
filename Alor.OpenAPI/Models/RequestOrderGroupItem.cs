@@ -12,7 +12,6 @@ namespace Alor.OpenAPI.Models
         public RequestOrderGroupItem() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectOrderGroupItem"]/Member[@name="objectOrderGroupItem"]/*' />
-        [JsonConstructor]
         public RequestOrderGroupItem(string? portfolio = default, Exchange exchange = default, string? orderId = default, OrderType type = default)
         {
             Portfolio = portfolio;

@@ -12,7 +12,6 @@ namespace Alor.OpenAPI.Models
         public RequestOrdersActionsMarketTv() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsMarketTV"]/Member[@name="OrdersActionsMarketTV"]/*' />
-        [JsonConstructor]
         public RequestOrdersActionsMarketTv(Side side = default,
             int? quantity = default, Instrument? instrument = default, string? comment = default,
             User? user = default, TimeInForce? timeInForce = default, bool? allowMargin = default)

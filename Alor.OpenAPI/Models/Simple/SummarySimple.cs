@@ -11,7 +11,6 @@ namespace Alor.OpenAPI.Models.Simple
         public SummarySimple() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSummary"]/Member[@name="responseSummary"]/*' />
-        [JsonConstructor]
         public SummarySimple(decimal? buyingPowerAtMorning = default, decimal? buyingPower = default,
             decimal? profit = default, decimal? profitRate = default,
             decimal? portfolioEvaluation = default, decimal? portfolioLiquidationValue = default,

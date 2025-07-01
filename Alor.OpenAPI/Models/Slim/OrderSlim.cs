@@ -13,7 +13,6 @@ namespace Alor.OpenAPI.Models.Slim
         public OrderSlim() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrder"]/Member[@name="responseOrder"]/*' />
-        [JsonConstructor]
         public OrderSlim(string? id = default, string? symbol = default, string? board = default,
             string? brokerSymbol = default,
             string? portfolio = default, Exchange exchange = default, string? comment = default,

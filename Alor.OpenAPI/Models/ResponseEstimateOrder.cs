@@ -12,7 +12,6 @@ namespace Alor.OpenAPI.Models
         public ResponseEstimateOrder() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseEstimateOrder"]/Member[@name="responseEstimateOrder"]/*' />
-        [JsonConstructor]
         public ResponseEstimateOrder(string? portfolio = default, string? ticker = default, Exchange exchange = default,
             decimal? quantityToSell = default, decimal? quantityToBuy = default,
             decimal? notMarginQuantityToSell = default, decimal? notMarginQuantityToBuy = default,

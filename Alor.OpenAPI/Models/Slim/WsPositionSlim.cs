@@ -14,7 +14,6 @@ namespace Alor.OpenAPI.Models.Slim
         public WsPositionSlim() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsResponseSubPositionsGetAndSubscribe"]/Member[@name="wsResponseSubPositionsGetAndSubscribe"]/*' />
-        [SpanJson.JsonConstructor]
         public WsPositionSlim(PositionSlim? dataSlim, string? guid)
         {
             Data = dataSlim;

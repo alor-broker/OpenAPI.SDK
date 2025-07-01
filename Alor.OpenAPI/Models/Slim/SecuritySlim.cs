@@ -12,7 +12,6 @@ namespace Alor.OpenAPI.Models.Slim
         public SecuritySlim() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSecurity"]/Member[@name="responseSecurity"]/*' />
-        [JsonConstructor]
         public SecuritySlim(string? symbol = default, string? shortname = default,
             string? description = default, Exchange exchange = default, string? type = default,
             decimal? lotsize = default, decimal? facevalue = default,

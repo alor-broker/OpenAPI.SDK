@@ -11,7 +11,6 @@ namespace Alor.OpenAPI.Models.Heavy
         public OrderbookHeavy() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrderBook"]/Member[@name="responseOrderBook"]/*' />
-        [JsonConstructor]
         public OrderbookHeavy(ICollection<LiquidityHeavy>? bids, ICollection<LiquidityHeavy>? asks, long? msTimestamp, bool? existing)
         {
             Bids = bids;

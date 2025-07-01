@@ -11,7 +11,6 @@ namespace Alor.OpenAPI.Models.Simple
         public AllTradesHistorySimple() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseAllTradesHistory"]/Member[@name="responseAllTradesHistory"]/*' />
-        [JsonConstructor]
         public AllTradesHistorySimple(int? total = default, List<AllTradeSimple>? list = default)
         {
             Total = total;

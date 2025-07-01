@@ -204,6 +204,12 @@ namespace Alor.OpenAPI.Managers
             _commandWebSocket.CalculateWebSocketInfoSentRate();
         }
 
+        public void SetWsResponseMessageHandler(Action<WsResponseMessage>? handler)
+            => _webSocketMessageHandler.SetWsResponseMessageHandler(handler);
+
+        public void SetWsResponseCommandMessageHandler(Action<WsResponseCommandMessage>? handler)
+            => _webSocketMessageHandler.SetWsResponseCommandMessageHandler(handler);
+
         private Task<bool[]> OnMsgDictionaryUpdatedAsync(Dictionary<string, string> dict)
         {
             var msgDic = new Dictionary<IWebSocketConnectionManager, List<string>>();

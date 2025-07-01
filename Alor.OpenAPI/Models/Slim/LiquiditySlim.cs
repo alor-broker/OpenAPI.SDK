@@ -10,7 +10,6 @@ namespace Alor.OpenAPI.Models.Slim
     {
         public LiquiditySlim() { }
 
-        [JsonConstructor]
         public LiquiditySlim(decimal price, long volume, decimal? yield)
         {
             Price = price;

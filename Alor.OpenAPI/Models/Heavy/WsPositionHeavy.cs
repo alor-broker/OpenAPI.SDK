@@ -14,7 +14,6 @@ namespace Alor.OpenAPI.Models.Heavy
         public WsPositionHeavy() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsResponseSubPositionsGetAndSubscribe"]/Member[@name="wsResponseSubPositionsGetAndSubscribe"]/*' />
-        [SpanJson.JsonConstructor]
         public WsPositionHeavy(PositionHeavy? dataHeavy, string? guid)
         {
             Data = dataHeavy;

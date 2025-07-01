@@ -10,7 +10,6 @@ namespace Alor.OpenAPI.Models.Slim
     {
         public TradeRepoSpecificFieldsSlim() { }
 
-        [JsonConstructor]
         public TradeRepoSpecificFieldsSlim(decimal? repoRate = default, string? extRef = default, int? repoTerm = default,
             string? account = default, string? tradeTypeInfo = default, decimal? value = default,
             decimal? yield = default)

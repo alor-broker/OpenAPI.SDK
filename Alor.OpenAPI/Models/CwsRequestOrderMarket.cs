@@ -12,7 +12,6 @@ namespace Alor.OpenAPI.Models
         public CwsRequestOrderMarket() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderMarket"]/Member[@name="wsCmdUpdateOrderMarket"]/*' />
-        [JsonConstructor]
         public CwsRequestOrderMarket(string? opcode = default, string? guid = default, string? orderId = default, Side side = default,
             int? quantity = default, Instrument? instrument = default, Exchange? exchange = default, string? comment = default, string? board = default,
             User? user = default, TimeInForce? timeInForce = default, bool? checkDuplicates = default, bool? allowMargin = default)

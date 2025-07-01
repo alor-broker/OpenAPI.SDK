@@ -12,7 +12,6 @@ namespace Alor.OpenAPI.Models.Simple
         public StopOrderSimple() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseStopOrderWarp"]/Member[@name="responseStopOrderWarp"]/*' />
-        [JsonConstructor]
         public StopOrderSimple(int? id = default, long? exchangeOrderId = default,
             string? symbol = default, string? brokerSymbol = default, string? portfolio = default,
             Exchange exchange = default, string? board = default, OrderTypeStopLimit type = default,

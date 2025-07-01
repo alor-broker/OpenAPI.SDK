@@ -247,5 +247,9 @@ namespace Alor.OpenAPI.Core
         public void EnableMetricsCollection() => _metrics.EnableMetricsCollection();
         public void DisableMetricsCollection() => _metrics.DisableMetricsCollection();
 
+        public void SetWsResponseMessageHandler(Action<WsResponseMessage>? handler)
+            => ((IInternalWebSocketsPoolManagerActions)WsPoolManager).SetWsResponseMessageHandler(handler);
+        public void SetWsResponseCommandMessageHandler(Action<WsResponseCommandMessage>? handler)
+            => ((IInternalWebSocketsPoolManagerActions)WsPoolManager).SetWsResponseCommandMessageHandler(handler);
     }
 }

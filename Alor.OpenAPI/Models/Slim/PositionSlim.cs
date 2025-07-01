@@ -12,7 +12,6 @@ namespace Alor.OpenAPI.Models.Slim
         public PositionSlim() { }
 
          /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responsePosition"]/Member[@name="responsePosition"]/*' />
-        [JsonConstructor]
         public PositionSlim(decimal? volume = default, decimal? currentVolume = default,
             string? symbol = default, string? brokerSymbol = default, string? portfolio = default,
             Exchange exchange = default, decimal? avgPrice = default,

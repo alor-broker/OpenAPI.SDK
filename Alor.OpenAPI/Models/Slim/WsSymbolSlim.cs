@@ -14,7 +14,6 @@ namespace Alor.OpenAPI.Models.Slim
         public WsSymbolSlim() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsResponseSubQuotesSubscribe"]/Member[@name="wsResponseSubQuotesSubscribe"]/*' />
-        [SpanJson.JsonConstructor]
         public WsSymbolSlim(SymbolSlim? dataSlim, string? guid)
         {
             Data = dataSlim;

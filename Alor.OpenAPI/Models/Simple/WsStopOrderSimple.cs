@@ -14,7 +14,6 @@ namespace Alor.OpenAPI.Models.Simple
         public WsStopOrderSimple() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsResponseSubStopOrdersGetAndSubscribeWarp"]/Member[@name="wsResponseSubStopOrdersGetAndSubscribeWarp"]/*' />
-        [SpanJson.JsonConstructor]
         public WsStopOrderSimple(StopOrderSimple? data, string? guid)
         {
             Data = data;

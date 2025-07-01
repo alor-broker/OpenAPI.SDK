@@ -11,7 +11,6 @@ namespace Alor.OpenAPI.Models.Simple
         public HistorySimple() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseHistory"]/Member[@name="responseHistory"]/*' />
-        [JsonConstructor]
         public HistorySimple(List<CandleSimple>? history = default, long? next = default,
             long? prev = default)
         {

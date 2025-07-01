@@ -1,4 +1,5 @@
-﻿using Alor.OpenAPI.Websocket;
+﻿using Alor.OpenAPI.Models;
+using Alor.OpenAPI.Websocket;
 
 namespace Alor.OpenAPI.Interfaces
 {
@@ -13,5 +14,7 @@ namespace Alor.OpenAPI.Interfaces
         void JwtUpdate(string? newToken);
         IEnumerable<WebSocketInfoDetails> GetWebSocketsInfoDetail();
         void CalculateWebSocketsInfoSentRecieveRates();
+        void SetWsResponseMessageHandler(Action<WsResponseMessage>? handler);
+        void SetWsResponseCommandMessageHandler(Action<WsResponseCommandMessage>? handler);
     }
 }

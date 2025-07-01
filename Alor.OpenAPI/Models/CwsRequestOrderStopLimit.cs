@@ -12,7 +12,6 @@ namespace Alor.OpenAPI.Models
         public CwsRequestOrderStopLimit() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderStopLimit"]/Member[@name="wsCmdUpdateOrderStopLimit"]/*' />
-        [JsonConstructor]
         public CwsRequestOrderStopLimit(string? opcode = default, string? guid = default, string? orderId = default,
             Side side = default, Condition condition = default, decimal? triggerPrice = default,
             long? stopEndUnixTime = default, decimal? price = default, int? quantity = default,

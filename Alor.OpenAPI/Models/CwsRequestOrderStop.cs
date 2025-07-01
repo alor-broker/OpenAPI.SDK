@@ -12,7 +12,6 @@ namespace Alor.OpenAPI.Models
         public CwsRequestOrderStop() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderStop"]/Member[@name="wsCmdUpdateOrderStop"]/*' />
-        [JsonConstructor]
         public CwsRequestOrderStop(string? opcode = default, string? guid = default, string? orderId = default,
             Side side = default, Condition condition = default, decimal? triggerPrice = default, long? stopEndUnixTime = default,
             int? quantity = default, Instrument? instrument = default, Exchange? exchange = default,

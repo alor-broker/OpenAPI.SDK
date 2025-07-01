@@ -14,7 +14,6 @@ namespace Alor.OpenAPI.Models.Heavy
         public WsCandleHeavy() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsResponseSubBarsGetAndSubscribe"]/Member[@name="wsResponseSubBarsGetAndSubscribe"]/*' />
-        [SpanJson.JsonConstructor]
         public WsCandleHeavy(CandleHeavy? dataHeavy, string? guid)
         {
             Data = dataHeavy;

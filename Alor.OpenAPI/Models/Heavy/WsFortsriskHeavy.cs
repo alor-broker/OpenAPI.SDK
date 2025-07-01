@@ -14,7 +14,6 @@ namespace Alor.OpenAPI.Models.Heavy
         public WsFortsriskHeavy() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsResponseSubSpectraRisksGetAndSubscribe"]/Member[@name="wsResponseSubSpectraRisksGetAndSubscribe"]/*' />
-        [SpanJson.JsonConstructor]
         public WsFortsriskHeavy(FortsriskHeavy? dataHeavy, string? guid)
         {
             Data = dataHeavy;

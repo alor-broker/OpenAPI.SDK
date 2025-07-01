@@ -11,7 +11,6 @@ namespace Alor.OpenAPI.Models.Slim
         public BuyingPowerByCurrencySlim() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectBuyingPowerByCurrency"]/Member[@name="objectBuyingPowerByCurrency"]/*' />
-        [JsonConstructor]
         public BuyingPowerByCurrencySlim(string? currency = default, decimal? buyingPower = default)
         {
             Currency = currency;

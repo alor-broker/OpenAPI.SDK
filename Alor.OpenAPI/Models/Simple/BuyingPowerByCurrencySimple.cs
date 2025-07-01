@@ -11,7 +11,6 @@ namespace Alor.OpenAPI.Models.Simple
         public BuyingPowerByCurrencySimple() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectBuyingPowerByCurrency"]/Member[@name="objectBuyingPowerByCurrency"]/*' />
-        [JsonConstructor]
         public BuyingPowerByCurrencySimple(string? currency = default, decimal? buyingPower = default)
         {
             Currency = currency;

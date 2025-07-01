@@ -14,7 +14,6 @@ namespace Alor.OpenAPI.Models.Slim
         public WsAllTradeSlim() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsResponseSubAllTradesGetAndSubscribe"]/Member[@name="wsResponseSubAllTradesGetAndSubscribe"]/*' />
-        [SpanJson.JsonConstructor]
         public WsAllTradeSlim(AllTradeSlim? dataSlim, string? guid)
         {
             Data = dataSlim;

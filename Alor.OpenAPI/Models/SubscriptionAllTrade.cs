@@ -12,7 +12,6 @@ namespace Alor.OpenAPI.Models
         public SubscriptionAllTrade() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubAllTradesGetAndSubscribe"]/Member[@name="wsSubAllTradesGetAndSubscribe"]/*' />
-        [JsonConstructor]
         public SubscriptionAllTrade(string? code = default, int? depth = default, bool? includeVirtualTrades = default,
             string? instrumentGroup = default, Exchange exchange = default, Format format = default,
             int? frequency = default, string? guid = default)

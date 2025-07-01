@@ -12,7 +12,6 @@ namespace Alor.OpenAPI.Models.Heavy
         public SecurityFromWsHeavy() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseInstruments"]/Member[@name="responseInstruments"]/*' />
-        [JsonConstructor]
         public SecurityFromWsHeavy(string? symbol = default, Exchange exchange = default,
             string? board = default, decimal? priceMax = default, decimal? priceMin = default,
             int? tradingStatus = default, string? tradingStatusInfo = default,

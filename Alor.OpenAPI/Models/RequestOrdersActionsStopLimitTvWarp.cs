@@ -13,7 +13,6 @@ namespace Alor.OpenAPI.Models
         public RequestOrdersActionsStopLimitTvWarp() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsStopLimitTVWarp"]/Member[@name="OrdersActionsStopLimitTVWarp"]/*' />
-        [JsonConstructor]
         public RequestOrdersActionsStopLimitTvWarp(Side side = default, Condition condition = default,
             decimal? triggerPrice = default, long? stopEndUnixTime = default, decimal? price = default,
             int? quantity = default, Instrument? instrument = default,

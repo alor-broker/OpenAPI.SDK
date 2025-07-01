@@ -14,7 +14,6 @@ namespace Alor.OpenAPI.Models.Simple
         public WsSummarySimple() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsResponseSubSummariesGetAndSubscribeV2"]/Member[@name="wsResponseSubSummariesGetAndSubscribeV2"]/*' />
-        [SpanJson.JsonConstructor]
         public WsSummarySimple(SummarySimple? data, string? guid)
         {
             Data = data;

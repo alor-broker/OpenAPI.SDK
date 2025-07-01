@@ -14,7 +14,6 @@ namespace Alor.OpenAPI.Models.Slim
         public WsCandleSlim() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsResponseSubBarsGetAndSubscribe"]/Member[@name="wsResponseSubBarsGetAndSubscribe"]/*' />
-        [SpanJson.JsonConstructor]
         public WsCandleSlim(CandleSlim? dataSlim, string? guid)
         {
             Data = dataSlim;

@@ -12,7 +12,6 @@ namespace Alor.OpenAPI.Models.Slim
         public FortsriskSlim() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseFortsRisk"]/Member[@name="responseFortsRisk"]/*' />
-        [JsonConstructor]
         public FortsriskSlim(string? portfolio = default, decimal? moneyFree = default,
             decimal? moneyBlocked = default, decimal? fee = default, decimal? moneyOld = default,
             decimal? moneyAmount = default, decimal? moneyPledgeAmount = default, decimal? vmInterCl = default,

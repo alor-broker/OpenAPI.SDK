@@ -14,7 +14,6 @@ namespace Alor.OpenAPI.Models.Simple
         public WsOrderBookSimple() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsResponseSubOrderBookGetAndSubscribe"]/Member[@name="wsResponseSubOrderBookGetAndSubscribe"]/*' />
-        [SpanJson.JsonConstructor]
         public WsOrderBookSimple(OrderbookSimple? data, string? guid)
         {
             Data = data;

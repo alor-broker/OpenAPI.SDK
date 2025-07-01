@@ -11,7 +11,6 @@ namespace Alor.OpenAPI.Models
         public BodyresponseOrderGroup() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrderGroupCreationSuccess"]/Member[@name="responseOrderGroupCreationSuccess"]/*' />
-        [JsonConstructor]
         public BodyresponseOrderGroup(string? message = default, Guid? groupId = default)
         {
             Message = message;

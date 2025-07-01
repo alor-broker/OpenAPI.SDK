@@ -11,7 +11,6 @@ namespace Alor.OpenAPI.Models
     {
         public Parameters() { }
 
-        [JsonConstructor]
         public Parameters(string? guid = default, string? portfolio = default, string? code = default,
             string? instrumentGroup = default, Exchange exchange = default, int? depth = default,
             string? tf = default, DateTime? from = default, bool? skipHistory = default,

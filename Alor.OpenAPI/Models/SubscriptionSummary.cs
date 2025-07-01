@@ -12,7 +12,6 @@ namespace Alor.OpenAPI.Models
         public SubscriptionSummary() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubSummariesGetAndSubscribeV2"]/Member[@name="wsSubSummariesGetAndSubscribeV2"]/*' />
-        [JsonConstructor]
         public SubscriptionSummary(string? portfolio = default, bool? skipHistory = default, 
             Exchange exchange = default, Format format = default, int? frequency = default,
             string? guid = default)

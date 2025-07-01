@@ -12,7 +12,6 @@ namespace Alor.OpenAPI.Models.Simple
         public TradeSimple() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseTradeV2"]/Member[@name="responseTradeV2"]/*' />
-        [JsonConstructor]
         public TradeSimple(string? id = default, string? orderno = default,
             string? symbol = default, string? brokerSymbol = default,
             Exchange exchange = default, string? comment = default, DateTime? date = default, string? board = default,

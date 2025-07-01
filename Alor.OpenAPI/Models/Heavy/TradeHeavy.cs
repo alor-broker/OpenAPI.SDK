@@ -17,7 +17,6 @@ namespace Alor.OpenAPI.Models.Heavy
         public TradeHeavy() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseTradeV2"]/Member[@name="responseTradeV2"]/*' />
-        [JsonConstructor]
         public TradeHeavy(string? id = default, string? orderno = default,
             string? symbol = default, string? shortName = default, string? brokerSymbol = default,
             Exchange exchange = default, string? comment = default, DateTime? date = default, string? board = default,

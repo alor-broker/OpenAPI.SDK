@@ -11,7 +11,6 @@ namespace Alor.OpenAPI.Models
         public SubscriptionUnsubscribe() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubUnsubscribe"]/Member[@name="wsSubUnsubscribe"]/*' />
-        [JsonConstructor]
         public SubscriptionUnsubscribe(string? guid = default)
         {
             Guid = guid;

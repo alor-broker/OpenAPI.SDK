@@ -12,7 +12,6 @@ namespace Alor.OpenAPI.Models
         public SubscriptionBar() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubBarsGetAndSubscribe"]/Member[@name="wsSubBarsGetAndSubscribe"]/*' />
-        [JsonConstructor]
         public SubscriptionBar(string? code = default, string? tf = default,
             long? from = default, string? instrumentGroup = default, bool? skipHistory = default,
             bool? splitAdjust = default, CandleSliceMode? sliceMode = default, Exchange exchange = default,

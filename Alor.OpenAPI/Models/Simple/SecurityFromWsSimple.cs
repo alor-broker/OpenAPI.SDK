@@ -12,7 +12,6 @@ namespace Alor.OpenAPI.Models.Simple
         public SecurityFromWsSimple() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseInstruments"]/Member[@name="responseInstruments"]/*' />
-        [JsonConstructor]
         public SecurityFromWsSimple(string? symbol = default, Exchange exchange = default,
             string? board = default, decimal? priceMax = default, decimal? priceMin = default,
             int? tradingStatus = default, string? tradingStatusInfo = default,

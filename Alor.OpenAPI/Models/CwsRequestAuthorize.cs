@@ -12,7 +12,6 @@ namespace Alor.OpenAPI.Models
         public CwsRequestAuthorize() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdAuthorize"]/Member[@name="wsCmdAuthorize"]/*' />
-        [JsonConstructor]
         public CwsRequestAuthorize(string? guid = default)
         {
             Guid = guid;

@@ -12,7 +12,6 @@ namespace Alor.OpenAPI.Models
         public SubscriptionQuote() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubQuotesSubscribe"]/Member[@name="wsSubQuotesSubscribe"]/*' />
-        [JsonConstructor]
         public SubscriptionQuote(string? code = default, Exchange exchange = default, string? instrumentGroup = default,
             Format format = default, int? frequency = default, string? guid = default)
         {

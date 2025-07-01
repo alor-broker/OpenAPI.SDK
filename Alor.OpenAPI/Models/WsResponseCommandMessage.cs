@@ -11,7 +11,6 @@ namespace Alor.OpenAPI.Models
         public WsResponseCommandMessage() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCommands200Create"]/Member[@name="wsCommands200Create"]/*' />
-        [JsonConstructor]
         public WsResponseCommandMessage(string? socketName = default, string? requestGuid = default, int? httpCode = default,
             string? message = default, string? orderNumber = default)
         {

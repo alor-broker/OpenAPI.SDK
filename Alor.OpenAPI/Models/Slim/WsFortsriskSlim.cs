@@ -14,7 +14,6 @@ namespace Alor.OpenAPI.Models.Slim
         public WsFortsriskSlim() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsResponseSubSpectraRisksGetAndSubscribe"]/Member[@name="wsResponseSubSpectraRisksGetAndSubscribe"]/*' />
-        [SpanJson.JsonConstructor]
         public WsFortsriskSlim(FortsriskSlim? dataSlim, string? guid)
         {
             Data = dataSlim;
