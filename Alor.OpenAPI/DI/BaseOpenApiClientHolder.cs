@@ -17,6 +17,7 @@ public abstract class BaseOpenApiClientHolder : IAlorOpenApiClient
     public IOrdersService Orders => Client.Orders;
     public IStopOrdersService StopOrders => Client.StopOrders;
     public IOrderGroupsService OrderGroups => Client.OrderGroups;
+    public IMetricsManager MetricsManager => Client.MetricsManager;
 
     public void EnableMetricsCollection() => Client.EnableMetricsCollection();
     public void DisableMetricsCollection() => Client.DisableMetricsCollection();
