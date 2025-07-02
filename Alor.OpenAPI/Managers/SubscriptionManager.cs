@@ -486,6 +486,11 @@ namespace Alor.OpenAPI.Managers
             UpdateWsMessageHandlerWsStopOrderHeavyDelegat?.Invoke(stopOrderChanged);
             return StopOrdersGetAndSubscribeV2Async(Format.Heavy, exchange, portfolio, orderStatuses, skipHistory);
         }
+
+        internal Task<string> SendPingAsync(bool? confirm = false)
+        {
+            return PingAsync(confirm);
+        }
         #endregion
 
         #region Subscriptions Methods
@@ -820,6 +825,25 @@ namespace Alor.OpenAPI.Managers
             msgDic.Add(guid, message);
 
             await (_msgDictionaryUpdate?.Invoke(msgDic) ?? Task.CompletedTask);
+
+            return guid;
+        }
+
+        private async Task<string> PingAsync(bool? confirm)
+        {
+            var msgDic = new Dictionary<string, string>();
+
+            var guid = Utilities.Utilities.GuidFormatter("ping", _parameters?.Count);
+
+            _parameters?.TryAdd(guid, new Parameters
+            {
+                Guid = guid,
+                Confirm = confirm,
+            });
+            var message = new SubscriptionPing(confirm, guid).ToJson();
+            msgDic.Add(guid, message);
+
+            await(_msgDictionaryUpdate?.Invoke(msgDic) ?? Task.CompletedTask);
 
             return guid;
         }

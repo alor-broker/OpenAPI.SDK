@@ -15,7 +15,7 @@ namespace Alor.OpenAPI.Models
             string? instrumentGroup = default, Exchange exchange = default, int? depth = default,
             string? tf = default, DateTime? from = default, bool? skipHistory = default,
             bool? splitAdjust = default, CandleSliceMode sliceMode = default, bool? includeVirtualTrades = default,
-            List<OrderStatus>? orderStatuses = default)
+            List<OrderStatus>? orderStatuses = default, bool? confirm = default)
         {
             Guid = guid;
             Portfolio = portfolio;
@@ -30,6 +30,7 @@ namespace Alor.OpenAPI.Models
             SliceMode = sliceMode;
             IncludeVirtualTrades = includeVirtualTrades;
             OrderStatuses = orderStatuses;
+            Confirm = confirm;
         }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="fieldGuidWs"]/Member[@name="fieldGuidWs"]/*' />
@@ -83,6 +84,10 @@ namespace Alor.OpenAPI.Models
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubOrdersGetAndSubscribe"]/Member[@name="orderStatuses"]/*' />
         [DataMember(Name = "orderStatuses")]
         public List<OrderStatus>? OrderStatuses { get; init; }
+
+        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsPingStatus"]/Member[@name="confirm"]/*' />
+        [DataMember(Name = "confirm")]
+        public bool? Confirm { get; init; }
 
         public override string ToString()
         {

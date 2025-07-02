@@ -20,6 +20,7 @@ namespace Alor.OpenAPI.Managers
         private readonly FrozenDictionary<ReadOnlyMemory<byte>, Action<(byte[] data, int len, DateTime timestamp)>> _handlers;
         private readonly ConcurrentDictionary<string, Parameters> _parameters;
         private Action<WsResponseMessage>? _wsResponseMessageChangedToUser;
+        private Action<(byte[] data, int len, DateTime timestamp, string wsName)>? _wsResponseMessageChangedToMetrics;
         private Action<WsResponseCommandMessage>? _wsResponseCommandMessageChangedToUser;
         private Action<WsOrderBookSimple>? _wsOrderBookSimpleChangedToUser;
         private Action<WsOrderBookSlim>? _wsOrderBookSlimChangedToUser;
@@ -222,13 +223,14 @@ namespace Alor.OpenAPI.Managers
             => _wsResponseCommandMessageChangedToUser = handler;
 
 
-        internal WebSocketMessageHandler(ILogger logger, ILogger commandLogger, AlorOpenApiLogLevel logLevel, ConcurrentDictionary<string, Parameters> parameters, Action<WsResponseMessage>? wsResponseMessageChangedFromUser, Action<WsResponseCommandMessage>? wsResponseCommandMessageChangedToUser)
+        internal WebSocketMessageHandler(ILogger logger, ILogger commandLogger, AlorOpenApiLogLevel logLevel, ConcurrentDictionary<string, Parameters> parameters, Action<WsResponseMessage>? wsResponseMessageChangedFromUser, Action<(byte[] data, int len, DateTime timestamp, string wsName)>? wsResponseMessageChangedFromMetrics, Action<WsResponseCommandMessage>? wsResponseCommandMessageChangedToUser)
         {
             _logger = logger;
             _commandLogger = commandLogger;
             _logLevel = logLevel;
             _parameters = parameters;
             _wsResponseMessageChangedToUser = wsResponseMessageChangedFromUser;
+            _wsResponseMessageChangedToMetrics = wsResponseMessageChangedFromMetrics;
             _wsResponseCommandMessageChangedToUser = wsResponseCommandMessageChangedToUser;
 
             _handlers = new KeyValuePair<ReadOnlyMemory<byte>, Action<(byte[] data, int len, DateTime timestamp)>>[]
@@ -280,7 +282,7 @@ namespace Alor.OpenAPI.Managers
             {
                 //Console.WriteLine(Encoding.UTF8.GetString(byteMsg.data.AsSpan(0, byteMsg.len)));
 
-                if (StartsWithPattern(byteMsg.data.AsSpan(0, byteMsg.len), _subscriptionTypesDictionary["requestGuid"]))
+                if (Utilities.Utilities.StartsWithPattern(byteMsg.data.AsSpan(0, byteMsg.len), _subscriptionTypesDictionary["requestGuid"]))
                 {
                     var marker =
                         FindSubscriptionTypeMarker(byteMsg,
@@ -300,10 +302,14 @@ namespace Alor.OpenAPI.Managers
                     else
                     {
                         //парсинг ответов на обычные подписки через /ws
-                        if (_wsResponseMessageChangedToUser == null) return;
+                        if (_wsResponseMessageChangedToUser == null && 
+                            _wsResponseMessageChangedToMetrics == null) return;
                         var obj = JsonSerializer.Generic.Utf8.Deserialize<WsResponseMessage>(
                             byteMsg.data.AsSpan(0, byteMsg.len)) with { SocketName = wsName};
-                        _wsResponseMessageChangedToUser(obj);
+                        if (_wsResponseMessageChangedToUser != null)
+                            _wsResponseMessageChangedToUser(obj);
+                        if (_wsResponseMessageChangedToMetrics != null)
+                            _wsResponseMessageChangedToMetrics((byteMsg.data, byteMsg.len, byteMsg.timestamp, wsName));
 
                         if (_logLevel == AlorOpenApiLogLevel.Verbose)
                         {
@@ -336,6 +342,7 @@ namespace Alor.OpenAPI.Managers
         public void Dispose()
         {
             _wsResponseMessageChangedToUser = null;
+            _wsResponseMessageChangedToMetrics = null;
             _wsResponseCommandMessageChangedToUser = null;
             _wsOrderBookSimpleChangedToUser = null;
             _wsOrderBookSlimChangedToUser = null;
@@ -432,24 +439,6 @@ namespace Alor.OpenAPI.Managers
             }
 
             return start != -1 && end != -1 ? source[start..end] : ReadOnlyMemory<byte>.Empty;
-        }
-
-        private static bool StartsWithPattern(Span<byte> sourceArray, byte[]? patternArray)
-        {
-            if (sourceArray == null || patternArray == null || sourceArray.Length < patternArray.Length)
-            {
-                return false;
-            }
-
-            for (var i = 0; i < patternArray.Length; i++)
-            {
-                if (sourceArray[i] != patternArray[i])
-                {
-                    return false;
-                }
-            }
-
-            return true;
         }
     }
 }
