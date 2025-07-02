@@ -42,7 +42,7 @@ namespace Alor.OpenAPI.Interfaces
         /// <include file='../XmlDocs/ISubscriptionManager.xml' path='Docs/Members[@name="ISubscriptionManager"]/Member[@name="BarsGetAndSubscribeSlimAsync"]/*' />
         public Task<Dictionary<string, string>> BarsGetAndSubscribeSlimAsync(Action<WsCandleSlim> candleChanged,
             IEnumerable<string?> tickersList,
-            Exchange exchange, string tf, DateTime from, string? instrumentGroup = null, bool skipHistory = false, 
+            Exchange exchange, string tf, DateTime from, string? instrumentGroup = null, bool skipHistory = false,
             bool? splitAdjust = null, CandleSliceMode sliceMode = CandleSliceMode.DailyIntervals);
 
         Action<Action<WsCandleSlim>>? UpdateWsMessageHandlerWsCandleSlimDelegat { get; set; }

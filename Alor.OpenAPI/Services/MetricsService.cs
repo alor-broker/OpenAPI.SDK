@@ -1,11 +1,15 @@
-﻿using Alor.OpenAPI.Interfaces;
+﻿using Alor.OpenAPI.Extensions;
+using Alor.OpenAPI.Interfaces;
+using Alor.OpenAPI.Managers;
+using Alor.OpenAPI.Models;
 using Alor.OpenAPI.Utilities;
 using App.Metrics;
 using App.Metrics.Formatters.Json;
 using App.Metrics.Gauge;
 using Serilog;
+using SpanJson;
+using System.Collections.Concurrent;
 using System.Net.NetworkInformation;
-using Alor.OpenAPI.Extensions;
 
 namespace Alor.OpenAPI.Services
 {
@@ -19,6 +23,17 @@ namespace Alor.OpenAPI.Services
         private readonly List<IWebSocketsPoolManager> _webSocketPoolManagers;
         private readonly IMetricsRegistry _metricsRegistry;
         private readonly IMetricsRoot _metrics;
+        private readonly ConcurrentDictionary<string, WsPingStats> _wsPingCache;
+        private readonly ConcurrentDictionary<string, WsPingStats> _wsPingCacheUnsubscribe;
+
+        public void UpdatePingStatsUserDelegate(Action<PingStats?>? pingStatsChangedFromUser) =>
+            _pingStatsChangedToUser = pingStatsChangedFromUser;
+
+        public void UpdateWsPingStatsUserDelegate(Action<WsPingStats?>? wsPingStatsChangedFromUser) =>
+            _wsPingStatsChangedToUser = wsPingStatsChangedFromUser;
+
+        private Action<PingStats?>? _pingStatsChangedToUser;
+        private Action<WsPingStats?>? _wsPingStatsChangedToUser;
 
         internal MetricsService(ILogger logger, Uri baseUrl, List<IWebSocketsPoolManager> webSocketPoolManagers, bool isMetricsCollectionEnabled, CancellationTokenSource cancellationTokenSource)
         {
@@ -38,18 +53,25 @@ namespace Alor.OpenAPI.Services
 
             _metricsRegistry = new MetricsRegistry(_metrics, isMetricsCollectionEnabled);
 
+            _wsPingCache = new ConcurrentDictionary<string, WsPingStats>();
+            _wsPingCacheUnsubscribe = new ConcurrentDictionary<string, WsPingStats>();
+
             SetupMetrics();
         }
 
         public void Dispose()
         {
             _clockSocketsRate?.Dispose();
+            _pingStatsChangedToUser = null;
+            _wsPingStatsChangedToUser = null;
         }
 
         private void SetupMetrics()
         {
             _metricsRegistry.MetricsOptions.TryAdd("gaugeOptionPing",
                 new GaugeOptions { Name = $"Ping to {_baseUrl?.Host}" });
+            _metricsRegistry.MetricsOptions.TryAdd("gaugeOptionWsPing",
+                new GaugeOptions { Name = $"Ping to {_baseUrl?.Host} (wss)" });
             _metricsRegistry.MetricsOptions.TryAdd("gaugeOptionActiveConnects",
                 new GaugeOptions { Name = "Active websockets connects count" });
 
@@ -66,6 +88,7 @@ namespace Alor.OpenAPI.Services
         }
 
         public void EnableMetricsCollection() => _metricsRegistry.EnableMetricsCollection();
+
         public void DisableMetricsCollection() => _metricsRegistry.DisableMetricsCollection();
 
         public IMetricsRegistry GetMetricsRegistry() => _metricsRegistry;
@@ -88,11 +111,13 @@ namespace Alor.OpenAPI.Services
                             if (reply.Status == IPStatus.Success)
                             {
                                 metricsRegistry.UpdateGauge("gaugeOptionPing", reply.RoundtripTime);
+                                _pingStatsChangedToUser?.Invoke(new PingStats(reply.RoundtripTime));
                             }
                         }
                     }
                     catch (Exception ex)
                     {
+                        _pingStatsChangedToUser?.Invoke(null);
                         _logger.Error($"Ошибка при пинге: {ex.Message}");
                     }
 
@@ -100,7 +125,45 @@ namespace Alor.OpenAPI.Services
                 }
             }, _cancellationTokenSource.Token);
 
+            var t2 = new Task<Task>(async () =>
+            {
+                while (!_cancellationTokenSource.Token.IsCancellationRequested)
+                {
+                    if (metricsRegistry.CurrentStatusMetricsCollection)
+                    {
+                        foreach (var pm in _webSocketPoolManagers)
+                        {
+                            if (pm.Subscriptions != null)
+                            {
+                                var t2s1 = new Task<Task>(async () =>
+                                {
+                                    try
+                                    {
+                                        string guid = ((SubscriptionManager)pm.Subscriptions).SendPingAsync(true).GetAwaiter().GetResult();
+                                        _wsPingCache.TryAdd(guid, new WsPingStats(null, DateTime.UtcNow, null, false));
+                                        await Task.Delay(5000, _cancellationTokenSource.Token);
+                                        _wsPingCacheUnsubscribe.TryAdd(guid, new WsPingStats(null, DateTime.UtcNow, null, true));
+                                        string[] keysUnsubscribe = _wsPingCacheUnsubscribe.Select(x => x.Key).ToArray();
+                                        await pm.Subscriptions.UnsubscribeAsync(keysUnsubscribe);
+
+                                        // Получение ответа на пинг в методе WsResponseRawHandler
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        _logger.Error($"Ошибка при пинге WS: {ex.Message}");
+                                    }
+                                }, _cancellationTokenSource.Token);
+                                t2s1.Start();
+                            }
+                        }
+                    }
+
+                    await Task.Delay(5000, _cancellationTokenSource.Token); // Замер каждые 5 секунд
+                }
+            }, _cancellationTokenSource.Token);
+
             t1.Start();
+            t2.Start();
 
             return tcs.Task;
         }
@@ -185,6 +248,45 @@ namespace Alor.OpenAPI.Services
             using var reader = new StreamReader(stream);
             var metricsData = await reader.ReadToEndAsync(_cancellationTokenSource.Token);
             _metricsLogger.Information(metricsData);
+        }
+
+        internal void WsResponseRawHandler((byte[] data, int len, DateTime timestamp, string wsName) byteMsg)
+        {
+            // Проверяем, что сообщение поступило по подписке ping_
+            if (Utilities.Utilities.StartsWithPattern(byteMsg.data.AsSpan(0, byteMsg.len), "{\"requestGuid\":\"ping_"u8.ToArray()))
+            {
+                var obj = JsonSerializer.Generic.Utf8.Deserialize<WsResponseMessage>(
+                    byteMsg.data.AsSpan(0, byteMsg.len)) with
+                { SocketName = byteMsg.wsName };
+                if (obj != null && obj.RequestGuid != null && obj.RequestGuid.StartsWith("ping"))
+                {
+                    if (_wsPingCache.TryRemove(obj.RequestGuid, out var ping))
+                    {
+                        ping.Status = obj;
+                        ping.ReciveTime = byteMsg.timestamp;
+                        var delay = ping.GetDelay();
+                        if (delay != null)
+                        {
+                            _metricsRegistry.UpdateGauge("gaugeOptionWsPing", (double)delay);
+                            _wsPingStatsChangedToUser?.Invoke(ping);
+                            return;
+                        }
+                    }
+
+                    if (_wsPingCacheUnsubscribe.TryRemove(obj.RequestGuid, out var pingUnsub))
+                    {
+                        pingUnsub.Status = obj;
+                        pingUnsub.ReciveTime = byteMsg.timestamp;
+                        var delay = pingUnsub.GetDelay();
+                        if (delay != null)
+                        {
+                            _wsPingStatsChangedToUser?.Invoke(pingUnsub);
+                            return;
+                        }
+                    }
+                    _wsPingStatsChangedToUser?.Invoke(null);
+                }
+            }
         }
     }
 }

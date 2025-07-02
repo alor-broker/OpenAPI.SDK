@@ -25,12 +25,13 @@ namespace Alor.OpenAPI.Managers
         private readonly IWebSocketMessageHandler _webSocketMessageHandler;
 
         private Action<WsResponseMessage>? _wsResponseMessageChangedFromUser;
+        private Action<(byte[] data, int len, DateTime timestamp, string wsName)>? _wsResponseMessageChangedFromMetrics;
         private Action<WsResponseCommandMessage>? _wsResponseCommandMessageChangedFromUser;
 
         internal WebSocketsPoolManager(ConcurrentDictionary<string, Parameters> parameters, Action incrementSocketsCounter, Action decrementSocketsCounter,
             string? jwtToken, IMetricsRegistry metricsRegistry, Uri webSocketUri, Uri commandWebSocketUri, AlorOpenApiLogLevel logLevel,
             IReadOnlyList<string>? names = null, string? commandSocketName = null, int sockets = 1, string? logFileNameSuffix = null,
-            Action<WsResponseMessage>? wsResponseMessageHandlerFromUser = null, Action<WsResponseCommandMessage>? wsResponseCommandMessageHandlerFromUser = null,
+            Action<WsResponseMessage>? wsResponseMessageHandlerFromUser = null, Action<(byte[] data, int len, DateTime timestamp, string wsName)>? wsResponseRawHandlerFromMetrics = null, Action<WsResponseCommandMessage>? wsResponseCommandMessageHandlerFromUser = null,
             Dictionary<string, string>? webSocketHeaders = null, Dictionary<string, string>? commandWebSocketHeaders = null)
         {
             var levelSwitch = new LoggingLevelSwitch(logLevel.ToSerilogLevel());
@@ -57,10 +58,11 @@ namespace Alor.OpenAPI.Managers
             _jwtToken = jwtToken;
 
             if (wsResponseMessageHandlerFromUser != null) _wsResponseMessageChangedFromUser = wsResponseMessageHandlerFromUser;
+            if (wsResponseRawHandlerFromMetrics != null) _wsResponseMessageChangedFromMetrics = wsResponseRawHandlerFromMetrics;
             if (wsResponseCommandMessageHandlerFromUser != null)
                 _wsResponseCommandMessageChangedFromUser = wsResponseCommandMessageHandlerFromUser;
 
-            _webSocketMessageHandler = new WebSocketMessageHandler(_logger, commandLogger, logLevel, parameters, _wsResponseMessageChangedFromUser, _wsResponseCommandMessageChangedFromUser);
+            _webSocketMessageHandler = new WebSocketMessageHandler(_logger, commandLogger, logLevel, parameters, _wsResponseMessageChangedFromUser, _wsResponseMessageChangedFromMetrics, _wsResponseCommandMessageChangedFromUser);
             var onMessageRecieved = _webSocketMessageHandler.MessageReceived;
 
             Subscriptions = new SubscriptionManager(parameters, OnMsgDictionaryUpdatedAsync, OnMsgDeleteRequestAsync,
@@ -260,6 +262,7 @@ namespace Alor.OpenAPI.Managers
         public void Dispose()
         {
             _wsResponseMessageChangedFromUser = null;
+            _wsResponseMessageChangedFromMetrics = null;
             _wsResponseCommandMessageChangedFromUser = null;
 
             foreach (var webSocketConnection in _webSocketConnections)
