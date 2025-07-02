@@ -22,6 +22,7 @@ namespace Alor.OpenAPI.Core
         private string? _jwtToken;
         private readonly List<IWebSocketsPoolManager> _webSocketsPoolManagers;
         private readonly Action<WsResponseMessage>? _wsResponseMessageHandler;
+        private readonly Action<(byte[] data, int len, DateTime timestamp, string wsName)>? _wsResponseRawToMetricsHandler;
         private readonly Action<WsResponseCommandMessage>? _wsResponseCommandMessageHandler;
 
         private readonly HttpClient _httpClientForApi;
@@ -38,6 +39,7 @@ namespace Alor.OpenAPI.Core
         public IOrdersService Orders { get; }
         public IStopOrdersService StopOrders { get; }
         public IOrderGroupsService OrderGroups { get; }
+        public IMetricsManager MetricsManager { get; }
 
         public void Dispose()
         {
@@ -62,6 +64,7 @@ namespace Alor.OpenAPI.Core
             IInstrumentsService instrumentsService, IClientInfoService clientInfoService, IOthersService othersService,
             IOrdersService ordersService, IStopOrdersService stopOrdersService, IOrderGroupsService orderGroupsService, IWebSocketsPoolManager? webSocketsPoolManager,
             Action<WsResponseMessage>? wsResponseMessageHandler = null,
+            Action<(byte[] data, int len, DateTime timestamp, string wsName)>? wsResponseRawToMetricsHandler = null,
             Action<WsResponseCommandMessage>? wsResponseCommandMessageHandler = null)
         {
             _cancellationTokenSource = cancellationTokenSource;
@@ -70,6 +73,7 @@ namespace Alor.OpenAPI.Core
             _webSocketsPoolManagers = webSocketsPoolManagers;
 
             _wsResponseMessageHandler = wsResponseMessageHandler;
+            _wsResponseRawToMetricsHandler = wsResponseRawToMetricsHandler;
             _wsResponseCommandMessageHandler = wsResponseCommandMessageHandler;
 
             _metrics = metricsService;
@@ -89,7 +93,9 @@ namespace Alor.OpenAPI.Core
                 configuration.CwsUrl, logLevel,
                 wsResponseMessageHandlerFromUser: _wsResponseMessageHandler,
                 wsResponseCommandMessageHandlerFromUser: _wsResponseCommandMessageHandler,
+                wsResponseRawHandlerFromMetrics: _wsResponseRawToMetricsHandler,
                 webSocketHeaders: configuration.WsUrlHeaders, commandWebSocketHeaders: configuration.CwsUrlHeaders);
+            MetricsManager = new MetricsManager(metricsService);
 
             _webSocketsPoolManagers.Add(WsPoolManager);
             _token.JwtUpdated = OnJwtUpdated;
@@ -104,7 +110,7 @@ namespace Alor.OpenAPI.Core
             var wsPoolManager = new WebSocketsPoolManager(Parameters, IncrementSocketsCounter,
                 DecrementSocketsCounter, _jwtToken, _metrics.GetMetricsRegistry(), _config.WsUrl, _config.CwsUrl,
                 logLevel, names, commandSocketName, sockets, logFileNameSuffix, _wsResponseMessageHandler,
-                _wsResponseCommandMessageHandler, _config.WsUrlHeaders, _config.CwsUrlHeaders);
+                _wsResponseRawToMetricsHandler, _wsResponseCommandMessageHandler, _config.WsUrlHeaders, _config.CwsUrlHeaders);
             _webSocketsPoolManagers.Add(wsPoolManager);
 
             return wsPoolManager;
@@ -179,11 +185,13 @@ namespace Alor.OpenAPI.Core
             var tokenService = new TokenService(httpClientForAuth, logger, configuration.AuthUrl, refreshToken,
                 cancellationTokenSource);
 
+            Action<(byte[] data, int len, DateTime timestamp, string wsName)>? wsResponseRawToMetricsHandler = isMetricsCollectionEnabled ? metricsService.WsResponseRawHandler : null;
+
             var client = new AlorOpenApiClient(configuration, httpClientForApi, httpClientForAuth, logLevel, cancellationTokenSource,
                 apiHttpClient, tokenService, metricsService,
                 webSocketsPoolManagers, instrumentsService, clientInfoService, othersService, ordersService,
                 stopOrdersService, orderGroupsService, null,
-                wsResponseMessageHandler, wsResponseCommandMessageHandler);
+                wsResponseMessageHandler, wsResponseRawToMetricsHandler, wsResponseCommandMessageHandler);
 
             await client._token.RefreshTokenAndSetRefreshTimer();
 
@@ -213,7 +221,7 @@ namespace Alor.OpenAPI.Core
                 apiHttpClient, tokenService, metricsService,
                 webSocketsPoolManagers, instrumentsService, clientInfoService, othersService, ordersService,
                 stopOrdersService, orderGroupsService, webSocketsPoolManager,
-                wsResponseMessageHandler, wsResponseCommandMessageHandler);
+                wsResponseMessageHandler, null, wsResponseCommandMessageHandler);
 
             await client._token.RefreshTokenAndSetRefreshTimer();
 

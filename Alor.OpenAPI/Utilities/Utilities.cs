@@ -103,5 +103,23 @@ namespace Alor.OpenAPI.Utilities
 
             return $"{subsType}_{Utilities.ConvertToBase62(number)}";
         }
+
+        internal static bool StartsWithPattern(Span<byte> sourceArray, byte[]? patternArray)
+        {
+            if (sourceArray == null || patternArray == null || sourceArray.Length < patternArray.Length)
+            {
+                return false;
+            }
+
+            for (var i = 0; i < patternArray.Length; i++)
+            {
+                if (sourceArray[i] != patternArray[i])
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
     }
 }

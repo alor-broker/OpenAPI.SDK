@@ -11,6 +11,7 @@ public interface IAlorOpenApiClient : IDisposable
     IOrdersService Orders { get; }
     IStopOrdersService StopOrders { get; }
     IOrderGroupsService OrderGroups { get; }
+    IMetricsManager MetricsManager { get; }
 
     void EnableMetricsCollection();
     void DisableMetricsCollection();
