@@ -11,7 +11,6 @@ namespace Alor.OpenAPI.Models.Slim
         public AllTradesHistorySlim() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseAllTradesHistory"]/Member[@name="responseAllTradesHistory"]/*' />
-        [JsonConstructor]
         public AllTradesHistorySlim(int? total = default, List<AllTradeSlim>? listSlim = default)
         {
             Total = total;

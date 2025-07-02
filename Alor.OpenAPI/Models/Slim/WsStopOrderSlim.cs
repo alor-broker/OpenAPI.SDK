@@ -14,7 +14,6 @@ namespace Alor.OpenAPI.Models.Slim
         public WsStopOrderSlim() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsResponseSubStopOrdersGetAndSubscribeWarp"]/Member[@name="wsResponseSubStopOrdersGetAndSubscribeWarp"]/*' />
-        [SpanJson.JsonConstructor]
         public WsStopOrderSlim(StopOrderSlim? dataSlim, string? guid)
         {
             Data = dataSlim;

@@ -12,7 +12,6 @@ namespace Alor.OpenAPI.Models.Slim
         public SymbolSlim() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSymbol"]/Member[@name="responseSymbol"]/*' />
-        [JsonConstructor]
         public SymbolSlim(string? symbol = default, Exchange exchange = default,
             string? description = default, decimal? ask = default, decimal? bid = default,
             int? askVol = default, int? bidVol = default, long? obMsTimestamp = default,

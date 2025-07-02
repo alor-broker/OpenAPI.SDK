@@ -14,7 +14,6 @@ namespace Alor.OpenAPI.Models.Heavy
         public OrderHeavy() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrder"]/Member[@name="responseOrder"]/*' />
-        [JsonConstructor]
         public OrderHeavy(string? id = default, string? symbol = default, string? board = default,
             string? brokerSymbol = default,
             string? portfolio = default, Exchange exchange = default, string? comment = default,

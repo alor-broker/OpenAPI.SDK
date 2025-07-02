@@ -14,7 +14,6 @@ namespace Alor.OpenAPI.Models.Slim
         public WsOrderBookSlim() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsResponseSubOrderBookGetAndSubscribe"]/Member[@name="wsResponseSubOrderBookGetAndSubscribe"]/*' />
-        [SpanJson.JsonConstructor]
         public WsOrderBookSlim(OrderbookSlim? dataSlim, string? guid)
         {
             Data = dataSlim;

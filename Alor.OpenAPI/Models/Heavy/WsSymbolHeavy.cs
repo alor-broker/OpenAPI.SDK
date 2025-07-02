@@ -14,7 +14,6 @@ namespace Alor.OpenAPI.Models.Heavy
         public WsSymbolHeavy() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsResponseSubQuotesSubscribe"]/Member[@name="wsResponseSubQuotesSubscribe"]/*' />
-        [SpanJson.JsonConstructor]
         public WsSymbolHeavy(SymbolHeavy? dataHeavy, string? guid)
         {
             Data = dataHeavy;

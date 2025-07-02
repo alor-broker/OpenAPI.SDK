@@ -14,7 +14,6 @@ namespace Alor.OpenAPI.Models.Simple
         public WsSecurityFromWsSimple() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsResponseSubInstrumentsGetAndSubscribeV2"]/Member[@name="wsResponseSubInstrumentsGetAndSubscribeV2"]/*' />
-        [SpanJson.JsonConstructor]
         public WsSecurityFromWsSimple(SecurityFromWsSimple? data, string? guid)
         {
             Data = data;

@@ -13,7 +13,6 @@ namespace Alor.OpenAPI.Models.Heavy
         public FuturesHeavy() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseFutures"]/Member[@name="responseFutures"]/*' />
-        [JsonConstructor]
         public FuturesHeavy(string? symbol = default, Exchange exchange = default, string? description = default, string? currencyHeavy = default,
             decimal? prevClosePrice = default, decimal? lastPrice = default, long? lastPriceTimestamp = default,
             decimal? highPrice = default, decimal? lowPrice = default, decimal? accruedInterest = default,

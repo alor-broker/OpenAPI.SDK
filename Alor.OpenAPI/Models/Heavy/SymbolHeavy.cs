@@ -14,7 +14,6 @@ namespace Alor.OpenAPI.Models.Heavy
         public SymbolHeavy() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSymbol"]/Member[@name="responseSymbol"]/*' />
-        [JsonConstructor]
         public SymbolHeavy(string? symbol = default, Exchange exchange = default,
             string? description = default, string? currencyHeavy = default, decimal? ask = default, decimal? bid = default,
             int? askVol = default, int? bidVol = default, long? obMsTimestamp = default,

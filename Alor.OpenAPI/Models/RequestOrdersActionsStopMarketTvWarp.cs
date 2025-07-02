@@ -14,7 +14,6 @@ namespace Alor.OpenAPI.Models
         public RequestOrdersActionsStopMarketTvWarp() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsStopMarketTVWarp"]/Member[@name="OrdersActionsStopMarketTVWarp"]/*' />
-        [JsonConstructor]
         public RequestOrdersActionsStopMarketTvWarp(Side side = default, Condition condition = default,
             decimal? triggerPrice = default, long? stopEndUnixTime = default,
             int? quantity = default, Instrument? instrument = default, User? user = default,

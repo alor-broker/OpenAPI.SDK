@@ -11,7 +11,6 @@ namespace Alor.OpenAPI.Models.Simple
         public OrderbookSimple() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrderBook"]/Member[@name="responseOrderBook"]/*' />
-        [JsonConstructor]
         public OrderbookSimple(ICollection<LiquiditySimple>? bids, ICollection<LiquiditySimple>? asks, long? msTimestamp, bool? existing)
         {
             Bids = bids;

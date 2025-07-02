@@ -11,7 +11,6 @@ namespace Alor.OpenAPI.Models
         public Iceberg() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectIcebergFields"]/Member[@name="objectIcebergFields"]/*' />
-        [JsonConstructor]
         public Iceberg(int? creationFixedQuantity = default, int? creationVarianceQuantity = default,
             int? visibleQuantity = default, int? visibleQuantityBatch = default,
             int? visibleFilledQuantity = default, int? visibleFilledQuantityBatch = default)

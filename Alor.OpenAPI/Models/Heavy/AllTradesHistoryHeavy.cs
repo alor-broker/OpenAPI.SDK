@@ -11,7 +11,6 @@ namespace Alor.OpenAPI.Models.Heavy
         public AllTradesHistoryHeavy() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseAllTradesHistory"]/Member[@name="responseAllTradesHistory"]/*' />
-        [JsonConstructor]
         public AllTradesHistoryHeavy(int? total = default, List<AllTradeHeavy>? listHeavy = default)
         {
             Total = total;

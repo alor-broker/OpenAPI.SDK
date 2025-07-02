@@ -14,7 +14,6 @@ namespace Alor.OpenAPI.Models.Heavy
         public WsStopOrderHeavy() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsResponseSubStopOrdersGetAndSubscribeWarp"]/Member[@name="wsResponseSubStopOrdersGetAndSubscribeWarp"]/*' />
-        [SpanJson.JsonConstructor]
         public WsStopOrderHeavy(StopOrderHeavy? dataHeavy, string? guid)
         {
             Data = dataHeavy;

@@ -12,7 +12,6 @@ namespace Alor.OpenAPI.Models.Slim
         public HistorySlim() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseHistory"]/Member[@name="responseHistory"]/*' />
-        [JsonConstructor]
         public HistorySlim(List<CandleSlim>? history = default, long? next = default,
             long? prev = default)
         {

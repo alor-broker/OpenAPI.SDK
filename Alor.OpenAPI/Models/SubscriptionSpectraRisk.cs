@@ -12,7 +12,6 @@ namespace Alor.OpenAPI.Models
         public SubscriptionSpectraRisk() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubSpectraRisksGetAndSubscribe"]/Member[@name="wsSubSpectraRisksGetAndSubscribe"]/*' />
-        [JsonConstructor]
         public SubscriptionSpectraRisk(string? portfolio = default, bool? skipHistory = default, 
             Exchange exchange = default, Format format = default, int? frequency = default,
             string? guid = default)

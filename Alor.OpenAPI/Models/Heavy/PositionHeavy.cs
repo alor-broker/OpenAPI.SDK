@@ -13,7 +13,6 @@ namespace Alor.OpenAPI.Models.Heavy
         public PositionHeavy() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responsePosition"]/Member[@name="responsePosition"]/*' />
-        [JsonConstructor]
         public PositionHeavy(decimal? volume = default, decimal? currentVolume = default,
             string? symbol = default, string? brokerSymbol = default, string? portfolio = default,
             Exchange exchange = default, decimal? avgPrice = default,

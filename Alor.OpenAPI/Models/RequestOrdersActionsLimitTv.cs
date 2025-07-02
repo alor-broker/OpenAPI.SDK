@@ -12,7 +12,6 @@ namespace Alor.OpenAPI.Models
         public RequestOrdersActionsLimitTv() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsLimitTV"]/Member[@name="OrdersActionsLimitTV"]/*' />
-        [JsonConstructor]
         public RequestOrdersActionsLimitTv(Side side = default, int? quantity = default, decimal? price = default,
             Instrument? instrument = default, string? comment = default, User? user = default,
             TimeInForce timeInForce = default, int? icebergFixed = default, decimal? icebergVariance = default, bool? allowMargin = default)

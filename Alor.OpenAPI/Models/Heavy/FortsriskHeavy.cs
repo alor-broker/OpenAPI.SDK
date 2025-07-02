@@ -11,7 +11,6 @@ namespace Alor.OpenAPI.Models.Heavy
         public FortsriskHeavy() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseFortsRisk"]/Member[@name="responseFortsRisk"]/*' />
-        [JsonConstructor]
         public FortsriskHeavy(string? portfolio = default, decimal? moneyFree = default,
             decimal? moneyBlocked = default, decimal? fee = default, decimal? moneyOld = default,
             decimal? moneyAmount = default, decimal? moneyPledgeAmount = default, decimal? vmInterCl = default,

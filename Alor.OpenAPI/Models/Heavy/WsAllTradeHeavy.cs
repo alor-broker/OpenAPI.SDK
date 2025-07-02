@@ -14,7 +14,6 @@ namespace Alor.OpenAPI.Models.Heavy
         public WsAllTradeHeavy() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsResponseSubAllTradesGetAndSubscribe"]/Member[@name="wsResponseSubAllTradesGetAndSubscribe"]/*' />
-        [SpanJson.JsonConstructor]
         public WsAllTradeHeavy(AllTradeHeavy? dataHeavy, string? guid)
         {
             Data = dataHeavy;

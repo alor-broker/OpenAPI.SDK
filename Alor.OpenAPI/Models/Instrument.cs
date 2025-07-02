@@ -12,7 +12,6 @@ namespace Alor.OpenAPI.Models
         public Instrument() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectInstrumentFieldsSymbolExchangeGroup"]/Member[@name="objectInstrumentFieldsSymbolExchangeGroup"]/*' />
-        [JsonConstructor]
         public Instrument(string? symbol = default, Exchange exchange = default, string? instrumentGroup = default)
         {
             Symbol = symbol;

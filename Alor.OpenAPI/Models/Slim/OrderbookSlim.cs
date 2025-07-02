@@ -11,7 +11,6 @@ namespace Alor.OpenAPI.Models.Slim
         public OrderbookSlim() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrderBook"]/Member[@name="responseOrderBook"]/*' />
-        [JsonConstructor]
         public OrderbookSlim(ICollection<LiquiditySlim>? bids, ICollection<LiquiditySlim>? asks, long? msTimestamp, bool? existing)
         {
             Bids = bids;

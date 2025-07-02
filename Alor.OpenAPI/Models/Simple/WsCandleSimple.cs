@@ -14,7 +14,6 @@ namespace Alor.OpenAPI.Models.Simple
         public WsCandleSimple() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsResponseSubBarsGetAndSubscribe"]/Member[@name="wsResponseSubBarsGetAndSubscribe"]/*' />
-        [SpanJson.JsonConstructor]
         public WsCandleSimple(CandleSimple? data, string? guid)
         {
             Data = data;

@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample Project", "Sample Pr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alor.OpenAPI.Tests", "Alor.OpenAPI.Tests\Alor.OpenAPI.Tests.csproj", "{1EE87CC5-960A-41A4-B3ED-33B647675F6F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample DI Project", "Sample DI Project\Sample DI Project.csproj", "{CBF28831-09A3-4EAD-B328-975E6C01222B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{1EE87CC5-960A-41A4-B3ED-33B647675F6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1EE87CC5-960A-41A4-B3ED-33B647675F6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1EE87CC5-960A-41A4-B3ED-33B647675F6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBF28831-09A3-4EAD-B328-975E6C01222B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBF28831-09A3-4EAD-B328-975E6C01222B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBF28831-09A3-4EAD-B328-975E6C01222B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBF28831-09A3-4EAD-B328-975E6C01222B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

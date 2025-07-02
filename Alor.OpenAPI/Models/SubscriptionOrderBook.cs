@@ -12,7 +12,6 @@ namespace Alor.OpenAPI.Models
         public SubscriptionOrderBook() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubOrderBookGetAndSubscribe"]/Member[@name="wsSubOrderBookGetAndSubscribe"]/*' />
-        [JsonConstructor]
         public SubscriptionOrderBook(string? code = default, int? depth = default,
             Exchange exchange = default, string? instrumentGroup = default, Format format = default, int? frequency = default, string? guid = default)
         {

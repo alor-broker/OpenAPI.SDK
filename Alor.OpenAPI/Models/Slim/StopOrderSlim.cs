@@ -12,7 +12,6 @@ namespace Alor.OpenAPI.Models.Slim
         public StopOrderSlim() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseStopOrderWarp"]/Member[@name="responseStopOrderWarp"]/*' />
-        [JsonConstructor]
         public StopOrderSlim(int? id = default, long? exchangeOrderId = default,
             string? symbol = default, string? brokerSymbol = default, string? portfolio = default,
             Exchange exchange = default, string? board = default, OrderTypeStopLimit type = default,

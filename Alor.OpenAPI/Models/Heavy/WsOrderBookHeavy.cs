@@ -14,7 +14,6 @@ namespace Alor.OpenAPI.Models.Heavy
         public WsOrderBookHeavy() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsResponseSubOrderBookGetAndSubscribe"]/Member[@name="wsResponseSubOrderBookGetAndSubscribe"]/*' />
-        [SpanJson.JsonConstructor]
         public WsOrderBookHeavy(OrderbookHeavy? dataHeavy, string? guid)
         {
             Data = dataHeavy;

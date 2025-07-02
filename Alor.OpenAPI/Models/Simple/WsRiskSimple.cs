@@ -14,7 +14,6 @@ namespace Alor.OpenAPI.Models.Simple
         public WsRiskSimple() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsResponseSubRisksGetAndSubscribe"]/Member[@name="wsResponseSubRisksGetAndSubscribe"]/*' />
-        [SpanJson.JsonConstructor]
         public WsRiskSimple(RiskSimple? data, string? guid)
         {
             Data = data;

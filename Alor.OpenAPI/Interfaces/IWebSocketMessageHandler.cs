@@ -1,4 +1,5 @@
-﻿using Alor.OpenAPI.Models.Heavy;
+﻿using Alor.OpenAPI.Models;
+using Alor.OpenAPI.Models.Heavy;
 using Alor.OpenAPI.Models.Simple;
 using Alor.OpenAPI.Models.Slim;
 
@@ -44,5 +45,8 @@ namespace Alor.OpenAPI.Interfaces
         public void UpdateWsStopOrderHeavyUserDelegate(Action<WsStopOrderHeavy>? wsStopOrderChangedFromUser);
 
         void MessageReceived((byte[] data, int len, DateTime timestamp) byteMsg, string socketName);
+
+        void SetWsResponseMessageHandler(Action<WsResponseMessage>? handler);
+        void SetWsResponseCommandMessageHandler(Action<WsResponseCommandMessage>? handler);
     }
 }

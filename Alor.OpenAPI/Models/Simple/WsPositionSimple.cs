@@ -14,7 +14,6 @@ namespace Alor.OpenAPI.Models.Simple
         public WsPositionSimple() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsResponseSubPositionsGetAndSubscribe"]/Member[@name="wsResponseSubPositionsGetAndSubscribe"]/*' />
-        [SpanJson.JsonConstructor]
         public WsPositionSimple(PositionSimple? data, string? guid)
         {
             Data = data;

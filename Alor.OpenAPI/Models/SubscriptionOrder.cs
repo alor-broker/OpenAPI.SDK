@@ -12,7 +12,6 @@ namespace Alor.OpenAPI.Models
         public SubscriptionOrder() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubOrdersGetAndSubscribe"]/Member[@name="wsSubOrdersGetAndSubscribe"]/*' />
-        [JsonConstructor]
         internal SubscriptionOrder(string? portfolio = default, List<OrderStatus>? orderStatuses = default,
             bool? skipHistory = default, Exchange exchange = default, Format format = default, int? frequency = default,
             string? guid = default)

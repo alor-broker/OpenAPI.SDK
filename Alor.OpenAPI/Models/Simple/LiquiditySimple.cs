@@ -10,7 +10,6 @@ namespace Alor.OpenAPI.Models.Simple
     {
         public LiquiditySimple() { }
 
-        [JsonConstructor]
         public LiquiditySimple(decimal price, long volume)
         {
             Price = price;

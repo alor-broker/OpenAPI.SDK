@@ -10,8 +10,6 @@ namespace Alor.OpenAPI.Models
     public record WsResponseMessage: IEquatable<WsResponseMessage>, IValidatableObject
     {
         public WsResponseMessage() { }
-
-        [SpanJson.JsonConstructor]
         public WsResponseMessage(string? socketName = default, string? requestGuid = default, int? httpCode = default,
             string? message = default)
         {

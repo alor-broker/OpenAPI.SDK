@@ -11,7 +11,6 @@ namespace Alor.OpenAPI.Models
         public ResponseOrderGroupItem() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectOrderGroupItems"]/Member[@name="objectOrderGroupItems"]/*' />
-        [JsonConstructor]
         public ResponseOrderGroupItem(string? orderId = default)
         {
             OrderId = orderId;

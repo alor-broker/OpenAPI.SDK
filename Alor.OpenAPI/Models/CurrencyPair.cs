@@ -11,7 +11,6 @@ namespace Alor.OpenAPI.Models
         public CurrencyPair() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseCurrencyPair"]/Member[@name="responseCurrencyPair"]/*' />
-        [JsonConstructor]
         public CurrencyPair(string? firstCode = default, string? secondCode = default, string? symbolTom = default)
         {
             FirstCode = firstCode;

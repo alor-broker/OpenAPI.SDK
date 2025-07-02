@@ -11,7 +11,6 @@ namespace Alor.OpenAPI.Models
         public User() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectUserPortfolioOnly"]/Member[@name="objectUserPortfolioOnly"]/*' />
-        [JsonConstructor]
         public User(string? portfolio = default)
         {
             Portfolio = portfolio;

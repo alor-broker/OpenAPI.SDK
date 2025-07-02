@@ -12,7 +12,6 @@ namespace Alor.OpenAPI.Models
         public RequestCreateOrderGroup() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrderGroupCreate"]/Member[@name="OrderGroupCreate"]/*' />
-        [JsonConstructor]
         public RequestCreateOrderGroup(ICollection<RequestOrderGroupItem>? orders = default, ExecutionPolicy? executionPolicy = default)
         {
             // to ensure "orders" is required (not null)

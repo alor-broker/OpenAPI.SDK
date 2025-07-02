@@ -14,7 +14,6 @@ namespace Alor.OpenAPI.Models.Heavy
         public WsSummaryHeavy() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsResponseSubSummariesGetAndSubscribeV2"]/Member[@name="wsResponseSubSummariesGetAndSubscribeV2"]/*' />
-        [SpanJson.JsonConstructor]
         public WsSummaryHeavy(SummaryHeavy? dataHeavy, string? guid)
         {
             Data = dataHeavy;

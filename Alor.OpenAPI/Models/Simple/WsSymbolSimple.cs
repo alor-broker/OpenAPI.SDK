@@ -14,7 +14,6 @@ namespace Alor.OpenAPI.Models.Simple
         public WsSymbolSimple() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsResponseSubQuotesSubscribe"]/Member[@name="wsResponseSubQuotesSubscribe"]/*' />
-        [SpanJson.JsonConstructor]
         public WsSymbolSimple(SymbolSimple? data, string? guid)
         {
             Data = data;

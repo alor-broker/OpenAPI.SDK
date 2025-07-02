@@ -14,7 +14,6 @@ namespace Alor.OpenAPI.Models.Heavy
         public WsSecurityFromWsHeavy() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsResponseSubInstrumentsGetAndSubscribeV2"]/Member[@name="wsResponseSubInstrumentsGetAndSubscribeV2"]/*' />
-        [SpanJson.JsonConstructor]
         public WsSecurityFromWsHeavy(SecurityFromWsHeavy? dataHeavy, string? guid)
         {
             Data = dataHeavy;

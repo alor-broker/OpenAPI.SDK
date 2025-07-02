@@ -11,7 +11,6 @@ namespace Alor.OpenAPI.Models.Heavy
         public CandleHeavy() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseHistoryObject"]/Member[@name="responseHistoryObject"]/*' />
-        [JsonConstructor]
         public CandleHeavy(long? time = default, decimal? close = default,
             decimal? open = default, decimal? high = default, decimal? low = default,
             int? volume = default)

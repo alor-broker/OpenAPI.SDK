@@ -217,6 +217,10 @@ namespace Alor.OpenAPI.Managers
             _wsStopOrderSlimChangedToUser = wsStopOrderChangedFromUser;
         public void UpdateWsStopOrderHeavyUserDelegate(Action<WsStopOrderHeavy>? wsStopOrderChangedFromUser) =>
             _wsStopOrderHeavyChangedToUser = wsStopOrderChangedFromUser;
+        public void SetWsResponseMessageHandler(Action<WsResponseMessage>? handler)
+            => _wsResponseMessageChangedToUser = handler;
+        public void SetWsResponseCommandMessageHandler(Action<WsResponseCommandMessage>? handler)
+            => _wsResponseCommandMessageChangedToUser = handler;
 
 
         internal WebSocketMessageHandler(ILogger logger, ILogger commandLogger, AlorOpenApiLogLevel logLevel, ConcurrentDictionary<string, Parameters> parameters, Action<WsResponseMessage>? wsResponseMessageChangedFromUser, Action<(byte[] data, int len, DateTime timestamp, string wsName)>? wsResponseMessageChangedFromMetrics, Action<WsResponseCommandMessage>? wsResponseCommandMessageChangedToUser)

@@ -10,7 +10,6 @@ namespace Alor.OpenAPI.Models.Heavy
     {
         public LiquidityHeavy() { }
 
-        [JsonConstructor]
         public LiquidityHeavy(decimal price, long volume)
         {
             Price = price;

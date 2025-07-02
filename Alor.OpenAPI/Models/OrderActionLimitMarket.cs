@@ -11,7 +11,6 @@ namespace Alor.OpenAPI.Models
         public OrderActionLimitMarket() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrderActionLimitMarketCommandAPI"]/Member[@name="responseOrderActionLimitMarketCommandAPI"]/*' />
-        [JsonConstructor]
         public OrderActionLimitMarket(string? message = default, string? orderNumber = default)
         {
             Message = message;

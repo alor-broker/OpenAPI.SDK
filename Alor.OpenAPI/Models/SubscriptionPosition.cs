@@ -12,7 +12,6 @@ namespace Alor.OpenAPI.Models
         public SubscriptionPosition() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubPositionsGetAndSubscribe"]/Member[@name="wsSubPositionsGetAndSubscribe"]/*' />
-        [JsonConstructor]
         public SubscriptionPosition(string? portfolio = default, bool? skipHistory = default, 
             Exchange exchange = default, Format format = default, int? frequency = default,
             string? guid = default)

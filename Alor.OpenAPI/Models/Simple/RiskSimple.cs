@@ -12,7 +12,6 @@ namespace Alor.OpenAPI.Models.Simple
         public RiskSimple() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseRisk"]/Member[@name="responseRisk"]/*' />
-        [JsonConstructor]
         public RiskSimple(string? portfolio = default, Exchange exchange = default, decimal? portfolioEvaluation = default,
             decimal? portfolioLiquidationValue = default, decimal? initialMargin = default,
             decimal? minimalMargin = default, decimal? correctedMargin = default,

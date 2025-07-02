@@ -12,7 +12,6 @@ namespace Alor.OpenAPI.Models.Simple
         public SecuritySimple() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSecurity"]/Member[@name="responseSecurity"]/*' />
-        [JsonConstructor]
         public SecuritySimple(string? symbol = default, string? shortname = default,
             string? description = default, Exchange exchange = default, Market market = default,
             string? type = default, decimal? lotsize = default, decimal? facevalue = default,

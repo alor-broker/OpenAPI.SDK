@@ -13,7 +13,6 @@ namespace Alor.OpenAPI.Models.Simple
         public PositionSimple() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responsePosition"]/Member[@name="responsePosition"]/*' />
-        [JsonConstructor]
         public PositionSimple(decimal? volume = default, decimal? currentVolume = default,
             string? symbol = default, string? brokerSymbol = default, string? portfolio = default,
             Exchange exchange = default, decimal? avgPrice = default,

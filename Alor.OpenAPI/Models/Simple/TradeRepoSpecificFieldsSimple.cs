@@ -10,7 +10,6 @@ namespace Alor.OpenAPI.Models.Simple
     {
         public TradeRepoSpecificFieldsSimple() { }
 
-        [JsonConstructor]
         public TradeRepoSpecificFieldsSimple(decimal? repoRate = default, string? extRef = default, int? repoTerm = default,
             string? account = default, string? tradeTypeInfo = default, decimal? value = default,
             decimal? yield = default)

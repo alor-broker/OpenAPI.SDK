@@ -12,7 +12,6 @@ namespace Alor.OpenAPI.Models
         public SubscriptionStopOrder() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubStopOrdersGetAndSubscribeV2"]/Member[@name="wsSubStopOrdersGetAndSubscribeV2"]/*' />
-        [JsonConstructor]
         internal SubscriptionStopOrder(string? portfolio = default, List<OrderStatus>? orderStatuses = default,
             bool? skipHistory = default, Exchange exchange = default, Format format = default, int? frequency = default,
             string? guid = default)

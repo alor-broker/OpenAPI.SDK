@@ -12,7 +12,6 @@ namespace Alor.OpenAPI.Models
         public RiskRate() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseRiskRate"]/Member[@name="responseRiskRate"]/*' />
-        [JsonConstructor]
         public RiskRate(long? id = default, string? instrument = default,
             Exchange exchange = default, int? riskCategoryId = default,
             decimal? securityRiskCategoryId = default, string? assetType = default,

@@ -13,7 +13,6 @@ namespace Alor.OpenAPI.Models.Slim
         public FuturesSlim() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseFutures"]/Member[@name="responseFutures"]/*' />
-        [JsonConstructor]
         public FuturesSlim(string? symbol = default, Exchange exchange = default, string? description = default,
             decimal? lastPrice = default, long? lastPriceTimestamp = default,
             decimal? highPrice = default, decimal? lowPrice = default, decimal? accruedInterest = default,

@@ -12,7 +12,6 @@ namespace Alor.OpenAPI.Models
         public ResponseOrderGroupInfo() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrderGroupInfo"]/Member[@name="responseOrderGroupInfo"]/*' />
-        [JsonConstructor]
         public ResponseOrderGroupInfo(Guid? id = default, string? login = default,
             List<ResponseOrderGroupItem>? orders = default, ExecutionPolicy executionPolicy = default,
             OrderGroupStatus status = default, DateTime? createdAt = default, DateTime? closedAt = default)

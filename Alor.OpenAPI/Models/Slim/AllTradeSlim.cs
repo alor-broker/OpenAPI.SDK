@@ -12,7 +12,6 @@ namespace Alor.OpenAPI.Models.Slim
         public AllTradeSlim() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseAllTrade"]/Member[@name="responseAllTrade"]/*' />
-        [JsonConstructor]
         public AllTradeSlim(long? id = default,
             string? symbol = default, string? board = default, int? qty = default,
             decimal? price = default, long? timestamp = default,
