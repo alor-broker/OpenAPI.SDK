@@ -36,7 +36,7 @@ namespace Alor.OpenAPI.Managers
 
             await EnsureInitialized();
 
-            var guid = Utilities.Utilities.GuidFormatter<long>("a", Interlocked.Increment(ref _messageCount));
+            var guid = Utilities.Utilities.GuidFormatter("a", Interlocked.Increment(ref _messageCount));
 
             var message = new CwsRequestOrderMarket("create:market", guid, null, side, quantity,
                 new Instrument(symbol, exchange), null, comment, board, new User(portfolio), timeInForce,
@@ -57,7 +57,7 @@ namespace Alor.OpenAPI.Managers
 
             await EnsureInitialized();
 
-            var guid = Utilities.Utilities.GuidFormatter<long>("a", Interlocked.Increment(ref _messageCount));
+            var guid = Utilities.Utilities.GuidFormatter("a", Interlocked.Increment(ref _messageCount));
 
             var message = new CwsRequestOrderLimit("create:limit", guid, null, side, quantity, price,
                 new Instrument(symbol, exchange), null, comment, board, new User(portfolio), timeInForce,
@@ -78,7 +78,7 @@ namespace Alor.OpenAPI.Managers
 
             await EnsureInitialized();
 
-            var guid = Utilities.Utilities.GuidFormatter<long>("a", Interlocked.Increment(ref _messageCount));
+            var guid = Utilities.Utilities.GuidFormatter("a", Interlocked.Increment(ref _messageCount));
 
             var message = new CwsRequestOrderStop("create:stop", guid, null, side, condition, triggerPrice,
                 stopEndUtcTime.GetUnixTimestampSecondsFromDateTime(), quantity,
@@ -101,7 +101,7 @@ namespace Alor.OpenAPI.Managers
 
             await EnsureInitialized();
 
-            var guid = Utilities.Utilities.GuidFormatter<long>("a", Interlocked.Increment(ref _messageCount));
+            var guid = Utilities.Utilities.GuidFormatter("a", Interlocked.Increment(ref _messageCount));
 
             var message = new CwsRequestOrderStopLimit("create:stopLimit", guid, null, side, condition, triggerPrice,
                 stopEndUtcTime.GetUnixTimestampSecondsFromDateTime(), price, quantity,
@@ -125,7 +125,7 @@ namespace Alor.OpenAPI.Managers
 
             await EnsureInitialized();
 
-            var guid = Utilities.Utilities.GuidFormatter<long>("a", Interlocked.Increment(ref _messageCount));
+            var guid = Utilities.Utilities.GuidFormatter("a", Interlocked.Increment(ref _messageCount));
 
             var message = new CwsRequestOrderMarket("update:market", guid, orderId, side, quantity,
                 new Instrument(symbol, exchange), null, comment, board, new User(portfolio), timeInForce, checkDuplicates, allowMargin).ToJson();
@@ -147,7 +147,7 @@ namespace Alor.OpenAPI.Managers
 
             await EnsureInitialized();
 
-            var guid = Utilities.Utilities.GuidFormatter<long>("a", Interlocked.Increment(ref _messageCount));
+            var guid = Utilities.Utilities.GuidFormatter("a", Interlocked.Increment(ref _messageCount));
 
             var message = new CwsRequestOrderLimit("update:limit", guid, orderId, side, quantity, price,
                 new Instrument(symbol, exchange), null, comment, board, new User(portfolio), timeInForce,
@@ -170,7 +170,7 @@ namespace Alor.OpenAPI.Managers
 
             await EnsureInitialized();
 
-            var guid = Utilities.Utilities.GuidFormatter<long>("a", Interlocked.Increment(ref _messageCount));
+            var guid = Utilities.Utilities.GuidFormatter("a", Interlocked.Increment(ref _messageCount));
 
             var message = new CwsRequestOrderStop("update:stop", guid, orderId, side, condition, triggerPrice,
                 stopEndUtcTime.GetUnixTimestampSecondsFromDateTime(), quantity,
@@ -195,7 +195,7 @@ namespace Alor.OpenAPI.Managers
 
             await EnsureInitialized();
 
-            var guid = Utilities.Utilities.GuidFormatter<long>("a", Interlocked.Increment(ref _messageCount));
+            var guid = Utilities.Utilities.GuidFormatter("a", Interlocked.Increment(ref _messageCount));
 
             var message = new CwsRequestOrderStopLimit("update:stopLimit", guid, orderId, side, condition, triggerPrice,
                 stopEndUtcTime.GetUnixTimestampSecondsFromDateTime(), price, quantity,
@@ -217,7 +217,7 @@ namespace Alor.OpenAPI.Managers
 
             await EnsureInitialized();
 
-            var guid = Utilities.Utilities.GuidFormatter<long>("a", Interlocked.Increment(ref _messageCount));
+            var guid = Utilities.Utilities.GuidFormatter("a", Interlocked.Increment(ref _messageCount));
 
             var message = new CwsRequestOrderMarket("delete:market", guid, orderId, exchange: exchange, user: new User(portfolio), checkDuplicates: checkDuplicates).ToJson();
 
@@ -235,7 +235,7 @@ namespace Alor.OpenAPI.Managers
 
             await EnsureInitialized();
 
-            var guid = Utilities.Utilities.GuidFormatter<long>("a", Interlocked.Increment(ref _messageCount));
+            var guid = Utilities.Utilities.GuidFormatter("a", Interlocked.Increment(ref _messageCount));
 
             var message = new CwsRequestOrderLimit("delete:limit", guid, orderId, exchange: exchange, user: new User(portfolio), checkDuplicates: checkDuplicates).ToJson();
 
@@ -253,7 +253,7 @@ namespace Alor.OpenAPI.Managers
 
             await EnsureInitialized();
 
-            var guid = Utilities.Utilities.GuidFormatter<long>("a", Interlocked.Increment(ref _messageCount));
+            var guid = Utilities.Utilities.GuidFormatter("a", Interlocked.Increment(ref _messageCount));
 
             var message = new CwsRequestOrderStop("delete:stop", guid, orderId, exchange: exchange, user: new User(portfolio), checkDuplicates: checkDuplicates).ToJson();
 
@@ -271,7 +271,7 @@ namespace Alor.OpenAPI.Managers
 
             await EnsureInitialized();
 
-            var guid = Utilities.Utilities.GuidFormatter<long>("a", Interlocked.Increment(ref _messageCount));
+            var guid = Utilities.Utilities.GuidFormatter("a", Interlocked.Increment(ref _messageCount));
 
             var message = new CwsRequestOrderStopLimit("delete:stopLimit", guid, orderId, exchange: exchange, user: new User(portfolio), checkDuplicates: checkDuplicates).ToJson();
 

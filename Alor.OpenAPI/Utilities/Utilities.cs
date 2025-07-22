@@ -65,29 +65,28 @@ namespace Alor.OpenAPI.Utilities
             }
         }
 
-        private static string? ConvertToBase62<T>(T? number) where T : struct, IComparable, IConvertible
+        private static string ConvertToBase62(long number)
         {
-            if (number == null) return null;
-            
-            if (number.Value.CompareTo((T)Convert.ChangeType(0, typeof(T))) < 0)
+            if (number < 0)
                 throw new ArgumentOutOfRangeException(nameof(number), "Number must be non-negative.");
 
-            var longNumber = Convert.ToInt64(number.Value);
             const string chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-            if (longNumber == 0) return "0";
+            if (number == 0) return "0";
 
             var result = new StringBuilder();
-            while (longNumber > 0)
+            var current = number;
+            
+            while (current > 0)
             {
-                result.Insert(0, chars[(int)(longNumber % 62)]);
-                longNumber /= 62;
+                result.Insert(0, chars[(int)(current % 62)]);
+                current /= 62;
             }
 
             return result.ToString();
         }
 
-        internal static string GuidFormatter<T>(string subsMarker, T? number, Format? format = null) where T : struct, IComparable, IConvertible
+        internal static string GuidFormatter(string subsMarker, long number, Format? format = null)
         {
             var subsType = subsMarker;
 

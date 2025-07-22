@@ -18,8 +18,10 @@ namespace Alor.OpenAPI.Core
 
         private readonly CancellationTokenSource _cancellationTokenSource;
 
+        private int _disposed;
         private int _socketsCounter;
         private string? _jwtToken;
+        private readonly object _webSocketsPoolManagersLock = new();
         private readonly List<IWebSocketsPoolManager> _webSocketsPoolManagers;
         private readonly Action<WsResponseMessage>? _wsResponseMessageHandler;
         private readonly Action<WsResponseCommandMessage>? _wsResponseCommandMessageHandler;
@@ -41,6 +43,9 @@ namespace Alor.OpenAPI.Core
 
         public void Dispose()
         {
+            if (Interlocked.Exchange(ref _disposed, 1) == 1)
+                return;
+
             _cancellationTokenSource.Cancel();
             _cancellationTokenSource.Dispose();
             Parameters.Clear();
@@ -49,9 +54,13 @@ namespace Alor.OpenAPI.Core
             _token.Dispose();
             _metrics.Dispose();
 
-            foreach (var webSocketsPoolManager in _webSocketsPoolManagers)
+            lock (_webSocketsPoolManagersLock)
             {
-                webSocketsPoolManager.Dispose();
+                foreach (var webSocketsPoolManager in _webSocketsPoolManagers)
+                {
+                    webSocketsPoolManager.Dispose();
+                }
+                _webSocketsPoolManagers.Clear();
             }
 
             _webSocketsPoolManagers.Clear();
@@ -67,7 +76,7 @@ namespace Alor.OpenAPI.Core
             _cancellationTokenSource = cancellationTokenSource;
             _config = configuration;
             _token = tokenService;
-            _webSocketsPoolManagers = webSocketsPoolManagers;
+            _webSocketsPoolManagers = webSocketsPoolManagers ?? [];
 
             _wsResponseMessageHandler = wsResponseMessageHandler;
             _wsResponseCommandMessageHandler = wsResponseCommandMessageHandler;
@@ -105,7 +114,11 @@ namespace Alor.OpenAPI.Core
                 DecrementSocketsCounter, _jwtToken, _metrics.GetMetricsRegistry(), _config.WsUrl, _config.CwsUrl,
                 logLevel, names, commandSocketName, sockets, logFileNameSuffix, _wsResponseMessageHandler,
                 _wsResponseCommandMessageHandler, _config.WsUrlHeaders, _config.CwsUrlHeaders);
-            _webSocketsPoolManagers.Add(wsPoolManager);
+            
+            lock (_webSocketsPoolManagersLock)
+            {
+                _webSocketsPoolManagers.Add(wsPoolManager);
+            }
 
             return wsPoolManager;
         }
@@ -233,14 +246,14 @@ namespace Alor.OpenAPI.Core
 
         private void IncrementSocketsCounter()
         {
-            _socketsCounter++;
-            _metrics.UpdateSocketsCounterMetric(_socketsCounter);
+            var interlockedCounter = Interlocked.Increment(ref _socketsCounter);
+            _metrics.UpdateSocketsCounterMetric(interlockedCounter);
         }
 
         private void DecrementSocketsCounter()
         {
-            _socketsCounter--;
-            _metrics.UpdateSocketsCounterMetric(_socketsCounter);
+            var interlockedCounter = Interlocked.Decrement(ref _socketsCounter);
+            _metrics.UpdateSocketsCounterMetric(interlockedCounter);
         }
 
 

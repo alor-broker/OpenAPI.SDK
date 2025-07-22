@@ -22,6 +22,7 @@
 			<param name="refreshToken">Refresh-токен для авторизации</param>
 			<param name="logLevel">Уровень логирования для сервисов клиента</param>
 			<param name="isMetricsCollectionEnabled">Флаг включения сбора метрик</param>
+			<param name="logFileNameSuffix">Суффикс в названии лог-файла для данного клиента</param>
 			<param name="wsResponseMessageHandler">Делегат для обработки входящих сообщений-ответов на подписки в вебсокетах</param>
 			<param name="wsResponseCommandMessageHandler">Делегат для обработки входящих сообщений-ответов на подписки в командном вебсокете</param>
 			<returns>

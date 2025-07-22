@@ -17,10 +17,10 @@ namespace Alor.OpenAPI.Managers
         private readonly IMetricsRegistry _metricsRegistry;
         private readonly IWebSocketInfo _webSocketInfo;
 
-        private readonly AsyncPolicyWrap _policyWrap;
+        private readonly SemaphoreSlim _socketLifecycleSemaphore = new(1, 1);
+        private Task? _socketStartingTask;
 
-        private bool _isRestarting = false;
-        private readonly object _restartLock = new object();
+        private readonly AsyncPolicyWrap _policyWrap;
 
         private Action? _incrementSocketsCounter;
         private Action? _decrementSocketsCounter;
@@ -130,8 +130,7 @@ namespace Alor.OpenAPI.Managers
         {
             try
             {
-                if (!_webSocketInfo.IsConnected)
-                    await StartSocket(_webSocketInfo);
+                await EnsureSocketStartedAsync();
 
                 await SendToSocket(_webSocketInfo, message);
                 return true;
@@ -147,8 +146,7 @@ namespace Alor.OpenAPI.Managers
         {
             try
             {
-                if (!_webSocketInfo.IsConnected)
-                    await StartSocket(_webSocketInfo);
+                await EnsureSocketStartedAsync();
 
                 var str = message.Replace("JwtToken", _jwtToken);
                 await SendToSocket(_webSocketInfo, str);
@@ -166,17 +164,13 @@ namespace Alor.OpenAPI.Managers
             try
             {
                 if (messages.Count <= 0) return false;
-                if (!_webSocketInfo.IsConnected)
+
+                await EnsureSocketStartedAsync();
+                
+                foreach (var msg in messages)
                 {
-                    await StartSocketAndSubscribe(_webSocketInfo);
-                }
-                else
-                {
-                    foreach (var msg in messages)
-                    {
-                        var str = msg.Replace("JwtToken", _jwtToken);
-                        await SendToSocket(_webSocketInfo, str);
-                    }
+                    var str = msg.Replace("JwtToken", _jwtToken);
+                    await SendToSocket(_webSocketInfo, str);
                 }
 
                 return true;
@@ -200,7 +194,30 @@ namespace Alor.OpenAPI.Managers
                 throw new Exception(errorMessage);
             }
         }
+        
+        private async Task EnsureSocketStartedAsync()
+        {
+            await _socketLifecycleSemaphore.WaitAsync();
+            try
+            {
+                if (_webSocketInfo.IsConnected)
+                    return;
 
+                if (_socketStartingTask is { IsCompleted: false })
+                {
+                    await _socketStartingTask;
+                    return;
+                }
+
+                _socketStartingTask = StartSocket(_webSocketInfo);
+                
+                await _socketStartingTask;
+            }
+            finally
+            {
+                _socketLifecycleSemaphore.Release();
+            }
+        }
 
         private async Task StartSocketAndSubscribe(IWebSocketInfo ws)
         {
@@ -249,19 +266,7 @@ namespace Alor.OpenAPI.Managers
 
         private async Task Restart(IWebSocketInfo ws)
         {
-            //await StopSocket(ws);
-            //ws.ReconnectCount++;
-
-            //await StartSocketAndSubscribe(ws);
-
-            lock (_restartLock)
-            {
-                if (_isRestarting)
-                {
-                    return;
-                }
-                _isRestarting = true;
-            }
+            await _socketLifecycleSemaphore.WaitAsync();
 
             try
             {
@@ -276,10 +281,7 @@ namespace Alor.OpenAPI.Managers
             }
             finally
             {
-                lock (_restartLock)
-                {
-                    _isRestarting = false;
-                }
+                _socketLifecycleSemaphore.Release();
             }
         }
 
@@ -294,7 +296,6 @@ namespace Alor.OpenAPI.Managers
 
         private Task Websocket_Error(IWebSocketInfo ws, Exception e)
         {
-            if (_isRestarting) return Task.CompletedTask;
             SendSocketStatus(AlorOpenApiLogLevel.Error, $"{ws.Name}: Поймали еррор: {e.Message}");
 
             return Restart(ws);
@@ -356,6 +357,7 @@ namespace Alor.OpenAPI.Managers
             _decrementSocketsCounter = null;
             _onMessageReceived = null;
             _webSocketInfo.Dispose();
+            _socketLifecycleSemaphore.Dispose();
 
             SendSocketStatus(AlorOpenApiLogLevel.Information,
                 $"Закрыли соединение в сокете {_webSocketInfo.Name}");

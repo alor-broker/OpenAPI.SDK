@@ -27,7 +27,7 @@ namespace Alor.OpenAPI.Services
         {
             try
             {
-                await (_authMsgUpdate?.Invoke(new CwsRequestAuthorize(Utilities.Utilities.GuidFormatter<long>("auth", _messageCount++)).ToJson()) ?? Task.CompletedTask);
+                await (_authMsgUpdate?.Invoke(new CwsRequestAuthorize(Utilities.Utilities.GuidFormatter("auth", _messageCount++)).ToJson()) ?? Task.CompletedTask);
             }
             catch (Exception ex)
             {

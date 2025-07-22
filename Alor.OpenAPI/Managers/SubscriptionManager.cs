@@ -48,7 +48,7 @@ namespace Alor.OpenAPI.Managers
         public Action<Action<WsStopOrderSlim>>? UpdateWsMessageHandlerWsStopOrderSlimDelegat { get; set; }
         public Action<Action<WsStopOrderHeavy>>? UpdateWsMessageHandlerWsStopOrderHeavyDelegat { get; set; }
 
-
+        private long _guidCounter;
         private readonly ConcurrentDictionary<string, Parameters> _parameters;
         private Func<Dictionary<string, string>, Task<bool[]>>? _msgDictionaryUpdate;
         private Func<Dictionary<string, string>, Task<bool[]>>? _msgDeleteRequest;
@@ -501,7 +501,7 @@ namespace Alor.OpenAPI.Managers
             {
                 if (string.IsNullOrEmpty(ticker)) continue;
 
-                var guid = Utilities.Utilities.GuidFormatter("b", _parameters?.Count, format);
+                var guid = Utilities.Utilities.GuidFormatter("b", Interlocked.Increment(ref _guidCounter), format);
 
                 _parameters?.TryAdd(guid, new Parameters
                                           {
@@ -533,7 +533,7 @@ namespace Alor.OpenAPI.Managers
             {
                 if (string.IsNullOrEmpty(ticker)) continue;
 
-                var guid = Utilities.Utilities.GuidFormatter("c", _parameters?.Count, format);
+                var guid = Utilities.Utilities.GuidFormatter("c", Interlocked.Increment(ref _guidCounter), format);
 
                 _parameters?.TryAdd(guid, new Parameters
                                           {
@@ -568,7 +568,7 @@ namespace Alor.OpenAPI.Managers
             {
                 if (string.IsNullOrEmpty(ticker)) continue;
 
-                var guid = Utilities.Utilities.GuidFormatter("d", _parameters?.Count, format);
+                var guid = Utilities.Utilities.GuidFormatter("d", Interlocked.Increment(ref _guidCounter), format);
                 
                 _parameters?.TryAdd(guid, new Parameters
                                           {
@@ -598,7 +598,7 @@ namespace Alor.OpenAPI.Managers
             {
                 if (string.IsNullOrEmpty(ticker)) continue;
 
-                var guid = Utilities.Utilities.GuidFormatter("e", _parameters?.Count, format);
+                var guid = Utilities.Utilities.GuidFormatter("e", Interlocked.Increment(ref _guidCounter), format);
                 
                 _parameters?.TryAdd(guid, new Parameters
                                           {
@@ -626,7 +626,7 @@ namespace Alor.OpenAPI.Managers
 
             var msgDic = new Dictionary<string, string>();
 
-            var guid = Utilities.Utilities.GuidFormatter("f", _parameters?.Count, format);
+            var guid = Utilities.Utilities.GuidFormatter("f", Interlocked.Increment(ref _guidCounter), format);
 
             _parameters?.TryAdd(guid, new Parameters
                                       {
@@ -651,7 +651,7 @@ namespace Alor.OpenAPI.Managers
 
             var msgDic = new Dictionary<string, string>();
 
-            var guid = Utilities.Utilities.GuidFormatter("g", _parameters?.Count, format);
+            var guid = Utilities.Utilities.GuidFormatter("g", Interlocked.Increment(ref _guidCounter), format);
 
             _parameters?.TryAdd(guid, new Parameters
                                       {
@@ -676,7 +676,7 @@ namespace Alor.OpenAPI.Managers
 
             var msgDic = new Dictionary<string, string>();
 
-            var guid = Utilities.Utilities.GuidFormatter("h", _parameters?.Count, format);
+            var guid = Utilities.Utilities.GuidFormatter("h", Interlocked.Increment(ref _guidCounter), format);
 
             _parameters?.TryAdd(guid, new Parameters
                                       {
@@ -701,7 +701,7 @@ namespace Alor.OpenAPI.Managers
 
             var msgDic = new Dictionary<string, string>();
 
-            var guid = Utilities.Utilities.GuidFormatter("i", _parameters?.Count, format);
+            var guid = Utilities.Utilities.GuidFormatter("i", Interlocked.Increment(ref _guidCounter), format);
 
             _parameters?.TryAdd(guid, new Parameters
                                       {
@@ -726,7 +726,7 @@ namespace Alor.OpenAPI.Managers
 
             var msgDic = new Dictionary<string, string>();
 
-            var guid = Utilities.Utilities.GuidFormatter("j", _parameters?.Count, format);
+            var guid = Utilities.Utilities.GuidFormatter("j", Interlocked.Increment(ref _guidCounter), format);
 
             _parameters?.TryAdd(guid, new Parameters
                                       {
@@ -751,7 +751,7 @@ namespace Alor.OpenAPI.Managers
 
             var msgDic = new Dictionary<string, string>();
 
-            var guid = Utilities.Utilities.GuidFormatter("k", _parameters?.Count, format);
+            var guid = Utilities.Utilities.GuidFormatter("k", Interlocked.Increment(ref _guidCounter), format);
 
             _parameters?.TryAdd(guid, new Parameters
                                       {
@@ -779,7 +779,7 @@ namespace Alor.OpenAPI.Managers
             {
                 if (string.IsNullOrEmpty(ticker)) continue;
 
-                var guid = Utilities.Utilities.GuidFormatter("l", _parameters?.Count, format);
+                var guid = Utilities.Utilities.GuidFormatter("l", Interlocked.Increment(ref _guidCounter), format);
 
                 _parameters?.TryAdd(guid, new Parameters
                                           {
@@ -806,7 +806,7 @@ namespace Alor.OpenAPI.Managers
 
             var msgDic = new Dictionary<string, string>();
 
-            var guid = Utilities.Utilities.GuidFormatter("m", _parameters?.Count, format);
+            var guid = Utilities.Utilities.GuidFormatter("m", Interlocked.Increment(ref _guidCounter), format);
 
             _parameters?.TryAdd(guid, new Parameters
                                       {
