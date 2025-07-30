@@ -12,7 +12,7 @@ namespace Alor.OpenAPI.Models.Simple
         public StopOrderSimple() { }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseStopOrderWarp"]/Member[@name="responseStopOrderWarp"]/*' />
-        public StopOrderSimple(int? id = default, long? exchangeOrderId = default,
+        public StopOrderSimple(string? id = default, long? exchangeOrderId = default,
             string? symbol = default, string? brokerSymbol = default, string? portfolio = default,
             Exchange exchange = default, string? board = default, OrderTypeStopLimit type = default,
             Side side = default, Condition condition = default,
@@ -56,7 +56,7 @@ namespace Alor.OpenAPI.Models.Simple
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseStopOrderWarp"]/Member[@name="id"]/*' />
         [DataMember(Name = "id", EmitDefaultValue = false)]
-        public int? Id { get; init; }
+        public string? Id { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseStopOrderWarp"]/Member[@name="exchangeOrderId"]/*' />
         [DataMember(Name = "exchangeOrderId", EmitDefaultValue = false)]
