@@ -11,18 +11,23 @@ namespace Alor.OpenAPI.Models.Slim
     {
         public SymbolSlim() { }
 
-        /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSymbol"]/Member[@name="responseSymbol"]/*' />
-        public SymbolSlim(string? symbol = default, Exchange exchange = default,
-            string? description = default, decimal? ask = default, decimal? bid = default,
-            int? askVol = default, int? bidVol = default, long? obMsTimestamp = default,
-            decimal? lastPrice = default,
-            long? lastPriceTimestamp = default, decimal? highPrice = default,
-            decimal? lowPrice = default, decimal? accruedInterest = default,
-            decimal? volume = default,
-            long? openInterest = default, decimal? openPrice = default,
-            decimal? yield = default, decimal? lotsize = default, decimal? lotvalue = default,
-            decimal? facevalue = default, string? type = default,
-            int? totalAskVol = default, int? totalBidVol = default)
+        /// <include file='../../XmlDocs/CoreModels.xml'
+        ///          path='Docs/Members[@name="responseSymbol"]
+        ///               /Member[@name="responseSymbol"]
+        ///               /param[
+        ///                      @name="symbol" or @name="exchange" or @name="description" or @name="ask" or @name="bid"
+        ///                      or @name="askVol" or @name="bidVol" or @name="obMsTimestamp" or @name="lastPrice"
+        ///                      or @name="lastPriceTimestamp" or @name="highPrice" or @name="lowPrice" or @name="accruedInterest"
+        ///                      or @name="volume" or @name="openInterest" or @name="openPrice" or @name="yield" or @name="lotsize" 
+        ///                      or @name="lotvalue" or @name="facevalue" or @name="type" or @name="totalAskVol" or @name="totalBidVol" 
+        ///                     ]'/>
+        public SymbolSlim(string? symbol = null, Exchange? exchange = null, string? description = null,
+            decimal? ask = null, decimal? bid = null, int? askVol = null, int? bidVol = null,
+            long? obMsTimestamp = null, decimal? lastPrice = null, long? lastPriceTimestamp = null,
+            decimal? highPrice = null, decimal? lowPrice = null, decimal? accruedInterest = null,
+            decimal? volume = null, long? openInterest = null, decimal? openPrice = null, decimal? yield = null,
+            decimal? lotsize = null, decimal? lotvalue = null, decimal? facevalue = null, string? type = null,
+            int? totalAskVol = null, int? totalBidVol = null)
         {
             Symbol = symbol;
             Exchange = exchange;
@@ -55,7 +60,7 @@ namespace Alor.OpenAPI.Models.Slim
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSymbol"]/Member[@name="exchange"]/*' />
         [DataMember(Name = "ex", EmitDefaultValue = false)]
-        public Exchange Exchange { get; init; }
+        public Exchange? Exchange { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSymbol"]/Member[@name="description"]/*' />
         [DataMember(Name = "desc", EmitDefaultValue = false)]
@@ -235,7 +240,7 @@ namespace Alor.OpenAPI.Models.Slim
             if (this == (object?)other)
                 return true;
 
-            if ((object?)other == null)
+            if (other is null)
                 return false;
 
             return GetType() == other.GetType() && EqualsHelper(this, other);

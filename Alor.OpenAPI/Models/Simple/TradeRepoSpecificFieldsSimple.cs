@@ -10,9 +10,16 @@ namespace Alor.OpenAPI.Models.Simple
     {
         public TradeRepoSpecificFieldsSimple() { }
 
-        public TradeRepoSpecificFieldsSimple(decimal? repoRate = default, string? extRef = default, int? repoTerm = default,
-            string? account = default, string? tradeTypeInfo = default, decimal? value = default,
-            decimal? yield = default)
+        /// <include file='../../XmlDocs/CoreModels.xml'
+        ///          path='Docs/Members[@name="objectRepoFields"]
+        ///               /Member[@name="objectRepoFields"]
+        ///               /param[
+        ///                      @name="repoRate" or @name="extRef" or @name="repoTerm" or @name="account" or @name="tradeTypeInfo" 
+        ///                      or @name="value" or @name="yield"
+        ///                     ]'/>
+        public TradeRepoSpecificFieldsSimple(decimal? repoRate = null, string? extRef = null, int? repoTerm = null,
+            string? account = null, string? tradeTypeInfo = null, decimal? value = null,
+            decimal? yield = null)
         {
             RepoRate = repoRate;
             ExtRef = extRef;
@@ -23,24 +30,31 @@ namespace Alor.OpenAPI.Models.Simple
             Yield = yield;
         }
 
+        /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectRepoFields"]/Member[@name="repoRate"]/*' />
         [DataMember(Name = "repoRate", EmitDefaultValue = false)]
         public decimal? RepoRate { get; init; }
 
+        /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectRepoFields"]/Member[@name="extRef"]/*' />
         [DataMember(Name = "extRef", EmitDefaultValue = false)]
         public string? ExtRef { get; init; }
 
+        /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectRepoFields"]/Member[@name="repoTerm"]/*' />
         [DataMember(Name = "repoTerm", EmitDefaultValue = false)]
         public int? RepoTerm { get; init; }
 
+        /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectRepoFields"]/Member[@name="account"]/*' />
         [DataMember(Name = "account", EmitDefaultValue = false)]
         public string? Account { get; init; }
 
+        /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectRepoFields"]/Member[@name="tradeTypeInfo"]/*' />
         [DataMember(Name = "tradeTypeInfo", EmitDefaultValue = false)]
         public string? TradeTypeInfo { get; init; }
 
+        /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectRepoFields"]/Member[@name="value"]/*' />
         [DataMember(Name = "value", EmitDefaultValue = false)]
         public decimal? Value { get; init; }
 
+        /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectRepoFields"]/Member[@name="yield"]/*' />
         [DataMember(Name = "yield", EmitDefaultValue = false)]
         public decimal? Yield { get; init; }
 
@@ -88,7 +102,7 @@ namespace Alor.OpenAPI.Models.Simple
             if (this == (object?)other)
                 return true;
 
-            if ((object?)other == null)
+            if (other is null)
                 return false;
 
             return GetType() == other.GetType() && EqualsHelper(this, other);

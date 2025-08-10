@@ -42,7 +42,7 @@ namespace Alor.OpenAPI.Services
             if (needAuthorization)
             {
                 if (string.IsNullOrEmpty(_jwtToken))
-                    throw new ArgumentNullException(nameof(_jwtToken));
+                    throw new InvalidOperationException("JWT token не задан для запроса, который требует авторизацию.");
                 PrepareRequest(request);
             }
             else

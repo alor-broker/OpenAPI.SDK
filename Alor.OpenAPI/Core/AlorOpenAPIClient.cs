@@ -64,6 +64,8 @@ namespace Alor.OpenAPI.Core
             }
 
             _webSocketsPoolManagers.Clear();
+
+            GC.SuppressFinalize(this);
         }
 
         private AlorOpenApiClient(Configuration.Config configuration, HttpClient httpClientForApi, HttpClient httpClientForAuth, AlorOpenApiLogLevel logLevel, CancellationTokenSource cancellationTokenSource,

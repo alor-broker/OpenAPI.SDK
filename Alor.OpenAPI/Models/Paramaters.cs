@@ -11,11 +11,11 @@ namespace Alor.OpenAPI.Models
     {
         public Parameters() { }
 
-        public Parameters(string? guid = default, string? portfolio = default, string? code = default,
-            string? instrumentGroup = default, Exchange exchange = default, int? depth = default,
-            string? tf = default, DateTime? from = default, bool? skipHistory = default,
-            bool? splitAdjust = default, CandleSliceMode sliceMode = default, bool? includeVirtualTrades = default,
-            List<OrderStatus>? orderStatuses = default)
+        public Parameters(string? guid = null, string? portfolio = null, string? code = null,
+            string? instrumentGroup = null, Exchange? exchange = null, int? depth = null,
+            string? tf = null, DateTime? from = null, bool? skipHistory = null,
+            bool? splitAdjust = null, CandleSliceMode sliceMode = default, bool? includeVirtualTrades = null,
+            List<OrderStatus>? orderStatuses = null)
         {
             Guid = guid;
             Portfolio = portfolio;
@@ -154,7 +154,7 @@ namespace Alor.OpenAPI.Models
             if (this == (object?)other)
                 return true;
 
-            if ((object?)other == null)
+            if (other is null)
                 return false;
 
             return GetType() == other.GetType() && EqualsHelper(this, other);

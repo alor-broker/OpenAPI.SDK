@@ -11,11 +11,18 @@ namespace Alor.OpenAPI.Models
     {
         public SubscriptionBar() { }
 
-        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubBarsGetAndSubscribe"]/Member[@name="wsSubBarsGetAndSubscribe"]/*' />
-        public SubscriptionBar(string? code = default, string? tf = default,
-            long? from = default, string? instrumentGroup = default, bool? skipHistory = default,
-            bool? splitAdjust = default, CandleSliceMode? sliceMode = default, Exchange exchange = default,
-            Format format = default, int? frequency = default, string? guid = default)
+        /// <include file='../XmlDocs/CoreModels.xml'
+        ///          path='Docs/Members[@name="wsSubBarsGetAndSubscribe"]
+        ///               /Member[@name="wsSubBarsGetAndSubscribe"]
+        ///               /param[
+        ///                      @name="code" or @name="tf" or @name="from" or @name="instrumentGroup" or @name="skipHistory"
+        ///                      or @name="splitAdjust" or @name="sliceMode" or @name="exchange" or @name="format"
+        ///                      or @name="frequency" or @name="guid"
+        ///                     ]'/>
+        public SubscriptionBar(string? code = null, string? tf = null,
+            long? from = null, string? instrumentGroup = null, bool? skipHistory = null,
+            bool? splitAdjust = null, CandleSliceMode? sliceMode = null, Exchange? exchange = null,
+            Format? format = null, int? frequency = null, string? guid = null)
         {
             Code = code;
             Tf = tf;
@@ -64,11 +71,11 @@ namespace Alor.OpenAPI.Models
         
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubBarsGetAndSubscribe"]/Member[@name="exchange"]/*' />
         [DataMember(Name = "exchange", EmitDefaultValue = false)]
-        public Exchange Exchange { get; init; }
+        public Exchange? Exchange { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubBarsGetAndSubscribe"]/Member[@name="format"]/*' />
         [DataMember(Name = "format", EmitDefaultValue = false)]
-        public Format Format { get; init; }
+        public Format? Format { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubBarsGetAndSubscribe"]/Member[@name="frequency"]/*' />
         [DataMember(Name = "frequency", EmitDefaultValue = false)]
@@ -142,7 +149,7 @@ namespace Alor.OpenAPI.Models
             if (this == (object?)other)
                 return true;
 
-            if ((object?)other == null)
+            if (other is null)
                 return false;
 
             return GetType() == other.GetType() && EqualsHelper(this, other);

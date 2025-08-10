@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
-using SpanJson;
 
 namespace Alor.OpenAPI.Models.Slim
 {
@@ -10,7 +9,10 @@ namespace Alor.OpenAPI.Models.Slim
     {
         public OrderbookSlim() { }
 
-        /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrderBook"]/Member[@name="responseOrderBook"]/*' />
+        /// <include file='../../XmlDocs/CoreModels.xml'
+        ///          path='Docs/Members[@name="responseOrderBook"]
+        ///               /Member[@name="responseOrderBook"]
+        ///               /param[@name="bids" or @name="asks" or @name="msTimestamp" or @name="existing"]'/>
         public OrderbookSlim(ICollection<LiquiditySlim>? bids, ICollection<LiquiditySlim>? asks, long? msTimestamp, bool? existing)
         {
             Bids = bids;
@@ -18,8 +20,7 @@ namespace Alor.OpenAPI.Models.Slim
             MsTimestamp = msTimestamp;
             Existing = existing;
         }
-
-
+          
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrderBook"]/Member[@name="bids"]/*' />
         [DataMember(Name = "b", EmitDefaultValue = false)]
         public ICollection<LiquiditySlim>? Bids { get; init; }
@@ -86,7 +87,7 @@ namespace Alor.OpenAPI.Models.Slim
             if (this == (object?)other)
                 return true;
 
-            if ((object?)other == null)
+            if (other is null)
                 return false;
 
             return GetType() == other.GetType() && EqualsHelper(this, other);

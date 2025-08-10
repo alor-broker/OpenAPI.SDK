@@ -11,7 +11,7 @@ namespace Alor.OpenAPI.Models
         public ResponseOrderGroupItem() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectOrderGroupItems"]/Member[@name="objectOrderGroupItems"]/*' />
-        public ResponseOrderGroupItem(string? orderId = default)
+        public ResponseOrderGroupItem(string? orderId = null)
         {
             OrderId = orderId;
         }
@@ -41,7 +41,7 @@ namespace Alor.OpenAPI.Models
             if (this == (object?)other)
                 return true;
 
-            if ((object?)other == null)
+            if (other is null)
                 return false;
 
             return GetType() == other.GetType() && EqualsHelper(this, other);

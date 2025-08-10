@@ -8,7 +8,7 @@ namespace Alor.OpenAPI.Enums
         [EnumMember(Value = "FORTS")] FORTS = 1,
         [EnumMember(Value = "FOND")] FOND = 2,
         [EnumMember(Value = "CURR")] CURR = 3,
-        [EnumMember(Value = "SPBX")] SPBX = 3
+        [EnumMember(Value = "SPBX")] SPBX = 4
 
     }
 }

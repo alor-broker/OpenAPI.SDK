@@ -11,11 +11,17 @@ namespace Alor.OpenAPI.Models.Slim
     {
         public AllTradeSlim() { }
 
-        /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseAllTrade"]/Member[@name="responseAllTrade"]/*' />
-        public AllTradeSlim(long? id = default,
-            string? symbol = default, string? board = default, int? qty = default,
-            decimal? price = default, long? timestamp = default,
-            Side side = default, long? oi = default, bool? existing = default)
+        /// <include file='../../XmlDocs/CoreModels.xml'
+        ///          path='Docs/Members[@name="responseAllTrade"]
+        ///               /Member[@name="responseAllTrade"]
+        ///               /param[
+        ///                      @name="id" or @name="symbol" or @name="board" or @name="qty" or @name="price"
+        ///                      or @name="timestamp" or @name="side" or @name="oi" or @name="existing"
+        ///                     ]'/>
+        public AllTradeSlim(long? id = null,
+            string? symbol = null, string? board = null, int? qty = null,
+            decimal? price = null, long? timestamp = null,
+            Side? side = null, long? oi = null, bool? existing = null)
         {
             Id = id;
             Symbol = symbol;
@@ -54,7 +60,7 @@ namespace Alor.OpenAPI.Models.Slim
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseAllTrade"]/Member[@name="side"]/*' />
         [DataMember(Name = "s", EmitDefaultValue = false)]
-        public Side Side { get; init; }
+        public Side? Side { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseAllTrade"]/Member[@name="oi"]/*' />
         [DataMember(Name = "oi", EmitDefaultValue = false)]
@@ -115,7 +121,7 @@ namespace Alor.OpenAPI.Models.Slim
             if (this == (object?)other)
                 return true;
 
-            if ((object?)other == null)
+            if (other is null)
                 return false;
 
             return GetType() == other.GetType() && EqualsHelper(this, other);

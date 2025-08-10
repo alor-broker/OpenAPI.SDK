@@ -8,6 +8,8 @@ namespace Alor.OpenAPI.Enums
         [EnumMember(Value = "oneday")] OneDay = 1,
         [EnumMember(Value = "immediateorcancel")] ImmediateOrCancel = 2,
         [EnumMember(Value = "fillorkill")] FillOrKill = 3,
-        [EnumMember(Value = "goodtillcancelled")] GoodTillCancelled = 4
+        [EnumMember(Value = "attheclose")] AtTheClose = 4,
+        [EnumMember(Value = "goodtillcancelled")] GoodTillCancelled = 5,
+        [EnumMember(Value = "bookorcancel")] BookOrCancel = 6
     }
 }

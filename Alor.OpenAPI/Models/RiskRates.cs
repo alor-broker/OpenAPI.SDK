@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
-using Alor.OpenAPI.Enums;
 using SpanJson;
 
 namespace Alor.OpenAPI.Models
@@ -12,7 +11,7 @@ namespace Alor.OpenAPI.Models
         public RiskRates() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseRiskRates"]/Member[@name="responseRiskRates"]/*' />
-        public RiskRates(int? total = default, List<RiskRate>? list = default)
+        public RiskRates(int? total = null, List<RiskRate>? list = null)
         {
             Total = total;
             List = list;
@@ -75,7 +74,7 @@ namespace Alor.OpenAPI.Models
             if (this == (object?)other)
                 return true;
 
-            if ((object?)other == null)
+            if (other is null)
                 return false;
 
             return GetType() == other.GetType() && EqualsHelper(this, other);

@@ -12,10 +12,10 @@ namespace Alor.OpenAPI.Models
         public ResponseEstimateOrder() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseEstimateOrder"]/Member[@name="responseEstimateOrder"]/*' />
-        public ResponseEstimateOrder(string? portfolio = default, string? ticker = default, Exchange exchange = default,
-            decimal? quantityToSell = default, decimal? quantityToBuy = default,
-            decimal? notMarginQuantityToSell = default, decimal? notMarginQuantityToBuy = default,
-            decimal? orderEvaluation = default, decimal? commission = default, decimal? buyPrice = default, bool? isUnitedPortfolio = default)
+        public ResponseEstimateOrder(string? portfolio = null, string? ticker = null, Exchange? exchange = null,
+            decimal? quantityToSell = null, decimal? quantityToBuy = null,
+            decimal? notMarginQuantityToSell = null, decimal? notMarginQuantityToBuy = null,
+            decimal? orderEvaluation = null, decimal? commission = null, decimal? buyPrice = null, bool? isUnitedPortfolio = null)
         {
             Portfolio = portfolio;
             Ticker = ticker;
@@ -40,7 +40,7 @@ namespace Alor.OpenAPI.Models
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseEstimateOrder"]/Member[@name="exchange"]/*' />
         [DataMember(Name = "exchange", EmitDefaultValue = false)]
-        public Exchange Exchange { get; init; }
+        public Exchange? Exchange { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseEstimateOrder"]/Member[@name="quantityToSell"]/*' />
         [DataMember(Name = "quantityToSell", EmitDefaultValue = false)]
@@ -131,7 +131,7 @@ namespace Alor.OpenAPI.Models
             if (this == (object?)other)
                 return true;
 
-            if ((object?)other == null)
+            if (other is null)
                 return false;
 
             return GetType() == other.GetType() && EqualsHelper(this, other);

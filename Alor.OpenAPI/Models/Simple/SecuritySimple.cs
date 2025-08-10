@@ -11,24 +11,36 @@ namespace Alor.OpenAPI.Models.Simple
     {
         public SecuritySimple() { }
 
-        /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSecurity"]/Member[@name="responseSecurity"]/*' />
-        public SecuritySimple(string? symbol = default, string? shortname = default,
-            string? description = default, Exchange exchange = default, Market market = default,
-            string? type = default, decimal? lotsize = default, decimal? facevalue = default,
-            string? cfiCode = default, string? cancellation = default,
-            decimal? minstep = default, decimal? rating = default,
-            decimal? marginbuy = default, decimal? marginsell = default,
-            decimal? marginrate = default, decimal? pricestep = default,
-            decimal? priceMax = default, decimal? priceMin = default,
-            decimal? theorPrice = default, decimal? theorPriceLimit = default,
-            decimal? volatility = default, string? currency = default, string? isin = default,
-            decimal? yield = default, string? board = default, string? primaryBoard = default,
-            int? tradingStatus = default, string? tradingStatusInfo = default,
-            string? complexProductCategory = default, decimal? priceMultiplier = default,
-            decimal? priceShownUnits = default, decimal? strikePrice = default,
-            DateTime? endExpiration = default, decimal? fixedSpotDiscount = default,
-            decimal? projectedSpotDiscount = default, string? underlyingSymbol = default,
-            OptionSide? optionSide = default)
+        /// <include file='../../XmlDocs/CoreModels.xml'
+        ///          path='Docs/Members[@name="responseSecurity"]
+        ///               /Member[@name="responseSecurity"]
+        ///               /param[
+        ///                      @name="symbol" or @name="shortname" or @name="description" or @name="exchange" or @name="market"
+        ///                      or @name="type" or @name="lotsize" or @name="facevalue" or @name="cfiCode" or @name="cancellation"
+        ///                      or @name="minstep" or @name="rating" or @name="marginbuy" or @name="marginsell" or @name="marginrate"
+        ///                      or @name="pricestep" or @name="priceMax" or @name="priceMin" or @name="theorPrice" or @name="theorPriceLimit"
+        ///                      or @name="volatility" or @name="currency" or @name="isin" or @name="yield" or @name="board" or @name="primaryBoard"
+        ///                      or @name="tradingStatus" or @name="tradingStatusInfo" or @name="complexProductCategory" or @name="priceMultiplier"
+        ///                      or @name="priceShownUnits" or @name="strikePrice" or @name="endExpiration" or @name="fixedSpotDiscount"
+        ///                      or @name="projectedSpotDiscount" or @name="underlyingSymbol" or @name="optionSide"
+        ///                     ]'/>
+        public SecuritySimple(string? symbol = null, string? shortname = null,
+            string? description = null, Exchange? exchange = null, Market? market = null,
+            string? type = null, decimal? lotsize = null, decimal? facevalue = null,
+            string? cfiCode = null, string? cancellation = null,
+            decimal? minstep = null, decimal? rating = null,
+            decimal? marginbuy = null, decimal? marginsell = null,
+            decimal? marginrate = null, decimal? pricestep = null,
+            decimal? priceMax = null, decimal? priceMin = null,
+            decimal? theorPrice = null, decimal? theorPriceLimit = null,
+            decimal? volatility = null, string? currency = null, string? isin = null,
+            decimal? yield = null, string? board = null, string? primaryBoard = null,
+            int? tradingStatus = null, string? tradingStatusInfo = null,
+            string? complexProductCategory = null, decimal? priceMultiplier = null,
+            decimal? priceShownUnits = null, decimal? strikePrice = null,
+            DateTime? endExpiration = null, decimal? fixedSpotDiscount = null,
+            decimal? projectedSpotDiscount = null, string? underlyingSymbol = null,
+            OptionSide? optionSide = null)
         {
             Symbol = symbol;
             Shortname = shortname;
@@ -83,11 +95,11 @@ namespace Alor.OpenAPI.Models.Simple
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSecurity"]/Member[@name="exchange"]/*' />
         [DataMember(Name = "exchange", EmitDefaultValue = false)]
-        public Exchange Exchange { get; init; }
+        public Exchange? Exchange { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSecurity"]/Member[@name="market"]/*' />
         [DataMember(Name = "market", EmitDefaultValue = false)]
-        public Market Market { get;  init; }
+        public Market? Market { get;  init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSecurity"]/Member[@name="type"]/*' />
         [DataMember(Name = "type", EmitDefaultValue = false)]
@@ -351,7 +363,7 @@ namespace Alor.OpenAPI.Models.Simple
             if (this == (object?)other)
                 return true;
 
-            if ((object?)other == null)
+            if (other is null)
                 return false;
 
             return GetType() == other.GetType() && EqualsHelper(this, other);

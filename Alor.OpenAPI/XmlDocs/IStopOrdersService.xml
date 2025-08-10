@@ -179,21 +179,21 @@
             <description>Условие срабатывания стоп/стоп-лимитной заявки:</description>
           </listheader>
           <item>
-            <term>More</term>
+            <term>more</term>
             <description />Цена срабатывания больше текущей цены</item>
           <item>
-            <term>Less</term>
+            <term>less</term>
             <description />Цена срабатывания меньше текущей цены</item>
           <item>
-            <term>MoreOrEqual</term>
+            <term>moreorequal</term>
             <description />Цена срабатывания больше или равна текущей цене</item>
           <item>
-            <term>LessOrEqual</term>
+            <term>lessorequal</term>
             <description />Цена срабатывания меньше или равна текущей цене</item>
         </list>
       </param>
       <param name="triggerPrice">Условная цена (цена срабатывания)</param>
-      <param name="stopEndUtcTime">Срок действия в формате <paramref name="DateTime" /> UTC</param>
+      <param name="stopEndUtcTime">Срок действия в формате <see langword="DateTime" /> UTC</param>
       <param name="quantity">Количество (лоты)</param>
       <param name="symbol">Тикер (Код финансового инструмента)</param>
       <param name="exchange">
@@ -213,10 +213,10 @@
         <description>Код режима торгов (Борд):</description>
         <list type="bullet">
           <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
-          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+          <item>Для Биржи СПБ всегда <see langword="SPBX" /></item>
         </list>
       </param>
-      <param name="protectingSeconds">Защитное время. Непрерывный период времени в секундах, в течение которого рыночная цена инструмента должна соответствовать указанным в заявке цене и условию срабатывания (<paramref name="triggerPrice" /> и <paramref name="condition" />). Предназначено для защиты условных заявок от срабатывания при краткосрочных колебаниях цены.</param>
+      <param name="protectingSeconds">Защитное время. Непрерывный период времени в секундах, в течение которого рыночная цена инструмента должна соответствовать указанным в заявке цене и условию срабатывания (<see langword="triggerPrice" />/<see langword="stopPrice" /> и <see langword="condition" />). Предназначено для защиты условных заявок от срабатывания при краткосрочных колебаниях цены.</param>
       <param name="activate">Флаг указывает, создать активную заявку, или не активную.
 Не активная заявка отображается в системе, но не участвует в процессе выставления на биржу, пока не станет активной.
 Данный флаг необходим при создании группы заявок с типом 'TriggerBracketOrders'
@@ -231,6 +231,7 @@
           <item>Подключена услуга 100% обеспечения</item>
         </list>
       </param>
+      <param name="comment">Пользовательский комментарий к заявке. Максимальная длина комментария — 100 символов</param>
       <returns>
         <see cref="OrderActionLimitMarket" />
       </returns>
@@ -263,21 +264,21 @@
             <description>Условие срабатывания стоп/стоп-лимитной заявки:</description>
           </listheader>
           <item>
-            <term>More</term>
+            <term>more</term>
             <description />Цена срабатывания больше текущей цены</item>
           <item>
-            <term>Less</term>
+            <term>less</term>
             <description />Цена срабатывания меньше текущей цены</item>
           <item>
-            <term>MoreOrEqual</term>
+            <term>moreorequal</term>
             <description />Цена срабатывания больше или равна текущей цене</item>
           <item>
-            <term>LessOrEqual</term>
+            <term>lessorequal</term>
             <description />Цена срабатывания меньше или равна текущей цене</item>
         </list>
       </param>
       <param name="triggerPrice">Условная цена (цена срабатывания)</param>
-      <param name="stopEndUtcTime">Срок действия в формате <paramref name="DateTime" /> UTC</param>
+      <param name="stopEndUtcTime">Срок действия в формате <see langword="DateTime" /> UTC</param>
       <param name="quantity">Количество (лоты)</param>
       <param name="price">Цена выставляемой биржевой заявки</param>
       <param name="symbol">Тикер (Код финансового инструмента)</param>
@@ -298,31 +299,38 @@
         <description>Код режима торгов (Борд):</description>
         <list type="bullet">
           <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
-          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+          <item>Для Биржи СПБ всегда <see langword="SPBX" /></item>
         </list>
       </param>
       <param name="timeInForce">
         <list type="table">
           <listheader>
-            <description>Тип заявки:</description>
+            <description>Условие выставления заявки с учётом возможности её исполнения:</description>
           </listheader>
           <item>
             <term>oneday</term>
-            <description />До конца дня</item>
+            <description />Исполнение в течение одного торгового дня. При истечении этого срока неисполненный остаток снимается</item>
           <item>
             <term>immediateorcancel</term>
-            <description />Снять остаток</item>
+            <description />Исполнение немедленно на весь доступный объём встречных заявок. Неисполненный остаток отменяется</item>
           <item>
             <term>fillorkill</term>
-            <description />Исполнить целиком или отклонить</item>
+            <description />Исполнение немедленно на весь указанный объём без остатка. Если исполнение без остатка невозможно — заявка отменяется</item>
+          <item>
+            <term>attheclose</term>
+            <description />Исполнение в момент закрытия торгов по достигнутой на тот момент рыночной цене. Только для SPBX (на MOEX автоматически меняется на <see langword="fillorkill" />) и только для рыночных заявок, т.к. цена лота зависит от рыночной цены на момент исполнения</item>
           <item>
             <term>goodtillcancelled</term>
-            <description />Активна до отмены</item>
+            <description />Исполнение в течение максимально доступного периода на бирже. Например, в течение года для MOEX. Только для срочного рынка</item>
+          <item>
+            <term>bookorcancel</term>
+            <description />
+            <see href="https://www.moex.com/s3424">Пассивная заявка</see>. Выставляется на биржу только если её цена или величина спреда хуже аналогичных показателей встречных заявок</item>
         </list>
       </param>
-      <param name="icebergFixed">Видимая постоянная часть айсберг-заявки в лотах, указанная при создании лимитной заявки</param>
+      <param name="icebergFixed">Видимая постоянная часть айсберг-заявки в лотах. Указывается при создании заявки, может быть впоследствии изменена только в заявках на фондовом и валютном рынках</param>
       <param name="icebergVariance">Амплитуда отклонения (в % от постоянной части) случайной надбавки к видимой части айсберг-заявки, указанная при создании лимитной заявки. Только срочный рынок</param>
-      <param name="protectingSeconds">Защитное время. Непрерывный период времени в секундах, в течение которого рыночная цена инструмента должна соответствовать указанным в заявке цене и условию срабатывания (<paramref name="triggerPrice" /> и <paramref name="condition" />). Предназначено для защиты условных заявок от срабатывания при краткосрочных колебаниях цены.</param>
+      <param name="protectingSeconds">Защитное время. Непрерывный период времени в секундах, в течение которого рыночная цена инструмента должна соответствовать указанным в заявке цене и условию срабатывания (<see langword="triggerPrice" />/<see langword="stopPrice" /> и <see langword="condition" />). Предназначено для защиты условных заявок от срабатывания при краткосрочных колебаниях цены.</param>
       <param name="activate">Флаг указывает, создать активную заявку, или не активную.
 Не активная заявка отображается в системе, но не участвует в процессе выставления на биржу, пока не станет активной.
 Данный флаг необходим при создании группы заявок с типом 'TriggerBracketOrders'
@@ -337,6 +345,7 @@
           <item>Подключена услуга 100% обеспечения</item>
         </list>
       </param>
+      <param name="comment">Пользовательский комментарий к заявке. Максимальная длина комментария — 100 символов</param>
       <returns>
         <see cref="OrderActionLimitMarket" />
       </returns>
@@ -369,21 +378,21 @@
             <description>Условие срабатывания стоп/стоп-лимитной заявки:</description>
           </listheader>
           <item>
-            <term>More</term>
+            <term>more</term>
             <description />Цена срабатывания больше текущей цены</item>
           <item>
-            <term>Less</term>
+            <term>less</term>
             <description />Цена срабатывания меньше текущей цены</item>
           <item>
-            <term>MoreOrEqual</term>
+            <term>moreorequal</term>
             <description />Цена срабатывания больше или равна текущей цене</item>
           <item>
-            <term>LessOrEqual</term>
+            <term>lessorequal</term>
             <description />Цена срабатывания меньше или равна текущей цене</item>
         </list>
       </param>
       <param name="triggerPrice">Условная цена (цена срабатывания)</param>
-      <param name="stopEndUtcTime">Срок действия в формате <paramref name="DateTime" /> UTC</param>
+      <param name="stopEndUtcTime">Срок действия в формате <see langword="DateTime" /> UTC</param>
       <param name="quantity">Количество (лоты)</param>
       <param name="symbol">Тикер (Код финансового инструмента)</param>
       <param name="exchange">
@@ -403,10 +412,10 @@
         <description>Код режима торгов (Борд):</description>
         <list type="bullet">
           <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
-          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+          <item>Для Биржи СПБ всегда <see langword="SPBX" /></item>
         </list>
       </param>
-      <param name="protectingSeconds">Защитное время. Непрерывный период времени в секундах, в течение которого рыночная цена инструмента должна соответствовать указанным в заявке цене и условию срабатывания (<paramref name="triggerPrice" /> и <paramref name="condition" />). Предназначено для защиты условных заявок от срабатывания при краткосрочных колебаниях цены.</param>
+      <param name="protectingSeconds">Защитное время. Непрерывный период времени в секундах, в течение которого рыночная цена инструмента должна соответствовать указанным в заявке цене и условию срабатывания (<see langword="triggerPrice" />/<see langword="stopPrice" /> и <see langword="condition" />). Предназначено для защиты условных заявок от срабатывания при краткосрочных колебаниях цены.</param>
       <param name="activate">Флаг указывает, создать активную заявку, или не активную.
 Не активная заявка отображается в системе, но не участвует в процессе выставления на биржу, пока не станет активной.
 Данный флаг необходим при создании группы заявок с типом 'TriggerBracketOrders'
@@ -421,6 +430,7 @@
           <item>Подключена услуга 100% обеспечения</item>
         </list>
       </param>
+      <param name="comment">Пользовательский комментарий к заявке. Максимальная длина комментария — 100 символов</param>
       <returns>
         <see cref="OrderActionLimitMarket" />
       </returns>
@@ -453,21 +463,21 @@
             <description>Условие срабатывания стоп/стоп-лимитной заявки:</description>
           </listheader>
           <item>
-            <term>More</term>
+            <term>more</term>
             <description />Цена срабатывания больше текущей цены</item>
           <item>
-            <term>Less</term>
+            <term>less</term>
             <description />Цена срабатывания меньше текущей цены</item>
           <item>
-            <term>MoreOrEqual</term>
+            <term>moreorequal</term>
             <description />Цена срабатывания больше или равна текущей цене</item>
           <item>
-            <term>LessOrEqual</term>
+            <term>lessorequal</term>
             <description />Цена срабатывания меньше или равна текущей цене</item>
         </list>
       </param>
       <param name="triggerPrice">Условная цена (цена срабатывания)</param>
-      <param name="stopEndUtcTime">Срок действия в формате <paramref name="DateTime" /> UTC</param>
+      <param name="stopEndUtcTime">Срок действия в формате <see langword="DateTime" /> UTC</param>
       <param name="quantity">Количество (лоты)</param>
       <param name="price">Цена выставляемой биржевой заявки</param>
       <param name="symbol">Тикер (Код финансового инструмента)</param>
@@ -488,31 +498,37 @@
         <description>Код режима торгов (Борд):</description>
         <list type="bullet">
           <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
-          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+          <item>Для Биржи СПБ всегда <see langword="SPBX" /></item>
         </list>
       </param>
       <param name="timeInForce">
         <list type="table">
           <listheader>
-            <description>Тип заявки:</description>
+            <description>Условие выставления заявки с учётом возможности её исполнения:</description>
           </listheader>
           <item>
             <term>oneday</term>
-            <description />До конца дня</item>
+            <description />Исполнение в течение одного торгового дня. При истечении этого срока неисполненный остаток снимается</item>
           <item>
             <term>immediateorcancel</term>
-            <description />Снять остаток</item>
+            <description />Исполнение немедленно на весь доступный объём встречных заявок. Неисполненный остаток отменяется</item>
           <item>
             <term>fillorkill</term>
-            <description />Исполнить целиком или отклонить</item>
+            <description />Исполнение немедленно на весь указанный объём без остатка. Если исполнение без остатка невозможно — заявка отменяется</item>
+          <item>
+            <term>attheclose</term>
+            <description />Исполнение в момент закрытия торгов по достигнутой на тот момент рыночной цене. Только для SPBX (на MOEX автоматически меняется на <see langword="fillorkill" />) и только для рыночных заявок, т.к. цена лота зависит от рыночной цены на момент исполнения</item>
           <item>
             <term>goodtillcancelled</term>
-            <description />Активна до отмены</item>
+            <description />Исполнение в течение максимально доступного периода на бирже. Например, в течение года для MOEX. Только для срочного рынка</item>
+          <item>
+            <term>bookorcancel</term>
+            <description />
+            <see href="https://www.moex.com/s3424">Пассивная заявка</see>. Выставляется на биржу только если её цена или величина спреда хуже аналогичных показателей встречных заявок</item>
         </list>
       </param>
-      <param name="icebergFixed">Видимая постоянная часть айсберг-заявки в лотах, указанная при создании лимитной заявки</param>
-      <param name="icebergVariance">Амплитуда отклонения (в % от постоянной части) случайной надбавки к видимой части айсберг-заявки, указанная при создании лимитной заявки. Только срочный рынок</param>
-      <param name="protectingSeconds">Защитное время. Непрерывный период времени в секундах, в течение которого рыночная цена инструмента должна соответствовать указанным в заявке цене и условию срабатывания (<paramref name="triggerPrice" /> и <paramref name="condition" />). Предназначено для защиты условных заявок от срабатывания при краткосрочных колебаниях цены.</param>
+      <param name="icebergFixed">Видимая постоянная часть айсберг-заявки в лотах. Указывается при создании заявки, может быть впоследствии изменена только в заявках на фондовом и валютном рынках</param>
+      <param name="protectingSeconds">Защитное время. Непрерывный период времени в секундах, в течение которого рыночная цена инструмента должна соответствовать указанным в заявке цене и условию срабатывания (<see langword="triggerPrice" />/<see langword="stopPrice" /> и <see langword="condition" />). Предназначено для защиты условных заявок от срабатывания при краткосрочных колебаниях цены.</param>
       <param name="activate">Флаг указывает, создать активную заявку, или не активную.
 Не активная заявка отображается в системе, но не участвует в процессе выставления на биржу, пока не станет активной.
 Данный флаг необходим при создании группы заявок с типом 'TriggerBracketOrders'
@@ -527,6 +543,7 @@
           <item>Подключена услуга 100% обеспечения</item>
         </list>
       </param>
+      <param name="comment">Пользовательский комментарий к заявке. Максимальная длина комментария — 100 символов</param>
       <returns>
         <see cref="OrderActionLimitMarket" />
       </returns>

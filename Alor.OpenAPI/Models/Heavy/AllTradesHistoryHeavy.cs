@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Alor.OpenAPI.Enums;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
 using SpanJson;
@@ -10,8 +11,11 @@ namespace Alor.OpenAPI.Models.Heavy
     {
         public AllTradesHistoryHeavy() { }
 
-        /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseAllTradesHistory"]/Member[@name="responseAllTradesHistory"]/*' />
-        public AllTradesHistoryHeavy(int? total = default, List<AllTradeHeavy>? listHeavy = default)
+        /// <include file='../../XmlDocs/CoreModels.xml'
+        ///          path='Docs/Members[@name="responseAllTradesHistory"]
+        ///               /Member[@name="responseAllTradesHistory"]
+        ///               /param[@name="total" or @name="listHeavy"]'/>
+        public AllTradesHistoryHeavy(int? total = null, List<AllTradeHeavy>? listHeavy = null)
         {
             Total = total;
             List = listHeavy;
@@ -75,7 +79,7 @@ namespace Alor.OpenAPI.Models.Heavy
             if (this == (object?)other)
                 return true;
 
-            if ((object?)other == null)
+            if (other is null)
                 return false;
 
             return GetType() == other.GetType() && EqualsHelper(this, other);

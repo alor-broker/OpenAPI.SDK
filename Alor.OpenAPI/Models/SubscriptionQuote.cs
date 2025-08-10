@@ -11,9 +11,15 @@ namespace Alor.OpenAPI.Models
     {
         public SubscriptionQuote() { }
 
-        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubQuotesSubscribe"]/Member[@name="wsSubQuotesSubscribe"]/*' />
-        public SubscriptionQuote(string? code = default, Exchange exchange = default, string? instrumentGroup = default,
-            Format format = default, int? frequency = default, string? guid = default)
+        /// <include file='../XmlDocs/CoreModels.xml'
+        ///          path='Docs/Members[@name="wsSubQuotesSubscribe"]
+        ///               /Member[@name="wsSubQuotesSubscribe"]
+        ///               /param[
+        ///                      @name="code" or @name="exchange" or @name="instrumentGroup" or @name="format"
+        ///                      or @name="frequency" or @name="guid"
+        ///                     ]'/>
+        public SubscriptionQuote(string? code = null, Exchange? exchange = null, string? instrumentGroup = null,
+            Format? format = null, int? frequency = null, string? guid = null)
         {
             Code = code;
             Exchange = exchange;
@@ -33,7 +39,7 @@ namespace Alor.OpenAPI.Models
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubQuotesSubscribe"]/Member[@name="exchange"]/*' />
         [DataMember(Name = "exchange", EmitDefaultValue = false)]
-        public Exchange Exchange { get; init; }
+        public Exchange? Exchange { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubQuotesSubscribe"]/Member[@name="instrumentGroup"]/*' />
         [DataMember(Name = "instrumentGroup", EmitDefaultValue = false)]
@@ -41,7 +47,7 @@ namespace Alor.OpenAPI.Models
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubQuotesSubscribe"]/Member[@name="format"]/*' />
         [DataMember(Name = "format", EmitDefaultValue = false)]
-        public Format Format { get; init; }
+        public Format? Format { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubQuotesSubscribe"]/Member[@name="frequency"]/*' />
         [DataMember(Name = "frequency", EmitDefaultValue = false)]
@@ -91,7 +97,7 @@ namespace Alor.OpenAPI.Models
             if (this == (object?)other)
                 return true;
 
-            if ((object?)other == null)
+            if (other is null)
                 return false;
 
             return GetType() == other.GetType() && EqualsHelper(this, other);

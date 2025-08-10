@@ -12,9 +12,9 @@ namespace Alor.OpenAPI.Models
         public RequestOrdersActionsMarketTv() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsMarketTV"]/Member[@name="OrdersActionsMarketTV"]/*' />
-        public RequestOrdersActionsMarketTv(Side side = default,
-            int? quantity = default, Instrument? instrument = default, string? comment = default,
-            User? user = default, TimeInForce? timeInForce = default, bool? allowMargin = default)
+        public RequestOrdersActionsMarketTv(Side? side = null,
+            int? quantity = null, Instrument? instrument = null, string? comment = null,
+            User? user = null, TimeInForce? timeInForce = null, bool? allowMargin = null)
         {
             Side = side;
             Quantity = quantity;
@@ -27,7 +27,7 @@ namespace Alor.OpenAPI.Models
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsMarketTV"]/Member[@name="side"]/*' />
         [DataMember(Name = "side", EmitDefaultValue = false)]
-        public Side Side { get; init; }
+        public Side? Side { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsMarketTV"]/Member[@name="quantity"]/*' />
         [DataMember(Name = "quantity", EmitDefaultValue = false)]
@@ -87,7 +87,7 @@ namespace Alor.OpenAPI.Models
             if (this == (object?)other)
                 return true;
 
-            if ((object?)other == null)
+            if (other is null)
                 return false;
 
             return GetType() == other.GetType() && EqualsHelper(this, other);

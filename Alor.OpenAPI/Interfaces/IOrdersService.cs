@@ -1,9 +1,9 @@
-﻿using Alor.OpenAPI.Core;
-using Alor.OpenAPI.Enums;
+﻿using Alor.OpenAPI.Enums;
 using Alor.OpenAPI.Models;
 using Alor.OpenAPI.Models.Heavy;
 using Alor.OpenAPI.Models.Simple;
 using Alor.OpenAPI.Models.Slim;
+ using Alor.OpenAPI.Core;
 
 namespace Alor.OpenAPI.Interfaces
 {
@@ -52,8 +52,7 @@ namespace Alor.OpenAPI.Interfaces
         /// <include file='../XmlDocs/IOrdersService.xml' path='Docs/Members[@name="IOrdersService"]/Member[@name="CommandapiWarptransTradeV2ClientOrdersActionsLimitOrderIdPutAsync"]/*' />
         public Task<OrderActionLimitMarket> CommandapiWarptransTradeV2ClientOrdersActionsLimitOrderIdPutAsync(
             int orderId, string portfolio, Side side, int quantity, decimal price, string symbol, Exchange exchange,
-            string? instrumentGroup = null, string? comment = null, TimeInForce timeInForce = TimeInForce.OneDay,
-            int? icebergFixed = null, decimal? icebergVariance = null, bool? allowMargin = null);
+            string? instrumentGroup = null, string? comment = null, int? icebergFixed = null, bool? allowMargin = null);
 
         /// <include file='../XmlDocs/IOrdersService.xml' path='Docs/Members[@name="IOrdersService"]/Member[@name="CommandapiWarptransTradeV2ClientOrdersEstimatePostAsync"]/*' />
         public Task<ResponseEstimateOrder> CommandapiWarptransTradeV2ClientOrdersEstimatePostAsync(string portfolio,

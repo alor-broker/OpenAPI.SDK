@@ -11,7 +11,7 @@ namespace Alor.OpenAPI.Models
         public CurrencyPair() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseCurrencyPair"]/Member[@name="responseCurrencyPair"]/*' />
-        public CurrencyPair(string? firstCode = default, string? secondCode = default, string? symbolTom = default)
+        public CurrencyPair(string? firstCode = null, string? secondCode = null, string? symbolTom = null)
         {
             FirstCode = firstCode;
             SecondCode = secondCode;
@@ -56,7 +56,7 @@ namespace Alor.OpenAPI.Models
             if (this == (object?)other)
                 return true;
 
-            if ((object?)other == null)
+            if (other is null)
                 return false;
 
             return GetType() == other.GetType() && EqualsHelper(this, other);

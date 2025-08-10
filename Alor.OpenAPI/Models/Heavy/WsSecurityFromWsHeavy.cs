@@ -1,4 +1,5 @@
-﻿using Alor.OpenAPI.Interfaces;
+﻿using Alor.OpenAPI.Enums;
+using Alor.OpenAPI.Interfaces;
 using SpanJson;
 using System.Collections.Concurrent;
 using System.ComponentModel.DataAnnotations;
@@ -13,7 +14,10 @@ namespace Alor.OpenAPI.Models.Heavy
     {
         public WsSecurityFromWsHeavy() { }
 
-        /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsResponseSubInstrumentsGetAndSubscribeV2"]/Member[@name="wsResponseSubInstrumentsGetAndSubscribeV2"]/*' />
+        /// <include file='../../XmlDocs/CoreModels.xml'
+        ///          path='Docs/Members[@name="wsResponseSubInstrumentsGetAndSubscribeV2"]
+        ///               /Member[@name="wsResponseSubInstrumentsGetAndSubscribeV2"]
+        ///               /param[@name="dataHeavy" or @name="guid"]'/>
         public WsSecurityFromWsHeavy(SecurityFromWsHeavy? dataHeavy, string? guid)
         {
             Data = dataHeavy;
@@ -59,7 +63,7 @@ namespace Alor.OpenAPI.Models.Heavy
             if (this == (object?)other)
                 return true;
 
-            if ((object?)other == null)
+            if (other is null)
                 return false;
 
             return GetType() == other.GetType() && EqualsHelper(this, other);

@@ -25,7 +25,7 @@
         <description>Код режима торгов (Борд):</description>
         <list type="bullet">
           <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
-          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+          <item>Для Биржи СПБ всегда <see langword="SPBX" /></item>
         </list>
       </param>
       <returns>Dictionary&lt;string, string&gt; в формате &lt;GUID, Ticker&gt;</returns>
@@ -54,7 +54,7 @@
         <description>Код режима торгов (Борд):</description>
         <list type="bullet">
           <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
-          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+          <item>Для Биржи СПБ всегда <see langword="SPBX" /></item>
         </list>
       </param>
       <returns>Dictionary&lt;string, string&gt; в формате &lt;GUID, Ticker&gt;</returns>
@@ -83,7 +83,7 @@
         <description>Код режима торгов (Борд):</description>
         <list type="bullet">
           <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
-          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+          <item>Для Биржи СПБ всегда <see langword="SPBX" /></item>
         </list>
       </param>
       <returns>Dictionary&lt;string, string&gt; в формате &lt;GUID, Ticker&gt;</returns>
@@ -140,7 +140,7 @@
         <description>Код режима торгов (Борд):</description>
         <list type="bullet">
           <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
-          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+          <item>Для Биржи СПБ всегда <see langword="SPBX" /></item>
         </list>
       </param>
       <param name="skipHistory">
@@ -223,7 +223,7 @@
         <description>Код режима торгов (Борд):</description>
         <list type="bullet">
           <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
-          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+          <item>Для Биржи СПБ всегда <see langword="SPBX" /></item>
         </list>
       </param>
       <param name="skipHistory">
@@ -306,7 +306,7 @@
         <description>Код режима торгов (Борд):</description>
         <list type="bullet">
           <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
-          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+          <item>Для Биржи СПБ всегда <see langword="SPBX" /></item>
         </list>
       </param>
       <param name="skipHistory">
@@ -360,7 +360,7 @@
         <description>Код режима торгов (Борд):</description>
         <list type="bullet">
           <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
-          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+          <item>Для Биржи СПБ всегда <see langword="SPBX" /></item>
         </list>
       </param>
       <returns>Dictionary&lt;string, string&gt; в формате &lt;GUID, Ticker&gt;</returns>
@@ -388,7 +388,7 @@
         <description>Код режима торгов (Борд):</description>
         <list type="bullet">
           <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
-          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+          <item>Для Биржи СПБ всегда <see langword="SPBX" /></item>
         </list>
       </param>
       <returns>Dictionary&lt;string, string&gt; в формате &lt;GUID, Ticker&gt;</returns>
@@ -416,7 +416,7 @@
         <description>Код режима торгов (Борд):</description>
         <list type="bullet">
           <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
-          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+          <item>Для Биржи СПБ всегда <see langword="SPBX" /></item>
         </list>
       </param>
       <returns>Dictionary&lt;string, string&gt; в формате &lt;GUID, Ticker&gt;</returns>
@@ -444,7 +444,7 @@
         <description>Код режима торгов (Борд):</description>
         <list type="bullet">
           <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
-          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+          <item>Для Биржи СПБ всегда <see langword="SPBX" /></item>
         </list>
       </param>
       <param name="depth">Если указать, то перед актуальными данными придут данные о последних N сделках.
@@ -475,7 +475,7 @@
         <description>Код режима торгов (Борд):</description>
         <list type="bullet">
           <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
-          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+          <item>Для Биржи СПБ всегда <see langword="SPBX" /></item>
         </list>
       </param>
       <param name="depth">Если указать, то перед актуальными данными придут данные о последних N сделках.
@@ -506,7 +506,7 @@
         <description>Код режима торгов (Борд):</description>
         <list type="bullet">
           <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
-          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+          <item>Для Биржи СПБ всегда <see langword="SPBX" /></item>
         </list>
       </param>
       <param name="depth">Если указать, то перед актуальными данными придут данные о последних N сделках.
@@ -1224,7 +1224,7 @@
         <description>Код режима торгов (Борд):</description>
         <list type="bullet">
           <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
-          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+          <item>Для Биржи СПБ всегда <see langword="SPBX" /></item>
         </list>
       </param>
       <returns>Dictionary&lt;string, string&gt; в формате &lt;GUID, Ticker&gt;</returns>
@@ -1252,7 +1252,7 @@
         <description>Код режима торгов (Борд):</description>
         <list type="bullet">
           <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
-          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+          <item>Для Биржи СПБ всегда <see langword="SPBX" /></item>
         </list>
       </param>
       <returns>Dictionary&lt;string, string&gt; в формате &lt;GUID, Ticker&gt;</returns>
@@ -1280,7 +1280,7 @@
         <description>Код режима торгов (Борд):</description>
         <list type="bullet">
           <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
-          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+          <item>Для Биржи СПБ всегда <see langword="SPBX" /></item>
         </list>
       </param>
       <returns>Dictionary&lt;string, string&gt; в формате &lt;GUID, Ticker&gt;</returns>

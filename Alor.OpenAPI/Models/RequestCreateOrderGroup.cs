@@ -12,7 +12,7 @@ namespace Alor.OpenAPI.Models
         public RequestCreateOrderGroup() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrderGroupCreate"]/Member[@name="OrderGroupCreate"]/*' />
-        public RequestCreateOrderGroup(ICollection<RequestOrderGroupItem>? orders = default, ExecutionPolicy? executionPolicy = default)
+        public RequestCreateOrderGroup(ICollection<RequestOrderGroupItem>? orders = null, ExecutionPolicy? executionPolicy = null)
         {
             // to ensure "orders" is required (not null)
             Orders = orders ?? throw new InvalidDataException(
@@ -68,7 +68,7 @@ namespace Alor.OpenAPI.Models
             if (this == (object?)other)
                 return true;
 
-            if ((object?)other == null)
+            if (other is null)
                 return false;
 
             return GetType() == other.GetType() && EqualsHelper(this, other);

@@ -10,12 +10,20 @@ namespace Alor.OpenAPI.Models.Slim
     {
         public SummarySlim() { }
 
-        /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSummary"]/Member[@name="responseSummary"]/*' />
-        public SummarySlim(decimal? buyingPowerAtMorning = default, decimal? buyingPower = default,
-            decimal? profit = default, decimal? profitRate = default,
-            decimal? portfolioEvaluation = default, decimal? portfolioLiquidationValue = default,
-            decimal? initialMargin = default, decimal? riskBeforeForcePositionClosing = default,
-            decimal? commission = default, ICollection<BuyingPowerByCurrencySlim>? buyingPowerByCurrency = default)
+        /// <include file='../../XmlDocs/CoreModels.xml'
+        ///          path='Docs/Members[@name="responseSummary"]
+        ///               /Member[@name="responseSummary"]
+        ///               /param[
+        ///                      @name="buyingPowerAtMorning" or @name="buyingPower" or @name="profit" or @name="profitRate" 
+        ///                      or @name="portfolioEvaluation" or @name="portfolioLiquidationValue" or @name="portfolioLiquidationValue"
+        ///                      or @name="initialMargin" or @name="correctedMargin" or @name="riskBeforeForcePositionClosing" 
+        ///                      or @name="commission" or @name="buyingPowerByCurrency"
+        ///                     ]'/>
+        public SummarySlim(decimal? buyingPowerAtMorning = null, decimal? buyingPower = null, decimal? profit = null,
+            decimal? profitRate = null, decimal? portfolioEvaluation = null, decimal? portfolioLiquidationValue = null,
+            decimal? initialMargin = null, decimal? correctedMargin = null,
+            decimal? riskBeforeForcePositionClosing = null, decimal? commission = null,
+            ICollection<BuyingPowerByCurrencySlim>? buyingPowerByCurrency = null)
         {
             BuyingPowerAtMorning = buyingPowerAtMorning;
             BuyingPower = buyingPower;
@@ -24,6 +32,7 @@ namespace Alor.OpenAPI.Models.Slim
             PortfolioEvaluation = portfolioEvaluation;
             PortfolioLiquidationValue = portfolioLiquidationValue;
             InitialMargin = initialMargin;
+            CorrectedMargin = correctedMargin;
             RiskBeforeForcePositionClosing = riskBeforeForcePositionClosing;
             Commission = commission;
             BuyingPowerByCurrency = buyingPowerByCurrency;
@@ -57,6 +66,10 @@ namespace Alor.OpenAPI.Models.Slim
         [DataMember(Name = "im", EmitDefaultValue = false)]
         public decimal? InitialMargin { get; init; }
 
+        /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSummary"]/Member[@name="correctedMargin"]/*' />
+        [DataMember(Name = "mgc", EmitDefaultValue = false)]
+        public decimal? CorrectedMargin { get; init; }
+
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSummary"]/Member[@name="riskBeforeForcePositionClosing"]/*' />
         [DataMember(Name = "r", EmitDefaultValue = false)]
         public decimal? RiskBeforeForcePositionClosing { get; init; }
@@ -80,6 +93,7 @@ namespace Alor.OpenAPI.Models.Slim
             sb.Append("  PortfolioEvaluation: ").Append(PortfolioEvaluation).Append(Environment.NewLine);
             sb.Append("  PortfolioLiquidationValue: ").Append(PortfolioLiquidationValue).Append(Environment.NewLine);
             sb.Append("  InitialMargin: ").Append(InitialMargin).Append(Environment.NewLine);
+            sb.Append("  CorrectedMargin: ").Append(CorrectedMargin).Append(Environment.NewLine);
             sb.Append("  RiskBeforeForcePositionClosing: ").Append(RiskBeforeForcePositionClosing).Append(Environment.NewLine);
             sb.Append("  Commission: ").Append(Commission).Append(Environment.NewLine);
             sb.Append("  BuyingPowerByCurrencyHeavy: ").Append(BuyingPowerByCurrency == null ? "null" : string.Join(", ", BuyingPowerByCurrency.Select(x => x.ToString()))).Append(Environment.NewLine);
@@ -99,6 +113,7 @@ namespace Alor.OpenAPI.Models.Slim
             hash.Add(PortfolioEvaluation);
             hash.Add(PortfolioLiquidationValue);
             hash.Add(InitialMargin);
+            hash.Add(CorrectedMargin);
             hash.Add(RiskBeforeForcePositionClosing);
             hash.Add(Commission);
 
@@ -119,6 +134,7 @@ namespace Alor.OpenAPI.Models.Slim
             first?.PortfolioEvaluation == second?.PortfolioEvaluation &&
             first?.PortfolioLiquidationValue == second?.PortfolioLiquidationValue &&
             first?.InitialMargin == second?.InitialMargin &&
+            first?.CorrectedMargin == second?.CorrectedMargin &&
             first?.RiskBeforeForcePositionClosing == second?.RiskBeforeForcePositionClosing &&
             first?.Commission == second?.Commission &&
             first?.BuyingPowerByCurrency != null && second?.BuyingPowerByCurrency != null
@@ -131,7 +147,7 @@ namespace Alor.OpenAPI.Models.Slim
             if (this == (object?)other)
                 return true;
 
-            if ((object?)other == null)
+            if (other is null)
                 return false;
 
             if (GetType() != other.GetType())

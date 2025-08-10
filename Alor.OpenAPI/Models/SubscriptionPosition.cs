@@ -11,16 +11,20 @@ namespace Alor.OpenAPI.Models
     {
         public SubscriptionPosition() { }
 
-        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubPositionsGetAndSubscribe"]/Member[@name="wsSubPositionsGetAndSubscribe"]/*' />
-        public SubscriptionPosition(string? portfolio = default, bool? skipHistory = default, 
-            Exchange exchange = default, Format format = default, int? frequency = default,
-            string? guid = default)
+        /// <include file='../XmlDocs/CoreModels.xml'
+        ///          path='Docs/Members[@name="wsSubPositionsGetAndSubscribe"]
+        ///               /Member[@name="wsSubPositionsGetAndSubscribe"]
+        ///               /param[
+        ///                      @name="portfolio" or @name="skipHistory" or @name="exchange"
+        ///                      or @name="format" or @name="frequency" or @name="guid"
+        ///                     ]'/>
+        public SubscriptionPosition(string? portfolio = null, bool? skipHistory = null, 
+            Exchange? exchange = null, Format? format = null, string? guid = null)
         {
             Portfolio = portfolio;
             SkipHistory = skipHistory;
             Exchange = exchange;
             Format = format;
-            Frequency = frequency;
             Guid = guid;
         }
 
@@ -38,15 +42,11 @@ namespace Alor.OpenAPI.Models
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubPositionsGetAndSubscribe"]/Member[@name="exchange"]/*' />
         [DataMember(Name = "exchange", EmitDefaultValue = false)]
-        public Exchange Exchange { get; init; }
+        public Exchange? Exchange { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubPositionsGetAndSubscribe"]/Member[@name="format"]/*' />
         [DataMember(Name = "format", EmitDefaultValue = false)]
-        public Format Format { get; init; }
-
-        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubPositionsGetAndSubscribe"]/Member[@name="frequency"]/*' />
-        [DataMember(Name = "frequency", EmitDefaultValue = false)]
-        public int? Frequency { get; init; }
+        public Format? Format { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubPositionsGetAndSubscribe"]/Member[@name="guid"]/*' />
         [DataMember(Name = "guid", EmitDefaultValue = false)]
@@ -66,7 +66,6 @@ namespace Alor.OpenAPI.Models
             sb.Append("  SkipHistory: ").Append(SkipHistory).Append(Environment.NewLine);
             sb.Append("  Exchange: ").Append(Exchange).Append(Environment.NewLine);
             sb.Append("  Format: ").Append(Format).Append(Environment.NewLine);
-            sb.Append("  Frequency: ").Append(Frequency).Append(Environment.NewLine);
             sb.Append("  Guid: ").Append(Guid).Append(Environment.NewLine);
             sb.Append("  Token: ").Append(Token).Append(Environment.NewLine);
             sb.Append('}').Append(Environment.NewLine);
@@ -76,7 +75,7 @@ namespace Alor.OpenAPI.Models
         public string ToJson() => Encoding.UTF8.GetString(JsonSerializer.Generic.Utf8.Serialize(this));
 
         public override int GetHashCode() =>
-            HashCode.Combine(Opcode, Portfolio, SkipHistory, Exchange, Format, Frequency, Guid, Token);
+            HashCode.Combine(Opcode, Portfolio, SkipHistory, Exchange, Format, Guid, Token);
 
         private static bool EqualsHelper(SubscriptionPosition? first, SubscriptionPosition? second) =>
             first?.Opcode == second?.Opcode &&
@@ -84,7 +83,6 @@ namespace Alor.OpenAPI.Models
             first?.SkipHistory == second?.SkipHistory &&
             first?.Exchange == second?.Exchange &&
             first?.Format == second?.Format &&
-            first?.Frequency == second?.Frequency &&
             first?.Guid == second?.Guid &&
             first?.Token == second?.Token;
 
@@ -93,7 +91,7 @@ namespace Alor.OpenAPI.Models
             if (this == (object?)other)
                 return true;
 
-            if ((object?)other == null)
+            if (other is null)
                 return false;
 
             return GetType() == other.GetType() && EqualsHelper(this, other);

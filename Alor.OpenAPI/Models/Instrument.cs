@@ -12,7 +12,7 @@ namespace Alor.OpenAPI.Models
         public Instrument() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectInstrumentFieldsSymbolExchangeGroup"]/Member[@name="objectInstrumentFieldsSymbolExchangeGroup"]/*' />
-        public Instrument(string? symbol = default, Exchange exchange = default, string? instrumentGroup = default)
+        public Instrument(string? symbol = null, Exchange? exchange = null, string? instrumentGroup = null)
         {
             Symbol = symbol;
             Exchange = exchange;
@@ -25,7 +25,7 @@ namespace Alor.OpenAPI.Models
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectInstrumentFieldsSymbolExchangeGroup"]/Member[@name="exchange"]/*' />
         [DataMember(Name = "exchange", EmitDefaultValue = false)]
-        public Exchange Exchange { get; init; }
+        public Exchange? Exchange { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectInstrumentFieldsSymbolExchangeGroup"]/Member[@name="instrumentGroup"]/*' />
         [DataMember(Name = "instrumentGroup", EmitDefaultValue = false)]
@@ -57,7 +57,7 @@ namespace Alor.OpenAPI.Models
             if (this == (object?)other)
                 return true;
 
-            if ((object?)other == null)
+            if (other is null)
                 return false;
 
             return GetType() == other.GetType() && EqualsHelper(this, other);

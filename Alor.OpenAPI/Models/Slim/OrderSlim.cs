@@ -12,21 +12,26 @@ namespace Alor.OpenAPI.Models.Slim
     {
         public OrderSlim() { }
 
-        /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrder"]/Member[@name="responseOrder"]/*' />
-        public OrderSlim(string? id = default, string? symbol = default, string? board = default,
-            string? brokerSymbol = default,
-            string? portfolio = default, Exchange exchange = default, string? comment = default,
-            Type type = default, Side side = default, OrderStatus status = default,
-            DateTime? transTime = default, DateTime? updateTime = default, DateTime? endTime = default,
-            int? qtyUnits = default,
-            int? qtyBatch = default, decimal? filledQtyUnits = default,
-            decimal? filledQtyBatch = default,
-            decimal? price = default, bool? existing = default,
-            TimeInForce timeInForce = default, Iceberg? iceberg = default,
-            decimal? volume = default)
+        /// <include file='../../XmlDocs/CoreModels.xml'
+        ///          path='Docs/Members[@name="responseOrder"]
+        ///               /Member[@name="responseOrder"]
+        ///               /param[
+        ///                      @name="id" or @name="symbol" or @name="board" or @name="brokerSymbol" or @name="portfolio"
+        ///                      or @name="exchange" or @name="comment" or @name="type" or @name="side" or @name="status"
+        ///                      or @name="transTime" or @name="updateTime" or @name="endTime" or @name="qtyUnits" or @name="qtyBatch"
+        ///                      or @name="filledQtyUnits" or @name="filledQtyBatch" or @name="price" or @name="existing"
+        ///                      or @name="timeInForce" or @name="iceberg" or @name="volume"
+        ///                     ]'/>
+        public OrderSlim(string? id = null, string? symbol = null, string? board = null, string? brokerSymbol = null,
+            string? portfolio = null, Exchange? exchange = null, string? comment = null, Type? type = null,
+            Side? side = null, OrderStatus? status = null, DateTime? transTime = null, DateTime? updateTime = null,
+            DateTime? endTime = null, int? qtyUnits = null, int? qtyBatch = null, decimal? filledQtyUnits = null,
+            decimal? filledQtyBatch = null, decimal? price = null, bool? existing = null,
+            TimeInForce? timeInForce = null, Iceberg? iceberg = null, decimal? volume = null)
         {
             Id = id;
             Symbol = symbol;
+            Board = board;
             BrokerSymbol = brokerSymbol;
             Portfolio = portfolio;
             Exchange = exchange;
@@ -70,7 +75,7 @@ namespace Alor.OpenAPI.Models.Slim
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrder"]/Member[@name="exchange"]/*' />
         [DataMember(Name = "ex", EmitDefaultValue = false)]
-        public Exchange Exchange { get; init; }
+        public Exchange? Exchange { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrder"]/Member[@name="comment"]/*' />
         [DataMember(Name = "cmt", EmitDefaultValue = false)]
@@ -78,15 +83,15 @@ namespace Alor.OpenAPI.Models.Slim
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrder"]/Member[@name="type"]/*' />
         [DataMember(Name = "t", EmitDefaultValue = false)]
-        public Type Type { get; init; }
+        public Type? Type { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrder"]/Member[@name="side"]/*' />
         [DataMember(Name = "s", EmitDefaultValue = false)]
-        public Side Side { get; init; }
+        public Side? Side { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrder"]/Member[@name="status"]/*' />
         [DataMember(Name = "st", EmitDefaultValue = false)]
-        public OrderStatus Status { get; init; }
+        public OrderStatus? Status { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrder"]/Member[@name="transTime"]/*' />
         [DataMember(Name = "tt", EmitDefaultValue = false)]
@@ -126,7 +131,7 @@ namespace Alor.OpenAPI.Models.Slim
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrder"]/Member[@name="timeInForce"]/*' />
         [DataMember(Name = "tf", EmitDefaultValue = false)]
-        public TimeInForce TimeInForce { get; init; }
+        public TimeInForce? TimeInForce { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrder"]/Member[@name="iceberg"]/*' />
         [DataMember(Name = "i", EmitDefaultValue = false)]
@@ -225,7 +230,7 @@ namespace Alor.OpenAPI.Models.Slim
             if (this == (object?)other)
                 return true;
 
-            if ((object?)other == null)
+            if (other is null)
                 return false;
 
             return GetType() == other.GetType() && EqualsHelper(this, other);

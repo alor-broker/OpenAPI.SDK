@@ -12,7 +12,7 @@ namespace Alor.OpenAPI.Models
         public RequestOrderGroupItem() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectOrderGroupItem"]/Member[@name="objectOrderGroupItem"]/*' />
-        public RequestOrderGroupItem(string? portfolio = default, Exchange exchange = default, string? orderId = default, OrderType type = default)
+        public RequestOrderGroupItem(string? portfolio = null, Exchange? exchange = null, string? orderId = null, OrderType? type = null)
         {
             Portfolio = portfolio;
             Exchange = exchange;
@@ -26,7 +26,7 @@ namespace Alor.OpenAPI.Models
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectOrderGroupItem"]/Member[@name="exchange"]/*' />
         [DataMember(Name = "exchange", EmitDefaultValue = false)]
-        public Exchange Exchange { get; init; }
+        public Exchange? Exchange { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectOrderGroupItem"]/Member[@name="orderId"]/*' />
         [DataMember(Name = "orderId", EmitDefaultValue = false)]
@@ -34,7 +34,7 @@ namespace Alor.OpenAPI.Models
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectOrderGroupItem"]/Member[@name="type"]/*' />
         [DataMember(Name = "type", EmitDefaultValue = false)]
-        public OrderType Type { get; init; }
+        public OrderType? Type { get; init; }
 
         public override string ToString()
         {
@@ -63,7 +63,7 @@ namespace Alor.OpenAPI.Models
             if (this == (object?)other)
                 return true;
 
-            if ((object?)other == null)
+            if (other is null)
                 return false;
 
             return GetType() == other.GetType() && EqualsHelper(this, other);

@@ -11,7 +11,7 @@ namespace Alor.OpenAPI.Models
         public BodyresponseOrderGroup() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrderGroupCreationSuccess"]/Member[@name="responseOrderGroupCreationSuccess"]/*' />
-        public BodyresponseOrderGroup(string? message = default, Guid? groupId = default)
+        public BodyresponseOrderGroup(string? message = null, Guid? groupId = null)
         {
             Message = message;
             GroupId = groupId;
@@ -48,7 +48,7 @@ namespace Alor.OpenAPI.Models
             if (this == (object?)other)
                 return true;
 
-            if ((object?)other == null)
+            if (other is null)
                 return false;
 
             return GetType() == other.GetType() && EqualsHelper(this, other);

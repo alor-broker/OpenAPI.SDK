@@ -11,9 +11,9 @@ namespace Alor.OpenAPI.Models
         public Iceberg() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectIcebergFields"]/Member[@name="objectIcebergFields"]/*' />
-        public Iceberg(int? creationFixedQuantity = default, int? creationVarianceQuantity = default,
-            int? visibleQuantity = default, int? visibleQuantityBatch = default,
-            int? visibleFilledQuantity = default, int? visibleFilledQuantityBatch = default)
+        public Iceberg(int? creationFixedQuantity = null, int? creationVarianceQuantity = null,
+            int? visibleQuantity = null, int? visibleQuantityBatch = null,
+            int? visibleFilledQuantity = null, int? visibleFilledQuantityBatch = null)
         {
             CreationFixedQuantity = creationFixedQuantity;
             CreationVarianceQuantity = creationVarianceQuantity;
@@ -79,7 +79,7 @@ namespace Alor.OpenAPI.Models
             if (this == (object?)other)
                 return true;
 
-            if ((object?)other == null)
+            if (other is null)
                 return false;
 
             return GetType() == other.GetType() && EqualsHelper(this, other);

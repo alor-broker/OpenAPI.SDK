@@ -2,7 +2,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Alor.OpenAPI.Models
 {
@@ -11,8 +10,11 @@ namespace Alor.OpenAPI.Models
     {
         public CwsRequestAuthorize() { }
 
-        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdAuthorize"]/Member[@name="wsCmdAuthorize"]/*' />
-        public CwsRequestAuthorize(string? guid = default)
+        /// <include file='../XmlDocs/CoreModels.xml'
+        ///          path='Docs/Members[@name="wsCmdAuthorize"]
+        ///               /Member[@name="wsCmdAuthorize"]
+        ///               /param[@name="guid"]'/>
+        public CwsRequestAuthorize(string? guid = null)
         {
             Guid = guid;
         }
@@ -54,7 +56,7 @@ namespace Alor.OpenAPI.Models
             if (this == (object?)other)
                 return true;
 
-            if ((object?)other == null)
+            if (other is null)
                 return false;
 
             return GetType() == other.GetType() && EqualsHelper(this, other);

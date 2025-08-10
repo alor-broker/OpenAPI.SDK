@@ -11,13 +11,20 @@ namespace Alor.OpenAPI.Models.Simple
     {
         public TradeSimple() { }
 
-        /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseTradeV2"]/Member[@name="responseTradeV2"]/*' />
-        public TradeSimple(string? id = default, string? orderno = default,
-            string? symbol = default, string? brokerSymbol = default,
-            Exchange exchange = default, string? comment = default, DateTime? date = default, string? board = default,
-            int? qtyUnits = default, int? qtyBatch = default, int? qty = default, decimal? price = default, decimal? accruedInt = default,
-            Side side = default, bool? existing = default, decimal? commission = default,
-            TradeRepoSpecificFieldsSimple? repoSpecificFields = default, decimal? volume = default)
+        /// <include file='../../XmlDocs/CoreModels.xml'
+        ///          path='Docs/Members[@name="responseTradeV2"]
+        ///               /Member[@name="responseTradeV2"]
+        ///               /param[
+        ///                      @name="id" or @name="orderno" or @name="symbol" or @name="brokerSymbol" or @name="exchange"
+        ///                      or @name="comment" or @name="date" or @name="board" or @name="qtyUnits" or @name="qtyBatch"
+        ///                      or @name="qty" or @name="price" or @name="accruedInt" or @name="side" or @name="existing"
+        ///                      or @name="commission" or @name="repoSpecificFields" or @name="volume" 
+        ///                     ]'/>
+        public TradeSimple(string? id = null, string? orderno = null, string? symbol = null,
+            string? brokerSymbol = null, Exchange? exchange = null, string? comment = null, DateTime? date = null,
+            string? board = null, int? qtyUnits = null, int? qtyBatch = null, int? qty = null, decimal? price = null,
+            decimal? accruedInt = null, Side? side = null, bool? existing = null, decimal? commission = null,
+            TradeRepoSpecificFieldsSimple? repoSpecificFields = null, decimal? volume = null)
         {
             Id = id;
             Orderno = orderno;
@@ -57,7 +64,7 @@ namespace Alor.OpenAPI.Models.Simple
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseTradeV2"]/Member[@name="exchange"]/*' />
         [DataMember(Name = "exchange", EmitDefaultValue = false)]
-        public Exchange Exchange { get; init; }
+        public Exchange? Exchange { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseTradeV2"]/Member[@name="comment"]/*' />
         [DataMember(Name = "comment", EmitDefaultValue = false)]
@@ -93,7 +100,7 @@ namespace Alor.OpenAPI.Models.Simple
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseTradeV2"]/Member[@name="side"]/*' />
         [DataMember(Name = "side", EmitDefaultValue = false)]
-        public Side Side { get; init; }
+        public Side? Side { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseTradeV2"]/Member[@name="existing"]/*' />
         [DataMember(Name = "existing", EmitDefaultValue = false)]
@@ -127,7 +134,7 @@ namespace Alor.OpenAPI.Models.Simple
             sb.Append("  QtyBatch: ").Append(QtyBatch).Append(Environment.NewLine);
             sb.Append("  Qty: ").Append(Qty).Append(Environment.NewLine);
             sb.Append("  Price: ").Append(Price).Append(Environment.NewLine);
-            sb.Append("  AccruedInt: ").Append(AccruedInt).Append(Environment.NewLine);
+            sb.Append("  AccruedInterest: ").Append(AccruedInt).Append(Environment.NewLine);
             sb.Append("  Side: ").Append(Side).Append(Environment.NewLine);
             sb.Append("  Existing: ").Append(Existing).Append(Environment.NewLine);
             sb.Append("  Commission: ").Append(Commission).Append(Environment.NewLine);
@@ -187,7 +194,7 @@ namespace Alor.OpenAPI.Models.Simple
             if (this == (object?)other)
                 return true;
 
-            if ((object?)other == null)
+            if (other is null)
                 return false;
 
             return GetType() == other.GetType() && EqualsHelper(this, other);

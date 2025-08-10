@@ -10,6 +10,10 @@ namespace Alor.OpenAPI.Models.Heavy
     {
         public LiquidityHeavy() { }
 
+        /// <include file='../../XmlDocs/CoreModels.xml'
+        ///          path='Docs/Members[@name="responseOrderBookBid"]
+        ///               /Member[@name="responseOrderBookBid"]
+        ///               /param[@name="price" or @name="volume"]'/>
         public LiquidityHeavy(decimal price, long volume)
         {
             Price = price;
@@ -47,7 +51,7 @@ namespace Alor.OpenAPI.Models.Heavy
             if (this == (object?)other)
                 return true;
 
-            if ((object?)other == null)
+            if (other is null)
                 return false;
 
             return GetType() == other.GetType() && EqualsHelper(this, other);

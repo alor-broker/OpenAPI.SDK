@@ -1,4 +1,5 @@
-﻿using System.Collections.Concurrent;
+﻿using Alor.OpenAPI.Enums;
+using System.Collections.Concurrent;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
@@ -13,7 +14,10 @@ namespace Alor.OpenAPI.Models.Slim
     {
         public WsOrderBookSlim() { }
 
-        /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsResponseSubOrderBookGetAndSubscribe"]/Member[@name="wsResponseSubOrderBookGetAndSubscribe"]/*' />
+        /// <include file='../../XmlDocs/CoreModels.xml'
+        ///          path='Docs/Members[@name="wsResponseSubOrderBookGetAndSubscribe"]
+        ///               /Member[@name="wsResponseSubOrderBookGetAndSubscribe"]
+        ///               /param[@name="dataSlim" or @name="guid"]'/>
         public WsOrderBookSlim(OrderbookSlim? dataSlim, string? guid)
         {
             Data = dataSlim;
@@ -59,7 +63,7 @@ namespace Alor.OpenAPI.Models.Slim
             if (this == (object?)other)
                 return true;
 
-            if ((object?)other == null)
+            if (other is null)
                 return false;
 
             return GetType() == other.GetType() && EqualsHelper(this, other);

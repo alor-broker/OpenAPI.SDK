@@ -10,8 +10,8 @@ namespace Alor.OpenAPI.Models
     public record WsResponseMessage: IEquatable<WsResponseMessage>, IValidatableObject
     {
         public WsResponseMessage() { }
-        public WsResponseMessage(string? socketName = default, string? requestGuid = default, int? httpCode = default,
-            string? message = default)
+        public WsResponseMessage(string? socketName = null, string? requestGuid = null, int? httpCode = null,
+            string? message = null)
         {
             SocketName = socketName;
             RequestGuid = requestGuid;

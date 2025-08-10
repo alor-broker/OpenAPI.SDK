@@ -11,12 +11,17 @@ namespace Alor.OpenAPI.Models
     {
         public CwsRequestOrderStop() { }
 
-        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderStop"]/Member[@name="wsCmdUpdateOrderStop"]/*' />
-        public CwsRequestOrderStop(string? opcode = default, string? guid = default, string? orderId = default,
-            Side side = default, Condition condition = default, decimal? triggerPrice = default, long? stopEndUnixTime = default,
-            int? quantity = default, Instrument? instrument = default, Exchange? exchange = default,
-            string? board = default, User? user = default, bool? checkDuplicates = default,
-            int? protectingSeconds = default, bool? activate = true, bool? allowMargin = default)
+        /// <include file='../XmlDocs/CoreModels.xml'
+        ///     path='
+        ///             Docs/Members[@name="wsCmdCreateOrderStop"]/Member[@name="wsCmdCreateOrderStop"]/*
+        ///           | Docs/Members[@name="wsCmdDeleteOrderStop"]/Member[@name="wsCmdDeleteOrderStop"]/param[@name="exchange"]
+        ///           | Docs/Members[@name="wsCmdUpdateOrderStop"]/Member[@name="wsCmdUpdateOrderStop"]/param[@name="orderId"]
+        ///          ' />
+        public CwsRequestOrderStop(string? opcode = null, string? guid = null, string? orderId = null,
+            Side? side = null, Condition? condition = null, decimal? triggerPrice = null, long? stopEndUnixTime = null,
+            int? quantity = null, Instrument? instrument = null, Exchange? exchange = null, User? user = null,
+            bool? checkDuplicates = null, int? protectingSeconds = null, string? comment = null, bool? activate = true,
+            bool? allowMargin = null)
         {
             Opcode = opcode;
             Guid = guid;
@@ -28,19 +33,19 @@ namespace Alor.OpenAPI.Models
             Quantity = quantity;
             Instrument = instrument;
             Exchange = exchange;
-            Board = board;
             User = user;
             CheckDuplicates = checkDuplicates;
             ProtectingSeconds = protectingSeconds;
+            Comment = comment;
             Activate = activate ?? true;
             AllowMargin = allowMargin;
         }
 
-        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderStop"]/Member[@name="opcode"]/*' />
+        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdCreateOrderStop"]/Member[@name="opcode"]/*' />
         [DataMember(Name = "opcode", EmitDefaultValue = false)]
         public string? Opcode { get; init; }
 
-        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderStop"]/Member[@name="guid"]/*' />
+        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdCreateOrderStop"]/Member[@name="guid"]/*' />
         [DataMember(Name = "guid", EmitDefaultValue = false)]
         public string? Guid { get; init; }
 
@@ -48,27 +53,27 @@ namespace Alor.OpenAPI.Models
         [DataMember(Name = "orderId", EmitDefaultValue = false)]
         public string? OrderId { get; init; }
 
-        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderStop"]/Member[@name="side"]/*' />
+        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdCreateOrderStop"]/Member[@name="side"]/*' />
         [DataMember(Name = "side", EmitDefaultValue = false)]
-        public Side Side { get; init; }
+        public Side? Side { get; init; }
 
-        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderStop"]/Member[@name="condition"]/*' />
+        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdCreateOrderStop"]/Member[@name="condition"]/*' />
         [DataMember(Name = "condition", EmitDefaultValue = false)]
-        public Condition Condition { get; init; }
+        public Condition? Condition { get; init; }
 
-        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderStop"]/Member[@name="triggerPrice"]/*' />
+        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdCreateOrderStop"]/Member[@name="triggerPrice"]/*' />
         [DataMember(Name = "triggerPrice", EmitDefaultValue = false)]
         public decimal? TriggerPrice { get; init; }
 
-        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderStop"]/Member[@name="stopEndUnixTime"]/*' />
+        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdCreateOrderStop"]/Member[@name="stopEndUnixTime"]/*' />
         [DataMember(Name = "stopEndUnixTime", EmitDefaultValue = false)]
         public long? StopEndUnixTime { get; init; }
 
-        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderStop"]/Member[@name="quantity"]/*' />
+        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdCreateOrderStop"]/Member[@name="quantity"]/*' />
         [DataMember(Name = "quantity", EmitDefaultValue = false)]
         public int? Quantity { get; init; }
 
-        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderStop"]/Member[@name="instrument"]/*' />
+        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdCreateOrderStop"]/Member[@name="instrument"]/*' />
         [DataMember(Name = "instrument", EmitDefaultValue = false)]
         public Instrument? Instrument { get; init; }
 
@@ -76,27 +81,27 @@ namespace Alor.OpenAPI.Models
         [DataMember(Name = "exchange", EmitDefaultValue = false)]
         public Exchange? Exchange { get; init; }
 
-        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderStop"]/Member[@name="board"]/*' />
-        [DataMember(Name = "board", EmitDefaultValue = false)]
-        public string? Board { get; init; }
-
-        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderStop"]/Member[@name="user"]/*' />
+        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdCreateOrderStop"]/Member[@name="user"]/*' />
         [DataMember(Name = "user", EmitDefaultValue = false)]
         public User? User { get; init; }
 
-        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderStop"]/Member[@name="checkDuplicates"]/*' />
+        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdCreateOrderStop"]/Member[@name="checkDuplicates"]/*' />
         [DataMember(Name = "checkDuplicates", EmitDefaultValue = false)]
         public bool? CheckDuplicates { get; init; }
 
-        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderStop"]/Member[@name="protectingSeconds"]/*' />
+        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdCreateOrderStop"]/Member[@name="protectingSeconds"]/*' />
         [DataMember(Name = "protectingSeconds", EmitDefaultValue = false)]
         public int? ProtectingSeconds { get; init; }
 
-        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderStop"]/Member[@name="activate"]/*' />
+        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdCreateOrderStop"]/Member[@name="comment"]/*' />
+        [DataMember(Name = "comment", EmitDefaultValue = false)]
+        public string? Comment { get; init; }
+
+        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdCreateOrderStop"]/Member[@name="activate"]/*' />
         [DataMember(Name = "activate", EmitDefaultValue = false)]
         public bool? Activate { get; init; }
 
-        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderStop"]/Member[@name="allowMargin"]/*' />
+        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdCreateOrderStop"]/Member[@name="allowMargin"]/*' />
         [DataMember(Name = "allowMargin", EmitDefaultValue = false)]
         public bool? AllowMargin { get; init; }
 
@@ -114,10 +119,10 @@ namespace Alor.OpenAPI.Models
             sb.Append("  Quantity: ").Append(Quantity).Append(Environment.NewLine);
             sb.Append("  Instrument: ").Append(Instrument).Append(Environment.NewLine);
             sb.Append("  Exchange: ").Append(Exchange).Append(Environment.NewLine);
-            sb.Append("  Board: ").Append(Board).Append(Environment.NewLine);
             sb.Append("  User: ").Append(User).Append(Environment.NewLine);
             sb.Append("  CheckDuplicates: ").Append(CheckDuplicates).Append(Environment.NewLine);
             sb.Append("  ProtectingSeconds: ").Append(ProtectingSeconds).Append(Environment.NewLine);
+            sb.Append("  Comment: ").Append(Comment).Append(Environment.NewLine);
             sb.Append("  Activate: ").Append(Activate).Append(Environment.NewLine);
             sb.Append("  AllowMargin: ").Append(AllowMargin).Append(Environment.NewLine);
             sb.Append('}').Append(Environment.NewLine);
@@ -139,10 +144,10 @@ namespace Alor.OpenAPI.Models
             hash.Add(Quantity);
             hash.Add(Instrument);
             hash.Add(Exchange);
-            hash.Add(Board);
             hash.Add(User);
             hash.Add(CheckDuplicates);
             hash.Add(ProtectingSeconds);
+            hash.Add(Comment);
             hash.Add(Activate);
             hash.Add(AllowMargin);
             return hash.ToHashCode();
@@ -159,10 +164,10 @@ namespace Alor.OpenAPI.Models
             first?.Quantity == second?.Quantity &&
             first?.Instrument == second?.Instrument &&
             first?.Exchange == second?.Exchange &&
-            first?.Board == second?.Board &&
             first?.User == second?.User &&
             first?.CheckDuplicates == second?.CheckDuplicates &&
             first?.ProtectingSeconds == second?.ProtectingSeconds &&
+            first?.Comment == second?.Comment &&
             first?.Activate == second?.Activate &&
             first?.AllowMargin == second?.AllowMargin;
 
@@ -171,7 +176,7 @@ namespace Alor.OpenAPI.Models
             if (this == (object?)other)
                 return true;
 
-            if ((object?)other == null)
+            if (other is null)
                 return false;
 
             return GetType() == other.GetType() && EqualsHelper(this, other);

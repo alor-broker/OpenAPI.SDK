@@ -11,12 +11,19 @@ namespace Alor.OpenAPI.Models.Slim
     {
         public SecurityFromWsSlim() { }
 
-        /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseInstruments"]/Member[@name="responseInstruments"]/*' />
-        public SecurityFromWsSlim(string? symbol = default, Exchange exchange = default,
-            string? board = default, decimal? priceMax = default, decimal? priceMin = default,
-            int? tradingStatus = default, string? tradingStatusInfo = default,
-            decimal? marginBuy = default, decimal? marginSell = default, decimal? marginSyntetic = default,
-            decimal? theorPrice = default, decimal? theorPriceLimit = default, decimal? volatility = default)
+        /// <include file='../../XmlDocs/CoreModels.xml'
+        ///          path='Docs/Members[@name="responseInstruments"]
+        ///               /Member[@name="responseInstruments"]
+        ///               /param[
+        ///                      @name="symbol" or @name="exchange" or @name="board" or @name="priceMax" or @name="priceMin" 
+        ///                      or @name="tradingStatus" or @name="tradingStatusInfo" or @name="marginBuy" or @name="marginSell"
+        ///                      or @name="marginSyntetic" or @name="theorPrice" or @name="theorPriceLimit" or @name="volatility"
+        ///                     ]'/>
+        public SecurityFromWsSlim(string? symbol = null, Exchange? exchange = null,
+            string? board = null, decimal? priceMax = null, decimal? priceMin = null,
+            int? tradingStatus = null, string? tradingStatusInfo = null,
+            decimal? marginBuy = null, decimal? marginSell = null, decimal? marginSyntetic = null,
+            decimal? theorPrice = null, decimal? theorPriceLimit = null, decimal? volatility = null)
         {
             Symbol = symbol;
             Exchange = exchange;
@@ -39,7 +46,7 @@ namespace Alor.OpenAPI.Models.Slim
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseInstruments"]/Member[@name="exchange"]/*' />
         [DataMember(Name = "ex", EmitDefaultValue = false)]
-        public Exchange Exchange { get; init; }
+        public Exchange? Exchange { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseInstruments"]/Member[@name="priceMax"]/*' />
         [DataMember(Name = "pxmx", EmitDefaultValue = false)]
@@ -147,7 +154,7 @@ namespace Alor.OpenAPI.Models.Slim
             if (this == (object?)other)
                 return true;
 
-            if ((object?)other == null)
+            if (other is null)
                 return false;
 
             return GetType() == other.GetType() && EqualsHelper(this, other);

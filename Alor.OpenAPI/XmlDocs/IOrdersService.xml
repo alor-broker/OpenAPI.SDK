@@ -5,7 +5,7 @@
       <summary>Информация о выбранной заявке</summary>
       <remarks>
         <b>Запрос нельзя выполнить анонимно.</b>
-        <br />Возвращает информацию о выбранной в параметре <paramref name="orderId" /> заявке.</remarks>
+        <br />Возвращает информацию о выбранной в параметре <see langword="orderId" /> заявке.</remarks>
       <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
       <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
       <param name="exchange">
@@ -31,7 +31,7 @@
       <summary>Информация о выбранной заявке</summary>
       <remarks>
         <b>Запрос нельзя выполнить анонимно.</b>
-        <br />Возвращает информацию о выбранной в параметре <paramref name="orderId" /> заявке.</remarks>
+        <br />Возвращает информацию о выбранной в параметре <see langword="orderId" /> заявке.</remarks>
       <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
       <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
       <param name="exchange">
@@ -57,7 +57,7 @@
       <summary>Информация о выбранной заявке</summary>
       <remarks>
         <b>Запрос нельзя выполнить анонимно.</b>
-        <br />Возвращает информацию о выбранной в параметре <paramref name="orderId" /> заявке.</remarks>
+        <br />Возвращает информацию о выбранной в параметре <see langword="orderId" /> заявке.</remarks>
       <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
       <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
       <param name="exchange">
@@ -83,7 +83,7 @@
       <summary>Информация обо всех заявках</summary>
       <remarks>
         <b>Запрос нельзя выполнить анонимно.</b>
-        <br />Возвращает информацию о всех заявках для указанного <paramref name="portfolio" />, созданных на заданной в параметре <paramref name="exchange" /> бирже.</remarks>
+        <br />Возвращает информацию о всех заявках для указанного <see langword="portfolio" />, созданных на заданной в параметре <see langword="exchange" /> бирже.</remarks>
       <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
       <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
       <param name="exchange">
@@ -107,7 +107,7 @@
       <summary>Информация обо всех заявках</summary>
       <remarks>
         <b>Запрос нельзя выполнить анонимно.</b>
-        <br />Возвращает информацию о всех заявках для указанного <paramref name="portfolio" />, созданных на заданной в параметре <paramref name="exchange" /> бирже.</remarks>
+        <br />Возвращает информацию о всех заявках для указанного <see langword="portfolio" />, созданных на заданной в параметре <see langword="exchange" /> бирже.</remarks>
       <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
       <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
       <param name="exchange">
@@ -131,7 +131,7 @@
       <summary>Информация обо всех заявках</summary>
       <remarks>
         <b>Запрос нельзя выполнить анонимно.</b>
-        <br />Возвращает информацию о всех заявках для указанного <paramref name="portfolio" />, созданных на заданной в параметре <paramref name="exchange" /> бирже.</remarks>
+        <br />Возвращает информацию о всех заявках для указанного <see langword="portfolio" />, созданных на заданной в параметре <see langword="exchange" /> бирже.</remarks>
       <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
       <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
       <param name="exchange">
@@ -191,27 +191,34 @@
         <description>Код режима торгов (Борд):</description>
         <list type="bullet">
           <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
-          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+          <item>Для Биржи СПБ всегда <see langword="SPBX" /></item>
         </list>
       </param>
-      <param name="comment">Пользовательский комментарий к заявке</param>
+      <param name="comment">Пользовательский комментарий к заявке. Максимальная длина комментария — 100 символов</param>
       <param name="timeInForce">
         <list type="table">
           <listheader>
-            <description>Тип заявки:</description>
+            <description>Условие выставления заявки с учётом возможности её исполнения:</description>
           </listheader>
           <item>
             <term>oneday</term>
-            <description />До конца дня</item>
+            <description />Исполнение в течение одного торгового дня. При истечении этого срока неисполненный остаток снимается</item>
           <item>
             <term>immediateorcancel</term>
-            <description />Снять остаток</item>
+            <description />Исполнение немедленно на весь доступный объём встречных заявок. Неисполненный остаток отменяется</item>
           <item>
             <term>fillorkill</term>
-            <description />Исполнить целиком или отклонить</item>
+            <description />Исполнение немедленно на весь указанный объём без остатка. Если исполнение без остатка невозможно — заявка отменяется</item>
+          <item>
+            <term>attheclose</term>
+            <description />Исполнение в момент закрытия торгов по достигнутой на тот момент рыночной цене. Только для SPBX (на MOEX автоматически меняется на <see langword="fillorkill" />) и только для рыночных заявок, т.к. цена лота зависит от рыночной цены на момент исполнения</item>
           <item>
             <term>goodtillcancelled</term>
-            <description />Активна до отмены</item>
+            <description />Исполнение в течение максимально доступного периода на бирже. Например, в течение года для MOEX. Только для срочного рынка</item>
+          <item>
+            <term>bookorcancel</term>
+            <description />
+            <see href="https://www.moex.com/s3424">Пассивная заявка</see>. Выставляется на биржу только если её цена или величина спреда хуже аналогичных показателей встречных заявок</item>
         </list>
       </param>
       <param name="allowMargin">
@@ -269,30 +276,37 @@
         <description>Код режима торгов (Борд):</description>
         <list type="bullet">
           <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
-          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+          <item>Для Биржи СПБ всегда <see langword="SPBX" /></item>
         </list>
       </param>
-      <param name="comment">Пользовательский комментарий к заявке</param>
+      <param name="comment">Пользовательский комментарий к заявке. Максимальная длина комментария — 100 символов</param>
       <param name="timeInForce">
         <list type="table">
           <listheader>
-            <description>Тип заявки:</description>
+            <description>Условие выставления заявки с учётом возможности её исполнения:</description>
           </listheader>
           <item>
             <term>oneday</term>
-            <description />До конца дня</item>
+            <description />Исполнение в течение одного торгового дня. При истечении этого срока неисполненный остаток снимается</item>
           <item>
             <term>immediateorcancel</term>
-            <description />Снять остаток</item>
+            <description />Исполнение немедленно на весь доступный объём встречных заявок. Неисполненный остаток отменяется</item>
           <item>
             <term>fillorkill</term>
-            <description />Исполнить целиком или отклонить</item>
+            <description />Исполнение немедленно на весь указанный объём без остатка. Если исполнение без остатка невозможно — заявка отменяется</item>
+          <item>
+            <term>attheclose</term>
+            <description />Исполнение в момент закрытия торгов по достигнутой на тот момент рыночной цене. Только для SPBX (на MOEX автоматически меняется на <see langword="fillorkill" />) и только для рыночных заявок, т.к. цена лота зависит от рыночной цены на момент исполнения</item>
           <item>
             <term>goodtillcancelled</term>
-            <description />Активна до отмены</item>
+            <description />Исполнение в течение максимально доступного периода на бирже. Например, в течение года для MOEX. Только для срочного рынка</item>
+          <item>
+            <term>bookorcancel</term>
+            <description />
+            <see href="https://www.moex.com/s3424">Пассивная заявка</see>. Выставляется на биржу только если её цена или величина спреда хуже аналогичных показателей встречных заявок</item>
         </list>
       </param>
-      <param name="icebergFixed">Видимая постоянная часть айсберг-заявки в лотах, указанная при создании лимитной заявки</param>
+      <param name="icebergFixed">Видимая постоянная часть айсберг-заявки в лотах. Указывается при создании заявки, может быть впоследствии изменена только в заявках на фондовом и валютном рынках</param>
       <param name="icebergVariance">Амплитуда отклонения (в % от постоянной части) случайной надбавки к видимой части айсберг-заявки, указанная при создании лимитной заявки. Только срочный рынок</param>
       <param name="allowMargin">
         <description>Флаг, подтверждающий согласие клиента с начальным уровнем риска (КНУР) на выставление заявки с потенциальной непокрытой позицией. Должен быть `true`:</description>
@@ -349,27 +363,34 @@
         <description>Код режима торгов (Борд):</description>
         <list type="bullet">
           <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
-          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+          <item>Для Биржи СПБ всегда <see langword="SPBX" /></item>
         </list>
       </param>
-      <param name="comment">Пользовательский комментарий к заявке</param>
+      <param name="comment">Пользовательский комментарий к заявке. Максимальная длина комментария — 100 символов</param>
       <param name="timeInForce">
         <list type="table">
           <listheader>
-            <description>Тип заявки:</description>
+            <description>Условие выставления заявки с учётом возможности её исполнения:</description>
           </listheader>
           <item>
             <term>oneday</term>
-            <description />До конца дня</item>
+            <description />Исполнение в течение одного торгового дня. При истечении этого срока неисполненный остаток снимается</item>
           <item>
             <term>immediateorcancel</term>
-            <description />Снять остаток</item>
+            <description />Исполнение немедленно на весь доступный объём встречных заявок. Неисполненный остаток отменяется</item>
           <item>
             <term>fillorkill</term>
-            <description />Исполнить целиком или отклонить</item>
+            <description />Исполнение немедленно на весь указанный объём без остатка. Если исполнение без остатка невозможно — заявка отменяется</item>
+          <item>
+            <term>attheclose</term>
+            <description />Исполнение в момент закрытия торгов по достигнутой на тот момент рыночной цене. Только для SPBX (на MOEX автоматически меняется на <see langword="fillorkill" />) и только для рыночных заявок, т.к. цена лота зависит от рыночной цены на момент исполнения</item>
           <item>
             <term>goodtillcancelled</term>
-            <description />Активна до отмены</item>
+            <description />Исполнение в течение максимально доступного периода на бирже. Например, в течение года для MOEX. Только для срочного рынка</item>
+          <item>
+            <term>bookorcancel</term>
+            <description />
+            <see href="https://www.moex.com/s3424">Пассивная заявка</see>. Выставляется на биржу только если её цена или величина спреда хуже аналогичных показателей встречных заявок</item>
         </list>
       </param>
       <param name="allowMargin">
@@ -390,7 +411,7 @@
       <summary>Изменение лимитной заявки</summary>
       <remarks>
         <b>Запрос нельзя выполнить анонимно.</b>
-        <br />Запрос на изменение ранее поданной лимитной заявки. При обработке запроса исходная заявка с указанным номером отменяется, после чего выставляется новая заявка с новым номером и изменёнными параметрами. Из-за ограничения со стороны биржи параметры <paramref name="side" /> и <paramref name="symbol" /> не учитываются при изменении заявок, относящихся к срочному рынку. Ограничение не распространяется на первичное выставление заявок на срочном рынке и изменение заявок на прочих рынках.</remarks>
+        <br />Запрос на изменение ранее поданной лимитной заявки. При обработке запроса исходная заявка с указанным номером отменяется, после чего выставляется новая заявка с новым номером и изменёнными параметрами. Из-за ограничения со стороны биржи параметры <see langword="side" /> и <see langword="symbol" /> не учитываются при изменении заявок, относящихся к срочному рынку. Ограничение не распространяется на первичное выставление заявок на срочном рынке и изменение заявок на прочих рынках.</remarks>
       <exception cref="ApiException">Вызывается при возникновении исключения при запросах к API</exception>
       <exception cref="ArgumentNullException">Вызывается, если один из параметров равен null</exception>
       <param name="orderId">Идентификатор заявки</param>
@@ -428,31 +449,11 @@
         <description>Код режима торгов (Борд):</description>
         <list type="bullet">
           <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
-          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+          <item>Для Биржи СПБ всегда <see langword="SPBX" /></item>
         </list>
       </param>
-      <param name="comment">Пользовательский комментарий к заявке</param>
-      <param name="timeInForce">
-        <list type="table">
-          <listheader>
-            <description>Тип заявки:</description>
-          </listheader>
-          <item>
-            <term>oneday</term>
-            <description />До конца дня</item>
-          <item>
-            <term>immediateorcancel</term>
-            <description />Снять остаток</item>
-          <item>
-            <term>fillorkill</term>
-            <description />Исполнить целиком или отклонить</item>
-          <item>
-            <term>goodtillcancelled</term>
-            <description />Активна до отмены</item>
-        </list>
-      </param>
-      <param name="icebergFixed">Видимая постоянная часть айсберг-заявки в лотах, указанная при создании лимитной заявки</param>
-      <param name="icebergVariance">Амплитуда отклонения (в % от постоянной части) случайной надбавки к видимой части айсберг-заявки, указанная при создании лимитной заявки. Только срочный рынок</param>
+      <param name="comment">Пользовательский комментарий к заявке. Максимальная длина комментария — 100 символов</param>
+      <param name="icebergFixed">Видимая постоянная часть айсберг-заявки в лотах. Указывается при создании заявки, может быть впоследствии изменена только в заявках на фондовом и валютном рынках</param>
       <param name="allowMargin">
         <description>Флаг, подтверждающий согласие клиента с начальным уровнем риска (КНУР) на выставление заявки с потенциальной непокрытой позицией. Должен быть `true`:</description>
         <list type="bullet">
@@ -496,15 +497,15 @@
 
 Бюджет не может превышать фактическое значение денежных позиций портфеля. Если заданное значение больше доступного количества денежных средств, при расчёте заявки будут использоваться имеющиеся средства без учёта позиций других инструментов.
 
-Если в теле запроса задано поле <paramref name="price" />, его значение будет использовано при расчёте заявки в качестве цены инструмента. В противном случае будет использована рыночная цена инструмента, действовавшая в момент отправки запроса.
+Если в теле запроса задано поле <see langword="price" />, его значение будет использовано при расчёте заявки в качестве цены инструмента. В противном случае будет использована рыночная цена инструмента, действовавшая в момент отправки запроса.
 
-Одновременное использование в запросе параметров <paramref name="budget" /> и <paramref name="lotQuantity" /> бессмысленно — указание бюджета позволяет рассчитать максимальное количество лотов инструмента, доступных к покупке за заданную сумму, тогда как <paramref name="lotQuantity" /> явно указывает желаемое количество лотов.
+Одновременное использование в запросе параметров <see langword="budget" /> и <see langword="lotQuantity" /> бессмысленно — указание бюджета позволяет рассчитать максимальное количество лотов инструмента, доступных к покупке за заданную сумму, тогда как <see langword="lotQuantity" /> явно указывает желаемое количество лотов.
 </param>
       <param name="board">
         <description>Код режима торгов (Борд):</description>
         <list type="bullet">
           <item>Для Московской Биржи список кодов доступен в <see href="https://fs.moex.com/files/3864/">таблице</see></item>
-          <item>Для Биржи СПБ всегда <paramref name="SPBX" /></item>
+          <item>Для Биржи СПБ всегда <see langword="SPBX" /></item>
         </list>
       </param>
       <param name="includeLimitOrders">Учитывать ли лимитные заявки при расчете</param>

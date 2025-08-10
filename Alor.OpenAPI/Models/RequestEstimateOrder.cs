@@ -12,8 +12,8 @@ namespace Alor.OpenAPI.Models
         public RequestEstimateOrder() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectEstimateOrder"]/Member[@name="objectEstimateOrder"]/*' />
-        public RequestEstimateOrder(string? portfolio = default, string? ticker = default, Exchange exchange = default,
-            decimal? price = default, int? lotQuantity = default, decimal? budget = default, string? board = default,
+        public RequestEstimateOrder(string? portfolio = null, string? ticker = null, Exchange? exchange = null,
+            decimal? price = null, int? lotQuantity = null, decimal? budget = null, string? board = null,
             bool? includeLimitOrders = false)
         {
             Portfolio = portfolio;
@@ -36,7 +36,7 @@ namespace Alor.OpenAPI.Models
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectEstimateOrder"]/Member[@name="exchange"]/*' />
         [DataMember(Name = "exchange", EmitDefaultValue = false)]
-        public Exchange Exchange { get; init; }
+        public Exchange? Exchange { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectEstimateOrder"]/Member[@name="price"]/*' />
         [DataMember(Name = "price", EmitDefaultValue = false)]
@@ -94,7 +94,7 @@ namespace Alor.OpenAPI.Models
             if (this == (object?)other)
                 return true;
 
-            if ((object?)other == null)
+            if (other is null)
                 return false;
 
             return GetType() == other.GetType() && EqualsHelper(this, other);

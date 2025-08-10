@@ -84,7 +84,7 @@ namespace Alor.OpenAPI.Tests
         {
             // Arrange
             var apiHttpClientMock = new Mock<IApiHttpClientService>();
-            var expectedResponse = new StopOrderSimple("347499", 425242362, "SBER", "MOEX:LKOH", "D39004", Exchange.MOEX, "TQBR", OrderTypeStopLimit.Stop,
+            var expectedResponse = new StopOrderSimple("347499", 425242362, "SBER", "MOEX:LKOH", "D39004", Exchange.MOEX, "comment", "TQBR", OrderTypeStopLimit.Stop,
                 Side.Buy, Condition.LessOrEqual, OrderStatus.Working, DateTime.Parse("2020-05-16T23:59:59.9990000Z"), null, DateTime.Parse("2020-06-16T23:59:59.9990000Z"),
                 null, 10m, 1, 1, 0, 0, 0, 0, 0, true, TimeInForce.OneDay, null, 2086.1m);
 

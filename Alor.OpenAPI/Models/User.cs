@@ -11,7 +11,7 @@ namespace Alor.OpenAPI.Models
         public User() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectUserPortfolioOnly"]/Member[@name="objectUserPortfolioOnly"]/*' />
-        public User(string? portfolio = default)
+        public User(string? portfolio = null)
         {
             Portfolio = portfolio;
         }
@@ -42,7 +42,7 @@ namespace Alor.OpenAPI.Models
             if (this == (object?)other)
                 return true;
 
-            if ((object?)other == null)
+            if (other is null)
                 return false;
 
             return GetType() == other.GetType() && EqualsHelper(this, other);

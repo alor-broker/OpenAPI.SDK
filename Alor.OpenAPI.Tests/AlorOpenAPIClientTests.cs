@@ -284,7 +284,7 @@ namespace Alor.OpenAPI.Tests
             var othersServiceMock = new Mock<IOthersService>();
             othersServiceMock
                 .Setup(x => x.MdV2TimeGetAsync())
-                .ReturnsAsync(new long())
+                .ReturnsAsync(0)
                 .Verifiable();
 
 

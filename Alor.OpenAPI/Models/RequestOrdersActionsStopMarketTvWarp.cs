@@ -1,8 +1,8 @@
 ﻿using Alor.OpenAPI.Enums;
-using SpanJson;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
+using JsonSerializer = SpanJson.JsonSerializer;
 
 namespace Alor.OpenAPI.Models
 {
@@ -14,10 +14,11 @@ namespace Alor.OpenAPI.Models
         public RequestOrdersActionsStopMarketTvWarp() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsStopMarketTVWarp"]/Member[@name="OrdersActionsStopMarketTVWarp"]/*' />
-        public RequestOrdersActionsStopMarketTvWarp(Side side = default, Condition condition = default,
-            decimal? triggerPrice = default, long? stopEndUnixTime = default,
-            int? quantity = default, Instrument? instrument = default, User? user = default,
-            int? protectingSeconds = null, bool? activate = true, bool? allowMargin = default)
+        public RequestOrdersActionsStopMarketTvWarp(Side? side = null, Condition? condition = null,
+            decimal? triggerPrice = null, long? stopEndUnixTime = null,
+            int? quantity = null, Instrument? instrument = null, User? user = null,
+            int? protectingSeconds = null, string? comment = null, 
+            bool? activate = true, bool? allowMargin = null)
         {
             Side = side;
             Condition = condition;
@@ -27,17 +28,18 @@ namespace Alor.OpenAPI.Models
             Instrument = instrument;
             User = user;
             ProtectingSeconds = protectingSeconds;
+            Comment = comment;
             Activate = activate ?? true;
             AllowMargin = allowMargin;
         }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsStopMarketTVWarp"]/Member[@name="side"]/*' />
         [DataMember(Name = "side", EmitDefaultValue = false)]
-        public Side Side { get; init; }
+        public Side? Side { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsStopMarketTVWarp"]/Member[@name="condition"]/*' />
         [DataMember(Name = "condition", EmitDefaultValue = false)]
-        public Condition Condition { get; init; }
+        public Condition? Condition { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsStopMarketTVWarp"]/Member[@name="triggerPrice"]/*' />
         [DataMember(Name = "triggerPrice", EmitDefaultValue = false)]
@@ -63,6 +65,10 @@ namespace Alor.OpenAPI.Models
         [DataMember(Name = "protectingSeconds", EmitDefaultValue = false)]
         public int? ProtectingSeconds { get; init; }
 
+        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsStopMarketTVWarp"]/Member[@name="comment"]/*' />
+        [DataMember(Name = "comment", EmitDefaultValue = false)]
+        public string? Comment { get; init; }
+
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsStopMarketTVWarp"]/Member[@name="activate"]/*' />
         [DataMember(Name = "activate", EmitDefaultValue = false)]
         public bool? Activate { get; init; }
@@ -83,6 +89,7 @@ namespace Alor.OpenAPI.Models
             sb.Append("  Instrument: ").Append(Instrument).Append(Environment.NewLine);
             sb.Append("  User: ").Append(User).Append(Environment.NewLine);
             sb.Append("  ProtectingSeconds: ").Append(ProtectingSeconds).Append(Environment.NewLine);
+            sb.Append("  Comment: ").Append(Comment).Append(Environment.NewLine);
             sb.Append("  Activate: ").Append(Activate).Append(Environment.NewLine);
             sb.Append("  AllowMargin: ").Append(AllowMargin).Append(Environment.NewLine);
             sb.Append('}').Append(Environment.NewLine);
@@ -102,6 +109,7 @@ namespace Alor.OpenAPI.Models
             hash.Add(Instrument);
             hash.Add(User);
             hash.Add(ProtectingSeconds);
+            hash.Add(Comment);
             hash.Add(Activate);
             hash.Add(AllowMargin);
             return hash.ToHashCode();
@@ -117,6 +125,7 @@ namespace Alor.OpenAPI.Models
             first?.Instrument == second?.Instrument &&
             first?.User == second?.User &&
             first?.ProtectingSeconds == second?.ProtectingSeconds &&
+            first?.Comment == second?.Comment &&
             first?.Activate == second?.Activate &&
             first?.AllowMargin == second?.AllowMargin;
 
@@ -125,7 +134,7 @@ namespace Alor.OpenAPI.Models
             if (this == (object?)other)
                 return true;
 
-            if ((object?)other == null)
+            if (other is null)
                 return false;
 
             return GetType() == other.GetType() && EqualsHelper(this, other);

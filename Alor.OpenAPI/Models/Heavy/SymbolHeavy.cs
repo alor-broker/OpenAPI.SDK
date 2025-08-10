@@ -1,8 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
-using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 using Alor.OpenAPI.Enums;
 using SpanJson;
 
@@ -13,19 +11,25 @@ namespace Alor.OpenAPI.Models.Heavy
     {
         public SymbolHeavy() { }
 
-        /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSymbol"]/Member[@name="responseSymbol"]/*' />
-        public SymbolHeavy(string? symbol = default, Exchange exchange = default,
-            string? description = default, string? currencyHeavy = default, decimal? ask = default, decimal? bid = default,
-            int? askVol = default, int? bidVol = default, long? obMsTimestamp = default,
-            decimal? prevClosePrice = default, decimal? lastPrice = default,
-            long? lastPriceTimestamp = default, decimal? change = default,
-            decimal? changePercent = default, decimal? highPrice = default,
-            decimal? lowPrice = default, decimal? accruedInterest = default,
-            decimal? volume = default,
-            long? openInterest = default, decimal? openPrice = default,
-            decimal? yield = default, decimal? lotsize = default, decimal? lotvalue = default,
-            decimal? facevalue = default, string? type = default,
-            int? totalAskVol = default, int? totalBidVol = default)
+        /// <include file='../../XmlDocs/CoreModels.xml'
+        ///          path='Docs/Members[@name="responseSymbol"]
+        ///               /Member[@name="responseSymbol"]
+        ///               /param[
+        ///                      @name="symbol" or @name="exchange" or @name="description" or @name="currencyHeavy" or @name="ask" 
+        ///                      or @name="bid" or @name="askVol" or @name="bidVol" or @name="obMsTimestamp" or @name="prevClosePrice"
+        ///                      or @name="lastPrice" or @name="lastPriceTimestamp" or @name="change" or @name="changePercent" 
+        ///                      or @name="highPrice" or @name="lowPrice" or @name="accruedInterest" or @name="volume"
+        ///                      or @name="openInterest" or @name="openPrice" or @name="yield" or @name="lotsize" 
+        ///                      or @name="lotvalue" or @name="facevalue" or @name="type" or @name="totalAskVol" or @name="totalBidVol" 
+        ///                     ]'/>
+        public SymbolHeavy(string? symbol = null, Exchange? exchange = null, string? description = null,
+            string? currencyHeavy = null, decimal? ask = null, decimal? bid = null, int? askVol = null,
+            int? bidVol = null, long? obMsTimestamp = null, decimal? prevClosePrice = null, decimal? lastPrice = null,
+            long? lastPriceTimestamp = null, decimal? change = null, decimal? changePercent = null,
+            decimal? highPrice = null, decimal? lowPrice = null, decimal? accruedInterest = null,
+            decimal? volume = null, long? openInterest = null, decimal? openPrice = null, decimal? yield = null,
+            decimal? lotsize = null, decimal? lotvalue = null, decimal? facevalue = null, string? type = null,
+            int? totalAskVol = null, int? totalBidVol = null)
         {
             Symbol = symbol;
             Exchange = exchange;
@@ -62,7 +66,7 @@ namespace Alor.OpenAPI.Models.Heavy
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSymbol"]/Member[@name="exchange"]/*' />
         [DataMember(Name = "exchange", EmitDefaultValue = false)]
-        public Exchange Exchange { get; init; }
+        public Exchange? Exchange { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseSymbol"]/Member[@name="description"]/*' />
         [DataMember(Name = "description", EmitDefaultValue = false)]
@@ -269,7 +273,7 @@ namespace Alor.OpenAPI.Models.Heavy
             if (this == (object?)other)
                 return true;
 
-            if ((object?)other == null)
+            if (other is null)
                 return false;
 
             return GetType() == other.GetType() && EqualsHelper(this, other);

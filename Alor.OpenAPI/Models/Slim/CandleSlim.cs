@@ -10,10 +10,13 @@ namespace Alor.OpenAPI.Models.Slim
     {
         public CandleSlim() { }
 
-        /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseHistoryObject"]/Member[@name="responseHistoryObject"]/*' />
-        public CandleSlim(long? time = default, decimal? close = default,
-            decimal? open = default, decimal? high = default, decimal? low = default,
-            int? volume = default)
+        /// <include file='../../XmlDocs/CoreModels.xml'
+        ///          path='Docs/Members[@name="responseHistoryObject"]
+        ///               /Member[@name="responseHistoryObject"]
+        ///               /param[@name="time" or @name="close" or @name="open" or @name="high" or @name="low" or @name="volume"]'/>
+        public CandleSlim(long? time = null, decimal? close = null,
+            decimal? open = null, decimal? high = null, decimal? low = null,
+            long? volume = null)
         {
             Time = time;
             Close = close;
@@ -45,7 +48,7 @@ namespace Alor.OpenAPI.Models.Slim
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseHistoryObject"]/Member[@name="volume"]/*' />
         [DataMember(Name = "v", EmitDefaultValue = false)]
-        public int? Volume { get; init; }
+        public long? Volume { get; init; }
 
         public override string ToString()
         {
@@ -78,7 +81,7 @@ namespace Alor.OpenAPI.Models.Slim
             if (this == (object?)other)
                 return true;
 
-            if ((object?)other == null)
+            if (other is null)
                 return false;
 
             return GetType() == other.GetType() && EqualsHelper(this, other);

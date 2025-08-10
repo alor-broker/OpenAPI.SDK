@@ -11,13 +11,20 @@ namespace Alor.OpenAPI.Models.Heavy
     {
         public RiskHeavy() { }
 
-        /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseRisk"]/Member[@name="responseRisk"]/*' />
-        public RiskHeavy(string? portfolio = default, Exchange exchange = default, decimal? portfolioEvaluation = default,
-            decimal? portfolioLiquidationValue = default, decimal? initialMargin = default,
-            decimal? minimalMargin = default, decimal? correctedMargin = default,
-            decimal? riskCoverageRatioOne = default, decimal? riskCoverageRatioTwo = default,
-            int? riskCategoryId = default, ClientType clientType = default,
-            bool? hasForbiddenPositions = default, bool? hasNegativeQuantity = default, RiskStatus riskStatus = default)
+        /// <include file='../../XmlDocs/CoreModels.xml'
+        ///          path='Docs/Members[@name="responseRisk"]
+        ///               /Member[@name="responseRisk"]
+        ///               /param[
+        ///                      @name="portfolio" or @name="exchange" or @name="portfolioEvaluation" or @name="portfolioLiquidationValue" 
+        ///                      or @name="initialMargin" or @name="minimalMargin" or @name="correctedMargin" or @name="riskCoverageRatioOne"
+        ///                      or @name="riskCoverageRatioTwo" or @name="riskCategoryId" or @name="clientType" or @name="hasForbiddenPositions"
+        ///                      or @name="hasNegativeQuantity" or @name="riskStatus" or @name="calculationTime"
+        ///                     ]'/>
+        public RiskHeavy(string? portfolio = null, Exchange? exchange = null, decimal? portfolioEvaluation = null,
+            decimal? portfolioLiquidationValue = null, decimal? initialMargin = null, decimal? minimalMargin = null,
+            decimal? correctedMargin = null, decimal? riskCoverageRatioOne = null, decimal? riskCoverageRatioTwo = null,
+            int? riskCategoryId = null, ClientType? clientType = null, bool? hasForbiddenPositions = null,
+            bool? hasNegativeQuantity = null, RiskStatus? riskStatus = null, DateTime? calculationTime = null)
         {
             Portfolio = portfolio;
             Exchange = exchange;
@@ -33,6 +40,7 @@ namespace Alor.OpenAPI.Models.Heavy
             HasForbiddenPositions = hasForbiddenPositions;
             HasNegativeQuantity = hasNegativeQuantity;
             RiskStatus = riskStatus;
+            CalculationTime = calculationTime;
         }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseRisk"]/Member[@name="portfolio"]/*' />
@@ -41,7 +49,7 @@ namespace Alor.OpenAPI.Models.Heavy
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseRisk"]/Member[@name="exchange"]/*' />
         [DataMember(Name = "exchange", EmitDefaultValue = false)]
-        public Exchange Exchange { get; init; }
+        public Exchange? Exchange { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseRisk"]/Member[@name="portfolioEvaluation"]/*' />
         [DataMember(Name = "portfolioEvaluation", EmitDefaultValue = false)]
@@ -77,7 +85,7 @@ namespace Alor.OpenAPI.Models.Heavy
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseRisk"]/Member[@name="clientType"]/*' />
         [DataMember(Name = "clientType", EmitDefaultValue = false)]
-        public ClientType ClientType { get; init; }
+        public ClientType? ClientType { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseRisk"]/Member[@name="hasForbiddenPositions"]/*' />
         [DataMember(Name = "hasForbiddenPositions", EmitDefaultValue = false)]
@@ -89,7 +97,11 @@ namespace Alor.OpenAPI.Models.Heavy
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseRisk"]/Member[@name="riskStatus"]/*' />
         [DataMember(Name = "riskStatus", EmitDefaultValue = false)]
-        public RiskStatus RiskStatus { get; init; }
+        public RiskStatus? RiskStatus { get; init; }
+
+        /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseRisk"]/Member[@name="calculationTime"]/*' />
+        [DataMember(Name = "calculationTime", EmitDefaultValue = false)]
+        public DateTime? CalculationTime { get; init; }
 
         public override string ToString()
         {
@@ -109,6 +121,7 @@ namespace Alor.OpenAPI.Models.Heavy
             sb.Append("  HasForbiddenPositions: ").Append(HasForbiddenPositions).Append(Environment.NewLine);
             sb.Append("  HasNegativeQuantity: ").Append(HasNegativeQuantity).Append(Environment.NewLine);
             sb.Append("  RiskStatus: ").Append(RiskStatus).Append(Environment.NewLine);
+            sb.Append("  CalculationTime: ").Append(CalculationTime).Append(Environment.NewLine);
             sb.Append('}').Append(Environment.NewLine);
             return sb.ToString();
         }
@@ -132,6 +145,7 @@ namespace Alor.OpenAPI.Models.Heavy
             hash.Add(HasForbiddenPositions);
             hash.Add(HasNegativeQuantity);
             hash.Add(RiskStatus);
+            hash.Add(CalculationTime);
             return hash.ToHashCode();
         }
 
@@ -149,14 +163,15 @@ namespace Alor.OpenAPI.Models.Heavy
             first?.ClientType == second?.ClientType &&
             first?.HasForbiddenPositions == second?.HasForbiddenPositions &&
             first?.HasNegativeQuantity == second?.HasNegativeQuantity &&
-            first?.RiskStatus == second?.RiskStatus;
+            first?.RiskStatus == second?.RiskStatus &&
+            first?.CalculationTime == second?.CalculationTime;
         
         public bool Equals(RiskHeavy? other)
         {
             if (this == (object?)other)
                 return true;
 
-            if ((object?)other == null)
+            if (other is null)
                 return false;
 
             return GetType() == other.GetType() && EqualsHelper(this, other);

@@ -10,13 +10,21 @@ namespace Alor.OpenAPI.Models.Heavy
     {
         public FortsriskHeavy() { }
 
-        /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseFortsRisk"]/Member[@name="responseFortsRisk"]/*' />
-        public FortsriskHeavy(string? portfolio = default, decimal? moneyFree = default,
-            decimal? moneyBlocked = default, decimal? fee = default, decimal? moneyOld = default,
-            decimal? moneyAmount = default, decimal? moneyPledgeAmount = default, decimal? vmInterCl = default,
-            decimal? vmCurrentPositions = default, decimal? varMargin = default, bool? isLimitsSet = default,
-            decimal? indicativeVarMargin = default,
-            decimal? netOptionValue = default, decimal? posRisk = default)
+        /// <include file='../../XmlDocs/CoreModels.xml'
+        ///          path='Docs/Members[@name="responseFortsRisk"]
+        ///               /Member[@name="responseFortsRisk"]
+        ///               /param[
+        ///                      @name="portfolio" or @name="moneyFree" or @name="moneyBlocked" or @name="fee" or @name="moneyOld"
+        ///                      or @name="moneyAmount" or @name="moneyPledgeAmount" or @name="vmInterCl" or @name="vmCurrentPositions"
+        ///                      or @name="varMargin" or @name="isLimitsSet" or @name="indicativeVarMargin" or @name="netOptionValue"
+        ///                      or @name="posRisk" 
+        ///                     ]'/>
+        public FortsriskHeavy(string? portfolio = null, decimal? moneyFree = null,
+            decimal? moneyBlocked = null, decimal? fee = null, decimal? moneyOld = null,
+            decimal? moneyAmount = null, decimal? moneyPledgeAmount = null, decimal? vmInterCl = null,
+            decimal? vmCurrentPositions = null, decimal? varMargin = null, bool? isLimitsSet = null,
+            decimal? indicativeVarMargin = null,
+            decimal? netOptionValue = null, decimal? posRisk = null)
         {
             Portfolio = portfolio;
             MoneyFree = moneyFree;
@@ -155,7 +163,7 @@ namespace Alor.OpenAPI.Models.Heavy
             if (this == (object?)other)
                 return true;
 
-            if ((object?)other == null)
+            if (other is null)
                 return false;
 
             return GetType() == other.GetType() && EqualsHelper(this, other);

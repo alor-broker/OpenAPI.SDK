@@ -229,7 +229,7 @@ namespace Alor.OpenAPI.Managers
             await ws.StartAsync();
             _incrementSocketsCounter?.Invoke();
 
-            if (ws.Opcodes.Count > 0)
+            if (!ws.Opcodes.IsEmpty)
             {
                 foreach (var msg in ws.Opcodes.Select(opcode => opcode.Value.Replace("JwtToken", _jwtToken)))
                 {

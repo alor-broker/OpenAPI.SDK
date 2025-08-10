@@ -14,7 +14,7 @@ namespace Alor.OpenAPI.Tests
         {
             // Arrange
             var apiHttpClientMock = new Mock<IApiHttpClientService>();
-            var expectedResponse = new long();
+            var expectedResponse = 0L;
             var expectedUri = new Uri("https://example.com/md/v2/time");
             apiHttpClientMock
                 .Setup(x => x.ProcessRequest<long>(
@@ -67,7 +67,7 @@ namespace Alor.OpenAPI.Tests
         {
             // Arrange
             var apiHttpClientMock = new Mock<IApiHttpClientService>();
-            var expectedResponse = new long();
+            var expectedResponse = 0L;
 
             // Настраиваем мок для возврата предсказуемого ответа
             apiHttpClientMock.Setup(x =>
@@ -105,7 +105,7 @@ namespace Alor.OpenAPI.Tests
                     // Эмуляция ожидания перед тем как отмена будет вызвана
                     await Task.Delay(500, token);
                     token.ThrowIfCancellationRequested();
-                    return new long(); // Возвращаем значение, если отмена не была вызвана
+                    return 0; // Возвращаем значение, если отмена не была вызвана
                 })
                 .Verifiable();
 

@@ -11,15 +11,23 @@ namespace Alor.OpenAPI.Models.Slim
     {
         public PositionSlim() { }
 
-         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responsePosition"]/Member[@name="responsePosition"]/*' />
-        public PositionSlim(decimal? volume = default, decimal? currentVolume = default,
-            string? symbol = default, string? brokerSymbol = default, string? portfolio = default,
-            Exchange exchange = default, decimal? avgPrice = default,
-            decimal? qtyUnits = default, decimal? openUnits = default,
-            decimal? lotSize = default, string? shortName = default,
-            decimal? qtyT0 = default, decimal? qtyT1 = default, decimal? qtyT2 = default,
-            decimal? qtyTFuture = default,  decimal? dailyUnrealisedPl = default,
-            decimal? unrealisedPl = default, bool? isCurrency = default, bool? existing = default)
+        /// <include file='../../XmlDocs/CoreModels.xml'
+        ///          path='Docs/Members[@name="responsePosition"]
+        ///               /Member[@name="responsePosition"]
+        ///               /param[
+        ///                      @name="volume" or @name="currentVolume" or @name="symbol" or @name="brokerSymbol" or @name="portfolio"
+        ///                      or @name="exchange" or @name="avgPrice" or @name="qtyUnits" or @name="openUnits" or @name="lotSize"
+        ///                      or @name="shortName" or @name="qtyT0" or @name="qtyT1" or @name="qtyT2" or @name="qtyTFuture"
+        ///                      or @name="dailyUnrealisedPl" or @name="unrealisedPl" or @name="isCurrency" or @name="existing"
+        ///                     ]'/>
+        public PositionSlim(decimal? volume = null, decimal? currentVolume = null,
+            string? symbol = null, string? brokerSymbol = null, string? portfolio = null,
+            Exchange? exchange = null, decimal? avgPrice = null,
+            decimal? qtyUnits = null, decimal? openUnits = null,
+            decimal? lotSize = null, string? shortName = null,
+            decimal? qtyT0 = null, decimal? qtyT1 = null, decimal? qtyT2 = null,
+            decimal? qtyTFuture = null,  decimal? dailyUnrealisedPl = null,
+            decimal? unrealisedPl = null, bool? isCurrency = null, bool? existing = null)
         {
             Volume = volume;
             CurrentVolume = currentVolume;
@@ -64,7 +72,7 @@ namespace Alor.OpenAPI.Models.Slim
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responsePosition"]/Member[@name="exchange"]/*' />
         [DataMember(Name = "ex", EmitDefaultValue = false)]
-        public Exchange Exchange { get; init; }
+        public Exchange? Exchange { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responsePosition"]/Member[@name="avgPrice"]/*' />
         [DataMember(Name = "pxavg", EmitDefaultValue = false)]
@@ -198,7 +206,7 @@ namespace Alor.OpenAPI.Models.Slim
             if (this == (object?)other)
                 return true;
 
-            if ((object?)other == null)
+            if (other is null)
                 return false;
 
             return GetType() == other.GetType() && EqualsHelper(this, other);

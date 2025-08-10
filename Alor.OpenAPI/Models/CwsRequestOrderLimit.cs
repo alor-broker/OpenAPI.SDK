@@ -11,12 +11,17 @@ namespace Alor.OpenAPI.Models
     {
         public CwsRequestOrderLimit() { }
 
-        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderLimit"]/Member[@name="wsCmdUpdateOrderLimit"]/*' />
-        public CwsRequestOrderLimit(string? opcode = default, string? guid = default, string? orderId = default,
-            Side side = default, int? quantity = default, decimal? price = default, Instrument? instrument = default,
-            Exchange? exchange = default, string? comment = default, string? board = default, User? user = default,
-            TimeInForce timeInForce = default, int? icebergFixed = default, decimal? icebergVariance = default,
-            bool? checkDuplicates = default, bool? allowMargin = default)
+        /// <include file='../XmlDocs/CoreModels.xml'
+        ///     path='
+        ///             Docs/Members[@name="wsCmdCreateOrderLimit"]/Member[@name="wsCmdCreateOrderLimit"]/*
+        ///           | Docs/Members[@name="wsCmdDeleteOrderLimit"]/Member[@name="wsCmdDeleteOrderLimit"]/param[@name="exchange"]
+        ///           | Docs/Members[@name="wsCmdUpdateOrderLimit"]/Member[@name="wsCmdUpdateOrderLimit"]/param[@name="orderId"]
+        ///          ' />
+        public CwsRequestOrderLimit(string? opcode = null, string? guid = null, string? orderId = null,
+            Side? side = null, int? quantity = null, decimal? price = null, Instrument? instrument = null,
+            Exchange? exchange = null, string? comment = null, User? user = null,
+            TimeInForce? timeInForce = null, int? icebergFixed = null, decimal? icebergVariance = null,
+            bool? checkDuplicates = null, bool? allowMargin = null)
         {
             Opcode = opcode;
             Guid = guid;
@@ -27,7 +32,6 @@ namespace Alor.OpenAPI.Models
             Instrument = instrument;
             Exchange = exchange;
             Comment = comment;
-            Board = board;
             User = user;
             TimeInForce = timeInForce;
             IcebergFixed = icebergFixed;
@@ -36,11 +40,11 @@ namespace Alor.OpenAPI.Models
             AllowMargin = allowMargin;
         }
 
-        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderLimit"]/Member[@name="opcode"]/*' />
+        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdCreateOrderLimit"]/Member[@name="opcode"]/*' />
         [DataMember(Name = "opcode", EmitDefaultValue = false)]
         public string? Opcode { get; init; }
 
-        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderLimit"]/Member[@name="guid"]/*' />
+        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdCreateOrderLimit"]/Member[@name="guid"]/*' />
         [DataMember(Name = "guid", EmitDefaultValue = false)]
         public string? Guid { get; init; }
 
@@ -48,19 +52,19 @@ namespace Alor.OpenAPI.Models
         [DataMember(Name = "orderId", EmitDefaultValue = false)]
         public string? OrderId { get; init; }
 
-        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderLimit"]/Member[@name="side"]/*' />
+        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdCreateOrderLimit"]/Member[@name="side"]/*' />
         [DataMember(Name = "side", EmitDefaultValue = false)]
-        public Side Side { get; init; }
+        public Side? Side { get; init; }
 
-        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderLimit"]/Member[@name="quantity"]/*' />
+        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdCreateOrderLimit"]/Member[@name="quantity"]/*' />
         [DataMember(Name = "quantity", EmitDefaultValue = false)]
         public int? Quantity { get; init; }
 
-        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderLimit"]/Member[@name="price"]/*' />
+        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdCreateOrderLimit"]/Member[@name="price"]/*' />
         [DataMember(Name = "price", EmitDefaultValue = false)]
         public decimal? Price { get; init; }
 
-        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderLimit"]/Member[@name="instrument"]/*' />
+        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdCreateOrderLimit"]/Member[@name="instrument"]/*' />
         [DataMember(Name = "instrument", EmitDefaultValue = false)]
         public Instrument? Instrument { get; init; }
 
@@ -68,35 +72,31 @@ namespace Alor.OpenAPI.Models
         [DataMember(Name = "exchange", EmitDefaultValue = false)]
         public Exchange? Exchange { get; init; }
 
-        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderLimit"]/Member[@name="comment"]/*' />
+        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdCreateOrderLimit"]/Member[@name="comment"]/*' />
         [DataMember(Name = "comment", EmitDefaultValue = false)]
         public string? Comment { get; init; }
 
-        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderLimit"]/Member[@name="board"]/*' />
-        [DataMember(Name = "board", EmitDefaultValue = false)]
-        public string? Board { get; init; }
-
-        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderLimit"]/Member[@name="user"]/*' />
+        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdCreateOrderLimit"]/Member[@name="user"]/*' />
         [DataMember(Name = "user", EmitDefaultValue = false)]
         public User? User { get; init; }
 
-        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderLimit"]/Member[@name="timeInForce"]/*' />
+        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdCreateOrderLimit"]/Member[@name="timeInForce"]/*' />
         [DataMember(Name = "timeInForce", EmitDefaultValue = false)]
-        public TimeInForce TimeInForce { get; init; }
+        public TimeInForce? TimeInForce { get; init; }
 
-        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderLimit"]/Member[@name="icebergFixed"]/*' />
+        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdCreateOrderLimit"]/Member[@name="icebergFixed"]/*' />
         [DataMember(Name = "icebergFixed", EmitDefaultValue = false)]
         public int? IcebergFixed { get; init; }
 
-        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderLimit"]/Member[@name="icebergVariance"]/*' />
+        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdCreateOrderLimit"]/Member[@name="icebergVariance"]/*' />
         [DataMember(Name = "icebergVariance", EmitDefaultValue = false)]
         public decimal? IcebergVariance { get; init; }
 
-        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderLimit"]/Member[@name="checkDuplicates"]/*' />
+        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdCreateOrderLimit"]/Member[@name="checkDuplicates"]/*' />
         [DataMember(Name = "checkDuplicates", EmitDefaultValue = false)]
         public bool? CheckDuplicates { get; init; }
 
-        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdUpdateOrderLimit"]/Member[@name="allowMargin"]/*' />
+        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCmdCreateOrderLimit"]/Member[@name="allowMargin"]/*' />
         [DataMember(Name = "allowMargin", EmitDefaultValue = false)]
         public bool? AllowMargin { get; init; }
 
@@ -113,7 +113,6 @@ namespace Alor.OpenAPI.Models
             sb.Append("  Instrument: ").Append(Instrument).Append(Environment.NewLine);
             sb.Append("  Exchange: ").Append(Exchange).Append(Environment.NewLine);
             sb.Append("  Comment: ").Append(Comment).Append(Environment.NewLine);
-            sb.Append("  Board: ").Append(Board).Append(Environment.NewLine);
             sb.Append("  User: ").Append(User).Append(Environment.NewLine);
             sb.Append("  TimeInForce: ").Append(TimeInForce).Append(Environment.NewLine);
             sb.Append("  IcebergFixed: ").Append(IcebergFixed).Append(Environment.NewLine);
@@ -138,7 +137,6 @@ namespace Alor.OpenAPI.Models
             hash.Add(Instrument);
             hash.Add(Exchange);
             hash.Add(Comment);
-            hash.Add(Board);
             hash.Add(User);
             hash.Add(TimeInForce);
             hash.Add(IcebergFixed);
@@ -158,7 +156,6 @@ namespace Alor.OpenAPI.Models
             first?.Instrument == second?.Instrument &&
             first?.Exchange == second?.Exchange &&
             first?.Comment == second?.Comment &&
-            first?.Board == second?.Board &&
             first?.User == second?.User &&
             first?.TimeInForce == second?.TimeInForce &&
             first?.IcebergFixed == second?.IcebergFixed &&
@@ -171,7 +168,7 @@ namespace Alor.OpenAPI.Models
             if (this == (object?)other)
                 return true;
 
-            if ((object?)other == null)
+            if (other is null)
                 return false;
 
             return GetType() == other.GetType() && EqualsHelper(this, other);

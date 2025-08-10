@@ -28,7 +28,7 @@ namespace Alor.OpenAPI.Managers
         }
 
         public async Task<string> CreateMarketOrderAsync(string portfolio, Side side, int quantity, string symbol,
-            Exchange exchange, string? board = null, TimeInForce timeInForce = TimeInForce.OneDay,
+            Exchange exchange, string? instrumentGroup = null, TimeInForce timeInForce = TimeInForce.OneDay,
             string? comment = null, bool checkDuplicates = true, bool? allowMargin = null)
         {
             if (string.IsNullOrEmpty(portfolio))
@@ -39,7 +39,7 @@ namespace Alor.OpenAPI.Managers
             var guid = Utilities.Utilities.GuidFormatter("a", Interlocked.Increment(ref _messageCount));
 
             var message = new CwsRequestOrderMarket("create:market", guid, null, side, quantity,
-                new Instrument(symbol, exchange), null, comment, board, new User(portfolio), timeInForce,
+                new Instrument(symbol, exchange, instrumentGroup), null, comment, new User(portfolio), timeInForce,
                 checkDuplicates, allowMargin).ToJson();
 
             await (_commandMsgUpdate?.Invoke(message) ?? Task.CompletedTask);
@@ -48,7 +48,7 @@ namespace Alor.OpenAPI.Managers
         }
 
         public async Task<string> CreateLimitOrderAsync(string portfolio, Side side, int quantity, decimal price,
-            string symbol, Exchange exchange, string? board = null, string? comment = null,
+            string symbol, Exchange exchange, string? instrumentGroup = null, string? comment = null,
             TimeInForce timeInForce = TimeInForce.OneDay, int? icebergFixed = null,
             decimal? icebergVariance = null, bool checkDuplicates = true, bool? allowMargin = null)
         {
@@ -60,7 +60,7 @@ namespace Alor.OpenAPI.Managers
             var guid = Utilities.Utilities.GuidFormatter("a", Interlocked.Increment(ref _messageCount));
 
             var message = new CwsRequestOrderLimit("create:limit", guid, null, side, quantity, price,
-                new Instrument(symbol, exchange), null, comment, board, new User(portfolio), timeInForce,
+                new Instrument(symbol, exchange, instrumentGroup), null, comment, new User(portfolio), timeInForce,
                 icebergFixed, icebergVariance, checkDuplicates, allowMargin).ToJson();
 
             await (_commandMsgUpdate?.Invoke(message) ?? Task.CompletedTask);
@@ -70,8 +70,8 @@ namespace Alor.OpenAPI.Managers
 
         public async Task<string> CreateStopOrderAsync(string portfolio, Side side,
             Condition condition, decimal triggerPrice, DateTime stopEndUtcTime, int quantity,
-            string symbol, Exchange exchange, string? board = null, bool checkDuplicates = true,
-            int? protectingSeconds = null, bool? activate = null, bool? allowMargin = null)
+            string symbol, Exchange exchange, string? instrumentGroup = null, bool checkDuplicates = true,
+            int? protectingSeconds = null, bool? activate = null, bool? allowMargin = null, string? comment = null)
         {
             if (string.IsNullOrEmpty(portfolio))
                 throw new ArgumentNullException(nameof(portfolio));
@@ -82,8 +82,8 @@ namespace Alor.OpenAPI.Managers
 
             var message = new CwsRequestOrderStop("create:stop", guid, null, side, condition, triggerPrice,
                 stopEndUtcTime.GetUnixTimestampSecondsFromDateTime(), quantity,
-                new Instrument(symbol, exchange), null, board, new User(portfolio), checkDuplicates, protectingSeconds,
-                activate, allowMargin).ToJson();
+                new Instrument(symbol, exchange, instrumentGroup), null, new User(portfolio), checkDuplicates, protectingSeconds,
+                comment, activate, allowMargin).ToJson();
 
             await (_commandMsgUpdate?.Invoke(message) ?? Task.CompletedTask);
 
@@ -92,9 +92,10 @@ namespace Alor.OpenAPI.Managers
 
         public async Task<string> CreateStopLimitOrderAsync(string portfolio, Side side,
             Condition condition, decimal triggerPrice, DateTime stopEndUtcTime, int quantity, decimal price,
-            string symbol, Exchange exchange, string? board = null,
+            string symbol, Exchange exchange, string? instrumentGroup = null,
             TimeInForce timeInForce = TimeInForce.OneDay, int? icebergFixed = null, decimal? icebergVariance = null,
-            bool checkDuplicates = true, int? protectingSeconds = null, bool? activate = null, bool? allowMargin = null)
+            bool checkDuplicates = true, int? protectingSeconds = null, bool? activate = null, bool? allowMargin = null,
+            string? comment = null)
         {
             if (string.IsNullOrEmpty(portfolio))
                 throw new ArgumentNullException(nameof(portfolio));
@@ -105,9 +106,9 @@ namespace Alor.OpenAPI.Managers
 
             var message = new CwsRequestOrderStopLimit("create:stopLimit", guid, null, side, condition, triggerPrice,
                 stopEndUtcTime.GetUnixTimestampSecondsFromDateTime(), price, quantity,
-                new Instrument(symbol, exchange), null, board, new User(portfolio), timeInForce,
+                new Instrument(symbol, exchange, instrumentGroup), null, new User(portfolio), timeInForce,
                 icebergFixed, icebergVariance, checkDuplicates,
-                protectingSeconds, activate, allowMargin).ToJson();
+                protectingSeconds, comment, activate, allowMargin).ToJson();
 
             await (_commandMsgUpdate?.Invoke(message) ?? Task.CompletedTask);
 
@@ -115,7 +116,7 @@ namespace Alor.OpenAPI.Managers
         }
 
         public async Task<string> UpdateMarketOrderAsync(string portfolio, string orderId, Side side, int quantity, string symbol,
-            Exchange exchange, string? board = null, TimeInForce timeInForce = TimeInForce.OneDay,
+            Exchange exchange, string? instrumentGroup = null, TimeInForce timeInForce = TimeInForce.OneDay,
             string? comment = null, bool checkDuplicates = true, bool? allowMargin = null)
         {
             if (string.IsNullOrEmpty(portfolio))
@@ -128,17 +129,16 @@ namespace Alor.OpenAPI.Managers
             var guid = Utilities.Utilities.GuidFormatter("a", Interlocked.Increment(ref _messageCount));
 
             var message = new CwsRequestOrderMarket("update:market", guid, orderId, side, quantity,
-                new Instrument(symbol, exchange), null, comment, board, new User(portfolio), timeInForce, checkDuplicates, allowMargin).ToJson();
+                new Instrument(symbol, exchange, instrumentGroup), null, comment, new User(portfolio), timeInForce, checkDuplicates, allowMargin).ToJson();
 
             await (_commandMsgUpdate?.Invoke(message) ?? Task.CompletedTask);
 
             return guid;
         }
 
-        public async Task<string> UpdateLimitOrderAsync(string portfolio, string orderId, Side side, int quantity, decimal price,
-            string symbol, Exchange exchange, string? board = null, string? comment = null,
-            TimeInForce timeInForce = TimeInForce.OneDay, int? icebergFixed = null,
-            decimal? icebergVariance = null, bool checkDuplicates = true, bool? allowMargin = null)
+        public async Task<string> UpdateLimitOrderAsync(string portfolio, string orderId, Side side, int quantity,
+            decimal price, string symbol, Exchange exchange, string? instrumentGroup = null, string? comment = null,
+            int? icebergFixed = null, bool checkDuplicates = true, bool? allowMargin = null)
         {
             if (string.IsNullOrEmpty(portfolio))
                 throw new ArgumentNullException(nameof(portfolio));
@@ -150,8 +150,8 @@ namespace Alor.OpenAPI.Managers
             var guid = Utilities.Utilities.GuidFormatter("a", Interlocked.Increment(ref _messageCount));
 
             var message = new CwsRequestOrderLimit("update:limit", guid, orderId, side, quantity, price,
-                new Instrument(symbol, exchange), null, comment, board, new User(portfolio), timeInForce,
-                icebergFixed, icebergVariance, checkDuplicates, allowMargin).ToJson();
+                new Instrument(symbol, exchange, instrumentGroup), null, comment, new User(portfolio), null,
+                icebergFixed, null, checkDuplicates, allowMargin).ToJson();
 
             await (_commandMsgUpdate?.Invoke(message) ?? Task.CompletedTask);
 
@@ -160,8 +160,9 @@ namespace Alor.OpenAPI.Managers
 
         public async Task<string> UpdateStopOrderAsync(string portfolio, string orderId, Side side,
             Condition condition, decimal triggerPrice, DateTime stopEndUtcTime, int quantity,
-            string symbol, Exchange exchange, string? board = null, bool checkDuplicates = true,
-            int? protectingSeconds = null, bool? activate = null, bool? allowMargin = null)
+            string symbol, Exchange exchange, string? instrumentGroup = null, bool checkDuplicates = true,
+            int? protectingSeconds = null, bool? activate = null, bool? allowMargin = null,
+            string? comment = null)
         {
             if (string.IsNullOrEmpty(portfolio))
                 throw new ArgumentNullException(nameof(portfolio));
@@ -174,8 +175,8 @@ namespace Alor.OpenAPI.Managers
 
             var message = new CwsRequestOrderStop("update:stop", guid, orderId, side, condition, triggerPrice,
                 stopEndUtcTime.GetUnixTimestampSecondsFromDateTime(), quantity,
-                new Instrument(symbol, exchange), null, board, new User(portfolio), checkDuplicates, protectingSeconds,
-                activate, allowMargin).ToJson();
+                new Instrument(symbol, exchange, instrumentGroup), null, new User(portfolio), checkDuplicates, protectingSeconds,
+                comment, activate, allowMargin).ToJson();
 
             await (_commandMsgUpdate?.Invoke(message) ?? Task.CompletedTask);
 
@@ -184,9 +185,9 @@ namespace Alor.OpenAPI.Managers
 
         public async Task<string> UpdateStopLimitOrderAsync(string portfolio, string orderId, Side side,
             Condition condition, decimal triggerPrice, DateTime stopEndUtcTime, int quantity, decimal price,
-            string symbol, Exchange exchange, string? board = null,
-            TimeInForce timeInForce = TimeInForce.OneDay, int? icebergFixed = null, decimal? icebergVariance = null,
-            bool checkDuplicates = true, int? protectingSeconds = null, bool? activate = null, bool? allowMargin = null)
+            string symbol, Exchange exchange, string? instrumentGroup = null, TimeInForce timeInForce = TimeInForce.OneDay,
+            int? icebergFixed = null, bool checkDuplicates = true, int? protectingSeconds = null, bool? activate = null,
+            bool? allowMargin = null, string? comment = null)
         {
             if (string.IsNullOrEmpty(portfolio))
                 throw new ArgumentNullException(nameof(portfolio));
@@ -199,9 +200,9 @@ namespace Alor.OpenAPI.Managers
 
             var message = new CwsRequestOrderStopLimit("update:stopLimit", guid, orderId, side, condition, triggerPrice,
                 stopEndUtcTime.GetUnixTimestampSecondsFromDateTime(), price, quantity,
-                new Instrument(symbol, exchange), null, board, new User(portfolio), timeInForce,
-                icebergFixed, icebergVariance, checkDuplicates,
-                protectingSeconds, activate, allowMargin).ToJson();
+                new Instrument(symbol, exchange, instrumentGroup), null, new User(portfolio), timeInForce,
+                icebergFixed, null, checkDuplicates,
+                protectingSeconds, comment, activate, allowMargin).ToJson();
 
             await (_commandMsgUpdate?.Invoke(message) ?? Task.CompletedTask);
 
@@ -285,6 +286,7 @@ namespace Alor.OpenAPI.Managers
         {
             _commandMsgUpdate = null;
             _cwsAuthorizeAndSetRefreshTimer = null;
+            GC.SuppressFinalize(this);
         }
     }
 }

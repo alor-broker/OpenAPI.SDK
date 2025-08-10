@@ -10,7 +10,10 @@ namespace Alor.OpenAPI.Models.Simple
     {
         public OrderbookSimple() { }
 
-        /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrderBook"]/Member[@name="responseOrderBook"]/*' />
+        /// <include file='../../XmlDocs/CoreModels.xml'
+        ///          path='Docs/Members[@name="responseOrderBook"]
+        ///               /Member[@name="responseOrderBook"]
+        ///               /param[@name="bids" or @name="asks" or @name="msTimestamp" or @name="existing"]'/>
         public OrderbookSimple(ICollection<LiquiditySimple>? bids, ICollection<LiquiditySimple>? asks, long? msTimestamp, bool? existing)
         {
             Bids = bids;
@@ -85,7 +88,7 @@ namespace Alor.OpenAPI.Models.Simple
             if (this == (object?)other)
                 return true;
 
-            if ((object?)other == null)
+            if (other is null)
                 return false;
 
             return GetType() == other.GetType() && EqualsHelper(this, other);

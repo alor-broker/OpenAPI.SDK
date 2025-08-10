@@ -11,17 +11,22 @@ namespace Alor.OpenAPI.Models
     {
         public SubscriptionOrder() { }
 
-        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubOrdersGetAndSubscribe"]/Member[@name="wsSubOrdersGetAndSubscribe"]/*' />
-        internal SubscriptionOrder(string? portfolio = default, List<OrderStatus>? orderStatuses = default,
-            bool? skipHistory = default, Exchange exchange = default, Format format = default, int? frequency = default,
-            string? guid = default)
+        /// <include file='../XmlDocs/CoreModels.xml'
+        ///          path='Docs/Members[@name="wsSubOrdersGetAndSubscribe"]
+        ///               /Member[@name="wsSubOrdersGetAndSubscribe"]
+        ///               /param[
+        ///                      @name="portfolio" or @name="orderStatuses" or @name="skipHistory" or @name="exchange"
+        ///                      or @name="format" or @name="frequency" or @name="guid"
+        ///                     ]'/>
+        internal SubscriptionOrder(string? portfolio = null, List<OrderStatus>? orderStatuses = null,
+            bool? skipHistory = null, Exchange? exchange = null, Format? format = null,
+            string? guid = null)
         {
             Portfolio = portfolio;
             OrderStatuses = orderStatuses;
             SkipHistory = skipHistory;
             Exchange = exchange;
             Format = format;
-            Frequency = frequency;
             Guid = guid;
         }
 
@@ -43,15 +48,11 @@ namespace Alor.OpenAPI.Models
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubOrdersGetAndSubscribe"]/Member[@name="exchange"]/*' />
         [DataMember(Name = "exchange", EmitDefaultValue = false)]
-        public Exchange Exchange { get; init; }
+        public Exchange? Exchange { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubOrdersGetAndSubscribe"]/Member[@name="format"]/*' />
         [DataMember(Name = "format", EmitDefaultValue = false)]
-        public Format Format { get; init; }
-
-        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubOrdersGetAndSubscribe"]/Member[@name="frequency"]/*' />
-        [DataMember(Name = "frequency", EmitDefaultValue = false)]
-        public int? Frequency { get; init; }
+        public Format? Format { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsSubOrdersGetAndSubscribe"]/Member[@name="guid"]/*' />
         [DataMember(Name = "guid", EmitDefaultValue = false)]
@@ -71,7 +72,6 @@ namespace Alor.OpenAPI.Models
             sb.Append("  SkipHistory: ").Append(SkipHistory).Append(Environment.NewLine);
             sb.Append("  Exchange: ").Append(Exchange).Append(Environment.NewLine);
             sb.Append("  Format: ").Append(Format).Append(Environment.NewLine);
-            sb.Append("  Frequency: ").Append(Frequency).Append(Environment.NewLine);
             sb.Append("  Guid: ").Append(Guid).Append(Environment.NewLine);
             sb.Append("  Token: ").Append(Token).Append(Environment.NewLine);
             sb.Append('}').Append(Environment.NewLine);
@@ -95,7 +95,6 @@ namespace Alor.OpenAPI.Models
             hash.Add(SkipHistory);
             hash.Add(Exchange);
             hash.Add(Format);
-            hash.Add(Frequency);
             hash.Add(Guid);
             hash.Add(Token);
             return hash.ToHashCode();
@@ -110,7 +109,6 @@ namespace Alor.OpenAPI.Models
                   first?.SkipHistory == second?.SkipHistory &&
             first?.Exchange == second?.Exchange &&
             first?.Format == second?.Format &&
-            first?.Frequency == second?.Frequency &&
             first?.Guid == second?.Guid &&
             first?.Token == second?.Token;
 
@@ -119,7 +117,7 @@ namespace Alor.OpenAPI.Models
             if (this == (object?)other)
                 return true;
 
-            if ((object?)other == null)
+            if (other is null)
                 return false;
 
             return GetType() == other.GetType() && EqualsHelper(this, other);

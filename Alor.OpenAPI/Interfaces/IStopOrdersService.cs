@@ -37,7 +37,8 @@ namespace Alor.OpenAPI.Interfaces
         public Task<OrderActionLimitMarket> CommandapiWarptransTradeV2ClientOrdersActionsStopPostAsync(
             string portfolio, Side side,
             Condition condition, decimal triggerPrice, DateTime stopEndUtcTime, int quantity,
-            string symbol, Exchange exchange, string? instrumentGroup = null, int? protectingSeconds = null, bool? activate = null, bool? allowMargin = null);
+            string symbol, Exchange exchange, string? instrumentGroup = null, int? protectingSeconds = null,
+            bool? activate = null, bool? allowMargin = null, string? comment = null);
 
         /// <include file='../XmlDocs/IStopOrdersService.xml' path='Docs/Members[@name="IStopOrdersService"]/Member[@name="CommandapiWarptransTradeV2ClientOrdersActionsStopLimitPostAsync"]/*' />
         public Task<OrderActionLimitMarket> CommandapiWarptransTradeV2ClientOrdersActionsStopLimitPostAsync(
@@ -45,21 +46,21 @@ namespace Alor.OpenAPI.Interfaces
             Condition condition, decimal triggerPrice, DateTime stopEndUtcTime, int quantity, decimal price,
             string symbol, Exchange exchange, string? instrumentGroup = null,
             TimeInForce timeInForce = TimeInForce.OneDay, int? icebergFixed = null, decimal? icebergVariance = null,
-            int? protectingSeconds = null, bool? activate = null, bool? allowMargin = null);
+            int? protectingSeconds = null, bool? activate = null, bool? allowMargin = null, string? comment = null);
 
         /// <include file='../XmlDocs/IStopOrdersService.xml' path='Docs/Members[@name="IStopOrdersService"]/Member[@name="CommandapiWarptransTradeV2ClientOrdersActionsStopStopOrderIdPutAsync"]/*' />
         public Task<OrderActionLimitMarket> CommandapiWarptransTradeV2ClientOrdersActionsStopStopOrderIdPutAsync(
             int stopOrderId, string portfolio, Side side,
             Condition condition, decimal triggerPrice, DateTime stopEndUtcTime, int quantity,
-            string symbol, Exchange exchange, string? instrumentGroup = null, int? protectingSeconds = null, bool? activate = null, bool? allowMargin = null);
+            string symbol, Exchange exchange, string? instrumentGroup = null, int? protectingSeconds = null,
+            bool? activate = null, bool? allowMargin = null, string? comment = null);
 
         /// <include file='../XmlDocs/IStopOrdersService.xml' path='Docs/Members[@name="IStopOrdersService"]/Member[@name="CommandapiWarptransTradeV2ClientOrdersActionsStopLimitStopOrderIdPutAsync"]/*' />
         public Task<OrderActionLimitMarket> CommandapiWarptransTradeV2ClientOrdersActionsStopLimitStopOrderIdPutAsync(
-            int stopOrderId, string portfolio, Side side,
-            Condition condition, decimal triggerPrice, DateTime stopEndUtcTime, int quantity, decimal price,
-            string symbol, Exchange exchange, string? instrumentGroup = null,
-            TimeInForce timeInForce = TimeInForce.OneDay, int? icebergFixed = null, decimal? icebergVariance = null,
-            int? protectingSeconds = null, bool? activate = null, bool? allowMargin = null);
+            int stopOrderId, string portfolio, Side side, Condition condition, decimal triggerPrice,
+            DateTime stopEndUtcTime, int quantity, decimal price, string symbol, Exchange exchange,
+            string? instrumentGroup = null, TimeInForce timeInForce = TimeInForce.OneDay, int? icebergFixed = null,
+            int? protectingSeconds = null, bool? activate = null, bool? allowMargin = null, string? comment = null);
 
     }
 }

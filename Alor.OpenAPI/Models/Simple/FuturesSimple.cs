@@ -1,6 +1,5 @@
 ﻿using Alor.OpenAPI.Enums;
 using SpanJson;
-using System;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
@@ -12,19 +11,25 @@ namespace Alor.OpenAPI.Models.Simple
     {
         public FuturesSimple() { }
 
-        /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseFutures"]/Member[@name="responseFutures"]/*' />
-		[JsonConstructor]
-        public FuturesSimple(string? symbol = default, Exchange exchange = default, string? description = default,
-            decimal? prevClosePrice = default, decimal? lastPrice = default, long? lastPriceTimestamp = default,
-            decimal? highPrice = default, decimal? lowPrice = default, decimal? accruedInt = default,
-            decimal? volume = default,
-            long? openInterest = default, decimal? ask = default, decimal? bid = default, decimal? askVol = default,
-            decimal? bidVol = default, long? obMsTimestamp = default, decimal? openPrice = default,
-            decimal? yield = default,
-            decimal? lotsize = default, decimal? lotvalue = default, decimal? facevalue = default,
-            string? type = default,
-            decimal? totalBidVol = default, decimal? totalAskVol = default,
-            decimal? change = default, decimal? changePercent = default)
+        /// <include file='../../XmlDocs/CoreModels.xml'
+        ///          path='Docs/Members[@name="responseFutures"]
+        ///               /Member[@name="responseFutures"]
+        ///               /param[
+        ///                      @name="symbol" or @name="exchange" or @name="description" or @name="prevClosePrice"
+        ///                      or @name="lastPrice" or @name="lastPriceTimestamp" or @name="highPrice" or @name="lowPrice"
+        ///                      or @name="accruedInterest" or @name="volume" or @name="openInterest" or @name="ask" or @name="bid"
+        ///                      or @name="askVol" or @name="bidVol" or @name="obMsTimestamp" or @name="openPrice" or @name="yield"
+        ///                      or @name="lotsize" or @name="lotvalue" or @name="facevalue" or @name="type" or @name="totalBidVol"
+        ///                      or @name="totalAskVol" or @name="change" or @name="changePercent" 
+        ///                     ]'/>
+        public FuturesSimple(string? symbol = null, Exchange? exchange = null, string? description = null,
+            decimal? prevClosePrice = null, decimal? lastPrice = null, long? lastPriceTimestamp = null,
+            decimal? highPrice = null, decimal? lowPrice = null, decimal? accruedInterest = null,
+            decimal? volume = null, long? openInterest = null, decimal? ask = null, decimal? bid = null,
+            decimal? askVol = null, decimal? bidVol = null, long? obMsTimestamp = null, decimal? openPrice = null,
+            decimal? yield = null, decimal? lotsize = null, decimal? lotvalue = null, decimal? facevalue = null,
+            string? type = null, decimal? totalBidVol = null, decimal? totalAskVol = null,
+            decimal? change = null, decimal? changePercent = null)
         {
             Symbol = symbol;
             Exchange = exchange;
@@ -34,7 +39,7 @@ namespace Alor.OpenAPI.Models.Simple
             LastPriceTimestamp = lastPriceTimestamp;
             HighPrice = highPrice;
             LowPrice = lowPrice;
-            AccruedInt = accruedInt;
+            AccruedInterest = accruedInterest;
             Volume = volume;
             OpenInterest = openInterest;
             Ask = ask;
@@ -60,7 +65,7 @@ namespace Alor.OpenAPI.Models.Simple
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseFutures"]/Member[@name="exchange"]/*' />
         [DataMember(Name = "exchange", EmitDefaultValue = false)]
-        public Exchange Exchange { get; init; }
+        public Exchange? Exchange { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseFutures"]/Member[@name="description"]/*' />
         [DataMember(Name = "description", EmitDefaultValue = false)]
@@ -88,7 +93,7 @@ namespace Alor.OpenAPI.Models.Simple
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseFutures"]/Member[@name="accruedInterest"]/*' />
         [DataMember(Name = "accruedInt", EmitDefaultValue = false)]
-        public decimal? AccruedInt { get; init; }
+        public decimal? AccruedInterest { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseFutures"]/Member[@name="volume"]/*' />
         [DataMember(Name = "volume", EmitDefaultValue = false)]
@@ -170,7 +175,7 @@ namespace Alor.OpenAPI.Models.Simple
             sb.Append("  LastPriceTimestamp: ").Append(LastPriceTimestamp).Append(Environment.NewLine);
             sb.Append("  HighPrice: ").Append(HighPrice).Append(Environment.NewLine);
             sb.Append("  LowPrice: ").Append(LowPrice).Append(Environment.NewLine);
-            sb.Append("  AccruedInt: ").Append(AccruedInt).Append(Environment.NewLine);
+            sb.Append("  AccruedInterest: ").Append(AccruedInterest).Append(Environment.NewLine);
             sb.Append("  Volume: ").Append(Volume).Append(Environment.NewLine);
             sb.Append("  OpenInterest: ").Append(OpenInterest).Append(Environment.NewLine);
             sb.Append("  Ask: ").Append(Ask).Append(Environment.NewLine);
@@ -205,7 +210,7 @@ namespace Alor.OpenAPI.Models.Simple
             hash.Add(LastPriceTimestamp);
             hash.Add(HighPrice);
             hash.Add(LowPrice);
-            hash.Add(AccruedInt);
+            hash.Add(AccruedInterest);
             hash.Add(Volume);
             hash.Add(OpenInterest);
             hash.Add(Ask);
@@ -235,7 +240,7 @@ namespace Alor.OpenAPI.Models.Simple
             first?.LastPriceTimestamp == second?.LastPriceTimestamp &&
             first?.HighPrice == second?.HighPrice &&
             first?.LowPrice == second?.LowPrice &&
-            first?.AccruedInt == second?.AccruedInt &&
+            first?.AccruedInterest == second?.AccruedInterest &&
             first?.Volume == second?.Volume &&
             first?.OpenInterest == second?.OpenInterest &&
             first?.Ask == second?.Ask &&
@@ -259,7 +264,7 @@ namespace Alor.OpenAPI.Models.Simple
             if (this == (object?)other)
                 return true;
 
-            if ((object?)other == null)
+            if (other is null)
                 return false;
 
             return GetType() == other.GetType() && EqualsHelper(this, other);

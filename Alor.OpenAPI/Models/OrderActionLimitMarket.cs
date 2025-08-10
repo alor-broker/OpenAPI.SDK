@@ -11,7 +11,7 @@ namespace Alor.OpenAPI.Models
         public OrderActionLimitMarket() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrderActionLimitMarketCommandAPI"]/Member[@name="responseOrderActionLimitMarketCommandAPI"]/*' />
-        public OrderActionLimitMarket(string? message = default, string? orderNumber = default)
+        public OrderActionLimitMarket(string? message = null, string? orderNumber = null)
         {
             Message = message;
             OrderNumber = orderNumber;
@@ -48,7 +48,7 @@ namespace Alor.OpenAPI.Models
             if (this == (object?)other)
                 return true;
 
-            if ((object?)other == null)
+            if (other is null)
                 return false;
 
             return GetType() == other.GetType() && EqualsHelper(this, other);

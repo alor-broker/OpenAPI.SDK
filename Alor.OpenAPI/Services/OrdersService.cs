@@ -52,8 +52,8 @@ namespace Alor.OpenAPI.Services
         public Task<OrderActionLimitMarket> CommandapiWarptransTradeV2ClientOrdersActionsMarketOrderIdPutAsync(int orderId, string portfolio, Side side, int quantity, string symbol, Exchange exchange, string? instrumentGroup = null, string? comment = null, TimeInForce timeInForce = TimeInForce.OneDay, bool? allowMargin = null) =>
             CommandapiWarptransTradeV2ClientOrdersActionsMarketOrderIdPutAsync(orderId, side, quantity, symbol, exchange, instrumentGroup, portfolio, comment, timeInForce, allowMargin, _cancellationTokenSource.Token);
 
-        public Task<OrderActionLimitMarket> CommandapiWarptransTradeV2ClientOrdersActionsLimitOrderIdPutAsync(int orderId, string portfolio, Side side, int quantity, decimal price, string symbol, Exchange exchange, string? instrumentGroup = null, string? comment = null, TimeInForce timeInForce = TimeInForce.OneDay, int? icebergFixed = null, decimal? icebergVariance = null, bool? allowMargin = null) =>
-            CommandapiWarptransTradeV2ClientOrdersActionsLimitOrderIdPutAsync(orderId, side, quantity, price, symbol, exchange, instrumentGroup, portfolio, comment, timeInForce, icebergFixed, icebergVariance, allowMargin, _cancellationTokenSource.Token);
+        public Task<OrderActionLimitMarket> CommandapiWarptransTradeV2ClientOrdersActionsLimitOrderIdPutAsync(int orderId, string portfolio, Side side, int quantity, decimal price, string symbol, Exchange exchange, string? instrumentGroup = null, string? comment = null, int? icebergFixed = null, bool? allowMargin = null) =>
+            CommandapiWarptransTradeV2ClientOrdersActionsLimitOrderIdPutAsync(orderId, side, quantity, price, symbol, exchange, instrumentGroup, portfolio, comment, icebergFixed, allowMargin, _cancellationTokenSource.Token);
 
         public Task<ResponseEstimateOrder> CommandapiWarptransTradeV2ClientOrdersEstimatePostAsync(string portfolio, string ticker, Exchange exchange, decimal? price, int? lotQuantity, decimal? budget, string? board, bool? includeLimitOrders) =>
             CommandapiWarptransTradeV2ClientOrdersEstimatePostAsync(portfolio, ticker, exchange, price, lotQuantity, budget, board, includeLimitOrders, _cancellationTokenSource.Token);
@@ -161,25 +161,28 @@ namespace Alor.OpenAPI.Services
         }
 
         private Task<OrderActionLimitMarket> CommandapiWarptransTradeV2ClientOrdersActionsLimitOrderIdPutAsync(
-            int orderId, Side side, int quantity, decimal price, string? symbol, Exchange exchange, string? instrumentGroup,
-            string? portfolio, string? comment, TimeInForce timeInForce, int? icebergFixed,
-            decimal? icebergVariance, bool? allowMargin, CancellationToken cancellationToken)
+            int orderId, Side side, int quantity, decimal price, string? symbol, Exchange exchange,
+            string? instrumentGroup, string? portfolio, string? comment, int? icebergFixed,
+            bool? allowMargin, CancellationToken cancellationToken)
         {
             if (string.IsNullOrEmpty(symbol))
                 throw new ArgumentNullException(nameof(symbol));
             if (string.IsNullOrEmpty(portfolio))
                 throw new ArgumentNullException(nameof(portfolio));
 
-            var order = new RequestOrdersActionsLimitTv(side, quantity, price, new Instrument(symbol, exchange, instrumentGroup),
-                comment, new User(portfolio), timeInForce, icebergFixed, icebergVariance, allowMargin);
+            var order = new RequestOrdersActionsLimitTv(side, quantity, price,
+                new Instrument(symbol, exchange, instrumentGroup),
+                comment, new User(portfolio), null, icebergFixed, null, allowMargin);
             var body = order.ToJson();
 
             var uriBuilder = new UriBuilder(_baseUrl)
-                             {
-                                 Path = $"{_baseUrl.AbsolutePath.TrimEnd('/')}/commandapi/warptrans/TRADE/v2/client/orders/actions/limit/{orderId}",
-                             };
+            {
+                Path =
+                    $"{_baseUrl.AbsolutePath.TrimEnd('/')}/commandapi/warptrans/TRADE/v2/client/orders/actions/limit/{orderId}",
+            };
 
-            return _apiHttpClient.ProcessRequest<OrderActionLimitMarket>(HttpMethod.Put, uriBuilder.Uri, cancellationToken, body: body, needXReqid: true, needAuthorization: true);
+            return _apiHttpClient.ProcessRequest<OrderActionLimitMarket>(HttpMethod.Put, uriBuilder.Uri,
+                cancellationToken, body: body, needXReqid: true, needAuthorization: true);
         }
 
         private Task<ResponseEstimateOrder> CommandapiWarptransTradeV2ClientOrdersEstimatePostAsync(string? portfolio,

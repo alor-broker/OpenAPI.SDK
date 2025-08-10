@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
 using SpanJson;
@@ -11,14 +10,21 @@ namespace Alor.OpenAPI.Models.Simple
     {
         public FortsriskSimple() { }
 
-        /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseFortsRisk"]/Member[@name="responseFortsRisk"]/*' />
-        public FortsriskSimple(decimal? balanceMoney = default, string? portfolio = default, decimal? moneyFree = default,
-            decimal? moneyBlocked = default, decimal? fee = default, decimal? moneyOld = default,
-            decimal? moneyAmount = default, decimal? moneyPledgeAmount = default, decimal? vmInterCl = default,
-            decimal? vmCurrentPositions = default, decimal? varMargin = default, bool? isLimitsSet = default,
-            decimal? indicativeVarMargin = default, decimal? netOptionValue = default, decimal? posRisk = default)
+        /// <include file='../../XmlDocs/CoreModels.xml'
+        ///          path='Docs/Members[@name="responseFortsRisk"]
+        ///               /Member[@name="responseFortsRisk"]
+        ///               /param[
+        ///                      @name="portfolio" or @name="moneyFree" or @name="moneyBlocked" or @name="fee" or @name="moneyOld"
+        ///                      or @name="moneyAmount" or @name="moneyPledgeAmount" or @name="vmInterCl" or @name="vmCurrentPositions"
+        ///                      or @name="varMargin" or @name="isLimitsSet" or @name="indicativeVarMargin" or @name="netOptionValue"
+        ///                      or @name="posRisk" 
+        ///                     ]'/>
+        public FortsriskSimple(string? portfolio = null, decimal? moneyFree = null,
+            decimal? moneyBlocked = null, decimal? fee = null, decimal? moneyOld = null,
+            decimal? moneyAmount = null, decimal? moneyPledgeAmount = null, decimal? vmInterCl = null,
+            decimal? vmCurrentPositions = null, decimal? varMargin = null, bool? isLimitsSet = null,
+            decimal? indicativeVarMargin = null, decimal? netOptionValue = null, decimal? posRisk = null)
         {
-            BalanceMoney = balanceMoney;
             Portfolio = portfolio;
             MoneyFree = moneyFree;
             MoneyBlocked = moneyBlocked;
@@ -34,10 +40,6 @@ namespace Alor.OpenAPI.Models.Simple
             NetOptionValue = netOptionValue;
             PosRisk = posRisk;
         }
-
-        /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseFortsRisk"]/Member[@name="balanceMoney"]/*' />
-        [DataMember(Name = "balanceMoney", EmitDefaultValue = false)]
-        public decimal? BalanceMoney { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseFortsRisk"]/Member[@name="portfolio"]/*' />
         [DataMember(Name = "portfolio", EmitDefaultValue = false)]
@@ -98,7 +100,6 @@ namespace Alor.OpenAPI.Models.Simple
         {
             var sb = new StringBuilder();
             sb.Append("class FortsriskSimple {").Append(Environment.NewLine);
-            sb.Append("  BalanceMoney: ").Append(BalanceMoney).Append(Environment.NewLine);
             sb.Append("  Portfolio: ").Append(Portfolio).Append(Environment.NewLine);
             sb.Append("  MoneyFree: ").Append(MoneyFree).Append(Environment.NewLine);
             sb.Append("  MoneyBlocked: ").Append(MoneyBlocked).Append(Environment.NewLine);
@@ -122,7 +123,6 @@ namespace Alor.OpenAPI.Models.Simple
         public override int GetHashCode()
         {
             var hash = new HashCode();
-            hash.Add(BalanceMoney);
             hash.Add(Portfolio);
             hash.Add(MoneyFree);
             hash.Add(MoneyBlocked);
@@ -141,7 +141,6 @@ namespace Alor.OpenAPI.Models.Simple
         }
 
         private static bool EqualsHelper(FortsriskSimple? first, FortsriskSimple? second) =>
-            first?.BalanceMoney == second?.BalanceMoney &&
             first?.Portfolio == second?.Portfolio &&
             first?.MoneyFree == second?.MoneyFree &&
             first?.MoneyBlocked == second?.MoneyBlocked &&
@@ -162,7 +161,7 @@ namespace Alor.OpenAPI.Models.Simple
             if (this == (object?)other)
                 return true;
 
-            if ((object?)other == null)
+            if (other is null)
                 return false;
 
             return GetType() == other.GetType() && EqualsHelper(this, other);

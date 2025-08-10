@@ -11,18 +11,25 @@ namespace Alor.OpenAPI.Models.Simple
     {
         public StopOrderSimple() { }
 
-        /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseStopOrderWarp"]/Member[@name="responseStopOrderWarp"]/*' />
-        public StopOrderSimple(string? id = default, long? exchangeOrderId = default,
-            string? symbol = default, string? brokerSymbol = default, string? portfolio = default,
-            Exchange exchange = default, string? board = default, OrderTypeStopLimit type = default,
-            Side side = default, Condition condition = default,
-            OrderStatus status = default, DateTime? transTime = default, DateTime? updateTime = default,
-            DateTime? endTime = default, string? error = default, decimal? qtyUnits = default,
-            int? qtyBatch = default, int? qty = default, decimal? filledQtyUnits = default,
-            decimal? filledQtyBatch = default, decimal? price = default,
-            decimal? avgPrice = default, decimal? stopPrice = default,
-            bool? existing = default, TimeInForce timeInForce = default, Iceberg? iceberg = default,
-            decimal? volume = default, int? protectingSeconds = default)
+        /// <include file='../../XmlDocs/CoreModels.xml'
+        ///          path='Docs/Members[@name="responseStopOrderWarp"]
+        ///               /Member[@name="responseStopOrderWarp"]
+        ///               /param[
+        ///                      @name="id" or @name="exchangeOrderId" or @name="symbol" or @name="brokerSymbol" or @name="portfolio" 
+        ///                      or @name="exchange" or @name="comment" or @name="board" or @name="type" or @name="side" or @name="condition"
+        ///                      or @name="status" or @name="transTime" or @name="updateTime" or @name="endTime" or @name="error"
+        ///                      or @name="qtyUnits" or @name="qtyBatch" or @name="qty" or @name="filledQtyUnits" or @name="filledQtyBatch"
+        ///                      or @name="price" or @name="avgPrice" or @name="stopPrice" or @name="existing" or @name="timeInForce"
+        ///                      or @name="iceberg" or @name="volume" or @name="protectingSeconds"
+        ///                     ]'/>
+        public StopOrderSimple(string? id = null, long? exchangeOrderId = null, string? symbol = null,
+            string? brokerSymbol = null, string? portfolio = null, Exchange? exchange = null, string? comment = null,
+            string? board = null, OrderTypeStopLimit? type = null, Side? side = null, Condition? condition = null,
+            OrderStatus? status = null, DateTime? transTime = null, DateTime? updateTime = null,
+            DateTime? endTime = null, string? error = null, decimal? qtyUnits = null, int? qtyBatch = null,
+            int? qty = null, decimal? filledQtyUnits = null, decimal? filledQtyBatch = null, decimal? price = null,
+            decimal? avgPrice = null, decimal? stopPrice = null, bool? existing = null, TimeInForce? timeInForce = null,
+            Iceberg? iceberg = null, decimal? volume = null, int? protectingSeconds = null)
         {
             Id = id;
             ExchangeOrderId = exchangeOrderId;
@@ -30,6 +37,7 @@ namespace Alor.OpenAPI.Models.Simple
             BrokerSymbol = brokerSymbol;
             Portfolio = portfolio;
             Exchange = exchange;
+            Comment = comment;
             Board = board;
             Type = type;
             Side = side;
@@ -76,7 +84,11 @@ namespace Alor.OpenAPI.Models.Simple
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseStopOrderWarp"]/Member[@name="exchange"]/*' />
         [DataMember(Name = "exchange", EmitDefaultValue = false)]
-        public Exchange Exchange { get; init; }
+        public Exchange? Exchange { get; init; }
+
+        /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseStopOrderWarp"]/Member[@name="comment"]/*' />
+        [DataMember(Name = "comment", EmitDefaultValue = false)]
+        public string? Comment { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseStopOrderWarp"]/Member[@name="board"]/*' />
         [DataMember(Name = "board", EmitDefaultValue = false)]
@@ -84,19 +96,19 @@ namespace Alor.OpenAPI.Models.Simple
         
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseStopOrderWarp"]/Member[@name="type"]/*' />
         [DataMember(Name = "type", EmitDefaultValue = false)]
-        public OrderTypeStopLimit Type { get; init; }
+        public OrderTypeStopLimit? Type { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseStopOrderWarp"]/Member[@name="side"]/*' />
         [DataMember(Name = "side", EmitDefaultValue = false)]
-        public Side Side { get; init; }
+        public Side? Side { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseStopOrderWarp"]/Member[@name="condition"]/*' />
         [DataMember(Name = "condition", EmitDefaultValue = false)]
-        public Condition Condition { get; init; }
+        public Condition? Condition { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseStopOrderWarp"]/Member[@name="status"]/*' />
         [DataMember(Name = "status", EmitDefaultValue = false)]
-        public OrderStatus Status { get; init; }
+        public OrderStatus? Status { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseStopOrderWarp"]/Member[@name="transTime"]/*' />
         [DataMember(Name = "transTime", EmitDefaultValue = false)]
@@ -152,7 +164,7 @@ namespace Alor.OpenAPI.Models.Simple
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseStopOrderWarp"]/Member[@name="timeInForce"]/*' />
         [DataMember(Name = "timeInForce", EmitDefaultValue = false)]
-        public TimeInForce TimeInForce { get; init; }
+        public TimeInForce? TimeInForce { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseStopOrderWarp"]/Member[@name="iceberg"]/*' />
         [DataMember(Name = "iceberg", EmitDefaultValue = false)]
@@ -176,6 +188,7 @@ namespace Alor.OpenAPI.Models.Simple
             sb.Append("  BrokerSymbol: ").Append(BrokerSymbol).Append(Environment.NewLine);
             sb.Append("  Portfolio: ").Append(Portfolio).Append(Environment.NewLine);
             sb.Append("  Exchange: ").Append(Exchange).Append(Environment.NewLine);
+            sb.Append("  Comment: ").Append(Comment).Append(Environment.NewLine);
             sb.Append("  Board: ").Append(Board).Append(Environment.NewLine);
             sb.Append("  Type: ").Append(Type).Append(Environment.NewLine);
             sb.Append("  Side: ").Append(Side).Append(Environment.NewLine);
@@ -213,6 +226,7 @@ namespace Alor.OpenAPI.Models.Simple
             hash.Add(BrokerSymbol);
             hash.Add(Portfolio);
             hash.Add(Exchange);
+            hash.Add(Comment);
             hash.Add(Board);
             hash.Add(Type);
             hash.Add(Side);
@@ -245,6 +259,7 @@ namespace Alor.OpenAPI.Models.Simple
             first?.BrokerSymbol == second?.BrokerSymbol &&
             first?.Portfolio == second?.Portfolio &&
             first?.Exchange == second?.Exchange &&
+            first?.Comment == second?.Comment &&
             first?.Board == second?.Board &&
             first?.Type == second?.Type &&
             first?.Side == second?.Side &&
@@ -273,7 +288,7 @@ namespace Alor.OpenAPI.Models.Simple
             if (this == (object?)other)
                 return true;
 
-            if ((object?)other == null)
+            if (other is null)
                 return false;
 
             return GetType() == other.GetType() && EqualsHelper(this, other);

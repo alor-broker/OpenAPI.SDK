@@ -12,13 +12,14 @@ namespace Alor.OpenAPI.Models
     {
         public RequestOrdersActionsStopLimitTvWarp() { }
 
-        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsStopLimitTVWarp"]/Member[@name="OrdersActionsStopLimitTVWarp"]/*' />
-        public RequestOrdersActionsStopLimitTvWarp(Side side = default, Condition condition = default,
-            decimal? triggerPrice = default, long? stopEndUnixTime = default, decimal? price = default,
-            int? quantity = default, Instrument? instrument = default,
-            User? user = default, TimeInForce timeInForce = default,
-            int? icebergFixed = default, decimal? icebergVariance = default,
-            int? protectingSeconds = default, bool? activate = true, bool? allowMargin = default)
+        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsStopLimitTVWarpPost"]/Member[@name="OrdersActionsStopLimitTVWarpPost"]/*' />
+        public RequestOrdersActionsStopLimitTvWarp(Side? side = null, Condition? condition = null,
+            decimal? triggerPrice = null, long? stopEndUnixTime = null, decimal? price = null,
+            int? quantity = null, Instrument? instrument = null,
+            User? user = null, TimeInForce? timeInForce = null,
+            int? icebergFixed = null, decimal? icebergVariance = null,
+            int? protectingSeconds = null, string? comment = null,
+            bool? activate = true, bool? allowMargin = null)
         {
             Side = side;
             Condition = condition;
@@ -32,63 +33,68 @@ namespace Alor.OpenAPI.Models
             IcebergFixed = icebergFixed;
             IcebergVariance = icebergVariance;
             ProtectingSeconds = protectingSeconds;
+            Comment = comment;
             Activate = activate ?? true;
             AllowMargin = allowMargin;
         }
 
-        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsStopLimitTVWarp"]/Member[@name="side"]/*' />
+        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsStopLimitTVWarpPost"]/Member[@name="side"]/*' />
         [DataMember(Name = "side", EmitDefaultValue = false)]
-        public Side Side { get; init; }
+        public Side? Side { get; init; }
 
-        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsStopLimitTVWarp"]/Member[@name="condition"]/*' />
+        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsStopLimitTVWarpPost"]/Member[@name="condition"]/*' />
         [DataMember(Name = "condition", EmitDefaultValue = false)]
-        public Condition Condition { get; init; }
+        public Condition? Condition { get; init; }
 
-        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsStopLimitTVWarp"]/Member[@name="triggerPrice"]/*' />
+        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsStopLimitTVWarpPost"]/Member[@name="triggerPrice"]/*' />
         [DataMember(Name = "triggerPrice", EmitDefaultValue = false)]
         public decimal? TriggerPrice { get; init; }
 
-        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsStopLimitTVWarp"]/Member[@name="stopEndUnixTime"]/*' />
+        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsStopLimitTVWarpPost"]/Member[@name="stopEndUnixTime"]/*' />
         [DataMember(Name = "stopEndUnixTime", EmitDefaultValue = false)]
         public long? StopEndUnixTime { get; init; }
 
-        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsStopLimitTVWarp"]/Member[@name="price"]/*' />
+        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsStopLimitTVWarpPost"]/Member[@name="price"]/*' />
         [DataMember(Name = "price", EmitDefaultValue = false)]
         public decimal? Price { get; init; }
 
-        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsStopLimitTVWarp"]/Member[@name="quantity"]/*' />
+        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsStopLimitTVWarpPost"]/Member[@name="quantity"]/*' />
         [DataMember(Name = "quantity", EmitDefaultValue = false)]
         public int? Quantity { get; init; }
 
-        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsStopLimitTVWarp"]/Member[@name="instrument"]/*' />
+        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsStopLimitTVWarpPost"]/Member[@name="instrument"]/*' />
         [DataMember(Name = "instrument", EmitDefaultValue = false)]
         public Instrument? Instrument { get; init; }
 
-        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsStopLimitTVWarp"]/Member[@name="user"]/*' />
+        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsStopLimitTVWarpPost"]/Member[@name="user"]/*' />
         [DataMember(Name = "user", EmitDefaultValue = false)]
         public User? User { get; init; }
 
-        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsStopLimitTVWarp"]/Member[@name="timeInForce"]/*' />
+        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsStopLimitTVWarpPost"]/Member[@name="timeInForce"]/*' />
         [DataMember(Name = "timeInForce", EmitDefaultValue = false)]
-        public TimeInForce TimeInForce { get; init; }
+        public TimeInForce? TimeInForce { get; init; }
 
-        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsStopLimitTVWarp"]/Member[@name="icebergFixed"]/*' />
+        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsStopLimitTVWarpPost"]/Member[@name="icebergFixed"]/*' />
         [DataMember(Name = "icebergFixed", EmitDefaultValue = false)]
         public int? IcebergFixed { get; init; }
 
-        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsStopLimitTVWarp"]/Member[@name="icebergVariance"]/*' />
+        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsStopLimitTVWarpPost"]/Member[@name="icebergVariance"]/*' />
         [DataMember(Name = "icebergVariance", EmitDefaultValue = false)]
         public decimal? IcebergVariance { get; init; }
 
-        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsStopLimitTVWarp"]/Member[@name="protectingSeconds"]/*' />
+        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsStopLimitTVWarpPost"]/Member[@name="protectingSeconds"]/*' />
         [DataMember(Name = "protectingSeconds", EmitDefaultValue = false)]
         public int? ProtectingSeconds { get; init; }
 
-        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsStopLimitTVWarp"]/Member[@name="activate"]/*' />
+        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsStopLimitTVWarpPost"]/Member[@name="comment"]/*' />
+        [DataMember(Name = "comment", EmitDefaultValue = false)]
+        public string? Comment { get; init; }
+
+        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsStopLimitTVWarpPost"]/Member[@name="activate"]/*' />
         [DataMember(Name = "activate", EmitDefaultValue = false)]
         public bool? Activate { get; init; }
 
-        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsStopLimitTVWarp"]/Member[@name="allowMargin"]/*' />
+        /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="OrdersActionsStopLimitTVWarpPost"]/Member[@name="allowMargin"]/*' />
         [DataMember(Name = "allowMargin", EmitDefaultValue = false)]
         public bool? AllowMargin { get; init; }
 
@@ -108,6 +114,7 @@ namespace Alor.OpenAPI.Models
             sb.Append("  IcebergFixed: ").Append(IcebergFixed).Append(Environment.NewLine);
             sb.Append("  IcebergVariance: ").Append(IcebergVariance).Append(Environment.NewLine);
             sb.Append("  ProtectingSeconds: ").Append(ProtectingSeconds).Append(Environment.NewLine);
+            sb.Append("  Comment: ").Append(Comment).Append(Environment.NewLine);
             sb.Append("  Activate: ").Append(Activate).Append(Environment.NewLine);
             sb.Append("  AllowMargin: ").Append(AllowMargin).Append(Environment.NewLine);
             sb.Append('}').Append(Environment.NewLine);
@@ -131,6 +138,7 @@ namespace Alor.OpenAPI.Models
             hash.Add(IcebergFixed);
             hash.Add(IcebergVariance);
             hash.Add(ProtectingSeconds);
+            hash.Add(Comment);
             hash.Add(Activate);
             hash.Add(AllowMargin);
             return hash.ToHashCode();
@@ -150,6 +158,7 @@ namespace Alor.OpenAPI.Models
             first?.IcebergFixed == second?.IcebergFixed &&
             first?.IcebergVariance == second?.IcebergVariance &&
             first?.ProtectingSeconds == second?.ProtectingSeconds &&
+            first?.Comment == second?.Comment &&
             first?.Activate == second?.Activate &&
             first?.AllowMargin == second?.AllowMargin;
 
@@ -158,7 +167,7 @@ namespace Alor.OpenAPI.Models
             if (this == (object?)other)
                 return true;
 
-            if ((object?)other == null)
+            if (other is null)
                 return false;
 
             return GetType() == other.GetType() && EqualsHelper(this, other);

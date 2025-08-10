@@ -10,9 +10,12 @@ namespace Alor.OpenAPI.Models.Simple
     {
         public HistorySimple() { }
 
-        /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseHistory"]/Member[@name="responseHistory"]/*' />
-        public HistorySimple(List<CandleSimple>? history = default, long? next = default,
-            long? prev = default)
+        /// <include file='../../XmlDocs/CoreModels.xml'
+        ///          path='Docs/Members[@name="responseHistory"]
+        ///               /Member[@name="responseHistory"]
+        ///               /param[@name="history" or @name="next" or @name="prev"]'/>
+        public HistorySimple(List<CandleSimple>? history = null, long? next = null,
+            long? prev = null)
         {
             History = history;
             Next = next;
@@ -84,7 +87,7 @@ namespace Alor.OpenAPI.Models.Simple
             if (this == (object?)other)
                 return true;
 
-            if ((object?)other == null)
+            if (other is null)
                 return false;
 
             return GetType() == other.GetType() && EqualsHelper(this, other);

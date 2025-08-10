@@ -11,8 +11,9 @@ namespace Alor.OpenAPI.Models
         public WsResponseCommandMessage() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="wsCommands200Create"]/Member[@name="wsCommands200Create"]/*' />
-        public WsResponseCommandMessage(string? socketName = default, string? requestGuid = default, int? httpCode = default,
-            string? message = default, string? orderNumber = default)
+        /// <param name="socketName">Название сокета (для логов)</param>
+        public WsResponseCommandMessage(string? socketName = null, string? requestGuid = null, int? httpCode = null,
+            string? message = null, string? orderNumber = null)
         {
             SocketName = socketName;
             RequestGuid = requestGuid;
@@ -21,6 +22,7 @@ namespace Alor.OpenAPI.Models
             OrderNumber = orderNumber;
         }
 
+        /// <summary>Название сокета (для логов)</summary>
         [DataMember(Name = "socketName", EmitDefaultValue = false)]
         public string? SocketName { get; init; }
 

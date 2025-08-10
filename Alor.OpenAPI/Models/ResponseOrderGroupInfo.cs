@@ -2,7 +2,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
-using SpanJson;
 
 namespace Alor.OpenAPI.Models
 {
@@ -12,9 +11,9 @@ namespace Alor.OpenAPI.Models
         public ResponseOrderGroupInfo() { }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrderGroupInfo"]/Member[@name="responseOrderGroupInfo"]/*' />
-        public ResponseOrderGroupInfo(Guid? id = default, string? login = default,
-            List<ResponseOrderGroupItem>? orders = default, ExecutionPolicy executionPolicy = default,
-            OrderGroupStatus status = default, DateTime? createdAt = default, DateTime? closedAt = default)
+        public ResponseOrderGroupInfo(Guid? id = null, string? login = null,
+            List<ResponseOrderGroupItem>? orders = null, ExecutionPolicy? executionPolicy = null,
+            OrderGroupStatus? status = null, DateTime? createdAt = null, DateTime? closedAt = null)
         {
             Id = id;
             Login = login;
@@ -39,11 +38,11 @@ namespace Alor.OpenAPI.Models
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrderGroupInfo"]/Member[@name="executionPolicy"]/*' />
         [DataMember(Name = "executionPolicy", EmitDefaultValue = false)]
-        public ExecutionPolicy ExecutionPolicy { get; init; }
+        public ExecutionPolicy? ExecutionPolicy { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrderGroupInfo"]/Member[@name="status"]/*' />
         [DataMember(Name = "status", EmitDefaultValue = false)]
-        public OrderGroupStatus Status { get; init; }
+        public OrderGroupStatus? Status { get; init; }
 
         /// <include file='../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrderGroupInfo"]/Member[@name="createdAt"]/*' />
         [DataMember(Name = "createdAt", EmitDefaultValue = false)]
@@ -100,6 +99,10 @@ namespace Alor.OpenAPI.Models
                   first?.ExecutionPolicy == second?.ExecutionPolicy &&
                   first?.Status == second?.Status &&
                   first?.CreatedAt == second?.CreatedAt &&
+                  first?.ClosedAt == second?.ClosedAt &&
+                  first?.ExecutionPolicy == second?.ExecutionPolicy &&
+                  first?.Status == second?.Status &&
+                  first?.CreatedAt == second?.CreatedAt &&
                   first?.ClosedAt == second?.ClosedAt;
 
         public bool Equals(ResponseOrderGroupInfo? other)
@@ -107,7 +110,7 @@ namespace Alor.OpenAPI.Models
             if (this == (object?)other)
                 return true;
 
-            if ((object?)other == null)
+            if (other is null)
                 return false;
 
             return GetType() == other.GetType() && EqualsHelper(this, other);

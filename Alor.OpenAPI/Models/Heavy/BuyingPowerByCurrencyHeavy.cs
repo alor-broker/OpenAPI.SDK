@@ -10,8 +10,11 @@ namespace Alor.OpenAPI.Models.Heavy
     {
         public BuyingPowerByCurrencyHeavy() { }
 
-        /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="objectBuyingPowerByCurrency"]/Member[@name="objectBuyingPowerByCurrency"]/*' />
-        public BuyingPowerByCurrencyHeavy(string? currency = default, decimal? buyingPower = default)
+        /// <include file='../../XmlDocs/CoreModels.xml'
+        ///          path='Docs/Members[@name="objectBuyingPowerByCurrency"]
+        ///               /Member[@name="objectBuyingPowerByCurrency"]
+        ///               /param[@name="currency" or @name="buyingPower"]'/>
+        public BuyingPowerByCurrencyHeavy(string? currency = null, decimal? buyingPower = null)
         {
             Currency = currency;
             BuyingPower = buyingPower;
@@ -48,7 +51,7 @@ namespace Alor.OpenAPI.Models.Heavy
             if (this == (object?)other)
                 return true;
 
-            if ((object?)other == null)
+            if (other is null)
                 return false;
 
             return GetType() == other.GetType() && EqualsHelper(this, other);

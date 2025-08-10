@@ -608,7 +608,7 @@ namespace Alor.OpenAPI.Managers
                                               Exchange = exchange,
                                               IncludeVirtualTrades = includeVirtualTrades
                                           });
-                var message = new SubscriptionAllTrade(ticker, depth, includeVirtualTrades, instrumentGroup, exchange, format, 0, guid).ToJson();
+                var message = new SubscriptionAllTrade(ticker, depth, includeVirtualTrades, instrumentGroup, exchange, format, guid).ToJson();
                 msgDic.Add(guid, message);
                 guidToTickerDic.Add(guid, ticker);
             }
@@ -635,7 +635,7 @@ namespace Alor.OpenAPI.Managers
                                           Exchange = exchange,
                                           SkipHistory = skipHistory
                                       });
-            var message = new SubscriptionPosition(portfolio, skipHistory, exchange, format, 0, guid).ToJson();
+            var message = new SubscriptionPosition(portfolio, skipHistory, exchange, format, guid).ToJson();
             msgDic.Add(guid, message);
 
             await (_msgDictionaryUpdate?.Invoke(msgDic) ?? Task.CompletedTask);
@@ -660,7 +660,7 @@ namespace Alor.OpenAPI.Managers
                                           Exchange = exchange,
                                           SkipHistory = skipHistory
                                       });
-            var message = new SubscriptionSummary(portfolio, skipHistory, exchange, format, 0, guid).ToJson();
+            var message = new SubscriptionSummary(portfolio, skipHistory, exchange, format, guid).ToJson();
             msgDic.Add(guid, message);
 
             await (_msgDictionaryUpdate?.Invoke(msgDic) ?? Task.CompletedTask);
@@ -685,7 +685,7 @@ namespace Alor.OpenAPI.Managers
                                           Exchange = exchange,
                                           SkipHistory = skipHistory
                                       });
-            var message = new SubscriptionRisk(portfolio, skipHistory, exchange, format, 0, guid).ToJson();
+            var message = new SubscriptionRisk(portfolio, skipHistory, exchange, format, guid).ToJson();
             msgDic.Add(guid, message);
 
             await (_msgDictionaryUpdate?.Invoke(msgDic) ?? Task.CompletedTask);
@@ -710,7 +710,7 @@ namespace Alor.OpenAPI.Managers
                                           Exchange = exchange,
                                           SkipHistory = skipHistory
                                       });
-            var message = new SubscriptionSpectraRisk(portfolio, skipHistory, exchange, format, 0, guid).ToJson();
+            var message = new SubscriptionSpectraRisk(portfolio, skipHistory, exchange, format, guid).ToJson();
             msgDic.Add(guid, message);
 
             await (_msgDictionaryUpdate?.Invoke(msgDic) ?? Task.CompletedTask);
@@ -735,7 +735,7 @@ namespace Alor.OpenAPI.Managers
                                           Exchange = exchange,
                                           SkipHistory = skipHistory
                                       });
-            var message = new SubscriptionTrade(portfolio, skipHistory, exchange, format, 0, guid).ToJson();
+            var message = new SubscriptionTrade(portfolio, skipHistory, exchange, format, guid).ToJson();
             msgDic.Add(guid, message);
 
             await (_msgDictionaryUpdate?.Invoke(msgDic) ?? Task.CompletedTask);
@@ -761,7 +761,7 @@ namespace Alor.OpenAPI.Managers
                                           SkipHistory = skipHistory,
                                           OrderStatuses = orderStatuses,
             });
-            var message = new SubscriptionOrder(portfolio, orderStatuses, skipHistory, exchange, format, 0, guid).ToJson();
+            var message = new SubscriptionOrder(portfolio, orderStatuses, skipHistory, exchange, format, guid).ToJson();
             msgDic.Add(guid, message);
 
             await (_msgDictionaryUpdate?.Invoke(msgDic) ?? Task.CompletedTask);
@@ -788,7 +788,7 @@ namespace Alor.OpenAPI.Managers
                                               InstrumentGroup = instrumentGroup,
                                               Exchange = exchange,
                                           });
-                var message = new SubscriptionInstrument(ticker, instrumentGroup, exchange, format, 0, guid).ToJson();
+                var message = new SubscriptionInstrument(ticker, instrumentGroup, exchange, format, guid).ToJson();
                 msgDic.Add(guid, message);
                 guidToTickerDic.Add(guid, ticker);
             }
@@ -816,7 +816,7 @@ namespace Alor.OpenAPI.Managers
                                           SkipHistory = skipHistory,
                                           OrderStatuses = orderStatuses,
                                       });
-            var message = new SubscriptionStopOrder(portfolio, orderStatuses, skipHistory, exchange, format, 0, guid).ToJson();
+            var message = new SubscriptionStopOrder(portfolio, orderStatuses, skipHistory, exchange, format, guid).ToJson();
             msgDic.Add(guid, message);
 
             await (_msgDictionaryUpdate?.Invoke(msgDic) ?? Task.CompletedTask);
@@ -880,6 +880,7 @@ namespace Alor.OpenAPI.Managers
             UpdateWsMessageHandlerWsStopOrderSimpleDelegat = null;
             UpdateWsMessageHandlerWsStopOrderSlimDelegat = null;
             UpdateWsMessageHandlerWsStopOrderHeavyDelegat = null;
+            GC.SuppressFinalize(this);
         }
     }
 }

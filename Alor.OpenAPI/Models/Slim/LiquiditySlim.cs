@@ -10,11 +10,15 @@ namespace Alor.OpenAPI.Models.Slim
     {
         public LiquiditySlim() { }
 
-        public LiquiditySlim(decimal price, long volume, decimal? yield)
+        /// <include file='../../XmlDocs/CoreModels.xml'
+        ///          path='Docs/Members[@name="responseOrderBookBid"]
+        ///               /Member[@name="responseOrderBookBid"]
+        ///               /param[@name="price" or @name="volume" or @name="ySlim"]'/>
+        public LiquiditySlim(decimal price, long volume, decimal? ySlim)
         {
             Price = price;
             Volume = volume;
-            Yield = yield;
+            Yield = ySlim;
         }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrderBookBid"]/Member[@name="price"]/*' />
@@ -26,7 +30,7 @@ namespace Alor.OpenAPI.Models.Slim
         public long Volume { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseOrderBookBid"]/Member[@name="ySlim"]/*' />
-        [DataMember(Name = "v", EmitDefaultValue = false)]
+        [DataMember(Name = "y", EmitDefaultValue = false)]
         public decimal? Yield { get; init; }
 
         public override string ToString()
@@ -54,7 +58,7 @@ namespace Alor.OpenAPI.Models.Slim
             if (this == (object?)other)
                 return true;
 
-            if ((object?)other == null)
+            if (other is null)
                 return false;
 
             return GetType() == other.GetType() && EqualsHelper(this, other);
