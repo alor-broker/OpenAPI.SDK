@@ -11,15 +11,15 @@ namespace Alor.OpenAPI.Interfaces
     {
         /// <include file='../XmlDocs/IOrdersService.xml' path='Docs/Members[@name="IOrdersService"]/Member[@name="MdV2ClientsExchangePortfolioOrdersOrderIdGetSimpleAsync"]/*' />
         public Task<OrderSimple> MdV2ClientsExchangePortfolioOrdersOrderIdGetSimpleAsync(Exchange exchange,
-            string portfolio, int orderId);
+            string portfolio, long orderId);
 
         /// <include file='../XmlDocs/IOrdersService.xml' path='Docs/Members[@name="IOrdersService"]/Member[@name="MdV2ClientsExchangePortfolioOrdersOrderIdGetSlimAsync"]/*' />
         public Task<OrderSlim> MdV2ClientsExchangePortfolioOrdersOrderIdGetSlimAsync(Exchange exchange,
-            string portfolio, int orderId);
+            string portfolio, long orderId);
 
         /// <include file='../XmlDocs/IOrdersService.xml' path='Docs/Members[@name="IOrdersService"]/Member[@name="MdV2ClientsExchangePortfolioOrdersOrderIdGetHeavyAsync"]/*' />
         public Task<OrderHeavy> MdV2ClientsExchangePortfolioOrdersOrderIdGetHeavyAsync(Exchange exchange,
-            string portfolio, int orderId);
+            string portfolio, long orderId);
 
         /// <include file='../XmlDocs/IOrdersService.xml' path='Docs/Members[@name="IOrdersService"]/Member[@name="MdV2ClientsExchangePortfolioOrdersGetSimpleAsync"]/*' />
         public Task<ICollection<OrderSimple>> MdV2ClientsExchangePortfolioOrdersGetSimpleAsync(Exchange exchange,
@@ -46,12 +46,12 @@ namespace Alor.OpenAPI.Interfaces
 
         /// <include file='../XmlDocs/IOrdersService.xml' path='Docs/Members[@name="IOrdersService"]/Member[@name="CommandapiWarptransTradeV2ClientOrdersActionsMarketOrderIdPutAsync"]/*' />
         public Task<OrderActionLimitMarket> CommandapiWarptransTradeV2ClientOrdersActionsMarketOrderIdPutAsync(
-            int orderId, string portfolio, Side side, int quantity, string symbol, Exchange exchange,
+            long orderId, string portfolio, Side side, int quantity, string symbol, Exchange exchange,
             string? instrumentGroup = null, string? comment = null, TimeInForce timeInForce = TimeInForce.OneDay, bool? allowMargin = null);
 
         /// <include file='../XmlDocs/IOrdersService.xml' path='Docs/Members[@name="IOrdersService"]/Member[@name="CommandapiWarptransTradeV2ClientOrdersActionsLimitOrderIdPutAsync"]/*' />
         public Task<OrderActionLimitMarket> CommandapiWarptransTradeV2ClientOrdersActionsLimitOrderIdPutAsync(
-            int orderId, string portfolio, Side side, int quantity, decimal price, string symbol, Exchange exchange,
+            long orderId, string portfolio, Side side, int quantity, decimal price, string symbol, Exchange exchange,
             string? instrumentGroup = null, string? comment = null, int? icebergFixed = null, bool? allowMargin = null);
 
         /// <include file='../XmlDocs/IOrdersService.xml' path='Docs/Members[@name="IOrdersService"]/Member[@name="CommandapiWarptransTradeV2ClientOrdersEstimatePostAsync"]/*' />
@@ -63,7 +63,7 @@ namespace Alor.OpenAPI.Interfaces
             ICollection<RequestEstimateOrder> collectionEstimateOrders);
 
         /// <include file='../XmlDocs/IOrdersService.xml' path='Docs/Members[@name="IOrdersService"]/Member[@name="CommandapiWarptransTradeV2ClientOrdersOrderIdDeleteAsync"]/*' />
-        public Task<string> CommandapiWarptransTradeV2ClientOrdersOrderIdDeleteAsync(int orderId, string? portfolio,
+        public Task<string> CommandapiWarptransTradeV2ClientOrdersOrderIdDeleteAsync(long orderId, string? portfolio,
             Exchange exchange, bool stop);
 
         /// <include file='../XmlDocs/IOrdersService.xml' path='Docs/Members[@name="IOrdersService"]/Member[@name="CommandapiWarptransTradeV2ClientOrdersAllDeleteAsync"]/*' />
