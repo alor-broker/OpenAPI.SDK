@@ -22,7 +22,7 @@ namespace Alor.OpenAPI.Models.Simple
         ///                      or @name="price" or @name="avgPrice" or @name="stopPrice" or @name="existing" or @name="timeInForce"
         ///                      or @name="iceberg" or @name="volume" or @name="protectingSeconds"
         ///                     ]'/>
-        public StopOrderSimple(string? id = null, long? exchangeOrderId = null, string? symbol = null,
+        public StopOrderSimple(string? id = null, string? exchangeOrderId = null, string? symbol = null,
             string? brokerSymbol = null, string? portfolio = null, Exchange? exchange = null, string? comment = null,
             string? board = null, OrderTypeStopLimit? type = null, Side? side = null, Condition? condition = null,
             OrderStatus? status = null, DateTime? transTime = null, DateTime? updateTime = null,
@@ -68,7 +68,7 @@ namespace Alor.OpenAPI.Models.Simple
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseStopOrderWarp"]/Member[@name="exchangeOrderId"]/*' />
         [DataMember(Name = "exchangeOrderId", EmitDefaultValue = false)]
-        public long? ExchangeOrderId { get; init; }
+        public string? ExchangeOrderId { get; init; }
 
         /// <include file='../../XmlDocs/CoreModels.xml' path='Docs/Members[@name="responseStopOrderWarp"]/Member[@name="symbol"]/*' />
         [DataMember(Name = "symbol", EmitDefaultValue = false)]
