@@ -29,7 +29,7 @@ namespace Alor.OpenAPI.Managers
 
         public async Task<string> CreateMarketOrderAsync(string portfolio, Side side, int quantity, string symbol,
             Exchange exchange, string? instrumentGroup = null, TimeInForce timeInForce = TimeInForce.OneDay,
-            string? comment = null, bool checkDuplicates = true, bool? allowMargin = null)
+            string? comment = null, bool checkDuplicates = false, bool? allowMargin = null)
         {
             if (string.IsNullOrEmpty(portfolio))
                 throw new ArgumentNullException(nameof(portfolio));
@@ -50,7 +50,7 @@ namespace Alor.OpenAPI.Managers
         public async Task<string> CreateLimitOrderAsync(string portfolio, Side side, int quantity, decimal price,
             string symbol, Exchange exchange, string? instrumentGroup = null, string? comment = null,
             TimeInForce timeInForce = TimeInForce.OneDay, int? icebergFixed = null,
-            decimal? icebergVariance = null, bool checkDuplicates = true, bool? allowMargin = null)
+            decimal? icebergVariance = null, bool checkDuplicates = false, bool? allowMargin = null)
         {
             if (string.IsNullOrEmpty(portfolio))
                 throw new ArgumentNullException(nameof(portfolio));
@@ -70,7 +70,7 @@ namespace Alor.OpenAPI.Managers
 
         public async Task<string> CreateStopOrderAsync(string portfolio, Side side,
             Condition condition, decimal triggerPrice, DateTime stopEndUtcTime, int quantity,
-            string symbol, Exchange exchange, string? instrumentGroup = null, bool checkDuplicates = true,
+            string symbol, Exchange exchange, string? instrumentGroup = null, bool checkDuplicates = false,
             int? protectingSeconds = null, bool? activate = null, bool? allowMargin = null, string? comment = null)
         {
             if (string.IsNullOrEmpty(portfolio))
@@ -94,7 +94,7 @@ namespace Alor.OpenAPI.Managers
             Condition condition, decimal triggerPrice, DateTime stopEndUtcTime, int quantity, decimal price,
             string symbol, Exchange exchange, string? instrumentGroup = null,
             TimeInForce timeInForce = TimeInForce.OneDay, int? icebergFixed = null, decimal? icebergVariance = null,
-            bool checkDuplicates = true, int? protectingSeconds = null, bool? activate = null, bool? allowMargin = null,
+            bool checkDuplicates = false, int? protectingSeconds = null, bool? activate = null, bool? allowMargin = null,
             string? comment = null)
         {
             if (string.IsNullOrEmpty(portfolio))
@@ -117,7 +117,7 @@ namespace Alor.OpenAPI.Managers
 
         public async Task<string> UpdateMarketOrderAsync(string portfolio, string orderId, Side side, int quantity, string symbol,
             Exchange exchange, string? instrumentGroup = null, TimeInForce timeInForce = TimeInForce.OneDay,
-            string? comment = null, bool checkDuplicates = true, bool? allowMargin = null)
+            string? comment = null, bool checkDuplicates = false, bool? allowMargin = null)
         {
             if (string.IsNullOrEmpty(portfolio))
                 throw new ArgumentNullException(nameof(portfolio));
@@ -138,7 +138,7 @@ namespace Alor.OpenAPI.Managers
 
         public async Task<string> UpdateLimitOrderAsync(string portfolio, string orderId, Side side, int quantity,
             decimal price, string symbol, Exchange exchange, string? instrumentGroup = null, string? comment = null,
-            int? icebergFixed = null, bool checkDuplicates = true, bool? allowMargin = null)
+            int? icebergFixed = null, bool checkDuplicates = false, bool? allowMargin = null)
         {
             if (string.IsNullOrEmpty(portfolio))
                 throw new ArgumentNullException(nameof(portfolio));
@@ -160,7 +160,7 @@ namespace Alor.OpenAPI.Managers
 
         public async Task<string> UpdateStopOrderAsync(string portfolio, string orderId, Side side,
             Condition condition, decimal triggerPrice, DateTime stopEndUtcTime, int quantity,
-            string symbol, Exchange exchange, string? instrumentGroup = null, bool checkDuplicates = true,
+            string symbol, Exchange exchange, string? instrumentGroup = null, bool checkDuplicates = false,
             int? protectingSeconds = null, bool? activate = null, bool? allowMargin = null,
             string? comment = null)
         {
@@ -186,7 +186,7 @@ namespace Alor.OpenAPI.Managers
         public async Task<string> UpdateStopLimitOrderAsync(string portfolio, string orderId, Side side,
             Condition condition, decimal triggerPrice, DateTime stopEndUtcTime, int quantity, decimal price,
             string symbol, Exchange exchange, string? instrumentGroup = null, TimeInForce timeInForce = TimeInForce.OneDay,
-            int? icebergFixed = null, bool checkDuplicates = true, int? protectingSeconds = null, bool? activate = null,
+            int? icebergFixed = null, bool checkDuplicates = false, int? protectingSeconds = null, bool? activate = null,
             bool? allowMargin = null, string? comment = null)
         {
             if (string.IsNullOrEmpty(portfolio))
@@ -209,7 +209,7 @@ namespace Alor.OpenAPI.Managers
             return guid;
         }
 
-        public async Task<string> DeleteMarketOrderAsync(string portfolio, string orderId, Exchange exchange, bool checkDuplicates = true)
+        public async Task<string> DeleteMarketOrderAsync(string portfolio, string orderId, Exchange exchange, bool checkDuplicates = false)
         {
             if (string.IsNullOrEmpty(portfolio))
                 throw new ArgumentNullException(nameof(portfolio));
@@ -227,7 +227,7 @@ namespace Alor.OpenAPI.Managers
             return guid;
         }
 
-        public async Task<string> DeleteLimitOrderAsync(string portfolio, string orderId, Exchange exchange, bool checkDuplicates = true)
+        public async Task<string> DeleteLimitOrderAsync(string portfolio, string orderId, Exchange exchange, bool checkDuplicates = false)
         {
             if (string.IsNullOrEmpty(portfolio))
                 throw new ArgumentNullException(nameof(portfolio));
@@ -245,7 +245,7 @@ namespace Alor.OpenAPI.Managers
             return guid;
         }
 
-        public async Task<string> DeleteStopOrderAsync(string portfolio, string orderId, Exchange exchange, bool checkDuplicates = true)
+        public async Task<string> DeleteStopOrderAsync(string portfolio, string orderId, Exchange exchange, bool checkDuplicates = false)
         {
             if (string.IsNullOrEmpty(portfolio))
                 throw new ArgumentNullException(nameof(portfolio));
@@ -263,7 +263,7 @@ namespace Alor.OpenAPI.Managers
             return guid;
         }
 
-        public async Task<string> DeleteStopLimitOrderAsync(string portfolio, string orderId, Exchange exchange, bool checkDuplicates = true)
+        public async Task<string> DeleteStopLimitOrderAsync(string portfolio, string orderId, Exchange exchange, bool checkDuplicates = false)
         {
             if (string.IsNullOrEmpty(portfolio))
                 throw new ArgumentNullException(nameof(portfolio));

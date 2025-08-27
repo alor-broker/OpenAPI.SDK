@@ -54,6 +54,7 @@ Install-Package Alor.OpenAPI
 using Alor.OpenAPI.Core;
 using Alor.OpenAPI.Enums;
 using Alor.OpenAPI.Models.Simple;
+using Alor.OpenAPI.Utilities;
 
 class Program
 {
